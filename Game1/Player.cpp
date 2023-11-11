@@ -2,6 +2,7 @@
 
 Player* Player::Create(string name)
 {
+	///11
 	Player* temp = new Player();
 	temp->LoadFile("Player.xml");
 	temp->type = ObType::Actor;
