@@ -1,9 +1,9 @@
-<Root Name="Root" Visible="true" ObType="1" BoneIndex="0">
+<Root Name="Lemurian" Visible="true" ObType="1" BoneIndex="0">
     <Skeleton File="mdlLemurianMesh/mdlLemurianMesh.skel" BoneIndexCount="71"/>
     <Animations AnimSize="24" File0="mdlLemurianMesh/mdlLemurianAni0.anim" File1="mdlLemurianMesh/mdlLemurianAni1.anim" File2="mdlLemurianMesh/mdlLemurianAni2.anim" File3="mdlLemurianMesh/mdlLemurianAni3.anim" File4="mdlLemurianMesh/mdlLemurianAni4.anim" File5="mdlLemurianMesh/mdlLemurianAni5.anim" File6="mdlLemurianMesh/mdlLemurianAni6.anim" File7="mdlLemurianMesh/mdlLemurianAni7.anim" File8="mdlLemurianMesh/mdlLemurianAni8.anim" File9="mdlLemurianMesh/mdlLemurianAni9.anim" File10="mdlLemurianMesh/mdlLemurianAni10.anim" File11="mdlLemurianMesh/mdlLemurianAni11.anim" File12="mdlLemurianMesh/mdlLemurianAni12.anim" File13="mdlLemurianMesh/mdlLemurianAni13.anim" File14="mdlLemurianMesh/mdlLemurianAni14.anim" File15="mdlLemurianMesh/mdlLemurianAni15.anim" File16="mdlLemurianMesh/mdlLemurianAni16.anim" File17="mdlLemurianMesh/mdlLemurianAni17.anim" File18="mdlLemurianMesh/mdlLemurianAni18.anim" File19="mdlLemurianMesh/mdlLemurianAni19.anim" File20="mdlLemurianMesh/mdlLemurianAni20.anim" File21="mdlLemurianMesh/mdlLemurianAni21.anim" File22="mdlLemurianMesh/mdlLemurianAni22.anim" File23="mdlLemurianMesh/mdlLemurianAni23.anim"/>
     <Transform>
         <Position X="0" Y="0" Z="0"/>
-        <Scale X="1" Y="1" Z="1"/>
+        <Scale X="0.15" Y="0.15" Z="0.15"/>
         <Rotation X="0" Y="0" Z="0"/>
     </Transform>
     <Children Size="1"/>
