@@ -7,6 +7,9 @@ class Scene1 : public Scene
 private:
     Camera* cam1;
     Grid* grid;
+
+    class Player* player;
+
     Monster* monster;
     float monsterCreationTimer = 0.0f;
     const float monsterCreationInterval = 20.0f;
