@@ -365,17 +365,14 @@ FodyWeavers.xsd
 
 # 빌드 파일
 Build/
-
+/Build/
 # 개인 설정 
 /AssetImpoter/imgui.ini
 /AssetImpoter/window.ini
 
 /Game1/imgui.ini
 /Game1/window.ini
-/Valheim/imgui.ini
-/Valheim/imgui.ini
 
 #Asset 폴더 안에 있는 obj는 포함
-!/Assets/*.obj
-/Valheim/window.ini
-/Build/2DFrameWork/Obj/Grid.obj
+
+*.obj
