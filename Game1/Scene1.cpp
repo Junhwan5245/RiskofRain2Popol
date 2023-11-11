@@ -9,7 +9,7 @@ Scene1::Scene1()
 
     Camera::main = cam1;
    
-    player = Player::Create();
+    GM->player = Player::Create();
 
     for (int i = 0; i < MONCREATESIZE; ++i)
     {
@@ -54,12 +54,17 @@ void Scene1::Update()
         }
     }
 
+
     Camera::main->ControlMainCam();
     Camera::main->Update();
     ImGui::Text("FPS: %d", TIMER->GetFramePerSecond());
+    for (auto& monster : GM->monsterPool)
+    {
+        ImGui::Text("MonsterState: %d",monster->state);
+    }
     ImGui::Begin("Hierarchy");
     //grid->RenderHierarchy();
-    player->RenderHierarchy();
+    GM->player->RenderHierarchy();
     //cam1->RenderHierarchy();
     for (auto& monster : GM->monsterPool)
     {
@@ -69,12 +74,15 @@ void Scene1::Update()
 
 
     grid->Update();
-    player->Update();
-    /*monster->Update();*/
+    GM->player->Update();
     for (auto& monster : GM->monsterPool)
     {
         monster->Update();
     }
+
+
+    
+
 }
 
 void Scene1::LateUpdate()
@@ -89,7 +97,7 @@ void Scene1::Render()
 {
     Camera::main->Set();
     grid->Render();
-    player->Render();
+    GM->player->Render();
     for (auto& monster : GM->monsterPool)
     {
         monster->Render();

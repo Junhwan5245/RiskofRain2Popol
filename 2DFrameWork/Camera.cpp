@@ -73,11 +73,11 @@ void Camera::ControlMainCam()
 	{
 		main->MoveWorldPos(main->GetRight() * DELTA * mainCamSpeed);
 	}
-	if (INPUT->KeyPress('['))
+	if (INPUT->KeyPress('O'))
 	{
 		main->MoveWorldPos(-main->GetUp() * DELTA * mainCamSpeed);
 	}
-	if (INPUT->KeyPress(']'))
+	if (INPUT->KeyPress('P'))
 	{
 		main->MoveWorldPos(main->GetUp() * DELTA * mainCamSpeed);
 	}

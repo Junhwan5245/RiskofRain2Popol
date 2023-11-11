@@ -30,9 +30,11 @@ Monster* Monster::Create(string name,MonsterType monType)
     temp->state = MonsterState::IDLE;
     temp->type = ObType::Actor;
 
+    temp->anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
+
     return temp;
 }
-	/*temp->type = (MonsterType)RANDOM->Int(0, 1);*/
+	
 
 
 Monster* Monster::Create(Monster* src, MonsterType monType)
@@ -57,17 +59,36 @@ Monster* Monster::Create(Monster* src, MonsterType monType)
     temp->state = MonsterState::IDLE;
     temp->type = ObType::Actor;
 
+    temp->anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
     return temp;
 }
 
 void Monster::Update()
 {
-    Unit::Update();
-	//if (state == MonsterState::IDLE)
-	//{
-	//	//Find(플레이어);	
-	//}
+
+    Vector3 playerVec = Vector3(GM->player->GetWorldPos().x, 0, GM->player->GetWorldPos().z);
+    Vector3 monVec = Vector3(this->GetWorldPos().x, 0, this->GetWorldPos().z);
+
+    if (state == MonsterState::IDLE)
+    {
+        if ((monVec - playerVec).Length() < 50)
+        {
+            anim->ChangeAnimation(AnimationState::LOOP, 6, 0.1f);
+            state = MonsterState::ATTACK;
+        }
+    }
+
+    if (state == MonsterState::ATTACK)
+    {
+        if ((monVec - playerVec).Length() >= 50)
+        {
+            anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
+            state = MonsterState::IDLE;
+        }
+    }
+
 	
+    Unit::Update();
 }
  
 void Monster::Render(shared_ptr<Shader> pShader)
@@ -79,10 +100,22 @@ void Monster::WolrdUpdate()
 {
 }
 
-void Monster::Find(class Player* p)
+void Monster::Find()
 {
-    
-	//플레이어 거리와 몬스터 거리 가까워지면 공격 상태나누기
+    Vector3 playerVec = Vector3(GM->player->GetWorldPos().x,0, GM->player->GetWorldPos().z);
+    Vector3 monVec = Vector3(this->GetWorldPos().x,0, this->GetWorldPos().z);
+
+    if ((monVec - playerVec).Length() < 50)
+    {
+        anim->ChangeAnimation(AnimationState::LOOP, 6, 0.1f);
+        state = MonsterState::ATTACK;
+    }
+    else
+    {
+        anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
+        state = MonsterState::IDLE;
+    }
+	
 }
 
 

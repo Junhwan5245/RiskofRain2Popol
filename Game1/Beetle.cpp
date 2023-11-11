@@ -12,16 +12,16 @@ Beetle* Beetle::Create(string name)
 void Beetle::Update()
 {
 	
-	if (state == MonsterState::IDLE)
-	{
-		
-		if (INPUT->KeyPress('X'))
-		{
-			anim->ChangeAnimation(AnimationState::ONCE_FIRST, 6, 0.1f);
-			/*state = MonsterState::ATTACK;*/
-		}
-	}
-	
+	//if (state == MonsterState::IDLE)
+	//{
+	//	
+	//	if (INPUT->KeyPress('X'))
+	//	{
+	//		anim->ChangeAnimation(AnimationState::ONCE_FIRST, 6, 0.1f);
+	//		/*state = MonsterState::ATTACK;*/
+	//	}
+	//}
+	//
 	Monster::Update();
 }
 

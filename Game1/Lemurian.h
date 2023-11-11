@@ -9,7 +9,7 @@ public:
 
 	void    Move(Vector3 Target);
 	void    WolrdUpdate();
-	void    Find(class Player* player);
+	void    Find();
 
 private:
 	Lemurian();

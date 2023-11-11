@@ -8,7 +8,7 @@ private:
     Camera* cam1;
     Grid* grid;
 
-    class Player* player;
+   /* class Player* player;*/
 
     Monster* monster;
     float monsterCreationTimer = 0.0f;
