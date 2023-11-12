@@ -3,14 +3,15 @@
 Bullet* Bullet::Create(string name)
 {
 	Bullet* temp = new Bullet();
-
+	temp->LoadFile("PlayerBullet.xml");
+	temp->type = ObType::Actor;
 	return temp;
 }
 
 Bullet::Bullet()
 {
 	int rand = RANDOM->Int();
-	type = (BulletType)rand;	// 불렛 타입 잡아주기
+	bulletType = (BulletType)rand;	// 불렛 타입 잡아주기
 	isFire = false;
 }
 

@@ -10,6 +10,9 @@ private:
 
     /*class Player* player;*/
     //Monster* monster;
+
+    //Actor* bullet;
+
     float monsterCreationTimer = 0.0f;
     const float monsterCreationInterval = 20.0f;
 

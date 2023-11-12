@@ -12,7 +12,7 @@ public:
 	static Bullet* Create(string name = "Bullet");
 
 private:
-    BulletType  type;
+    BulletType  bulletType;
     
     Vector3     fireDir;      // ½î´Â ¹æÇâ
     float       power;

@@ -8,6 +8,9 @@ Scene1::Scene1()
     cam1->LoadFile("Cam.xml");
 
     Camera::main = cam1;
+
+    //bullet = Bullet::Create();
+
    
     GM->player = Player::Create();
 
