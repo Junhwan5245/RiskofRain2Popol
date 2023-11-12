@@ -8,12 +8,14 @@ Player* Player::Create(string name)
 	temp->type = ObType::Actor;
 	temp->playerState = PlayerState::IDLE;
 	temp->attackState = PlayerAttackState::IDLE;
+	temp->attack = Attack::NONE;
 	temp->anim->ChangeAnimation(AnimationState::LOOP, 3, 0.1f);
 	temp->Find("RootNode")->rotation.y = 180.0f * ToRadian;
 	temp->velocity = 2.0f;
 	temp->isRoll = false;
-
-
+	temp->isLButton = false;
+	temp->isRButton = false;
+	temp->isRSkill = false;
 	return temp;
 }
 
@@ -176,10 +178,11 @@ void Player::FSM()
 	if (attackState == PlayerAttackState::IDLE)
 	{
 		//IDLE -> ATTACK
-		if (INPUT->KeyPress(VK_LBUTTON))
+		if (INPUT->KeyPress(VK_LBUTTON) or INPUT->KeyPress(VK_RBUTTON) or
+			INPUT->KeyPress('R'))
 		{
 			attackState = PlayerAttackState::ATTACK;
-			anim->ChangeAnimation(AnimationState::LOOP, 21, 0.1f);
+			//anim->ChangeAnimation(AnimationState::LOOP, 21, 0.1f);
 			attackStopTime = 0.0f;
 
 			// 플레이어의 공격상태가 공격으로 바뀌면서 플레이어가 걷는 상태일때; 방향키를 누름에 따라서 애니메이션 변경해주기
@@ -201,13 +204,31 @@ void Player::FSM()
 		if (INPUT->KeyPress(VK_LBUTTON))
 		{
 			attackStopTime = 0.0f;
+			attack = Attack::LBUTTON;
+			isLButton = true;
 		}
+		if (INPUT->KeyPress(VK_RBUTTON))
+		{
+			attackStopTime = 0.0f;
+			attack = Attack::RBUTTON;
+			isRButton = true;
+		}
+		if (INPUT->KeyPress('R'))
+		{
+			attackStopTime = 0.0f;
+			attack = Attack::R;
+			isRSkill = true;
+		}
+
+		AttackMotion(attack);
 
 		// ATTACK -> IDLE
 		// 공격하지않고 4초가 지나면서 공격상태는 IDLE로 바뀌고, 플레이어의 애니메이션도 변경
 		if (TIMER->GetTick(attackStopTime, 4.0f))
 		{
 			attackState = PlayerAttackState::IDLE;
+			attack = Attack::NONE;
+
 
 			if (playerState == PlayerState::WALK)
 				anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
@@ -215,6 +236,22 @@ void Player::FSM()
 	}
 
 	// 플레이어 공격 FSM
+}
+
+void Player::AttackMotion(Attack state)
+{
+	if (state == Attack::LBUTTON)
+	{
+
+	}
+	if (state == Attack::RBUTTON)
+	{
+
+	}
+	if (state == Attack::R)
+	{
+
+	}
 }
 
 void Player::AinmChange(PlayerState state)

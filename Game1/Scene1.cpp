@@ -54,6 +54,9 @@ void Scene1::Update()
         }
     }
 
+    dynamic_cast<Beetle*>(monster)->temp();
+
+
 
     Camera::main->ControlMainCam();
     Camera::main->Update();

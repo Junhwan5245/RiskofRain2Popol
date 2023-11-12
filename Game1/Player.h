@@ -73,6 +73,15 @@ enum class PlayerAttackState
     ATTACK,
 };
 
+enum class Attack
+{
+    NONE,
+    LBUTTON,
+    RBUTTON,
+    R,
+};
+
+
 class Player : public Unit
 {
 public:
@@ -82,16 +91,22 @@ private:
     // Player는 몸통메쉬 + 이동 애니메이션만, playerGun은 총메쉬 + 공격 애니메이션만
     Actor* playerGun;
 
-    PlayerState         playerState;
-    PlayerAttackState   attackState;
+    PlayerState         playerState;    // 플레이어 이동상태
+    PlayerAttackState   attackState;    // 플레이어 공격상태
+    Attack              attack;         // 공격
 
     Vector3             dir;            // 대체, 나중에 Unit클래스를 상속 받을 친구
     Vector3             fixDir;         // 굴렀을때의 고정된 방향값
-    bool                isRoll;         // 구르고 있는지
+    
     float               lastRot;
-
     float               attackStopTime; // 공격 멈춘 시간 (4초가 되면 isAttack = false)
 
+
+    bool                isRoll;         // 구르고 있는지
+    bool                isLButton;      // 좌클릭이 눌렸는지
+    bool                isRButton;      // 우클릭이 눌렸는지
+    bool                isRSkill;       // R이 눌렸는지
+    
     /** 임시스텟*/
     float               velocity;       // 이동속도
 
@@ -103,8 +118,10 @@ public:
     void	Render(shared_ptr<Shader> pShader = nullptr) override;
 
     void    FSM();
+    void    AttackMotion(Attack state);
     void    AinmChange(PlayerState state);
     void    Move(Vector3 Target);
+
     void    Fire(Vector3 dest, float power);
     void    WolrdUpdate();
 

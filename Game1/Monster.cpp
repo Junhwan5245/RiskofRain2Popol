@@ -65,13 +65,15 @@ Monster* Monster::Create(Monster* src, MonsterType monType)
 
 void Monster::Update()
 {
-
     Vector3 playerVec = Vector3(GM->player->GetWorldPos().x, 0, GM->player->GetWorldPos().z);
     Vector3 monVec = Vector3(this->GetWorldPos().x, 0, this->GetWorldPos().z);
+    float lenght = (monVec - playerVec).Length();
+
+    ImGui::Text("lenght : %.2f", lenght);
 
     if (state == MonsterState::IDLE)
     {
-        if ((monVec - playerVec).Length() < 50)
+        if (lenght < 10)
         {
             anim->ChangeAnimation(AnimationState::LOOP, 6, 0.1f);
             state = MonsterState::ATTACK;
@@ -80,7 +82,7 @@ void Monster::Update()
 
     if (state == MonsterState::ATTACK)
     {
-        if ((monVec - playerVec).Length() >= 50)
+        if (lenght >= 10)
         {
             anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
             state = MonsterState::IDLE;
@@ -104,6 +106,8 @@ void Monster::Find()
 {
     Vector3 playerVec = Vector3(GM->player->GetWorldPos().x,0, GM->player->GetWorldPos().z);
     Vector3 monVec = Vector3(this->GetWorldPos().x,0, this->GetWorldPos().z);
+
+    
 
     if ((monVec - playerVec).Length() < 50)
     {
