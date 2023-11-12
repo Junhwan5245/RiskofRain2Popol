@@ -89,7 +89,9 @@ public:
 
 private:
     // Player는 몸통메쉬 + 이동 애니메이션만, playerGun은 총메쉬 + 공격 애니메이션만
-    Actor* playerGun;
+    //Actor* playerGun;   //고민중..
+    vector<class Bullet*>   bullet;     // 총알
+
 
     PlayerState         playerState;    // 플레이어 이동상태
     PlayerAttackState   attackState;    // 플레이어 공격상태
@@ -101,12 +103,15 @@ private:
     float               lastRot;
     float               attackStopTime; // 공격 멈춘 시간 (4초가 되면 isAttack = false)
 
-
+    bool                isRight;
     bool                isRoll;         // 구르고 있는지
     bool                isLButton;      // 좌클릭이 눌렸는지
     bool                isRButton;      // 우클릭이 눌렸는지
     bool                isRSkill;       // R이 눌렸는지
     
+    float               attackSpeed = 0.1f;    // 공속
+    float               LButtonFireTime;// 좌클릭 발사타임
+
     /** 임시스텟*/
     float               velocity;       // 이동속도
 
@@ -124,6 +129,7 @@ public:
 
     void    Fire(Vector3 dest, float power);
     void    WolrdUpdate();
+    void    PlayerRenderHierarchy();
 
 
     /** Get함수*/

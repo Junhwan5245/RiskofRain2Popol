@@ -8,16 +8,10 @@
     <ClInclude Include="LoadingScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Mutant.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="Unit.h">
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Beetle.h">
@@ -29,6 +23,8 @@
     <ClInclude Include="Player.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Bullet.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -39,9 +35,6 @@
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Unit.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Mutant.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
@@ -56,6 +49,7 @@
     <ClCompile Include="Player.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">

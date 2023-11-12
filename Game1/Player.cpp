@@ -12,6 +12,7 @@ Player* Player::Create(string name)
 	temp->anim->ChangeAnimation(AnimationState::LOOP, 3, 0.1f);
 	temp->Find("RootNode")->rotation.y = 180.0f * ToRadian;
 	temp->velocity = 2.0f;
+	temp->isRight = false;
 	temp->isRoll = false;
 	temp->isLButton = false;
 	temp->isRButton = false;
@@ -29,13 +30,8 @@ Player::~Player()
 
 void Player::Update()
 {
-	//ImGui::Text("attackStopTime : %.2f", attackStopTime);
-	//ImGui::Text("attackState : %d", (int)attackState);
-
 	lastRot = rotation.y;
-
 	dir = Vector3();
-
 
 	if (INPUT->KeyPress('W'))
 	{
@@ -69,11 +65,23 @@ void Player::Update()
 	}
 
 	FSM();
+
+
+	for (auto it = bullet.begin(); it != bullet.end(); it++)
+	{
+		(*it)->Update();
+	}
+
 	Unit::Update();
 }
 
 void Player::Render(shared_ptr<Shader> pShader)
 {
+	for (auto it = bullet.begin(); it != bullet.end(); it++)
+	{
+		(*it)->Render();
+	}
+
 	Unit::Render();
 }
 
@@ -178,8 +186,9 @@ void Player::FSM()
 	if (attackState == PlayerAttackState::IDLE)
 	{
 		//IDLE -> ATTACK
-		if (INPUT->KeyPress(VK_LBUTTON) or INPUT->KeyPress(VK_RBUTTON) or
-			INPUT->KeyPress('R'))
+		if (INPUT->KeyPress(VK_LBUTTON))
+			//or INPUT->KeyPress(VK_RBUTTON) 
+			//or INPUT->KeyPress('R'))
 		{
 			attackState = PlayerAttackState::ATTACK;
 			//anim->ChangeAnimation(AnimationState::LOOP, 21, 0.1f);
@@ -207,18 +216,44 @@ void Player::FSM()
 			attack = Attack::LBUTTON;
 			isLButton = true;
 		}
-		if (INPUT->KeyPress(VK_RBUTTON))
+		if (INPUT->KeyUp(VK_LBUTTON))
 		{
-			attackStopTime = 0.0f;
-			attack = Attack::RBUTTON;
-			isRButton = true;
+			isLButton = false;
 		}
-		if (INPUT->KeyPress('R'))
+		if (isLButton)
 		{
-			attackStopTime = 0.0f;
-			attack = Attack::R;
-			isRSkill = true;
+			if (TIMER->GetTick(LButtonFireTime, attackSpeed))
+			{
+				Bullet* temp = Bullet::Create();
+				//temp->LoadFile("PlayerBullet.xml");
+				Vector3 pos = Find("gun.r.muzzle")->GetWorldPos();
+				temp->SetPos(pos);
+
+				bullet.push_back(temp);
+
+				for (auto it = bullet.begin(); it != bullet.end(); it++)
+				{
+					if (not (*it)->isFire)
+					{
+						(*it)->Fire(GetRight(), 100.0f);
+						break;
+					}
+				}
+			}
 		}
+
+		//if (INPUT->KeyPress(VK_RBUTTON))
+		//{
+		//	attackStopTime = 0.0f;
+		//	attack = Attack::RBUTTON;
+		//	isRButton = true;
+		//}
+		//if (INPUT->KeyPress('R'))
+		//{
+		//	attackStopTime = 0.0f;
+		//	attack = Attack::R;
+		//	isRSkill = true;
+		//}
 
 		AttackMotion(attack);
 
@@ -234,7 +269,6 @@ void Player::FSM()
 				anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
 		}
 	}
-
 	// 플레이어 공격 FSM
 }
 
@@ -317,8 +351,6 @@ void Player::Move(Vector3 Target)
 	else if (attackState == PlayerAttackState::ATTACK)
 	{
 		Vector3 Dir;
-		//Dir.x = -Target.x;
-		//Dir.z = Target.z;
 		if (playerState != PlayerState::ROLL)
 		{
 			Dir.x = -Target.x;
@@ -329,12 +361,8 @@ void Player::Move(Vector3 Target)
 			Dir.x = -fixDir.x;
 			Dir.z = fixDir.z;
 		}
-		//if (playerState != PlayerState::ROLL)
+
 		MoveWorldPos(Dir * velocity * DELTA);
-		//if (playerState != PlayerState::ROLL)
-		//	MoveWorldPos(Dir  * DELTA);
-		//else if (playerState == PlayerState::ROLL)
-		//	MoveWorldPos(Dir * 20.0f *  DELTA);
 		rotation.y = 0.0f;
 	}
 }
@@ -345,4 +373,13 @@ void Player::Fire(Vector3 dest, float power)
 
 void Player::WolrdUpdate()
 {
+}
+
+void Player::PlayerRenderHierarchy()
+{
+	this->RenderHierarchy();
+	for (auto it = bullet.begin(); it != bullet.end(); it++)
+	{
+		(*it)->RenderHierarchy();
+	}
 }

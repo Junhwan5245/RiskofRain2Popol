@@ -8,3 +8,5 @@
 #include "Monster.h"
 #include "Beetle.h"
 #include "Lemurian.h"
+
+#include "Bullet.h"

@@ -2,7 +2,7 @@
     <Skeleton File="Commando/Commando.skel" BoneIndexCount="114"/>
     <Animations AnimSize="34" File0="Commando/CommandoAnim0.anim" File1="Commando/CommandoAnim1.anim" File2="Commando/CommandoAnim2.anim" File3="Commando/CommandoAnim3.anim" File4="Commando/CommandoAnim4.anim" File5="Commando/CommandoAnim5.anim" File6="Commando/CommandoAnim6.anim" File7="Commando/CommandoAnim7.anim" File8="Commando/CommandoAnim8.anim" File9="Commando/CommandoAnim9.anim" File10="Commando/CommandoAnim10.anim" File11="Commando/CommandoAnim11.anim" File12="Commando/CommandoAnim12.anim" File13="Commando/CommandoAnim13.anim" File14="Commando/CommandoAnim14.anim" File15="Commando/CommandoAnim15.anim" File16="Commando/CommandoAnim16.anim" File17="Commando/CommandoAnim17.anim" File18="Commando/CommandoAnim18.anim" File19="Commando/CommandoAnim19.anim" File20="Commando/CommandoAnim20.anim" File21="Commando/CommandoAnim21.anim" File22="Commando/CommandoAnim22.anim" File23="Commando/CommandoAnim23.anim" File24="Commando/CommandoAnim24.anim" File25="Commando/CommandoAnim25.anim" File26="Commando/CommandoAnim26.anim" File27="Commando/CommandoAnim27.anim" File28="Commando/CommandoAnim28.anim" File29="Commando/CommandoAnim29.anim" File30="Commando/CommandoAnim30.anim" File31="Commando/CommandoAnim31.anim" File32="Commando/CommandoAnim32.anim" File33="Commando/CommandoAnim33.anim"/>
     <Transform>
-        <Position X="0" Y="0" Z="0"/>
+        <Position X="-9.9145374" Y="0" Z="1.7025784"/>
         <Scale X="1" Y="1" Z="1"/>
         <Rotation X="0" Y="0" Z="0"/>
     </Transform>
@@ -11,7 +11,7 @@
         <Transform>
             <Position X="0" Y="0" Z="0"/>
             <Scale X="1" Y="1" Z="1"/>
-            <Rotation X="0" Y="0" Z="-0"/>
+            <Rotation X="0" Y="3.1415758" Z="-0"/>
         </Transform>
         <Children Size="1"/>
         <Child0 Name="mdlCommandoDualies" Visible="true" ObType="0" BoneIndex="2">
@@ -570,7 +570,7 @@
                                                     <Scale X="1" Y="0.99999994" Z="0.99999994"/>
                                                     <Rotation X="0.50919318" Y="0.24243531" Z="-1.3346334"/>
                                                 </Transform>
-                                                <Children Size="2"/>
+                                                <Children Size="3"/>
                                                 <Child0 Name="GunMesh.001" Visible="true" ObType="0" BoneIndex="60">
                                                     <Mesh File="Commando/GunMesh.001.mesh"/>
                                                     <Shader File="4.Cube.hlsl"/>
@@ -582,7 +582,15 @@
                                                     </Transform>
                                                     <Children Size="0"/>
                                                 </Child0>
-                                                <Child1 Name="gun.l_end" Visible="true" ObType="0" BoneIndex="59">
+                                                <Child1 Name="gun.l.muzzle" Visible="true" ObType="0" BoneIndex="-1">
+                                                    <Transform>
+                                                        <Position X="-0.22000003" Y="0.069996223" Z="0"/>
+                                                        <Scale X="1" Y="1" Z="1"/>
+                                                        <Rotation X="0" Y="0" Z="0"/>
+                                                    </Transform>
+                                                    <Children Size="0"/>
+                                                </Child1>
+                                                <Child2 Name="gun.l_end" Visible="true" ObType="0" BoneIndex="59">
                                                     <Shader File="4.Cube.hlsl"/>
                                                     <Transform>
                                                         <Position X="0" Y="0.23720242" Z="0"/>
@@ -590,7 +598,7 @@
                                                         <Rotation X="0" Y="0" Z="-0"/>
                                                     </Transform>
                                                     <Children Size="0"/>
-                                                </Child1>
+                                                </Child2>
                                             </Child8>
                                             <Child9 Name="thumb.1.l" Visible="true" ObType="0" BoneIndex="61">
                                                 <Shader File="4.Cube.hlsl"/>
@@ -932,7 +940,7 @@
                                                     <Scale X="1" Y="0.99999994" Z="1"/>
                                                     <Rotation X="0.50919253" Y="-0.24243227" Z="1.3346343"/>
                                                 </Transform>
-                                                <Children Size="2"/>
+                                                <Children Size="3"/>
                                                 <Child0 Name="GunMesh" Visible="true" ObType="0" BoneIndex="100">
                                                     <Mesh File="Commando/GunMesh.mesh"/>
                                                     <Shader File="4.Cube.hlsl"/>
@@ -944,7 +952,15 @@
                                                     </Transform>
                                                     <Children Size="0"/>
                                                 </Child0>
-                                                <Child1 Name="gun.r_end" Visible="true" ObType="0" BoneIndex="99">
+                                                <Child1 Name="gun.r.muzzle" Visible="true" ObType="0" BoneIndex="-1">
+                                                    <Transform>
+                                                        <Position X="0.21999976" Y="0.070000023" Z="0"/>
+                                                        <Scale X="1" Y="1" Z="1"/>
+                                                        <Rotation X="0" Y="0" Z="0"/>
+                                                    </Transform>
+                                                    <Children Size="0"/>
+                                                </Child1>
+                                                <Child2 Name="gun.r_end" Visible="true" ObType="0" BoneIndex="99">
                                                     <Shader File="4.Cube.hlsl"/>
                                                     <Transform>
                                                         <Position X="0" Y="0.23720248" Z="0"/>
@@ -952,7 +968,7 @@
                                                         <Rotation X="0" Y="0" Z="-0"/>
                                                     </Transform>
                                                     <Children Size="0"/>
-                                                </Child1>
+                                                </Child2>
                                             </Child8>
                                             <Child9 Name="thumb.1.r" Visible="true" ObType="0" BoneIndex="101">
                                                 <Shader File="4.Cube.hlsl"/>

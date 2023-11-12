@@ -54,21 +54,17 @@ void Scene1::Update()
         }
     }
 
-    dynamic_cast<Beetle*>(monster)->temp();
-
-
-
     Camera::main->ControlMainCam();
     Camera::main->Update();
     ImGui::Text("FPS: %d", TIMER->GetFramePerSecond());
-    for (auto& monster : GM->monsterPool)
-    {
-        ImGui::Text("MonsterState: %d",monster->state);
-    }
+    //for (auto& monster : GM->monsterPool)
+    //{
+    //    ImGui::Text("MonsterState: %d",monster->state);
+    //}
     ImGui::Begin("Hierarchy");
     //grid->RenderHierarchy();
-    GM->player->RenderHierarchy();
     //cam1->RenderHierarchy();
+    GM->player->PlayerRenderHierarchy();
     for (auto& monster : GM->monsterPool)
     {
         monster->RenderHierarchy();

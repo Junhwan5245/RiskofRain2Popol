@@ -58,7 +58,6 @@ void Camera::ControlMainCam()
 
 	if (INPUT->KeyPress(VK_UP))
 	{
-		//                                  초당100움직임 xyz/s
 		main->MoveWorldPos(main->GetForward() * DELTA * mainCamSpeed);
 	}
 	if (INPUT->KeyPress(VK_DOWN))
