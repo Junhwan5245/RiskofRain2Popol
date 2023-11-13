@@ -2,6 +2,7 @@
 #include "Main.h"
 #include "Scene1.h"
 #include "LoadingScene.h"
+#include "StartScene.h"
 
 Main::Main()
 {
@@ -20,8 +21,13 @@ void Main::Init()
    
     /*SCENE->AddScene("LOADING", new LoadingScene);
     SCENE->ChangeScene("LOADING");*/
-    SCENE->AddScene("SC1", new Scene1);
-    SCENE->ChangeScene("SC1"); 
+
+
+    //SCENE->AddScene("SC1", new Scene1);
+    //SCENE->ChangeScene("SC1"); 
+
+    SCENE->AddScene("StartScene", new StartScene);
+    SCENE->ChangeScene("StartScene"); 
 }
 
 void Main::Release()
