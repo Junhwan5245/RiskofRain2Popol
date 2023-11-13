@@ -5,22 +5,16 @@ Lemurian* Lemurian::Create(string name)
 	Lemurian* lemurian = new Lemurian();
 	lemurian->LoadFile("Lemurian.xml");
 	lemurian->type = ObType::Actor;
-	lemurian->anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
+	/*lemurian->anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);*/
+	lemurian->range = 10;
 	return lemurian;
 }
 
 void Lemurian::Update()
 {
-	/*if (state == MonsterState::IDLE)
-	{
-
-		if (INPUT->KeyPress('X'))
-		{
-			anim->ChangeAnimation(AnimationState::ONCE_FIRST, 6, 0.1f);
-			state = MonsterState::ATTACK;
-		}
-	}*/
 	Monster::Update();
+
+	root->Find("frontHp")->scale.x = Hp * 1.7 / 100;
 }
 
 void Lemurian::Render(shared_ptr<Shader> pShader)
@@ -36,15 +30,19 @@ void Lemurian::WolrdUpdate()
 {
 }
 
-void Lemurian::Find()
+void Lemurian::MonFSM()
 {
-  /* Vector3 playerVec = Vector3(0, 0, 0);
-   Vector3 monVec = Vector3(this->GetWorldPos().x, 0, this->GetWorldPos().z);
+  
+}
 
-   if ((monVec - playerVec).Length() < 100)
-   {
-	   state == MonsterState::ATTACK;
-   }*/
+void Lemurian::IdleAnimations()
+{
+	anim->ChangeAnimation(AnimationState::LOOP, 3, 0.1f);
+}
+
+void Lemurian::AttackAnimations()
+{
+	anim->ChangeAnimation(AnimationState::LOOP, 17, 0.1f);
 }
 
 Lemurian::Lemurian()

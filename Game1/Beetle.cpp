@@ -5,24 +5,16 @@ Beetle* Beetle::Create(string name)
 	Beetle* beetle = new Beetle();
 	beetle->LoadFile("Beetle.xml");
 	beetle->type = ObType::Actor;
-	beetle->anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
+	/*beetle->anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);*/
+	beetle->range = 3;
 	return beetle;
 }        
 
 void Beetle::Update()
 {
-	
-	//if (state == MonsterState::IDLE)
-	//{
-	//	
-	//	if (INPUT->KeyPress('X'))
-	//	{
-	//		anim->ChangeAnimation(AnimationState::ONCE_FIRST, 6, 0.1f);
-	//		/*state = MonsterState::ATTACK;*/
-	//	}
-	//}
-	//
 	Monster::Update();
+
+	root->Find("frontHp")->scale.x = Hp * 1.7 / 100;
 }
 
 void Beetle::Render(shared_ptr<Shader> pShader)
@@ -38,8 +30,18 @@ void Beetle::WolrdUpdate()
 {
 }
 
-void Beetle::Find(Player* player)
+void Beetle::MonFSM()
 {
+}
+
+void Beetle::IdleAnimations()
+{
+	anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
+}
+
+void Beetle::AttackAnimations()
+{
+	anim->ChangeAnimation(AnimationState::LOOP, 6, 0.1f);
 }
 
 Beetle::Beetle()

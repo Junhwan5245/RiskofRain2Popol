@@ -124,6 +124,7 @@ extern Application App;//Extern Global
 
 
 #include "Utility.h"
+#include "PerlinNoise.hpp"//펄린노이즈
 
 //Singleton Macro
 #define	D3D			Direct3D11::GetInstance()

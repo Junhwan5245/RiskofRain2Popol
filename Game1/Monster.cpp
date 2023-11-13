@@ -11,6 +11,7 @@ Monster::~Monster()
 Monster* Monster::Create(string name,MonsterType monType)
 {
     Monster* temp = nullptr;
+    
 
     switch (monType)
     {
@@ -27,6 +28,7 @@ Monster* Monster::Create(string name,MonsterType monType)
         break;
     }
 
+    temp->Hp = 100;
     temp->state = MonsterState::IDLE;
     temp->type = ObType::Actor;
 
@@ -65,31 +67,8 @@ Monster* Monster::Create(Monster* src, MonsterType monType)
 
 void Monster::Update()
 {
-    Vector3 playerVec = Vector3(GM->player->GetWorldPos().x, 0, GM->player->GetWorldPos().z);
-    Vector3 monVec = Vector3(this->GetWorldPos().x, 0, this->GetWorldPos().z);
-    float lenght = (monVec - playerVec).Length();
+    MonFSM();
 
-    ImGui::Text("lenght : %.2f", lenght);
-
-    if (state == MonsterState::IDLE)
-    {
-        if (lenght < 10)
-        {
-            anim->ChangeAnimation(AnimationState::LOOP, 6, 0.1f);
-            state = MonsterState::ATTACK;
-        }
-    }
-
-    if (state == MonsterState::ATTACK)
-    {
-        if (lenght >= 10)
-        {
-            anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
-            state = MonsterState::IDLE;
-        }
-    }
-
-	
     Unit::Update();
 }
  
@@ -100,24 +79,30 @@ void Monster::Render(shared_ptr<Shader> pShader)
 
 void Monster::WolrdUpdate()
 {
+    GameObject::Update();
 }
 
-void Monster::Find()
+void Monster::MonFSM()
 {
     Vector3 playerVec = Vector3(GM->player->GetWorldPos().x,0, GM->player->GetWorldPos().z);
     Vector3 monVec = Vector3(this->GetWorldPos().x,0, this->GetWorldPos().z);
 
-    
-
-    if ((monVec - playerVec).Length() < 50)
+    if (state == MonsterState::IDLE)
     {
-        anim->ChangeAnimation(AnimationState::LOOP, 6, 0.1f);
-        state = MonsterState::ATTACK;
+        if ((monVec - playerVec).Length() < this->range)
+        {
+            AttackAnimations();
+            state = MonsterState::ATTACK;
+        }
     }
-    else
+
+    if (state == MonsterState::ATTACK)
     {
-        anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
-        state = MonsterState::IDLE;
+        if ((monVec - playerVec).Length() >= this->range)
+        {
+            IdleAnimations();
+            state = MonsterState::IDLE;
+        }
     }
 	
 }

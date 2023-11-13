@@ -5,8 +5,8 @@ Terrain* Terrain::Create(string name)
 	Terrain* map = new Terrain();
 	map->type = ObType::Terrain;
 	map->name = name;
-	map->garo = 257;
-	map->size = 257 * 257;
+	map->garo = 512;
+	map->size = 512 * 512;
 	map->uvScale = 1.0f;
 	map->CreateMesh(map->garo);
 	map->shader = RESOURCE->shaders.Load("5.Cube.hlsl");
@@ -519,6 +519,34 @@ void Terrain::RenderDetail()
 		}
 		ImGui::EndTabBar();
 	}
+}
+
+void Terrain::PerlinNoise()
+{
+	siv::PerlinNoise perlin(RANDOM->Int(0, 10000));
+
+	double tmp = 0.02;//완만도 낮게하면 완만해짐 
+	VertexTerrain* vertices = (VertexTerrain*)mesh->vertices;
+
+
+	double heightExponent = 20;
+
+	for (int i = 0; i < garo; i++)
+	{
+		for (int j = 0; j < garo; j++)
+		{
+			double x = (double)i * tmp;  // 펄린노이즈의 x좌표
+			double y = (double)j * tmp;  // 펄린노이즈의 y좌표
+			double z = 0.5;               // 지형의 높이 변화에 영향 크게하면 높아짐 지형
+
+			double noiseValueIsland = perlin.noise3D(x, y, z);
+
+			// Apply a power function to control the smoothness of the terrain
+			vertices[i * garo + j].position.y = noiseValueIsland * heightExponent;
+		}
+	}
+
+	mesh->UpdateBuffer();
 }
 
 bool Terrain::ComPutePicking(Ray WRay, OUT Vector3& HitPoint)

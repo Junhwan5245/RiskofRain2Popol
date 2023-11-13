@@ -114,11 +114,12 @@ private:
 
     /** 임시스텟*/
     float               velocity;       // 이동속도
-
+           //공격력
 
     Player();
     virtual ~Player();
 public:
+    float               attack = 10;
     void	Update() override;
     void	Render(shared_ptr<Shader> pShader = nullptr) override;
 

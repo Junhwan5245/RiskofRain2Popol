@@ -55,6 +55,7 @@ public:
 	void			UpdateStructuredBuffer();
 	void			UpdateNormal();
 	void	        RenderDetail();
+    void            PerlinNoise();
 
     bool            ComPutePicking(Ray WRay, OUT Vector3& HitPoint);
 };
