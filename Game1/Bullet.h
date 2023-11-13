@@ -18,17 +18,19 @@ private:
     float       power;
 
 
+protected:
     Bullet();
     virtual ~Bullet();
+
 public:
     bool        isFire;
 
 
-    void    SetPos(Vector3 pos);
-    void	Update() override;
-    void	Render(shared_ptr<Shader> pShader = nullptr) override;
+    virtual void	Update();
+    virtual void	Render(shared_ptr<Shader> pShader = nullptr);
 
-    void    Fire(Vector3 dir, float power);
+    virtual void    SetPos(Vector3 pos);
+    virtual void    Fire(Vector3 dir, float power, Vector3 rotation);
 
     //bool    GetIsFire() { return isFire; }
 };

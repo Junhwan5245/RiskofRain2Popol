@@ -224,21 +224,28 @@ void Player::FSM()
 		{
 			if (TIMER->GetTick(LButtonFireTime, attackSpeed))
 			{
-				Bullet* temp = Bullet::Create();
-				//temp->LoadFile("PlayerBullet.xml");
-				Vector3 pos = Find("gun.r.muzzle")->GetWorldPos();
-				temp->SetPos(pos);
-
-				bullet.push_back(temp);
-
-				for (auto it = bullet.begin(); it != bullet.end(); it++)
-				{
-					if (not (*it)->isFire)
-					{
-						(*it)->Fire(GetRight(), 100.0f);
-						break;
-					}
-				}
+				//isRight = !isRight;
+				//
+				//PlayerBullet* temp = PlayerBullet::Create();
+				////temp->LoadFile("PlayerBullet.xml");
+				//Vector3 pos;
+				//
+				//if (isRight)
+				//	pos = Find("gun.r.muzzle")->GetWorldPos();
+				//else pos = Find("gun.l.muzzle")->GetWorldPos();
+				//
+				//temp->SetPos(pos);
+				//
+				//bullet.push_back(temp);
+				//
+				//for (auto it = bullet.begin(); it != bullet.end(); it++)
+				//{
+				//	if (not (*it)->isFire)
+				//	{
+				//		(*it)->Fire(GetForward(), 1.0f, rotation);
+				//		break;
+				//	}
+				//}
 			}
 		}
 

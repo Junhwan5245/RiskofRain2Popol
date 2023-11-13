@@ -11,20 +11,25 @@
     <ClInclude Include="Unit.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Beetle.h">
-      <Filter>GameObject</Filter>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Player.h">
+      <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="Lemurian.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Beetle.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>GameObject</Filter>
+    <ClInclude Include="PlayerBullet.h">
+      <Filter>Player</Filter>
     </ClInclude>
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="Bullet.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -37,19 +42,24 @@
     <ClCompile Include="Unit.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Beetle.cpp">
-      <Filter>GameObject</Filter>
+    <ClCompile Include="Player.cpp">
+      <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="Lemurian.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Beetle.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>GameObject</Filter>
+    <ClCompile Include="PlayerBullet.cpp">
+      <Filter>Player</Filter>
     </ClCompile>
-    <ClCompile Include="Bullet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">
@@ -57,6 +67,15 @@
     </Filter>
     <Filter Include="Scene">
       <UniqueIdentifier>{e0c428c6-0d94-4784-bb3a-59d8180b610b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monster">
+      <UniqueIdentifier>{60eb8c36-a258-4697-ab91-5aa6b95d8dd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{0aac0255-3041-45bb-acc9-b086fe361e15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{ba625f57-8e71-4b58-95b7-de435308561f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

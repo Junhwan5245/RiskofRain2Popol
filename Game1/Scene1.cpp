@@ -9,9 +9,6 @@ Scene1::Scene1()
 
     Camera::main = cam1;
 
-    //bullet = Bullet::Create();
-
-   
     GM->player = Player::Create();
 
     for (int i = 0; i < MONCREATESIZE; ++i)

@@ -90,7 +90,7 @@ public:
 private:
     // Player는 몸통메쉬 + 이동 애니메이션만, playerGun은 총메쉬 + 공격 애니메이션만
     //Actor* playerGun;   //고민중..
-    vector<class Bullet*>   bullet;     // 총알
+    vector<class PlayerBullet*>   bullet;     // 총알
 
 
     PlayerState         playerState;    // 플레이어 이동상태
@@ -109,7 +109,7 @@ private:
     bool                isRButton;      // 우클릭이 눌렸는지
     bool                isRSkill;       // R이 눌렸는지
     
-    float               attackSpeed = 0.1f;    // 공속
+    float               attackSpeed = 0.2f;    // 공속
     float               LButtonFireTime;// 좌클릭 발사타임
 
     /** 임시스텟*/
