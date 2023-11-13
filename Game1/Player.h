@@ -73,7 +73,7 @@ enum class PlayerAttackState
     ATTACK,
 };
 
-enum class Attack
+enum class SkillState
 {
     NONE,
     LBUTTON,
@@ -95,7 +95,7 @@ private:
 
     PlayerState         playerState;    // 플레이어 이동상태
     PlayerAttackState   attackState;    // 플레이어 공격상태
-    Attack              attack;         // 공격
+    SkillState          skillState;         // 공격
 
     Vector3             dir;            // 대체, 나중에 Unit클래스를 상속 받을 친구
     Vector3             fixDir;         // 굴렀을때의 고정된 방향값
@@ -124,7 +124,6 @@ public:
     void	Render(shared_ptr<Shader> pShader = nullptr) override;
 
     void    FSM();
-    void    AttackMotion(Attack state);
     void    AinmChange(PlayerState state);
     void    Move(Vector3 Target);
 

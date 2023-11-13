@@ -23,11 +23,11 @@ void Main::Init()
     SCENE->ChangeScene("LOADING");*/
 
 
-    //SCENE->AddScene("SC1", new Scene1);
-    //SCENE->ChangeScene("SC1"); 
+    SCENE->AddScene("SC1", new Scene1);
+    SCENE->ChangeScene("SC1"); 
 
-    SCENE->AddScene("StartScene", new StartScene);
-    SCENE->ChangeScene("StartScene"); 
+    //SCENE->AddScene("StartScene", new StartScene);
+    //SCENE->ChangeScene("StartScene"); 
 }
 
 void Main::Release()
