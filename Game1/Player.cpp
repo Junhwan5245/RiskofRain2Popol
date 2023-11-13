@@ -308,4 +308,5 @@ void Player::Fire(Vector3 dest, float power)
 
 void Player::WolrdUpdate()
 {
+	GameObject::Update();
 }

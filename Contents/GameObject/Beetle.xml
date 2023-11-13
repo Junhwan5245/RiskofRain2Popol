@@ -6,7 +6,7 @@
         <Scale X="0.5" Y="0.5" Z="0.5"/>
         <Rotation X="0" Y="0" Z="0"/>
     </Transform>
-    <Children Size="1"/>
+    <Children Size="3"/>
     <Child0 Name="RootNode" Visible="true" ObType="0" BoneIndex="1">
         <Transform>
             <Position X="0" Y="0" Z="0"/>
@@ -431,4 +431,26 @@
             <Children Size="0"/>
         </Child1>
     </Child0>
+    <Child1 Name="backHp" Visible="true" ObType="7" BoneIndex="-1">
+        <Mesh File="7.Billboard.mesh"/>
+        <Shader File="7.Billboard.hlsl"/>
+        <Material File="backHp.mtl"/>
+        <Transform>
+            <Position X="0" Y="3" Z="0"/>
+            <Scale X="1.7" Y="0.15000001" Z="1"/>
+            <Rotation X="-0.89999998" Y="0" Z="0"/>
+        </Transform>
+        <Children Size="0"/>
+    </Child1>
+    <Child2 Name="frontHp" Visible="true" ObType="7" BoneIndex="-1">
+        <Mesh File="7.Billboard.mesh"/>
+        <Shader File="7.Billboard.hlsl"/>
+        <Material File="frontHp.mtl"/>
+        <Transform>
+            <Position X="0" Y="3" Z="0"/>
+            <Scale X="1.7" Y="0.15000001" Z="1"/>
+            <Rotation X="-0.89999998" Y="0" Z="0"/>
+        </Transform>
+        <Children Size="0"/>
+    </Child2>
 </Root>

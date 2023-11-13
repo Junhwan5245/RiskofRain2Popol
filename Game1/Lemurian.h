@@ -9,7 +9,9 @@ public:
 
 	void    Move(Vector3 Target);
 	void    WolrdUpdate();
-	void    Find();
+	void    MonFSM();
+	void	IdleAnimations() override;
+	void	AttackAnimations() override;
 
 private:
 	Lemurian();

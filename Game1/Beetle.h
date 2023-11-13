@@ -9,7 +9,10 @@ public:
 
 	void    Move(Vector3 Target);
 	void    WolrdUpdate();
-	void    Find(class Player* player);
+	void    MonFSM();
+	void	IdleAnimations() override;
+	void	AttackAnimations() override;
+	
 
 private:
 	Beetle();

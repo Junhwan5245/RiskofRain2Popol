@@ -18,22 +18,22 @@ public:
 	static Monster* Create(Monster* src, MonsterType monType);
 	void   Update();
 	void   Render(shared_ptr<Shader> pShader = nullptr);
+	void    WolrdUpdate();
 	MonsterState state;
+	MonsterType  monType;
+	int maxHp = 100;
+	int Hp=100;
+	
 	
 protected:
-
 	
-	void    WolrdUpdate();
-	void    Find();
+	virtual void IdleAnimations()=0;
+	virtual void AttackAnimations() = 0;
+	void    MonFSM();
 	MonsterState     GetState() { return state; }
-	 Monster();
-	 virtual ~Monster();
-	
-	
-	
-	MonsterType  monType;
-	
-
+	Monster();
+	virtual ~Monster();
+	int range=0;
 	
 
 };
