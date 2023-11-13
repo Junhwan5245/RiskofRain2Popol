@@ -118,8 +118,11 @@ void Scene1::LateUpdate()
     playerTop.position = GM->player->GetWorldPos() + Vector3(0, 100, 0);
     playerTop.direction = Vector3(0, -1, 0);
     
-    monTop.position = GM->player->GetWorldPos() + Vector3(0, 100, 0);
-    monTop.direction = Vector3(0, -1, 0);
+    for (auto& monster : GM->monsterPool)
+    {
+        monTop.position = monster->GetWorldPos() + Vector3(0, 100, 0);
+        monTop.direction = Vector3(0, -1, 0);
+    }
     Vector3 hit;
     
     if (Utility::RayIntersectMap(playerTop, map, hit))
