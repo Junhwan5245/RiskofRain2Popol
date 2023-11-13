@@ -22,10 +22,13 @@ void Main::Init()
     /*SCENE->AddScene("LOADING", new LoadingScene);
     SCENE->ChangeScene("LOADING");*/
 
+    // 로딩신 -> 스타트신 -> 캐릭선택신 -> 게임플레이신
 
+    // 게임플레이신
     SCENE->AddScene("SC1", new Scene1);
     SCENE->ChangeScene("SC1"); 
 
+    // 스타트신
     //SCENE->AddScene("StartScene", new StartScene);
     //SCENE->ChangeScene("StartScene"); 
 }

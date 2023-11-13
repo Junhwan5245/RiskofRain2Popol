@@ -94,8 +94,8 @@ private:
 
 
     PlayerState         playerState;    // 플레이어 이동상태
-    PlayerAttackState   attackState;    // 플레이어 공격상태
-    SkillState          skillState;         // 공격
+    PlayerAttackState   attackState;    // 플레이어 공격상태 // 공격상태냐 아니면 
+    SkillState          skillState;         // 공격       // 좌클릭이냐 우클릭이냐 R이냐
 
     Vector3             dir;            // 대체, 나중에 Unit클래스를 상속 받을 친구
     Vector3             fixDir;         // 굴렀을때의 고정된 방향값
