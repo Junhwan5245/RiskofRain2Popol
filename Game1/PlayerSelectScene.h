@@ -1,20 +1,11 @@
 #pragma once
-class StartScene : public Scene
+class PlayerSelectScene : public Scene
 {
 private:
     Camera* cam1;
-    Actor* ui;
 
-    UI* bg;
-    UI* logo;
-    UI* playerSelect;
-    UI* option;
-    UI* exit;
-
-    wstring w_playerSelect;
-    wstring w_option;
-    wstring w_exit;
-    wstring w_explan;
+    //Actor*  select_player;  //선택된 캐릭터 액터
+    UI* ui;
 
 public:
     // Scene을(를) 통해 상속됨
@@ -26,4 +17,3 @@ public:
     virtual void Render() override;
     virtual void ResizeScreen() override;
 };
-

@@ -33,6 +33,9 @@
     <ClInclude Include="StartScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerSelectScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -64,6 +67,9 @@
       <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="StartScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSelectScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>

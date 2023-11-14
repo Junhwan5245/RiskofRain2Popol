@@ -48,19 +48,31 @@ void Player::Update()
 
 	if (INPUT->KeyPress('W'))
 	{
-		dir += GetForward();
+		if (attackState == PlayerAttackState::ATTACK)
+			dir += GetForward();
+		else if (attackState == PlayerAttackState::IDLE)
+			dir += Vector3(1,0,0);
 	}
 	else if (INPUT->KeyPress('S'))
 	{
-		dir += -GetForward();
+		if (attackState == PlayerAttackState::ATTACK)
+			dir += -GetForward();
+		else if (attackState == PlayerAttackState::IDLE)
+			dir += Vector3(-1, 0, 0);
 	}
 	if (INPUT->KeyPress('A'))
 	{
-		dir += -GetRight();
+		if (attackState == PlayerAttackState::ATTACK)
+			dir += -GetRight();
+		else if (attackState == PlayerAttackState::IDLE)
+			dir += Vector3(0, 0, -1);
 	}
 	else if (INPUT->KeyPress('D'))
 	{
-		dir += GetRight();
+		if (attackState == PlayerAttackState::ATTACK)
+			dir += GetRight();
+		else if (attackState == PlayerAttackState::IDLE)
+			dir += Vector3(0, 0, 1);
 	}
 	dir.Normalize();
 
@@ -237,28 +249,28 @@ void Player::FSM()
 		{
 			if (TIMER->GetTick(LButtonFireTime, attackSpeed))
 			{
-				//isRight = !isRight;
-				//
-				//PlayerBullet* temp = PlayerBullet::Create();
-				////temp->LoadFile("PlayerBullet.xml");
-				//Vector3 pos;
-				//
-				//if (isRight)
-				//	pos = Find("gun.r.muzzle")->GetWorldPos();
-				//else pos = Find("gun.l.muzzle")->GetWorldPos();
-				//
-				//temp->SetPos(pos);
-				//
-				//bullet.push_back(temp);
-				//
-				//for (auto it = bullet.begin(); it != bullet.end(); it++)
-				//{
-				//	if (not (*it)->isFire)
-				//	{
-				//		(*it)->Fire(GetForward(), 1.0f, rotation);
-				//		break;
-				//	}
-				//}
+				isRight = !isRight;
+				
+				PlayerBullet* temp = PlayerBullet::Create();
+				//temp->LoadFile("PlayerBullet.xml");
+				Vector3 pos;
+				
+				if (isRight)
+					pos = Find("gun.r.muzzle")->GetWorldPos();
+				else pos = Find("gun.l.muzzle")->GetWorldPos();
+				
+				temp->SetPos(pos);
+				
+				bullet.push_back(temp);
+				
+				for (auto it = bullet.begin(); it != bullet.end(); it++)
+				{
+					if (not (*it)->isFire)
+					{
+						(*it)->Fire(GetForward(), 1.0f, rotation);
+						break;
+					}
+				}
 			}
 		}
 
@@ -377,6 +389,8 @@ void Player::Move(Vector3 Target)
 		}
 
 		MoveWorldPos(Dir * velocity * DELTA);
+		Find("RootNode")->rotation.y = atan2f(Find("PlayerCam")->GetForward().z, Find("PlayerCam")->GetForward().x) - HALFPI;
+		//rotation.y = atan2f(GetForward().z, GetForward().x);
 		//rotation.y = atan2f(Find("PlayerCam")->GetForward().z, Find("PlayerCam")->GetForward().x);
 	}
 }

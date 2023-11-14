@@ -3,6 +3,8 @@
 #include "Scene1.h"
 #include "LoadingScene.h"
 #include "StartScene.h"
+#include "PlayerSelectScene.h"
+
 
 Main::Main()
 {
@@ -18,19 +20,24 @@ Main::~Main()
 
 void Main::Init()
 {
-   
-    /*SCENE->AddScene("LOADING", new LoadingScene);
-    SCENE->ChangeScene("LOADING");*/
+    // LOADING SCENE
+    //SCENE->AddScene("LOADING", new LoadingScene);
+    //SCENE->ChangeScene("LOADING");
+
+    // START SCENE
+    //SCENE->AddScene("StartScene", new StartScene);
+    //SCENE->ChangeScene("StartScene"); 
+
+    SCENE->AddScene("PLAYERSELECT", new PlayerSelectScene);
+    SCENE->ChangeScene("PLAYERSELECT");
 
     // 로딩신 -> 스타트신 -> 캐릭선택신 -> 게임플레이신
 
     // 게임플레이신
-    SCENE->AddScene("SC1", new Scene1);
-    SCENE->ChangeScene("SC1"); 
+    //SCENE->AddScene("SC1", new Scene1);
+    //SCENE->ChangeScene("SC1"); 
 
-    // 스타트신
-    //SCENE->AddScene("StartScene", new StartScene);
-    //SCENE->ChangeScene("StartScene"); 
+    
 }
 
 void Main::Release()

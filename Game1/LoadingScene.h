@@ -1,11 +1,13 @@
 #pragma once
-class LoadingScene :public Scene
+class LoadingScene : public Scene
 {
 private:
     Camera* cam1;
     Grid* grid;
     UI* bono;
     thread* t1;
+
+    float     loadingPersent;
 public:
     // Scene을(를) 통해 상속됨
     virtual void Init() override;
@@ -16,4 +18,3 @@ public:
     virtual void Render() override;
     virtual void ResizeScreen() override;
 };
-

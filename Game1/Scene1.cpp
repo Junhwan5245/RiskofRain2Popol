@@ -1,22 +1,27 @@
 #include "stdafx.h"
 #include "Scene1.h"
 
+extern int     loadCount;
+
 Scene1::Scene1()
 {
     grid = Grid::Create();
     grid->visible = false;
+    loadCount++;
+
     cam1 = Camera::Create();
     cam1->LoadFile("Cam.xml");
-
-
-    playerCam = Camera::Create();
-
     Camera::main = cam1;
+    loadCount++;
+
 
     GM->player = Player::Create();
+    loadCount++;
+
 
     map = Terrain::Create();
     map->LoadFile("Terrain.xml");
+    loadCount++;
     //map->PerlinNoise();//펄린노이즈 적용
 
     for (int i = 0; i < MONCREATESIZE; ++i)
@@ -25,7 +30,7 @@ Scene1::Scene1()
         auto newMonster = Monster::Create("Monster", MonsterType(num));
         GM->monsterPool.push_back(newMonster);
     }
-    
+    loadCount++;
 }
 Scene1::~Scene1()
 {
@@ -90,7 +95,7 @@ void Scene1::Update()
     ImGui::Begin("Hierarchy");
     //cam1->RenderHierarchy();
     GM->player->PlayerRenderHierarchy();
-    playerCam->RenderHierarchy();
+    //playerCam->RenderHierarchy();
     //for (auto& monster : GM->monsterPool)
     //{
     //    monster->RenderHierarchy();
@@ -176,12 +181,4 @@ void Scene1::ResizeScreen()
 
     Camera::main->width = App.GetWidth();
     Camera::main->height = App.GetHeight();
-
-    //cam1->viewport.x = 0.0f;
-    //cam1->viewport.y = 0.0f;
-    //cam1->viewport.width = App.GetWidth();
-    //cam1->viewport.height = App.GetHeight();
-    //
-    //cam1->width = App.GetWidth();
-    //cam1->height = App.GetHeight();
 }
