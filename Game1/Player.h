@@ -99,8 +99,11 @@ private:
 
     Vector3             dir;            // 대체, 나중에 Unit클래스를 상속 받을 친구
     Vector3             fixDir;         // 굴렀을때의 고정된 방향값
-    
+    Vector3             mouseDir;       // 마우스의 방향
+
+
     float               lastRot;
+    float               lastRot_root;
     float               attackStopTime; // 공격 멈춘 시간 (4초가 되면 isAttack = false)
 
     bool                isRight;

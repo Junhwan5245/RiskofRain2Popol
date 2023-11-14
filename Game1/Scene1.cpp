@@ -4,8 +4,12 @@
 Scene1::Scene1()
 {
     grid = Grid::Create();
+    grid->visible = false;
     cam1 = Camera::Create();
     cam1->LoadFile("Cam.xml");
+
+
+    playerCam = Camera::Create();
 
     Camera::main = cam1;
 
@@ -81,18 +85,16 @@ void Scene1::Update()
     
     
     ImGui::Text("FPS: %d", TIMER->GetFramePerSecond());
-    //for (auto& monster : GM->monsterPool)
-    //{
-    //    ImGui::Text("MonsterState: %d",monster->state);
-    //}
+
+
     ImGui::Begin("Hierarchy");
-    //grid->RenderHierarchy();
     //cam1->RenderHierarchy();
     GM->player->PlayerRenderHierarchy();
-    for (auto& monster : GM->monsterPool)
-    {
-        monster->RenderHierarchy();
-    }
+    playerCam->RenderHierarchy();
+    //for (auto& monster : GM->monsterPool)
+    //{
+    //    monster->RenderHierarchy();
+    //}
     map->RenderHierarchy();
     ImGui::End();
 
@@ -100,6 +102,7 @@ void Scene1::Update()
     
     grid->Update();
     GM->player->Update();
+    //playerCam->Update();
     for (auto& monster : GM->monsterPool)
     {
         monster->Update();
@@ -154,6 +157,7 @@ void Scene1::Render()
 {
     LIGHT->Set();
     Camera::main->Set();
+    //playerCam->Set();
     grid->Render();
     map->Render();
     GM->player->Render();
@@ -165,11 +169,19 @@ void Scene1::Render()
 
 void Scene1::ResizeScreen()
 {
-    cam1->viewport.x = 0.0f;
-    cam1->viewport.y = 0.0f;
-    cam1->viewport.width = App.GetWidth();
-    cam1->viewport.height = App.GetHeight();
+    Camera::main->viewport.x = 0.0f;
+    Camera::main->viewport.y = 0.0f;
+    Camera::main->viewport.width = App.GetWidth();
+    Camera::main->viewport.height = App.GetHeight();
 
-    cam1->width = App.GetWidth();
-    cam1->height = App.GetHeight();
+    Camera::main->width = App.GetWidth();
+    Camera::main->height = App.GetHeight();
+
+    //cam1->viewport.x = 0.0f;
+    //cam1->viewport.y = 0.0f;
+    //cam1->viewport.width = App.GetWidth();
+    //cam1->viewport.height = App.GetHeight();
+    //
+    //cam1->width = App.GetWidth();
+    //cam1->height = App.GetHeight();
 }

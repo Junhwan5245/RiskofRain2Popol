@@ -161,8 +161,6 @@ void GameObject::Update()
 			{
 				Transform::UpdateAnim(skelRoot->anim->GetFrameBone(boneIndex));
 			}
-			
-				
 		}
 		else
 		{

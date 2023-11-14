@@ -10,7 +10,7 @@ Player* Player::Create(string name)
 	temp->attackState = PlayerAttackState::IDLE;
 	temp->skillState = SkillState::NONE;
 	temp->anim->ChangeAnimation(AnimationState::LOOP, 3, 0.1f);
-	temp->Find("RootNode")->rotation.y = 180.0f * ToRadian;
+	temp->Find("mdlCommandoDualies")->rotation.y = 180.0f * ToRadian;
 	temp->velocity = 2.0f;
 	temp->isRight = false;
 	temp->isRoll = false;
@@ -30,24 +30,37 @@ Player::~Player()
 
 void Player::Update()
 {
-	lastRot = rotation.y;
+	//cout << GetForward().x << endl;
+	//cout << GetForward().y << endl;
+	//cout << GetForward().z << endl;
+
+	Vector3 Rot;
+	Rot.x = INPUT->movePosition.y * 0.003f;
+	Rot.y = INPUT->movePosition.x * 0.005f;
+	mouseDir = Rot;
+	rotation.y += mouseDir.y;
+	Find("PlayerCam")->rotation.x += mouseDir.x;
+
+
+	lastRot = Find("RootNode")->rotation.y;
+	lastRot_root = rotation.y;
 	dir = Vector3();
 
 	if (INPUT->KeyPress('W'))
 	{
-		dir += Vector3(0, 0, 1);
+		dir += GetForward();
 	}
 	else if (INPUT->KeyPress('S'))
 	{
-		dir += Vector3(0, 0, -1);
+		dir += -GetForward();
 	}
 	if (INPUT->KeyPress('A'))
 	{
-		dir += Vector3(1, 0, 0);
+		dir += -GetRight();
 	}
 	else if (INPUT->KeyPress('D'))
 	{
-		dir += Vector3(-1, 0, 0);
+		dir += GetRight();
 	}
 	dir.Normalize();
 
@@ -331,21 +344,31 @@ void Player::Move(Vector3 Target)
 {
 	if (attackState == PlayerAttackState::IDLE)
 	{
+		Vector3 Dir;
+		//Dir.x = -Target.x;
+		//Dir.z = Target.z;
 
-		MoveWorldPos(GetForward() * velocity * DELTA);
+		MoveWorldPos(Find("RootNode")->GetForward() * velocity * DELTA);
+		//MoveWorldPos(Target * velocity * DELTA);
 
 		if (playerState == PlayerState::IDLE)
-			rotation.y = lastRot;
+			Find("RootNode")->rotation.y = lastRot;
+
 		else if (playerState != PlayerState::ROLL and playerState != PlayerState::IDLE)
-			rotation.y = atan2f(Target.z, Target.x) - HALFPI;
+			Find("RootNode")->rotation.y = atan2f(Target.z, Target.x);
 	}
 	else if (attackState == PlayerAttackState::ATTACK)
 	{
 		Vector3 Dir;
 		if (playerState != PlayerState::ROLL)
 		{
-			Dir.x = -Target.x;
-			Dir.z = Target.z;
+			//Vector3 D;
+			Dir = Target;
+			//Dir.x = -Target.x;
+			//Dir.z = Target.z;
+
+			//Dir = Find("PlayerCam")->GetWorldPos() + D;
+			//Dir.Normalize();
 		}
 		else
 		{
@@ -354,7 +377,7 @@ void Player::Move(Vector3 Target)
 		}
 
 		MoveWorldPos(Dir * velocity * DELTA);
-		rotation.y = 0.0f;
+		//rotation.y = atan2f(Find("PlayerCam")->GetForward().z, Find("PlayerCam")->GetForward().x);
 	}
 }
 
