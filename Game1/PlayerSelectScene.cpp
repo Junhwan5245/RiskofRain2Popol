@@ -10,7 +10,7 @@ void PlayerSelectScene::Init()
     bg->LoadFile("UI_StartScene_BackGround.xml");
 
     playerSelectBox = UI::Create();
-    playerSelectBox->LoadFile("UI_SelectScene_playerSelectBox.xml");
+    //playerSelectBox->LoadFile("UI_SelectScene_playerSelectBox.xml");
 
 	ui = UI::Create();
 
