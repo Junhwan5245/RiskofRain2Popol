@@ -9,7 +9,11 @@ void PlayerSelectScene::Init()
     bg = UI::Create();
     bg->LoadFile("UI_StartScene_BackGround.xml");
 
+    playerSelectBox = UI::Create();
+    playerSelectBox->LoadFile("UI_SelectScene_playerSelectBox.xml");
+
 	ui = UI::Create();
+
 
 
 }
@@ -23,6 +27,7 @@ void PlayerSelectScene::Update()
     ImGui::Begin("Hierarchy");
     //ui->RenderHierarchy();
     bg->RenderHierarchy();
+    playerSelectBox->RenderHierarchy();
     ui->RenderHierarchy();
     ImGui::End();
 
@@ -44,6 +49,7 @@ void PlayerSelectScene::Render()
     cam1->Set();
     LIGHT->Set();
     bg->Render();
+    playerSelectBox->Render();
     ui->Render();
 }
 
