@@ -123,4 +123,11 @@ void StartScene::Render()
 
 void StartScene::ResizeScreen()
 {
+    Camera::main->viewport.x = 0.0f;
+    Camera::main->viewport.y = 0.0f;
+    Camera::main->viewport.width = App.GetWidth();
+    Camera::main->viewport.height = App.GetHeight();
+
+    Camera::main->width = App.GetWidth();
+    Camera::main->height = App.GetHeight();
 }

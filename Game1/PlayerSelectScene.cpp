@@ -10,12 +10,13 @@ void PlayerSelectScene::Init()
     bg->LoadFile("UI_StartScene_BackGround.xml");
 
     playerSelectBox = UI::Create();
-    //playerSelectBox->LoadFile("UI_SelectScene_playerSelectBox.xml");
+    playerSelectBox->LoadFile("UI_SelectScene_playerSelectBox.xml");
+
+    optionSelectBox = UI::Create();
+    optionSelectBox->LoadFile("UI_SelectScene_optionBox.xml");
+
 
 	ui = UI::Create();
-
-
-
 }
 
 void PlayerSelectScene::Release()
@@ -28,12 +29,16 @@ void PlayerSelectScene::Update()
     //ui->RenderHierarchy();
     bg->RenderHierarchy();
     playerSelectBox->RenderHierarchy();
+    optionSelectBox->RenderHierarchy();
     ui->RenderHierarchy();
     ImGui::End();
 
 
     Camera::main->Update();
+    bg->Update();
     ui->Update();
+    playerSelectBox->Update();
+    optionSelectBox->Update();
 }
 
 void PlayerSelectScene::LateUpdate()
@@ -50,9 +55,17 @@ void PlayerSelectScene::Render()
     LIGHT->Set();
     bg->Render();
     playerSelectBox->Render();
+    optionSelectBox->Render();
     ui->Render();
 }
 
 void PlayerSelectScene::ResizeScreen()
 {
+    Camera::main->viewport.x = 0.0f;
+    Camera::main->viewport.y = 0.0f;
+    Camera::main->viewport.width = App.GetWidth();
+    Camera::main->viewport.height = App.GetHeight();
+
+    Camera::main->width = App.GetWidth();
+    Camera::main->height = App.GetHeight();
 }
