@@ -262,7 +262,7 @@ void Player::FSM()
 		//	isRSkill = true;
 		//}
 
-		
+
 
 		// ATTACK -> IDLE
 		// 공격하지않고 4초가 지나면서 공격상태는 IDLE로 바뀌고, 플레이어의 애니메이션도 변경
