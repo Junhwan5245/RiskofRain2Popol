@@ -5,6 +5,8 @@ private:
     Camera* cam1;
 
     //Actor*  select_player;  //선택된 캐릭터 액터
+    UI* bg;
+
     UI* ui;
 
 public:

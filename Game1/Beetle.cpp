@@ -7,6 +7,14 @@ Beetle* Beetle::Create(string name)
 	beetle->type = ObType::Actor;
 	/*beetle->anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);*/
 	beetle->range = 3;
+	
+	beetle->moveSpeed = 7.0f; // 증가계수 24
+	beetle->maxHp = 80; // 증가계수 24
+	beetle->Hp = 80;
+	beetle->defend = 0;
+
+	beetle->attack = 12.0f;	//증가계수 2.4
+	
 	return beetle;
 }        
 

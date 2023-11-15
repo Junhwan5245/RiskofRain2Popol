@@ -6,6 +6,9 @@ void PlayerSelectScene::Init()
 	cam1 = Camera::Create();
 	Camera::main = cam1;
 
+    bg = UI::Create();
+    bg->LoadFile("UI_StartScene_BackGround.xml");
+
 	ui = UI::Create();
 
 
@@ -19,6 +22,7 @@ void PlayerSelectScene::Update()
 {
     ImGui::Begin("Hierarchy");
     //ui->RenderHierarchy();
+    bg->RenderHierarchy();
     ui->RenderHierarchy();
     ImGui::End();
 
@@ -39,6 +43,7 @@ void PlayerSelectScene::Render()
 {
     cam1->Set();
     LIGHT->Set();
+    bg->Render();
     ui->Render();
 }
 

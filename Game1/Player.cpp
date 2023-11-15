@@ -11,7 +11,16 @@ Player* Player::Create(string name)
 	temp->skillState = SkillState::NONE;
 	temp->anim->ChangeAnimation(AnimationState::LOOP, 3, 0.1f);
 	temp->Find("mdlCommandoDualies")->rotation.y = 180.0f * ToRadian;
-	temp->velocity = 2.0f;
+
+	/** 스텟*/
+	temp->moveSpeed = 7.0f;
+
+	temp->maxHp = 110; // 증가계수 + 33
+	temp->Hp = 110;
+	temp->attack = 12; // 증가계수 + 2.4
+	temp->defend = 0;
+	/** 스텟*/
+
 	temp->isRight = false;
 	temp->isRoll = false;
 	temp->isLButton = false;
@@ -115,7 +124,7 @@ void Player::FSM()
 	// 플레이어 이동 FSM
 	if (playerState == PlayerState::IDLE)
 	{
-		velocity = 2.0f;
+		moveSpeed = 7.0f;
 		// IDLE-> WALK 키를 눌렀을 때
 		if (INPUT->KeyPress('W') or INPUT->KeyPress('S') or
 			INPUT->KeyPress('A') or INPUT->KeyPress('D'))
@@ -126,7 +135,7 @@ void Player::FSM()
 	}
 	else if (playerState == PlayerState::WALK)
 	{
-		velocity = 2.0f;
+		moveSpeed = 7.0f;
 
 		if (attackState == PlayerAttackState::ATTACK)
 		{
@@ -166,7 +175,7 @@ void Player::FSM()
 	}
 	else if (playerState == PlayerState::RUN)
 	{
-		velocity = 4.0f;
+		moveSpeed = 10.0f;
 
 		// RUN -> WALK
 		if (not INPUT->KeyPress('W') or INPUT->KeyPress('S') or INPUT->KeyPress(VK_LBUTTON))
@@ -185,7 +194,7 @@ void Player::FSM()
 	}
 	else if (playerState == PlayerState::ROLL)
 	{
-		velocity = 5.0f;
+		moveSpeed = 12.0f;
 
 		// 구르는 애니메이션이 끝날때 ROLL-> WALK or IDLE로 상태 변경
 		if (anim->GetPlayTime() >= 0.99)
@@ -252,7 +261,6 @@ void Player::FSM()
 				isRight = !isRight;
 				
 				PlayerBullet* temp = PlayerBullet::Create();
-				//temp->LoadFile("PlayerBullet.xml");
 				Vector3 pos;
 				
 				if (isRight)
@@ -357,10 +365,8 @@ void Player::Move(Vector3 Target)
 	if (attackState == PlayerAttackState::IDLE)
 	{
 		Vector3 Dir;
-		//Dir.x = -Target.x;
-		//Dir.z = Target.z;
 
-		MoveWorldPos(Find("RootNode")->GetForward() * velocity * DELTA);
+		MoveWorldPos(Find("RootNode")->GetForward() * moveSpeed * DELTA);
 		//MoveWorldPos(Target * velocity * DELTA);
 
 		if (playerState == PlayerState::IDLE)
@@ -374,24 +380,15 @@ void Player::Move(Vector3 Target)
 		Vector3 Dir;
 		if (playerState != PlayerState::ROLL)
 		{
-			//Vector3 D;
 			Dir = Target;
-			//Dir.x = -Target.x;
-			//Dir.z = Target.z;
-
-			//Dir = Find("PlayerCam")->GetWorldPos() + D;
-			//Dir.Normalize();
 		}
 		else
 		{
-			Dir.x = -fixDir.x;
-			Dir.z = fixDir.z;
+			Dir = fixDir;
 		}
 
-		MoveWorldPos(Dir * velocity * DELTA);
-		Find("RootNode")->rotation.y = atan2f(Find("PlayerCam")->GetForward().z, Find("PlayerCam")->GetForward().x) - HALFPI;
-		//rotation.y = atan2f(GetForward().z, GetForward().x);
-		//rotation.y = atan2f(Find("PlayerCam")->GetForward().z, Find("PlayerCam")->GetForward().x);
+		MoveWorldPos(Dir * moveSpeed * DELTA);
+		//Find("RootNode")->rotation.y = atan2f(GetForward().z, GetForward().x) - HALFPI;
 	}
 }
 
