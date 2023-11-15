@@ -25,7 +25,9 @@ public:
 	int Hp=100;
 	
 	
+	
 protected:
+	
 	
 	virtual void IdleAnimations()=0;
 	virtual void AttackAnimations() = 0;

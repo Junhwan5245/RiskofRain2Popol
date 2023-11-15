@@ -12,7 +12,6 @@ Monster* Monster::Create(string name,MonsterType monType)
 {
     Monster* temp = nullptr;
     
-
     switch (monType)
     {
     case MonsterType::BEETLE:

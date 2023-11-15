@@ -21,11 +21,32 @@ void Lemurian::Update()
 	Monster::Update();
 
 	root->Find("frontHp")->scale.x = Hp * 1.7 / 100;
+	
+	if (INPUT->KeyDown('J'))
+	{
+		LemurianBullet* temp = LemurianBullet::Create("LemurianBullet");
+		temp->SetPos(root->Find("neck_ik")->GetWorldPos());
+		bullet.push_back(temp);
+	}
+
+	for (auto it = bullet.begin(); it != bullet.end(); it++)
+	{
+		Vector3 tempDir = GM->player->GetWorldPos() - this->GetWorldPos();
+		tempDir.Normalize();
+		(*it)->Fire(tempDir, 10, Vector3());
+		(*it)->Update();
+	}
+	
 }
 
 void Lemurian::Render(shared_ptr<Shader> pShader)
 {
 	Monster::Render(pShader);
+
+	for (auto it = bullet.begin(); it != bullet.end(); it++)
+	{
+		(*it)->Render(pShader);
+	}
 }
 
 void Lemurian::Move(Vector3 Target)

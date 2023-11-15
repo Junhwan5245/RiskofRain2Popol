@@ -12,6 +12,7 @@ public:
 	void    MonFSM();
 	void	IdleAnimations() override;
 	void	AttackAnimations() override;
+	vector <class LemurianBullet*> bullet;
 
 private:
 	Lemurian();
