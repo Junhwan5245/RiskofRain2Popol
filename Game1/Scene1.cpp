@@ -113,16 +113,11 @@ void Scene1::Update()
 void Scene1::LateUpdate()
 {
     Ray playerTop;
-    Ray monTop;
+   
     
     playerTop.position = GM->player->GetWorldPos() + Vector3(0, 100, 0);
     playerTop.direction = Vector3(0, -1, 0);
     
-    for (auto& monster : GM->monsterPool)
-    {
-        monTop.position = monster->GetWorldPos() + Vector3(0, 100, 0);
-        monTop.direction = Vector3(0, -1, 0);
-    }
     Vector3 hit;
     
     if (Utility::RayIntersectMap(playerTop, map, hit))
@@ -130,16 +125,19 @@ void Scene1::LateUpdate()
         GM->player->SetWorldPosY(hit.y);
     }
     
-    GM->player->WolrdUpdate();
+    //GM->player->WolrdUpdate();
     
     for (auto& monster : GM->monsterPool)
     {
+        Ray monTop;
+        monTop.position = monster->GetWorldPos() + Vector3(0, 100, 0);
+        monTop.direction = Vector3(0, -1, 0);
         if (Utility::RayIntersectMap(monTop, map, hit))
         {
             monster->SetWorldPosY(hit.y);
         }
 
-        monster->WolrdUpdate();
+        //monster->WolrdUpdate();
     }
     
    

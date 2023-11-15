@@ -10,17 +10,17 @@ class Bullet : public Actor
 {
 public:
 	static Bullet* Create(string name = "Bullet");
-
-private:
-    BulletType  bulletType;
     
-    Vector3     fireDir;      // ½î´Â ¹æÇâ
-    float       power;
 
 
 protected:
     Bullet();
     virtual ~Bullet();
+    BulletType  bulletType;
+
+    Vector3     fireDir;      // ½î´Â ¹æÇâ
+    float       power;
+
 
 public:
     bool        isFire;

@@ -33,6 +33,12 @@
     <ClInclude Include="StartScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="MonBullet.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="LemurianBullet.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -65,6 +71,12 @@
     </ClCompile>
     <ClCompile Include="StartScene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="MonBullet.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="LemurianBullet.cpp">
+      <Filter>Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
