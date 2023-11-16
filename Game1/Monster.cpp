@@ -69,7 +69,7 @@ Monster* Monster::Create(Monster* src, MonsterType monType)
 void Monster::Update()
 {
     MonFSM();
-
+    Stare();
     Unit::Update();
 }
  
@@ -81,6 +81,14 @@ void Monster::Render(shared_ptr<Shader> pShader)
 void Monster::WolrdUpdate()
 {
     GameObject::Update();
+}
+
+void Monster::Stare()
+{
+    Vector3 tempDir = GM->player->GetWorldPos() - this->GetWorldPos();
+    tempDir.Normalize();
+    float stareDir = atan2f(tempDir.x, tempDir.z);
+    this->rotation.y = stareDir + PI;
 }
 
 void Monster::MonFSM()

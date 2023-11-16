@@ -28,14 +28,14 @@ void Main::Init()
     //SCENE->AddScene("StartScene", new StartScene);
     //SCENE->ChangeScene("StartScene"); 
 
-    SCENE->AddScene("PLAYERSELECT", new PlayerSelectScene);
-    SCENE->ChangeScene("PLAYERSELECT");
+    //SCENE->AddScene("PLAYERSELECT", new PlayerSelectScene);
+    //SCENE->ChangeScene("PLAYERSELECT");
 
     // 로딩신 -> 스타트신 -> 캐릭선택신 -> 게임플레이신
 
     // 게임플레이신
-    //SCENE->AddScene("SC1", new Scene1);
-    //SCENE->ChangeScene("SC1"); 
+    SCENE->AddScene("SC1", new Scene1);
+    SCENE->ChangeScene("SC1"); 
 
     
 }

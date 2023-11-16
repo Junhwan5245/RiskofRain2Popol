@@ -24,6 +24,7 @@ public:
 	int maxHp = 100;
 	int Hp=100;
 	
+	void Stare();
 	
 	
 protected:
