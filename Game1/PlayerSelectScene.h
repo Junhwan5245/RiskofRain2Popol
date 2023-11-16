@@ -6,6 +6,9 @@ private:
 
     //Actor*  select_player;  //선택된 캐릭터 액터
     UI* bg;
+
+    UI* gameStartButton;
+
     UI* playerSelectBox;        // 좌측 큰 창
     UI* playerSelect[16];       // 캐릭터 선택칸 + 16
 
