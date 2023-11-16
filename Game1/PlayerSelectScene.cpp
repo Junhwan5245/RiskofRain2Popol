@@ -10,10 +10,22 @@ void PlayerSelectScene::Init()
     bg->LoadFile("UI_StartScene_BackGround.xml");
 
     playerSelectBox = UI::Create();
-    //playerSelectBox->LoadFile("UI_SelectScene_playerSelectBox.xml");
+    playerSelectBox->LoadFile("UI_SelectScene_playerSelectBox.xml");
 
     optionSelectBox = UI::Create();
     optionSelectBox->LoadFile("UI_SelectScene_optionBox.xml");
+
+    playerExplain = UI::Create();
+    playerExplain->LoadFile("UI_SelectScene_Font.xml");
+    playerExplain->visible = false;
+
+
+    for (int i = 0; i < 4; i++)
+    {
+        playerSkill[i] = UI::Create();
+    }
+
+
 
 
 	ui = UI::Create();
@@ -30,15 +42,25 @@ void PlayerSelectScene::Update()
     bg->RenderHierarchy();
     playerSelectBox->RenderHierarchy();
     optionSelectBox->RenderHierarchy();
-    ui->RenderHierarchy();
+    playerExplain->RenderHierarchy();
+
+    for (int i = 0; i < 4; i++)
+    {
+        playerSkill[i]->RenderHierarchy();
+    }
+
     ImGui::End();
 
 
     Camera::main->Update();
     bg->Update();
-    ui->Update();
     playerSelectBox->Update();
     optionSelectBox->Update();
+    playerExplain->Update();
+    for (int i = 0; i < 4; i++)
+    {
+        playerSkill[i]->Update();
+    }
 }
 
 void PlayerSelectScene::LateUpdate()
@@ -56,7 +78,11 @@ void PlayerSelectScene::Render()
     bg->Render();
     playerSelectBox->Render();
     optionSelectBox->Render();
-    ui->Render();
+    playerExplain->Render();
+    for (int i = 0; i < 4; i++)
+    {
+        playerSkill[i]->Render();
+    }
 }
 
 void PlayerSelectScene::ResizeScreen()

@@ -12,11 +12,12 @@ private:
     UI* playerSelectBox;        // 좌측 큰 창
     UI* playerSelect[16];       // 캐릭터 선택칸 + 16
 
+    UI* playerExplainButton;    // 개요 버튼
     UI* playerExplain;          // 개요
     // 1개 추가 (글씨만 적혀있는거)
 
-    UI* playerSkill;            // 스킬
-    // 5개 추가 (스킬 설명들)
+    UI* playerSkillButton;      // 스킬
+    UI* playerSkill[4];         // 스킬 0 : LButton, 1 : RButton, 2 : LShift, 3 : R
 
     UI* playerSKillChange;      // 장전
     // 19개의 UI박스 추가 (스킬 변경)
