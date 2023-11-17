@@ -1,13 +1,22 @@
 #include "stdafx.h"
 #include "PlayerSelectScene.h"
 
-void PlayerSelectScene::Init()
+extern int     loadCount;
+
+PlayerSelectScene::PlayerSelectScene()
 {
-	cam1 = Camera::Create();
-	Camera::main = cam1;
+    cam1 = Camera::Create();
+    Camera::main = cam1;
+
+
 
     bg = UI::Create();
     bg->LoadFile("UI_StartScene_BackGround.xml");
+
+    gameStartButton = UI::Create();
+    gameStartButton->LoadFile("UI_SelectScene_GameStart.xml");
+    backButton = UI::Create();
+    backButton->LoadFile("UI_SelectScene_Back.xml");
 
     playerSelectBox = UI::Create();
     playerSelectBox->LoadFile("UI_SelectScene_playerSelectBox.xml");
@@ -17,18 +26,56 @@ void PlayerSelectScene::Init()
 
     playerExplain = UI::Create();
     playerExplain->LoadFile("UI_SelectScene_Font.xml");
-    playerExplain->visible = false;
-
+    
 
     for (int i = 0; i < 4; i++)
     {
         playerSkill[i] = UI::Create();
     }
+    playerSkill[0]->LoadFile("UI_SelectScene_Font_SkillExplain_LButton.xml");
+    playerSkill[1]->LoadFile("UI_SelectScene_Font_SkillExplain_RButton.xml");
+    playerSkill[2]->LoadFile("UI_SelectScene_Font_SkillExplain_LShift.xml");
+    playerSkill[3]->LoadFile("UI_SelectScene_Font_SkillExplain_R.xml");
 
+    
 
+    loadCount++;
+}
 
+PlayerSelectScene::~PlayerSelectScene()
+{
+}
 
-	ui = UI::Create();
+void PlayerSelectScene::Init()
+{
+    cam1->viewport.x = 0.0f;
+    cam1->viewport.y = 0.0f;
+    cam1->viewport.width = App.GetWidth();
+    cam1->viewport.height = App.GetHeight();
+    cam1->width = App.GetWidth();
+    cam1->height = App.GetHeight();
+
+    playerExplain->visible = false;
+    playerSkill[0]->visible = false;
+    playerSkill[1]->visible = false;
+    playerSkill[2]->visible = false;
+    playerSkill[3]->visible = false;
+
+    ((UI*)gameStartButton)->mouseDown = [&]
+    {
+        cout << "시작버튼 클릭" << endl;
+        //SCENE->AddScene("SC1", new Scene1);
+        SCENE->ChangeScene("SC1");
+    }; 
+    
+    ((UI*)backButton)->mouseDown = [&]
+    {
+        cout << "뒤로가기버튼 클릭" << endl;
+        //SCENE->AddScene("SC1", new Scene1);
+        SCENE->ChangeScene("StartScene");
+    };
+
+	//ui = UI::Create();
 }
 
 void PlayerSelectScene::Release()
@@ -43,6 +90,8 @@ void PlayerSelectScene::Update()
     playerSelectBox->RenderHierarchy();
     optionSelectBox->RenderHierarchy();
     playerExplain->RenderHierarchy();
+    gameStartButton->RenderHierarchy();
+    backButton->RenderHierarchy();
 
     for (int i = 0; i < 4; i++)
     {
@@ -57,6 +106,8 @@ void PlayerSelectScene::Update()
     playerSelectBox->Update();
     optionSelectBox->Update();
     playerExplain->Update();
+    gameStartButton->Update();
+    backButton->Update();
     for (int i = 0; i < 4; i++)
     {
         playerSkill[i]->Update();
@@ -79,6 +130,8 @@ void PlayerSelectScene::Render()
     playerSelectBox->Render();
     optionSelectBox->Render();
     playerExplain->Render();
+    gameStartButton->Render();
+    backButton->Render();
     for (int i = 0; i < 4; i++)
     {
         playerSkill[i]->Render();
@@ -87,11 +140,10 @@ void PlayerSelectScene::Render()
 
 void PlayerSelectScene::ResizeScreen()
 {
-    Camera::main->viewport.x = 0.0f;
-    Camera::main->viewport.y = 0.0f;
-    Camera::main->viewport.width = App.GetWidth();
-    Camera::main->viewport.height = App.GetHeight();
-
-    Camera::main->width = App.GetWidth();
-    Camera::main->height = App.GetHeight();
+    cam1->viewport.x = 0.0f;
+    cam1->viewport.y = 0.0f;
+    cam1->viewport.width = App.GetWidth();
+    cam1->viewport.height = App.GetHeight();
+    cam1->width = App.GetWidth();
+    cam1->height = App.GetHeight();
 }

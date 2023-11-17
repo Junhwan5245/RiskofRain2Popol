@@ -7,7 +7,8 @@ private:
     //Actor*  select_player;  //선택된 캐릭터 액터
     UI* bg;
 
-    UI* gameStartButton;
+    UI* gameStartButton;        // 시작
+    UI* backButton;             // 뒤로가기
 
     UI* playerSelectBox;        // 좌측 큰 창
     UI* playerSelect[16];       // 캐릭터 선택칸 + 16
@@ -38,6 +39,10 @@ private:
     UI* ui;
 
 public:
+    ~PlayerSelectScene();
+    PlayerSelectScene();
+
+
     // Scene을(를) 통해 상속됨
     virtual void Init() override;
     virtual void Release() override;

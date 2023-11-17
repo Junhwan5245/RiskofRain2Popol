@@ -2,7 +2,9 @@
 #include "StartScene.h"
 #include "Scene1.h"
 
-void StartScene::Init()
+extern int     loadCount;
+
+StartScene::StartScene()
 {
     cam1 = Camera::Create();
     Camera::main = cam1;
@@ -14,29 +16,41 @@ void StartScene::Init()
 
     logo = UI::Create();
     logo->LoadFile("UI_StartScene_Logo.xml");
-    
+
     playerSelect = UI::Create();
     playerSelect->LoadFile("UI_StartScene_PlayerSelect.xml");
-    
+
     option = UI::Create();
     option->LoadFile("UI_StartScene_Option.xml");
-    
+
     exit = UI::Create();
     exit->LoadFile("UI_StartScene_Exit.xml");
 
+    loadCount++;
+}
+
+StartScene::~StartScene()
+{
+}
+
+void StartScene::Init()
+{
+    cam1->viewport.x = 0.0f;
+    cam1->viewport.y = 0.0f;
+    cam1->viewport.width = App.GetWidth();
+    cam1->viewport.height = App.GetHeight();
+    cam1->width = App.GetWidth();
+    cam1->height = App.GetHeight();
 
     w_playerSelect = L"싱글 플레이어";
     w_option = L"설정";
     w_exit = L"나가기";
 
-
-
-
     ((UI*)playerSelect)->mouseDown = [&]
     {
         cout << "playerSelect 클릭" << endl;
         //SCENE->AddScene("SC1", new Scene1);
-        SCENE->ChangeScene("SC1");
+        SCENE->ChangeScene("PlayerSelect");
     };
     ((UI*)option)->mouseDown = [&]
     {
@@ -123,11 +137,10 @@ void StartScene::Render()
 
 void StartScene::ResizeScreen()
 {
-    Camera::main->viewport.x = 0.0f;
-    Camera::main->viewport.y = 0.0f;
-    Camera::main->viewport.width = App.GetWidth();
-    Camera::main->viewport.height = App.GetHeight();
-
-    Camera::main->width = App.GetWidth();
-    Camera::main->height = App.GetHeight();
+    cam1->viewport.x = 0.0f;
+    cam1->viewport.y = 0.0f;
+    cam1->viewport.width = App.GetWidth();
+    cam1->viewport.height = App.GetHeight();
+    cam1->width = App.GetWidth();
+    cam1->height = App.GetHeight();
 }

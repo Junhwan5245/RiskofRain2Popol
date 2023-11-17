@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "LoadingScene.h"
 #include "StartScene.h"
+#include "PlayerSelectScene.h"
 #include "Scene1.h"
 
 wstring loadObejct;
@@ -8,8 +9,17 @@ int     loadCount = 0;
 
 void CreateScene1()
 {
-    SCENE->AddScene("SC1", new Scene1);
     SCENE->AddScene("StartScene", new StartScene);
+    SCENE->AddScene("PlayerSelect", new PlayerSelectScene);
+    SCENE->AddScene("SC1", new Scene1);
+}
+
+LoadingScene::LoadingScene()
+{
+}
+
+LoadingScene::~LoadingScene()
+{
 }
 
 void LoadingScene::Init()
@@ -19,6 +29,13 @@ void LoadingScene::Init()
     cam1 = Camera::Create();
     cam1->LoadFile("Cam.xml");
     Camera::main = cam1;
+
+    cam1->viewport.x = 0.0f;
+    cam1->viewport.y = 0.0f;
+    cam1->viewport.width = App.GetWidth();
+    cam1->viewport.height = App.GetHeight();
+    cam1->width = App.GetWidth();
+    cam1->height = App.GetHeight();
 
     bono = UI::Create();
     bono->LoadFile("UI.xml");
@@ -47,7 +64,7 @@ void LoadingScene::Update()
     bono->Update();
 
     //lodingPersent += 500 * DELTA;
-    loadingPersent = min(min(25 * loadCount, 99), loadingPersent += 0.01f);
+    loadingPersent = min(min(17 * loadCount, 99), loadingPersent += 0.025f);
     ImGui::Text("loadCount : %d", loadCount);
 
     //if (loadCount == 1)
@@ -70,7 +87,7 @@ void LoadingScene::Update()
     //    lodingPersent = min(lodingPersent, 99);
     //}
     //else 
-    if (loadCount == 5)
+    if (loadCount == 7)
     {
         loadingPersent = 100;
         Render();
@@ -105,11 +122,10 @@ void LoadingScene::Render()
 
 void LoadingScene::ResizeScreen()
 {
-    Camera::main->viewport.x = 0.0f;
-    Camera::main->viewport.y = 0.0f;
-    Camera::main->viewport.width = App.GetWidth();
-    Camera::main->viewport.height = App.GetHeight();
-
-    Camera::main->width = App.GetWidth();
-    Camera::main->height = App.GetHeight();
+    cam1->viewport.x = 0.0f;
+    cam1->viewport.y = 0.0f;
+    cam1->viewport.width = App.GetWidth();
+    cam1->viewport.height = App.GetHeight();
+    cam1->width = App.GetWidth();
+    cam1->height = App.GetHeight();
 }
