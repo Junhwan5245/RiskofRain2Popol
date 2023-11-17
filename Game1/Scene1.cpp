@@ -11,7 +11,7 @@ Scene1::Scene1()
 
     cam1 = Camera::Create();
     cam1->LoadFile("Cam.xml");
-    Camera::main = cam1;
+    
     loadCount++;
 
 
@@ -39,6 +39,7 @@ Scene1::~Scene1()
 
 void Scene1::Init()
 {
+    Camera::main = cam1;
 }
 
 void Scene1::Release()

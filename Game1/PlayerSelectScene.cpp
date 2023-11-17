@@ -6,10 +6,7 @@ extern int     loadCount;
 PlayerSelectScene::PlayerSelectScene()
 {
     cam1 = Camera::Create();
-    Camera::main = cam1;
-
-
-
+    
     bg = UI::Create();
     bg->LoadFile("UI_StartScene_BackGround.xml");
 
@@ -48,6 +45,8 @@ PlayerSelectScene::~PlayerSelectScene()
 
 void PlayerSelectScene::Init()
 {
+    Camera::main = cam1;
+
     cam1->viewport.x = 0.0f;
     cam1->viewport.y = 0.0f;
     cam1->viewport.width = App.GetWidth();
@@ -84,6 +83,14 @@ void PlayerSelectScene::Release()
 
 void PlayerSelectScene::Update()
 {
+    
+    Vector3 ndcMouse = Utility::MouseToNDC(Camera::main);
+    ImGui::Text("gameStartButton x : %.2f, y : %.2f, z : %.2f", gameStartButton->GetWorldPos().x,
+        gameStartButton->GetWorldPos().y, gameStartButton->GetWorldPos().z);
+    ImGui::Text("mouseNdc x : %.2f, y : %.2f, z : %.2f", ndcMouse.x,
+        ndcMouse.y, ndcMouse.z);
+
+
     ImGui::Begin("Hierarchy");
     //ui->RenderHierarchy();
     bg->RenderHierarchy();

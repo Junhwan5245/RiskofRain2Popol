@@ -7,7 +7,7 @@ extern int     loadCount;
 StartScene::StartScene()
 {
     cam1 = Camera::Create();
-    Camera::main = cam1;
+    
 
     //ui = Actor::Create();
 
@@ -35,6 +35,8 @@ StartScene::~StartScene()
 
 void StartScene::Init()
 {
+    Camera::main = cam1;
+
     cam1->viewport.x = 0.0f;
     cam1->viewport.y = 0.0f;
     cam1->viewport.width = App.GetWidth();
