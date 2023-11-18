@@ -1,8 +1,18 @@
 #pragma once
+
+enum class SelectType
+{
+    Explain,
+    Skill,
+    SkillChange,
+};
+
 class PlayerSelectScene : public Scene
 {
 private:
     Camera* cam1;
+
+    SelectType  selectType;
 
     //Actor*  select_player;  //선택된 캐릭터 액터
     UI* bg;
@@ -20,7 +30,7 @@ private:
     UI* playerSkillButton;      // 스킬
     UI* playerSkill[4];         // 스킬 0 : LButton, 1 : RButton, 2 : LShift, 3 : R
 
-    UI* playerSKillChange;      // 장전
+    UI* playerSKillChangeButton;      // 장전
     // 19개의 UI박스 추가 (스킬 변경)
 
     UI* optionSelectBox;        // 우측 큰 창

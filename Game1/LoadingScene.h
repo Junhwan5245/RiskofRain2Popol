@@ -4,7 +4,7 @@ class LoadingScene : public Scene
 private:
     Camera* cam1;
     Grid* grid;
-    UI* bono;
+    UI* bg;
     thread* t1;
 
     float     loadingPersent;

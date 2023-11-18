@@ -4,9 +4,40 @@ class Main : public Scene
 
 private:
 	Camera* cam1;
-	Grid* grid;
-	Actor* root;
-	map < string, Material*> mtlList;
+
+	/** 인게임 UI */
+	UI* itemListUpperBox;			// 상단 아이템 목록 보는 박스
+	UI* resourceBox;				// 좌상단 골드및 루나코인 있는 박스
+	UI* stageBax;					// 우상단 스테이지 및 시간 난이도 있는 박스
+	UI* goalBox;					// 목표 박스
+
+	UI* hPBox;						// HP 표시 박스
+	UI* expBox;						// 경험치 표시 박시
+	UI* level;						// 플레이어 레벨
+
+
+	UI* tab_Font;
+	UI* tab_Image;
+
+	UI* ctrl_Font;
+	UI* ctrl_Image;
+
+	UI* m1_Font;
+	UI* m1_Image;
+
+	UI* m2_Font;
+	UI* m2_Image;
+
+	UI* shift_Font;
+	UI* shift_Image;
+
+	UI* r_Font;
+	UI* r_Image;
+
+	UI* q_Font;
+	UI* q_Image;
+
+
 
 public:
 	void ReadMtl(string file);

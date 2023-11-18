@@ -37,8 +37,8 @@ void LoadingScene::Init()
     cam1->width = App.GetWidth();
     cam1->height = App.GetHeight();
 
-    bono = UI::Create();
-    bono->LoadFile("UI.xml");
+    bg = UI::Create();
+    bg->LoadFile("UI_LoadingScene_BackGround.xml");
 
     t1 = new thread(CreateScene1);
 }
@@ -57,47 +57,27 @@ void LoadingScene::Update()
     ImGui::Begin("Hierarchy");
     grid->RenderHierarchy();
     cam1->RenderHierarchy();
-    bono->RenderHierarchy();
+    bg->RenderHierarchy();
     ImGui::End();
     grid->Update();
     cam1->Update();
-    bono->Update();
+    bg->Update();
 
-    //lodingPersent += 500 * DELTA;
+
     loadingPersent = min(min(17 * loadCount, 99), loadingPersent += 0.025f);
     ImGui::Text("loadCount : %d", loadCount);
 
-    //if (loadCount == 1)
+    //if (loadCount == 7)
     //{
-    //    lodingPersent = min(lodingPersent, 19);
+    //    loadingPersent = 100;
+    //    Render();
+    //    //Sleep(1000);
+    //    for (int i = 0; i < 1000; i++)
+    //    {
+    //
+    //    }
+    //    SCENE->ChangeScene("StartScene");
     //}
-    //else if (loadCount == 2)
-    //{
-    //    //lodingPersent += DELTA;
-    //    lodingPersent = min(lodingPersent, 49);
-    //}
-    //else if (loadCount == 3)
-    //{
-    //    //lodingPersent += DELTA;
-    //    lodingPersent = min(lodingPersent, 74);
-    //}
-    //else if (loadCount == 4)
-    //{
-    //    //lodingPersent += DELTA;
-    //    lodingPersent = min(lodingPersent, 99);
-    //}
-    //else 
-    if (loadCount == 7)
-    {
-        loadingPersent = 100;
-        Render();
-        //Sleep(1000);
-        for (int i = 0; i < 1000; i++)
-        {
-
-        }
-        SCENE->ChangeScene("StartScene");
-    }
 
 
 }
@@ -117,7 +97,7 @@ void LoadingScene::Render()
     cam1->Set();
     LIGHT->Set();
     grid->Render();
-    bono->Render();
+    bg->Render();
 }
 
 void LoadingScene::ResizeScreen()

@@ -40,6 +40,14 @@ Scene1::~Scene1()
 void Scene1::Init()
 {
     Camera::main = cam1;
+
+    Camera::main->viewport.x = 0.0f;
+    Camera::main->viewport.y = 0.0f;
+    Camera::main->viewport.width = App.GetWidth();
+    Camera::main->viewport.height = App.GetHeight();
+
+    Camera::main->width = App.GetWidth();
+    Camera::main->height = App.GetHeight();
 }
 
 void Scene1::Release()

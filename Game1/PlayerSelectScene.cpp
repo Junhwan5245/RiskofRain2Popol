@@ -21,10 +21,15 @@ PlayerSelectScene::PlayerSelectScene()
     optionSelectBox = UI::Create();
     optionSelectBox->LoadFile("UI_SelectScene_optionBox.xml");
 
+    playerExplainButton = UI::Create();
+    playerExplainButton->LoadFile("UI_SelectScene_ExplainButton.xml");
     playerExplain = UI::Create();
     playerExplain->LoadFile("UI_SelectScene_Font.xml");
     
 
+
+    playerSkillButton = UI::Create();
+    playerSkillButton->LoadFile("UI_SelectScene_SkillButton.xml");
     for (int i = 0; i < 4; i++)
     {
         playerSkill[i] = UI::Create();
@@ -34,7 +39,9 @@ PlayerSelectScene::PlayerSelectScene()
     playerSkill[2]->LoadFile("UI_SelectScene_Font_SkillExplain_LShift.xml");
     playerSkill[3]->LoadFile("UI_SelectScene_Font_SkillExplain_R.xml");
 
-    
+    playerSKillChangeButton = UI::Create();
+    playerSKillChangeButton->LoadFile("UI_SelectScene_SkillChangeButton.xml");
+
 
     loadCount++;
 }
@@ -60,6 +67,8 @@ void PlayerSelectScene::Init()
     playerSkill[2]->visible = false;
     playerSkill[3]->visible = false;
 
+    selectType = SelectType::Explain;
+
     ((UI*)gameStartButton)->mouseDown = [&]
     {
         cout << "시작버튼 클릭" << endl;
@@ -74,6 +83,20 @@ void PlayerSelectScene::Init()
         SCENE->ChangeScene("StartScene");
     };
 
+    ((UI*)playerExplainButton)->mouseDown = [&]
+    {
+        selectType = SelectType::Explain;
+    };
+
+    ((UI*)playerSkillButton)->mouseDown = [&]
+    {
+        selectType = SelectType::Skill;
+    };
+
+    ((UI*)playerSKillChangeButton)->mouseDown = [&]
+    {
+        selectType = SelectType::SkillChange;
+    };
 	//ui = UI::Create();
 }
 
@@ -96,29 +119,57 @@ void PlayerSelectScene::Update()
     bg->RenderHierarchy();
     playerSelectBox->RenderHierarchy();
     optionSelectBox->RenderHierarchy();
+    playerExplainButton->RenderHierarchy();
     playerExplain->RenderHierarchy();
     gameStartButton->RenderHierarchy();
     backButton->RenderHierarchy();
-
+    playerSkillButton->RenderHierarchy();
     for (int i = 0; i < 4; i++)
     {
         playerSkill[i]->RenderHierarchy();
     }
-
+    playerSKillChangeButton->RenderHierarchy();
     ImGui::End();
+
+
+    if (selectType == SelectType::Explain)
+    {
+        playerExplain->visible = true;
+        for (int i = 0; i < 4; i++)
+        {
+            playerSkill[i]->visible = false;
+        }
+
+        playerExplain->Update();
+    }
+    if (selectType == SelectType::Skill)
+    {
+        playerExplain->visible = false;
+        for (int i = 0; i < 4; i++)
+        {
+            playerSkill[i]->visible = true;
+            playerSkill[i]->Update();
+        }
+    }
+    if (selectType == SelectType::SkillChange)
+    {
+        playerExplain->visible = false;
+        for (int i = 0; i < 4; i++)
+        {
+            playerSkill[i]->visible = false;
+        }
+    }
 
 
     Camera::main->Update();
     bg->Update();
     playerSelectBox->Update();
     optionSelectBox->Update();
-    playerExplain->Update();
     gameStartButton->Update();
     backButton->Update();
-    for (int i = 0; i < 4; i++)
-    {
-        playerSkill[i]->Update();
-    }
+    playerExplainButton->Update();
+    playerSkillButton->Update();
+    playerSKillChangeButton->Update();
 }
 
 void PlayerSelectScene::LateUpdate()
@@ -136,13 +187,32 @@ void PlayerSelectScene::Render()
     bg->Render();
     playerSelectBox->Render();
     optionSelectBox->Render();
-    playerExplain->Render();
+    playerExplainButton->Render();
+    playerSkillButton->Render();
+    playerSKillChangeButton->Render();
+
+
+    switch (selectType)
+    {
+    case SelectType::Explain:
+        playerExplain->Render();
+        break;
+    case SelectType::Skill:
+        for (int i = 0; i < 4; i++)
+        {
+            playerSkill[i]->Render();
+        }
+        break;
+    case SelectType::SkillChange:
+        break;
+    default:
+        break;
+    }
+
     gameStartButton->Render();
     backButton->Render();
-    for (int i = 0; i < 4; i++)
-    {
-        playerSkill[i]->Render();
-    }
+    
+    
 }
 
 void PlayerSelectScene::ResizeScreen()
