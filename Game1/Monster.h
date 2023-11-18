@@ -8,7 +8,10 @@ enum class MonsterType
 enum class MonsterState 
 {
 	IDLE,//move까지 포함
-	ATTACK
+	MOVE,
+	ATTACK,
+	DEAD,
+
 };
 
 class Monster : public Unit
@@ -21,8 +24,12 @@ public:
 	void    WolrdUpdate();
 	MonsterState state;
 	MonsterType  monType;
+	float stateChangeTime=0.0f;
+	float stateChangeInterval=5.0f;
 	int maxHp = 100;
 	int Hp=100;
+
+	vector<Vector3> way;
 	
 	
 	
@@ -31,7 +38,12 @@ protected:
 	
 	virtual void IdleAnimations()=0;
 	virtual void AttackAnimations() = 0;
-	void    MonFSM();
+	virtual void MoveAnimations() = 0;
+	virtual void DeadAnimations() = 0;
+
+	virtual void    MonFSM();
+	void	SetRandomPosition();
+	void	Stare();
 	MonsterState     GetState() { return state; }
 	Monster();
 	virtual ~Monster();

@@ -9,10 +9,14 @@ public:
 
 	void    Move(Vector3 Target);
 	void    WolrdUpdate();
-	void    MonFSM();
+	void    MonFSM() override;
 	void	IdleAnimations() override;
 	void	AttackAnimations() override;
+	void	MoveAnimations() override;
+	void	DeadAnimations() override;
 	vector <class LemurianBullet*> bullet;
+	Vector3 last;
+	float bulletCreateTime = 0.0f;
 
 private:
 	Lemurian();

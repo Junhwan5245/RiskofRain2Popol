@@ -36,6 +36,10 @@
     <ClInclude Include="LemurianBullet.h">
       <Filter>Monster</Filter>
     </ClInclude>
+    <ClInclude Include="Astar.h" />
+    <ClInclude Include="Golem.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -70,6 +74,10 @@
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="LemurianBullet.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Astar.cpp" />
+    <ClCompile Include="Golem.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
   </ItemGroup>

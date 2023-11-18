@@ -10,8 +10,11 @@ private:
     Monster*    monster;
     Terrain*    map;
     float monsterCreationTimer = 0.0f;
-    const float monsterCreationInterval = 20.0f;
-
+    const float monsterCreationInterval = 100.0f;
+    class Astar* astar;
+    
+    float			time = 0;
+    
 public:
     Scene1();
     ~Scene1();

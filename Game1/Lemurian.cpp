@@ -5,22 +5,44 @@ Lemurian* Lemurian::Create(string name)
 	Lemurian* lemurian = new Lemurian();
 	lemurian->LoadFile("Lemurian.xml");
 	lemurian->type = ObType::Actor;
-	/*lemurian->anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);*/
+	lemurian->IdleAnimations();
 	lemurian->range = 10;
+	
+	lemurian->Find("base")->rootMotion = true;
 	return lemurian;
 }
 
 void Lemurian::Update()
 {
+	last = root->Find("base")->GetWorldPos();
 	Monster::Update();
+	
 
 	root->Find("frontHp")->scale.x = Hp * 1.7 / 100;
+
 	
-	if (INPUT->KeyDown('J'))
+
+	if (state == MonsterState::MOVE)
 	{
-		LemurianBullet* temp = LemurianBullet::Create("LemurianBullet");
-		temp->SetPos(root->Find("neck_ik")->GetWorldPos());
-		bullet.push_back(temp);
+		if (anim->GetPlayTime() >= 1.0f)
+		{
+			Vector3 minus = root->Find("base")->GetWorldPos() - last;
+			minus.y = 0.0f;
+			MoveWorldPos(minus);
+			Transform::Update();
+			last = root->Find("base")->GetWorldPos();
+			anim->ChangeAnimation(AnimationState::ONCE_LAST, 3, 0.0f);
+		}
+	}
+	
+	if (state==MonsterState::ATTACK)//attack 상태일때 총알 발사하기
+	{
+		if (TIMER->GetTick(bulletCreateTime, 3.0f))
+		{
+			LemurianBullet* temp = LemurianBullet::Create("LemurianBullet");
+			temp->SetPos(root->Find("neck_ik")->GetWorldPos());
+			bullet.push_back(temp);
+		}
 	}
 
 	for (auto it = bullet.begin(); it != bullet.end(); it++)
@@ -30,6 +52,7 @@ void Lemurian::Update()
 		(*it)->Fire(tempDir, 10, Vector3());
 		(*it)->Update();
 	}
+
 	
 }
 
@@ -53,17 +76,27 @@ void Lemurian::WolrdUpdate()
 
 void Lemurian::MonFSM()
 {
-  
+	Monster::MonFSM();
 }
 
 void Lemurian::IdleAnimations()
 {
-	anim->ChangeAnimation(AnimationState::LOOP, 3, 0.1f);
+	anim->ChangeAnimation(AnimationState::LOOP, 14, 0.1f);
 }
 
 void Lemurian::AttackAnimations()
 {
 	anim->ChangeAnimation(AnimationState::LOOP, 17, 0.1f);
+}
+
+void Lemurian::MoveAnimations()
+{
+	anim->ChangeAnimation(AnimationState::LOOP, 3, 0.1f);
+}
+
+void Lemurian::DeadAnimations()
+{
+	anim->ChangeAnimation(AnimationState::LOOP, 6, 0.1f);
 }
 
 Lemurian::Lemurian()

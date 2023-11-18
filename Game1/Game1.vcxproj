@@ -19,8 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Astar.h" />
     <ClInclude Include="Beetle.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Golem.h" />
     <ClInclude Include="Lemurian.h" />
     <ClInclude Include="LemurianBullet.h" />
     <ClInclude Include="LoadingScene.h" />
@@ -34,8 +36,10 @@
     <ClInclude Include="Unit.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Astar.cpp" />
     <ClCompile Include="Beetle.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Golem.cpp" />
     <ClCompile Include="Lemurian.cpp" />
     <ClCompile Include="LemurianBullet.cpp" />
     <ClCompile Include="LoadingScene.cpp" />
