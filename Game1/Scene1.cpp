@@ -1,19 +1,28 @@
 #include "stdafx.h"
 #include "Scene1.h"
 
+extern int     loadCount;
+
 Scene1::Scene1()
 {
     grid = Grid::Create();
+    grid->visible = false;
+    loadCount++;
+
     cam1 = Camera::Create();
     cam1->LoadFile("Cam.xml");
-
     Camera::main = cam1;
+    loadCount++;
+
 
     GM->player = Player::Create();
+    loadCount++;
+
 
     map = Terrain::Create();
     map->LoadFile("Terrain.xml");
     map->CreateStructuredBuffer();
+    loadCount++;
     //map->PerlinNoise();//펄린노이즈 적용
 
     for (int i = 0; i < MONCREATESIZE; ++i)
@@ -22,6 +31,7 @@ Scene1::Scene1()
         auto newMonster = Monster::Create("Monster", MonsterType(num));
         GM->monsterPool.push_back(newMonster);
     }
+    loadCount++;
 
     astar = new Astar();
     astar->CreateNode(map, 200);
@@ -94,18 +104,16 @@ void Scene1::Update()
     
     
     ImGui::Text("FPS: %d", TIMER->GetFramePerSecond());
-    //for (auto& monster : GM->monsterPool)
-    //{
-    //    ImGui::Text("MonsterState: %d",monster->state);
-    //}
+
+
     ImGui::Begin("Hierarchy");
-    //grid->RenderHierarchy();
     //cam1->RenderHierarchy();
     GM->player->PlayerRenderHierarchy();
-    for (auto& monster : GM->monsterPool)
-    {
-        monster->RenderHierarchy();
-    }
+    //playerCam->RenderHierarchy();
+    //for (auto& monster : GM->monsterPool)
+    //{
+    //    monster->RenderHierarchy();
+    //}
     map->RenderHierarchy();
     ImGui::End();
 
@@ -113,6 +121,7 @@ void Scene1::Update()
     
     grid->Update();
     GM->player->Update();
+    //playerCam->Update();
     for (auto& monster : GM->monsterPool)
     {
         monster->Update();
@@ -210,6 +219,7 @@ void Scene1::Render()
 {
     LIGHT->Set();
     Camera::main->Set();
+    //playerCam->Set();
     grid->Render();
     map->Render();
     GM->player->Render();
@@ -221,11 +231,11 @@ void Scene1::Render()
 
 void Scene1::ResizeScreen()
 {
-    cam1->viewport.x = 0.0f;
-    cam1->viewport.y = 0.0f;
-    cam1->viewport.width = App.GetWidth();
-    cam1->viewport.height = App.GetHeight();
+    Camera::main->viewport.x = 0.0f;
+    Camera::main->viewport.y = 0.0f;
+    Camera::main->viewport.width = App.GetWidth();
+    Camera::main->viewport.height = App.GetHeight();
 
-    cam1->width = App.GetWidth();
-    cam1->height = App.GetHeight();
+    Camera::main->width = App.GetWidth();
+    Camera::main->height = App.GetHeight();
 }

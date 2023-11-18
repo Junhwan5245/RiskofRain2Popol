@@ -6,6 +6,13 @@ Lemurian* Lemurian::Create(string name)
 	lemurian->LoadFile("Lemurian.xml");
 	lemurian->type = ObType::Actor;
 	lemurian->IdleAnimations();
+	/*lemurian->anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);*/
+	lemurian->moveSpeed = 6.0f; // 증가계수 24
+	lemurian->maxHp = 80; // 증가계수 24
+	lemurian->Hp = 80;
+	lemurian->defend = 0;
+
+	lemurian->attack = 12.0f;	//증가계수 2.4
 	lemurian->range = 10;
 	
 	lemurian->Find("base")->rootMotion = true;

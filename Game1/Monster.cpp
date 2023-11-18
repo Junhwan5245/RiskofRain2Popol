@@ -27,6 +27,9 @@ Monster* Monster::Create(string name,MonsterType monType)
         break;
     }
 
+    temp->maxHp = 100;  // 몬스터마다의 체력으로 변경
+    temp->Hp = 100;     // 몬스터마다의 체력으로 변경
+
     temp->SetRandomPosition();
     temp->IdleAnimations();
     temp->Hp = 100;

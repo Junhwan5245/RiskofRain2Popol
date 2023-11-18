@@ -6,6 +6,7 @@ class Scene1 : public Scene
 {
 private:
     Camera*     cam1;
+    Camera*     playerCam;
     Grid*       grid;
     Monster*    monster;
     Terrain*    map;

@@ -56,6 +56,21 @@ Commando
 34번 ? 상테를 좌측으로 까딱
 */
 
+/**
+이번주 작업해야할것
+- 캐릭터 선택창 씬 완료
+    - 선택 캐릭터 구현, 스킬 및 캐릭터 설명
+    - 스킬 변경 구현
+    - -> 선택한 캐릭터, 선택한 스킬, 선택한 난이도로 캐릭터 생성 후 게임씬 진입
+
+- 플레이어 완료
+    - 점프, 우클릭, R스킬 구현
+    - 스텟 구현
+
+- 게임씬 UI ?
+    - UI 배치 및 캐릭터 레벨 or 체력바 UI
+*/
+
 
 enum class PlayerState
 {
@@ -88,19 +103,20 @@ public:
     static Player* Create(string name = "Player");
 
 private:
-    // Player는 몸통메쉬 + 이동 애니메이션만, playerGun은 총메쉬 + 공격 애니메이션만
-    //Actor* playerGun;   //고민중..
-    vector<class PlayerBullet*>   bullet;     // 총알
+    vector <class PlayerBullet*>   bullet;     // 총알
 
 
     PlayerState         playerState;    // 플레이어 이동상태
     PlayerAttackState   attackState;    // 플레이어 공격상태 // 공격상태냐 아니면 
     SkillState          skillState;         // 공격       // 좌클릭이냐 우클릭이냐 R이냐
 
-    Vector3             dir;            // 대체, 나중에 Unit클래스를 상속 받을 친구
+    //Vector3             dir;            // 대체, 나중에 Unit클래스를 상속 받을 친구
     Vector3             fixDir;         // 굴렀을때의 고정된 방향값
-    
+    Vector3             mouseDir;       // 마우스의 방향
+
+
     float               lastRot;
+    float               lastRot_root;
     float               attackStopTime; // 공격 멈춘 시간 (4초가 되면 isAttack = false)
 
     bool                isRight;
