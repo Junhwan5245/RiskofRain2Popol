@@ -1,0 +1,52 @@
+<Root Name="Root" Visible="true" ObType="1">
+    <Transform>
+        <Position X="0" Y="0" Z="0"/>
+        <Scale X="0.15000001" Y="0.16" Z="0.15000001"/>
+        <Rotation X="0" Y="0" Z="0"/>
+    </Transform>
+    <Children Size="1"/>
+    <Child0 Name="CommandoFMJMesh.obj" Visible="true" ObType="0">
+        <Transform>
+            <Position X="0" Y="0" Z="0"/>
+            <Scale X="1" Y="1" Z="1"/>
+            <Rotation X="0" Y="0" Z="-0"/>
+        </Transform>
+        <Children Size="2"/>
+        <Child0 Name="CommandoFMJMesh" Visible="true" ObType="0">
+            <Shader File="4.Cube.hlsl"/>
+            <Transform>
+                <Position X="0" Y="0" Z="0"/>
+                <Scale X="1" Y="1" Z="1"/>
+                <Rotation X="0" Y="0" Z="-0"/>
+            </Transform>
+            <Children Size="0"/>
+        </Child0>
+        <Child1 Name="CommandoFMJMesh_0" Visible="true" ObType="0">
+            <Mesh File="CommandoFMJMesh/CommandoFMJMesh_0.mesh"/>
+            <Shader File="4.Cube.hlsl"/>
+            <Material File="CommandoFMJMesh/DefaultMaterial.mtl"/>
+            <Transform>
+                <Position X="0" Y="0" Z="0"/>
+                <Scale X="1" Y="1" Z="1"/>
+                <Rotation X="0" Y="0" Z="-0"/>
+            </Transform>
+            <Children Size="2"/>
+            <Child0 Name="end" Visible="true" ObType="1">
+                <Transform>
+                    <Position X="0" Y="-2.8125" Z="0"/>
+                    <Scale X="1" Y="1" Z="1"/>
+                    <Rotation X="0" Y="0" Z="0"/>
+                </Transform>
+                <Children Size="0"/>
+            </Child0>
+            <Child1 Name="start" Visible="true" ObType="1">
+                <Transform>
+                    <Position X="0" Y="3.4375002" Z="0"/>
+                    <Scale X="1" Y="1" Z="1"/>
+                    <Rotation X="0" Y="0" Z="0"/>
+                </Transform>
+                <Children Size="0"/>
+            </Child1>
+        </Child1>
+    </Child0>
+</Root>
