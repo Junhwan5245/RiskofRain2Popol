@@ -1,12 +1,14 @@
 #include "stdafx.h"
-#include "Main.h"
 
-
-Main::Main()
+InGameUI* InGameUI::Create(string name)
 {
-	cam1 = Camera::Create();
-	cam1->LoadFile("Cam.xml");
+	InGameUI* temp = new InGameUI();
 
+	return temp;
+}
+
+InGameUI::InGameUI()
+{
 	itemListUpperBox = UI::Create();
 	itemListUpperBox->LoadFile("UI_InGame_ItemListUpperBox.xml");
 
@@ -64,45 +66,18 @@ Main::Main()
 	exp->LoadFile("UI_InGame_PlayerExp_Image.xml");
 
 	level = UI::Create();
-
-
-	//투명 이미지출력
 }
 
-Main::~Main()
-{
-	
-}
-void Main::Init()
-{
-	
-	Camera::main = cam1;
-	cam1->viewport.x = 0.0f;
-	cam1->viewport.y = 0.0f;
-	cam1->viewport.width = App.GetWidth();
-	cam1->viewport.height = App.GetHeight();
-	cam1->width = App.GetWidth();
-	cam1->height = App.GetHeight();
-
-
-}
-
-void Main::Release()
+InGameUI::~InGameUI()
 {
 }
 
-void Main::Update()
-
+void InGameUI::Init()
 {
-	ImGui::Begin("Hierarchy");
-	expBox->RenderHierarchy();
-	exp->RenderHierarchy();
-	ImGui::End();
+}
 
-	cam1->ControlMainCam();
-
-
-	cam1->Update();
+void InGameUI::Update()
+{
 	itemListUpperBox->Update();
 	resourceBox->Update();
 	stageBax->Update();
@@ -128,19 +103,8 @@ void Main::Update()
 	exp->Update();
 }
 
-void Main::LateUpdate()
+void InGameUI::Render()
 {
-	
-
-}
-void Main::PreRender()
-{
-}
-
-void Main::Render()
-{
-	cam1->Set();
-	LIGHT->Set();
 	itemListUpperBox->Render();
 	resourceBox->Render();
 	stageBax->Render();
@@ -166,32 +130,6 @@ void Main::Render()
 	exp->Render();
 }
 
-void Main::ResizeScreen()
+void InGameUI::ResizeScreen()
 {
-	cam1->viewport.x = 0.0f;
-	cam1->viewport.y = 0.0f;
-	cam1->viewport.width = App.GetWidth();
-	cam1->viewport.height = App.GetHeight();
-	cam1->width = App.GetWidth();
-	cam1->height = App.GetHeight();
-}
-
-int WINAPI wWinMain(HINSTANCE instance, HINSTANCE prevInstance, LPWSTR param, int command)
-{
-	App.SetAppName(L"Game2");
-	App.SetInstance(instance);
-	WIN->Create();
-	D3D->Create();
-	Main* main = new Main();
-	main->Init();
-
-	int wParam = (int)WIN->Run(main);
-
-
-	main->Release();
-	SafeDelete(main);
-	D3D->DeleteSingleton();
-	WIN->DeleteSingleton();
-
-	return wParam;
 }

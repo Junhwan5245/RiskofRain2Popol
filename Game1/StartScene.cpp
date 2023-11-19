@@ -121,7 +121,15 @@ void StartScene::PreRender()
 
 void StartScene::Render()
 {
-    DWRITE->RenderText(w_playerSelect, RECT{110,1000,1000,418}, 18, L"Noto Sans CJK KR Regular", Color(1, 1, 1, 1), DWRITE_FONT_WEIGHT_BOLD);
+    //RECT r_playerSelect;
+    //r_playerSelect.left = playerSelect->GetWorldPos().x - playerSelect->scale.x * 0.5f + 20;
+    //r_playerSelect.top = playerSelect->GetWorldPos().y - playerSelect->scale.y * 0.5f +5;
+    //r_playerSelect.right = playerSelect->scale.x;
+    //r_playerSelect.bottom = playerSelect->scale.y;
+    
+    //Vector3 pos = Vector3::Transform(playerSelect->GetWorldPos(), Matrix::T);
+
+    DWRITE->RenderText(w_playerSelect, r_playerSelect, 18, L"Noto Sans CJK KR Regular", Color(1, 1, 1, 1), DWRITE_FONT_WEIGHT_BOLD);
     DWRITE->RenderText(w_option, RECT{ 110,1000,1000,472 }, 18, L"Noto Sans CJK KR Regular", Color(1, 1, 1, 1), DWRITE_FONT_WEIGHT_BOLD);
     DWRITE->RenderText(w_exit, RECT{ 110,1000,1000,525 }, 18, L"Noto Sans CJK KR Regular", Color(1, 1, 1, 1), DWRITE_FONT_WEIGHT_BOLD);
 

@@ -1,9 +1,10 @@
 #pragma once
-class Main : public Scene
+class InGameUI
 {
+public:
+	static InGameUI* Create(string name = "InGameUI");
 
 private:
-	Camera* cam1;
 
 	/** 인게임 UI */
 	UI* itemListUpperBox;			// 상단 아이템 목록 보는 박스
@@ -14,7 +15,7 @@ private:
 	UI* hPBox;						// HP 뒤 박스
 	UI* hp;							// HP
 	UI* expBox;						// 경험치 표시 박시
-	UI* exp;						
+	UI* exp;
 	UI* level;						// 플레이어 레벨
 
 
@@ -40,16 +41,13 @@ private:
 	UI* q_Font;
 
 
-
 public:
-	void ReadMtl(string file);
-	Main();
-	~Main();
-	virtual void Init() override;
-	virtual void Release() override; //해제
-	virtual void Update() override;
-	virtual void LateUpdate() override;//갱신
-	virtual void PreRender() override;
-	virtual void Render() override;
-	virtual void ResizeScreen() override;
+	InGameUI();
+	~InGameUI();
+
+	void Init();
+	void Update();
+	void Render();
+	void ResizeScreen();
 };
+

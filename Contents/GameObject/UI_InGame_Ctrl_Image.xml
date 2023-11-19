@@ -1,4 +1,4 @@
-<Root Name="UI" Visible="true" ObType="4">
+<Root Name="UI_Image_Ctrl" Visible="true" ObType="4">
     <Mesh File="6.UI.mesh"/>
     <Shader File="6.UI.hlsl"/>
     <Material File="UI_InGame_Ctrl_Image.mtl"/>

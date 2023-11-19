@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="Beetle.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="InGameUI.h" />
     <ClInclude Include="Lemurian.h" />
     <ClInclude Include="LemurianBullet.h" />
     <ClInclude Include="LoadingScene.h" />
@@ -37,6 +38,7 @@
   <ItemGroup>
     <ClCompile Include="Beetle.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="InGameUI.cpp" />
     <ClCompile Include="Lemurian.cpp" />
     <ClCompile Include="LemurianBullet.cpp" />
     <ClCompile Include="LoadingScene.cpp" />

@@ -67,17 +67,17 @@ void LoadingScene::Update()
     loadingPersent = min(min(17 * loadCount, 99), loadingPersent += 0.025f);
     ImGui::Text("loadCount : %d", loadCount);
 
-    //if (loadCount == 7)
-    //{
-    //    loadingPersent = 100;
-    //    Render();
-    //    //Sleep(1000);
-    //    for (int i = 0; i < 1000; i++)
-    //    {
-    //
-    //    }
-    //    SCENE->ChangeScene("StartScene");
-    //}
+    if (loadCount == 7)
+    {
+        loadingPersent = 100;
+        Render();
+        //Sleep(1000);
+        for (int i = 0; i < 1000; i++)
+        {
+    
+        }
+        SCENE->ChangeScene("StartScene");
+    }
 
 
 }
@@ -93,7 +93,13 @@ void LoadingScene::PreRender()
 void LoadingScene::Render()
 {
     wstring persent = to_wstring((int)loadingPersent) + L"%";
-    DWRITE->RenderText(persent, RECT{0,0,1000,300}, 50, L"¹ÙÅÁÃ¼", Color(1, 0, 0, 1));
+    RECT rect;
+    rect.left = App.GetWidth() - 100;
+    rect.top = App.GetHeight() - 100;
+    rect.right = App.GetWidth();
+    rect.bottom = App.GetHeight();
+
+    DWRITE->RenderText(persent, rect, 50, L"¹ÙÅÁÃ¼", Color(1, 1, 1, 1), DWRITE_FONT_WEIGHT_BOLD);
     cam1->Set();
     LIGHT->Set();
     grid->Render();

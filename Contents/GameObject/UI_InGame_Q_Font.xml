@@ -1,9 +1,9 @@
-<Root Name="UI_Image_Tab" Visible="true" ObType="4">
+<Root Name="UI" Visible="true" ObType="4">
     <Mesh File="6.UI.mesh"/>
     <Shader File="6.UI.hlsl"/>
-    <Material File="UI_InGame_Tab_Image.mtl"/>
+    <Material File="UI_InGame_Q_Font.mtl"/>
     <Transform>
-        <Position X="0.44999999" Y="-0.77999997" Z="0"/>
+        <Position X="0.89999998" Y="-0.87" Z="0"/>
         <Scale X="0.015" Y="0.029999999" Z="1"/>
         <Rotation X="0" Y="0" Z="0"/>
     </Transform>
