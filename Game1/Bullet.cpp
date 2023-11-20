@@ -22,7 +22,7 @@ void Bullet::SetPos(Vector3 pos)
 	SetWorldPos(pos);
 }
 
-void Bullet::CollisionWithMap()
+void Bullet::CollisionWithMap()//¸Ê°ú ÃÑ¾Ë Ãæµ¹
 {
 	for (auto it = GM->bulletPool.begin(); it != GM->bulletPool.end(); it++)
 	{

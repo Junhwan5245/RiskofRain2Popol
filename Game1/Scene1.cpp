@@ -118,7 +118,7 @@ void Scene1::Update()
        monster->Update();
     }
     GM->map->Update();
-    GM->Update();
+    GM->Update();//ÃÑ¾Ë
     GM->player->Update();
     
 
