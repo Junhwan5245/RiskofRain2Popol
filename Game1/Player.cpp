@@ -279,9 +279,9 @@ void Player::FSM()
 
 					temp->SetPos(pos);
 
-					bullet.push_back(temp);
+					GM->bulletPool.push_back(temp);
 
-					for (auto it = bullet.begin(); it != bullet.end(); it++)
+					for (auto it = GM->bulletPool.begin(); it != GM->bulletPool.end(); it++)
 					{
 						if (not (*it)->isFire)
 						{
@@ -306,9 +306,9 @@ void Player::FSM()
 
 					temp->SetPos(pos);
 
-					bullet.push_back(temp);
+					GM->bulletPool.push_back(temp);
 
-					for (auto it = bullet.begin(); it != bullet.end(); it++)
+					for (auto it = GM->bulletPool.begin(); it != GM->bulletPool.end(); it++)
 					{
 						if (not (*it)->isFire)
 						{
@@ -349,9 +349,9 @@ void Player::FSM()
 
 							temp->SetPos(pos);
 
-							bullet.push_back(temp);
+							GM->bulletPool.push_back(temp);
 
-							for (auto it = bullet.begin(); it != bullet.end(); it++)
+							for (auto it = GM->bulletPool.begin(); it != GM->bulletPool.end(); it++)
 							{
 								if (not (*it)->isFire)
 								{
