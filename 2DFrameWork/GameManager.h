@@ -6,8 +6,8 @@ public:
 	/*class Player* pl;*/
 	vector<class Monster*> monsterPool;
 	class Player* player;
-	
-	
+	vector<class Bullet*> bulletPool;
+	class Terrain* map;
 
 	virtual ~GameManager();
 	virtual void Init();

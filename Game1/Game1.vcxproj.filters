@@ -43,6 +43,7 @@
     <ClInclude Include="Golem.h">
       <Filter>Monster</Filter>
     </ClInclude>
+    <ClInclude Include="LemurianBulletTrail.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -86,6 +87,7 @@
     <ClCompile Include="Golem.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
+    <ClCompile Include="LemurianBulletTrail.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">

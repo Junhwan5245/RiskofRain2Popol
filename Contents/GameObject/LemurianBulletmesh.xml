@@ -1,8 +1,13 @@
 <Root Name="Root" Visible="true" ObType="1">
+    <Collider ColliderType="2" Visible="true">
+        <Position X="0" Y="0.5" Z="0"/>
+        <Scale X="1" Y="2.95" Z="1"/>
+        <Rotation X="0" Y="0" Z="0"/>
+    </Collider>
     <Transform>
         <Position X="0" Y="0" Z="0"/>
-        <Scale X="0.15000001" Y="0.16" Z="0.15000001"/>
-        <Rotation X="0" Y="0" Z="0"/>
+        <Scale X="0.1" Y="0.1" Z="0.1"/>
+        <Rotation X="1.5707879" Y="0" Z="0"/>
     </Transform>
     <Children Size="1"/>
     <Child0 Name="CommandoFMJMesh.obj" Visible="true" ObType="0">
@@ -33,7 +38,7 @@
             <Children Size="2"/>
             <Child0 Name="end" Visible="true" ObType="1">
                 <Transform>
-                    <Position X="0" Y="-2.8125" Z="0"/>
+                    <Position X="0" Y="-4.8099999" Z="0"/>
                     <Scale X="1" Y="1" Z="1"/>
                     <Rotation X="0" Y="0" Z="0"/>
                 </Transform>
@@ -41,7 +46,7 @@
             </Child0>
             <Child1 Name="start" Visible="true" ObType="1">
                 <Transform>
-                    <Position X="0" Y="3.4375002" Z="0"/>
+                    <Position X="0" Y="7.4400001" Z="0"/>
                     <Scale X="1" Y="1" Z="1"/>
                     <Rotation X="0" Y="0" Z="0"/>
                 </Transform>

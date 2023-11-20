@@ -9,11 +9,11 @@ private:
     Camera*     playerCam;
     Grid*       grid;
     Monster*    monster;
-    Terrain*    map;
+   /* Terrain*    map;*/
     float monsterCreationTimer = 0.0f;
     const float monsterCreationInterval = 100.0f;
     class Astar* astar;
-    
+
     float			time = 0;
     
 public:
@@ -28,5 +28,6 @@ public:
     virtual void PreRender() override;
     virtual void Render() override;
     virtual void ResizeScreen() override;//
+  
 };
 

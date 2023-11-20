@@ -15,4 +15,6 @@
 #include "PlayerBullet.h"
 #include "MonBullet.h"
 #include "LemurianBullet.h"
+#include "LemurianBulletTrail.h"
+
 #include "Astar.h"

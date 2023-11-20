@@ -103,8 +103,7 @@ public:
     static Player* Create(string name = "Player");
 
 private:
-    vector <class PlayerBullet*>   bullet;     // 총알
-
+    
 
     PlayerState         playerState;    // 플레이어 이동상태
     PlayerAttackState   attackState;    // 플레이어 공격상태 // 공격상태냐 아니면 

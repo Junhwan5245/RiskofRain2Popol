@@ -101,21 +101,13 @@ void Player::Update()
 	FSM();
 
 
-	for (auto it = bullet.begin(); it != bullet.end(); it++)
-	{
-		(*it)->Update();
-	}
+	
 
 	Unit::Update();
 }
 
 void Player::Render(shared_ptr<Shader> pShader)
 {
-	for (auto it = bullet.begin(); it != bullet.end(); it++)
-	{
-		(*it)->Render();
-	}
-
 	Unit::Render();
 }
 
@@ -269,9 +261,9 @@ void Player::FSM()
 				
 				temp->SetPos(pos);
 				
-				bullet.push_back(temp);
+				GM->bulletPool.push_back(temp);
 				
-				for (auto it = bullet.begin(); it != bullet.end(); it++)
+				for (auto it = GM->bulletPool.begin(); it != GM->bulletPool.end(); it++)
 				{
 					if (not (*it)->isFire)
 					{
@@ -404,8 +396,5 @@ void Player::WolrdUpdate()
 void Player::PlayerRenderHierarchy()
 {
 	this->RenderHierarchy();
-	for (auto it = bullet.begin(); it != bullet.end(); it++)
-	{
-		(*it)->RenderHierarchy();
-	}
+	
 }

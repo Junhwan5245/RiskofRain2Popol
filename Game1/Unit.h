@@ -4,7 +4,7 @@ class Unit : public Actor
 public:
 	static Unit* Create(string name = "Unit");
 	static Unit* Create(Unit* src);
-
+	int Hp;				// 체력
 
 protected:
 	Unit();
@@ -16,7 +16,6 @@ protected:
 	float moveSpeed;	// 이동 속도
 
 	int maxHp;			// 최대 체력
-	int Hp;				// 체력
 	int defend;			// 방어막
 
 	float attack;		// 공격력

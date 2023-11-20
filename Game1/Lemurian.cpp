@@ -14,8 +14,9 @@ Lemurian* Lemurian::Create(string name)
 
 	lemurian->attack = 12.0f;	//증가계수 2.4
 	lemurian->range = 10;
-	
+
 	lemurian->Find("base")->rootMotion = true;
+	
 	return lemurian;
 }
 
@@ -23,11 +24,11 @@ void Lemurian::Update()
 {
 	last = root->Find("base")->GetWorldPos();
 	Monster::Update();
-	
+
 
 	root->Find("frontHp")->scale.x = Hp * 1.7 / 100;
 
-	
+
 
 	if (state == MonsterState::MOVE)
 	{
@@ -41,36 +42,27 @@ void Lemurian::Update()
 			anim->ChangeAnimation(AnimationState::ONCE_LAST, 3, 0.0f);
 		}
 	}
-	
-	if (state==MonsterState::ATTACK)//attack 상태일때 총알 발사하기
+
+	if (state == MonsterState::ATTACK)//attack 상태일때 총알 발사하기
 	{
-		if (TIMER->GetTick(bulletCreateTime, 3.0f))
+		if (TIMER->GetTick(bulletCreateTime, 5.0f))//5초마다 GM->bulletPool에 푸쉬
 		{
+			/*PlayerDir = GM->player->GetWorldPos();*/
 			LemurianBullet* temp = LemurianBullet::Create("LemurianBullet");
 			temp->SetPos(root->Find("neck_ik")->GetWorldPos());
-			bullet.push_back(temp);
+			temp->fireDir = GM->player->GetWorldPos()-this->GetWorldPos();
+			temp->fireDir.Normalize();
+			GM->bulletPool.push_back(temp);
+			
 		}
+
 	}
 
-	for (auto it = bullet.begin(); it != bullet.end(); it++)
-	{
-		Vector3 tempDir = GM->player->GetWorldPos() - this->GetWorldPos();
-		tempDir.Normalize();
-		(*it)->Fire(tempDir, 10, Vector3());
-		(*it)->Update();
-	}
-
-	
 }
 
 void Lemurian::Render(shared_ptr<Shader> pShader)
 {
 	Monster::Render(pShader);
-
-	for (auto it = bullet.begin(); it != bullet.end(); it++)
-	{
-		(*it)->Render(pShader);
-	}
 }
 
 void Lemurian::Move(Vector3 Target)

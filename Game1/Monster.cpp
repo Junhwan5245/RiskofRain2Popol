@@ -137,6 +137,16 @@ void Monster::MonFSM()
             state = MonsterState::MOVE;
         }
     }
+
+    if (state == MonsterState::DEAD)
+    {
+        DeadAnimations();
+
+        if (anim->GetPlayTime() >= 0.9)
+        {
+           //5초를 재고 없애기 소멸 상태를 만든다?
+        }
+    }
 	
 }
 

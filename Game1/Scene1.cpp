@@ -19,9 +19,9 @@ Scene1::Scene1()
     loadCount++;
 
 
-    map = Terrain::Create();
-    map->LoadFile("Terrain.xml");
-    map->CreateStructuredBuffer();
+    GM->map = Terrain::Create();
+    GM->map->LoadFile("Terrain.xml");
+    GM->map->CreateStructuredBuffer();
     loadCount++;
     //map->PerlinNoise();//펄린노이즈 적용
 
@@ -34,7 +34,7 @@ Scene1::Scene1()
     loadCount++;
 
     astar = new Astar();
-    astar->CreateNode(map, 200);
+    astar->CreateNode(GM->map, 200);
     
 }
 Scene1::~Scene1()
@@ -55,7 +55,7 @@ void Scene1::Update()
     monsterCreationTimer += DELTA;
 
     ImGui::Text("TIMER : %.2f", monsterCreationTimer);
-
+    ImGui::Text("HP : %d", GM->player->Hp);
     for (auto& monster : GM->monsterPool)
     {
         ImGui::Text("MosterState : %d", monster->state);
@@ -63,7 +63,7 @@ void Scene1::Update()
 
     if (ImGui::Button("Perlin"))
     {
-        map->PerlinNoise();
+        GM->map->PerlinNoise();
     }
 
     if (GM->monsterPool.size()<MAXMONSIZE)
@@ -82,22 +82,13 @@ void Scene1::Update()
                
                 GM->monsterPool.push_back(newMonster);
                
-                /*if (newMonster->monType == MonsterType::BEETLE)
-                {
-                   
-                    Beetle* temp1 = dynamic_cast<Beetle*>(newMonster);
-                    if (temp1)
-                    temp1->temp();
-
-                }*/ 
-                //downcasting으로 자식에만 있는 함수에 접근하는 방법
+             
             }
           
         }
     }
     
-
-  
+    //downcasting으로 자식에만 있는 함수에 접근하는 방법
 
     Camera::main->ControlMainCam();
     Camera::main->Update();
@@ -107,27 +98,28 @@ void Scene1::Update()
 
 
     ImGui::Begin("Hierarchy");
-    //cam1->RenderHierarchy();
+    ////cam1->RenderHierarchy();
     GM->player->PlayerRenderHierarchy();
-    //playerCam->RenderHierarchy();
-    //for (auto& monster : GM->monsterPool)
-    //{
-    //    monster->RenderHierarchy();
-    //}
-    map->RenderHierarchy();
+    ////playerCam->RenderHierarchy();
+    for (auto& monster : GM->monsterPool)
+    {
+       monster->RenderHierarchy();
+    }
+    GM->map->RenderHierarchy();
     ImGui::End();
 
     
     
     grid->Update();
-    GM->player->Update();
-    //playerCam->Update();
+
+    ////playerCam->Update();
     for (auto& monster : GM->monsterPool)
     {
-        monster->Update();
+       monster->Update();
     }
-    map->Update();
-
+    GM->map->Update();
+    GM->Update();
+    GM->player->Update();
     
 
 }
@@ -141,7 +133,7 @@ void Scene1::LateUpdate()
 
     Vector3 hit;
 
-    if (Utility::RayIntersectMap(playerTop, map, hit))
+    if (Utility::RayIntersectMap(playerTop, GM->map, hit))//맵과 몬스터 레이 이용해 플레이어 y값 잡기
     {
         GM->player->SetWorldPosY(hit.y);
     }
@@ -153,14 +145,14 @@ void Scene1::LateUpdate()
         Ray monTop;
         monTop.position = monster->GetWorldPos() + Vector3(0, 100, 0);
         monTop.direction = Vector3(0, -1, 0);
-        if (Utility::RayIntersectMap(monTop, map, hit))//맵과 몬스터 레이 이용해 몬스터 y값 잡기
+        if (Utility::RayIntersectMap(monTop, GM->map, hit))//맵과 몬스터 레이 이용해 몬스터 y값 잡기
         {
             monster->SetWorldPosY(hit.y);
         }
-       
+
         if (monster->state == MonsterState::MOVE)//IDLE 상태일때 길찾기 실행
         {
-            astar->PathFinding(monster->GetWorldPos(), GM->player->GetWorldPos(), monster->way);
+        astar->PathFinding(monster->GetWorldPos(), GM->player->GetWorldPos(), monster->way);
         }
 
         if (monster->state == MonsterState::ATTACK)
@@ -174,7 +166,7 @@ void Scene1::LateUpdate()
             if (TIMER->GetTick(time, 0.1f))
             {
                 Vector3 currentPosition = monster->GetWorldPos();
-                
+
                 if (monster->way.size() >= 2)//way back()을 하게되면 way.back()과 몬스터의 getworldpos가 같기 때문에 안움직임 
                 {
                     Vector3 targetPosition = monster->way[monster->way.size() - 2];
@@ -201,13 +193,18 @@ void Scene1::LateUpdate()
 
             }
         }
+
+           
+            /*Lemurian* temp1 = dynamic_cast<Lemurian*>(monster);
+            if (temp1) 
+                temp1->CollisionBulletToMap(GM->map);*/
+         
         
 
-     
 
         //monster->WolrdUpdate();
     }
-   
+    GM->LateUpdate();
 }
 
 void Scene1::PreRender()
@@ -221,12 +218,14 @@ void Scene1::Render()
     Camera::main->Set();
     //playerCam->Set();
     grid->Render();
-    map->Render();
-    GM->player->Render();
+   GM->map->Render();
+   
     for (auto& monster : GM->monsterPool)
     {
         monster->Render();
     }
+    GM->Render();
+    GM->player->Render();
 }
 
 void Scene1::ResizeScreen()
@@ -239,3 +238,5 @@ void Scene1::ResizeScreen()
     Camera::main->width = App.GetWidth();
     Camera::main->height = App.GetHeight();
 }
+
+
