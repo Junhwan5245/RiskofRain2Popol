@@ -42,13 +42,15 @@ void Scene1::Init()
 {
     Camera::main = cam1;
 
-    cam1->viewport.x = 0.0f;
-    cam1->viewport.y = 0.0f;
-    cam1->viewport.width = App.GetWidth();
-    cam1->viewport.height = App.GetHeight();
+    Camera::main->viewport.x = 0.0f;
+    Camera::main->viewport.y = 0.0f;
+    Camera::main->viewport.width = App.GetWidth();
+    Camera::main->viewport.height = App.GetHeight();
     
-    cam1->width = App.GetWidth();
-    cam1->height = App.GetHeight();
+    Camera::main->width = App.GetWidth();
+    Camera::main->height = App.GetHeight();
+
+    //Camera::main = (Camera*)GM->player->Find("PlayerCam");
 }
 
 void Scene1::Release()
@@ -58,6 +60,24 @@ void Scene1::Release()
 void Scene1::Update()
 {
     monsterCreationTimer += DELTA;
+
+    if (INPUT->KeyDown('V'))
+        isMainCam = !isMainCam;
+    Camera::main->viewport.x = 0.0f;
+    Camera::main->viewport.y = 0.0f;
+    Camera::main->viewport.width = App.GetWidth();
+    Camera::main->viewport.height = App.GetHeight();
+
+    Camera::main->width = App.GetWidth();
+    Camera::main->height = App.GetHeight();
+    if (isMainCam)
+    {
+        Camera::main = cam1;
+    }
+    else
+    {
+        Camera::main = (Camera*)GM->player->Find("PlayerCam");
+    }
 
     ImGui::Text("TIMER : %.2f", monsterCreationTimer);
 
@@ -183,19 +203,19 @@ void Scene1::Render()
 
 void Scene1::ResizeScreen()
 {
-    cam1->viewport.x = 0.0f;
-    cam1->viewport.y = 0.0f;
-    cam1->viewport.width = App.GetWidth();
-    cam1->viewport.height = App.GetHeight();
-    cam1->width = App.GetWidth();
-    cam1->height = App.GetHeight();
+    Camera::main->viewport.x = 0.0f;
+    Camera::main->viewport.y = 0.0f;
+    Camera::main->viewport.width = App.GetWidth();
+    Camera::main->viewport.height = App.GetHeight();
+    Camera::main->width = App.GetWidth();
+    Camera::main->height = App.GetHeight();
 
 
 
-    //GM->player->Find("PlayerCam")->viewport.x = 0.0f;
-    //GM->player->Find("PlayerCam")->viewport.y = 0.0f;
-    //GM->player->Find("PlayerCam")->viewport.width = App.GetWidth();
-    //GM->player->Find("PlayerCam")->viewport.height = App.GetHeight();
-    //GM->player->Find("PlayerCam")->width = App.GetWidth();
-    //GM->player->Find("PlayerCam")->height = App.GetHeight();
+    //(Camera*)(GM->player->Find("PlayerCam"))->viewport.x = 0.0f;
+    //(Camera*)GM->player->Find("PlayerCam")->viewport.y = 0.0f;
+    //(Camera*)GM->player->Find("PlayerCam")->viewport.width = App.GetWidth();
+    //(Camera*)GM->player->Find("PlayerCam")->viewport.height = App.GetHeight();
+    //(Camera*)GM->player->Find("PlayerCam")->width = App.GetWidth();
+    //(Camera*)GM->player->Find("PlayerCam")->height = App.GetHeight();
 }
