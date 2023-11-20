@@ -39,6 +39,11 @@
     <ClInclude Include="LemurianBullet.h">
       <Filter>Monster</Filter>
     </ClInclude>
+    <ClInclude Include="Astar.h" />
+    <ClInclude Include="Golem.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="LemurianBulletTrail.h" />
     <ClInclude Include="InGameUI.h">
       <Filter>UI</Filter>
     </ClInclude>
@@ -81,6 +86,11 @@
     <ClCompile Include="LemurianBullet.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
+    <ClCompile Include="Astar.cpp" />
+    <ClCompile Include="Golem.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="LemurianBulletTrail.cpp" />
     <ClCompile Include="InGameUI.cpp">
       <Filter>UI</Filter>
     </ClCompile>

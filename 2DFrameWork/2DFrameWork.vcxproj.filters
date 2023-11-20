@@ -113,7 +113,6 @@
     <ClInclude Include="CubeRenderTarget.h">
       <Filter>Render</Filter>
     </ClInclude>
-    <ClInclude Include="SlashTrail.h" />
     <ClInclude Include="GameManager.h" />
   </ItemGroup>
   <ItemGroup>
@@ -248,7 +247,6 @@
     <ClCompile Include="CubeRenderTarget.cpp">
       <Filter>Render</Filter>
     </ClCompile>
-    <ClCompile Include="SlashTrail.cpp" />
     <ClCompile Include="GameManager.cpp" />
   </ItemGroup>
 </Project>

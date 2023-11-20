@@ -12,7 +12,8 @@ public:
 	void    MonFSM();
 	void	IdleAnimations() override;
 	void	AttackAnimations() override;
-	
+	void	MoveAnimations() override;
+	void	DeadAnimations() override;
 
 private:
 	Beetle();
