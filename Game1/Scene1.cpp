@@ -152,7 +152,7 @@ void Scene1::Update()
     GM->player->Update();
     
 
-    map->Update();
+    //map->Update();
 
     ui->Update();
 

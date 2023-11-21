@@ -18,7 +18,7 @@ private:
 
     float			time = 0;
     
-    const float monsterCreationInterval = 20.0f;
+    //const float monsterCreationInterval = 20.0f;
 
 
     bool isMainCam;     // 메인캠 전환키 (임시용)

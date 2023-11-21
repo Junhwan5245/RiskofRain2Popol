@@ -44,7 +44,7 @@ protected:
 
 	virtual void    MonFSM();
 	void	SetRandomPosition();
-	void	Stare();
+	//void	Stare();
 	MonsterState     GetState() { return state; }
 	Monster();
 	virtual ~Monster();
