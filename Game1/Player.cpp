@@ -209,6 +209,7 @@ void Player::FSM()
 	}
 	// 플레이어 이동 FSM
 
+	// 우클릭스킬 쿨타임
 	if (isRButton)
 	{
 		if (TIMER->GetTick(m2Timer, 4.0f))
@@ -217,6 +218,7 @@ void Player::FSM()
 		}
 	}
 	
+	// R스킬 쿨타임
 	if (isRSkill)
 	{
 		if (TIMER->GetTick(rTimer, 10.0f))
@@ -469,7 +471,7 @@ void Player::Move(Vector3 Target)
 		}
 
 		MoveWorldPos(Dir * moveSpeed * DELTA);
-		//Find("RootNode")->rotation.y = atan2f(GetForward().z, GetForward().x) - HALFPI;
+		//Find("RootNode")->rotation.y = rotation.y;
 	}
 }
 
