@@ -178,16 +178,3 @@ void Monster::SetRandomPosition()
     this->SetWorldPosX(GM->player->GetWorldPos().x + offsetX);
     this->SetWorldPosZ(GM->player->GetWorldPos().z + offsetZ);
 }
-
-void Monster::Stare()
-{
-    Vector3 tempDir = GM->player->GetWorldPos() - this->GetWorldPos();
-    tempDir.Normalize();
-    float stareDir = atan2f(tempDir.x, tempDir.z);
-    this->rotation.y = stareDir + PI;
-
-}
-
-
-
-
