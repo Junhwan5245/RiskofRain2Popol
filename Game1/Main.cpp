@@ -23,8 +23,8 @@ void Main::Init()
     // 로딩신 -> 스타트신 -> 캐릭선택신 -> 게임플레이신
     
     // LOADING SCENE
-    //SCENE->AddScene("LOADING", new LoadingScene);
-    //SCENE->ChangeScene("LOADING");
+    SCENE->AddScene("LOADING", new LoadingScene);
+    SCENE->ChangeScene("LOADING");
 
     // START SCENE
     //SCENE->AddScene("StartScene", new StartScene);
@@ -35,8 +35,8 @@ void Main::Init()
     //SCENE->ChangeScene("PLAYERSELECT");
 
     // 게임플레이신
-    SCENE->AddScene("SC1", new Scene1);
-    SCENE->ChangeScene("SC1"); 
+    //SCENE->AddScene("SC1", new Scene1);
+    //SCENE->ChangeScene("SC1"); 
 
     
 }
