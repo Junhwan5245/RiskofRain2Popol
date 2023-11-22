@@ -5,6 +5,13 @@ class Main : public Scene
 private:
 	Camera* cam1;
 
+	Actor* player;
+	Vector3 dir;
+
+	bool isClick;
+	float	clickTime;
+
+
 	/** 인게임 UI */
 	UI* itemListUpperBox;			// 상단 아이템 목록 보는 박스
 	UI* resourceBox;				// 좌상단 골드및 루나코인 있는 박스
@@ -40,6 +47,19 @@ private:
 	UI* q_Font;
 
 
+	Item* item1;
+	Item* item2;
+	Item* item3;
+	Item* item4;
+	Item* item5;
+	Item* item6;
+	Item* item7;
+
+	Item_Normal* itemNormal;
+	Item_Rare* itemRare;
+	ItemBox* itemBox;
+
+
 
 public:
 	void ReadMtl(string file);
@@ -52,4 +72,7 @@ public:
 	virtual void PreRender() override;
 	virtual void Render() override;
 	virtual void ResizeScreen() override;
+
+
+	void move();
 };

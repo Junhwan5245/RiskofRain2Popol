@@ -1,9 +1,10 @@
 #include "stdafx.h"
 
-void Item::list() const
+Item::Item(int v) : value(v)
 {
 }
 
-Item::~Item()
+void Item::list() const
 {
+	cout << value << endl;
 }

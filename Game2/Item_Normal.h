@@ -1,15 +1,15 @@
 #pragma once
 
 // Composite
-class Item_Normal : public Item
+class Item_Normal : public ItemComponent
 {
 private:
-	vector<Item*> normalItems;
+	vector<ItemComponent*> normalItems;
 	string id;
 
 public:
 	Item_Normal(string i);
-	void add(Item* item);
+	void add(ItemComponent* item);
 	void list() const;
 };
 

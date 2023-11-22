@@ -1,10 +1,11 @@
 #pragma once
-
-// Component
-class Item
+class Item : public ItemComponent
 {
+private:
+	int value;
+
 public:
-	virtual void list() const = 0;
-	virtual ~Item();
+	Item(int v);
+	void list() const;
 };
 

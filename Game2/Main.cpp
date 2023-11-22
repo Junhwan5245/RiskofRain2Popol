@@ -7,6 +7,9 @@ Main::Main()
 	cam1 = Camera::Create();
 	cam1->LoadFile("Cam.xml");
 
+	player = Actor::Create("Player");
+	player->LoadFile("Player2.xml");
+
 	itemListUpperBox = UI::Create();
 	itemListUpperBox->LoadFile("UI_InGame_ItemListUpperBox.xml");
 
@@ -77,14 +80,37 @@ void Main::Init()
 {
 	
 	Camera::main = cam1;
-	cam1->viewport.x = 0.0f;
-	cam1->viewport.y = 0.0f;
-	cam1->viewport.width = App.GetWidth();
-	cam1->viewport.height = App.GetHeight();
-	cam1->width = App.GetWidth();
-	cam1->height = App.GetHeight();
+	Camera::main->viewport.x = 0.0f;
+	Camera::main->viewport.y = 0.0f;
+	Camera::main->viewport.width = App.GetWidth();
+	Camera::main->viewport.height = App.GetHeight();
+	Camera::main->width = App.GetWidth();
+	Camera::main->height = App.GetHeight();
 
 
+	
+	item1 = new Item(1);
+	item2 = new Item(2);
+	item3 = new Item(3);
+	item4 = new Item(4);
+	item5 = new Item(5);
+	item6 = new Item(6);
+	item7 = new Item(7);
+
+	itemNormal = new Item_Normal("NormalItem");
+	itemRare = new Item_Rare("RareItem");
+
+	itemNormal->add(item1);
+	itemNormal->add(item2);
+	itemNormal->add(item3);
+	itemNormal->add(item4);
+
+	itemRare->add(item5);
+	itemRare->add(item6);
+	itemRare->add(item7);
+
+
+	itemBox->add(itemNormal);
 }
 
 void Main::Release()
@@ -92,17 +118,88 @@ void Main::Release()
 }
 
 void Main::Update()
-
 {
+	ImGui::Text("isClick : %d", (int)isClick);
+
 	ImGui::Begin("Hierarchy");
 	expBox->RenderHierarchy();
+	player->RenderHierarchy();
 	exp->RenderHierarchy();
 	ImGui::End();
 
 	cam1->ControlMainCam();
 
 
-	cam1->Update();
+	player->MoveWorldPos(dir * 2 * DELTA);
+
+	if(INPUT->KeyPress('W'))
+	{
+		dir += player->GetForward();
+	}
+	if (INPUT->KeyPress('S'))
+	{
+		dir += -player->GetForward();
+	}
+	if (INPUT->KeyPress('A'))
+	{
+		dir += -player->GetRight();
+	}
+	if (INPUT->KeyPress('D'))
+	{
+		dir += player->GetRight();
+	}
+	dir.Normalize();
+
+	if (not isClick)
+	{
+		if (INPUT->KeyDown('W'))
+		{
+			player->anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
+		}
+		if (INPUT->KeyDown('S'))
+		{
+			player->anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
+		}
+		if (INPUT->KeyDown('A'))
+		{
+			player->anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
+		}
+		if (INPUT->KeyDown('D'))
+		{
+			player->anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
+		}
+		player->Find("RootNode")->rotation.y = atan2f(-dir.z, dir.x) + HALFPI;
+	}
+	else
+	{
+		if (INPUT->KeyDown('W'))
+			player->anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
+		if (INPUT->KeyDown('S'))
+			player->anim->ChangeAnimation(AnimationState::LOOP, 2, 0.1f);
+		if (INPUT->KeyDown('A'))
+			player->anim->ChangeAnimation(AnimationState::LOOP, 4, 0.1f);
+		if (INPUT->KeyDown('D'))
+			player->anim->ChangeAnimation(AnimationState::LOOP, 5, 0.1f);
+		player->Find("RootNode")->rotation.y = player->rotation.y;
+	}
+	
+
+	
+
+
+	if (INPUT->KeyPress(VK_LBUTTON))
+	{
+		isClick = true;
+	}
+	else
+	{
+		if (TIMER->GetTick(clickTime, 4.0f))
+		{
+			isClick = false;
+		}
+	}
+
+	Camera::main->Update();
 	itemListUpperBox->Update();
 	resourceBox->Update();
 	stageBax->Update();
@@ -126,6 +223,7 @@ void Main::Update()
 	hp->Update();
 	expBox->Update();
 	exp->Update();
+	player->Update();
 }
 
 void Main::LateUpdate()
@@ -139,8 +237,9 @@ void Main::PreRender()
 
 void Main::Render()
 {
-	cam1->Set();
+	Camera::main->Set();
 	LIGHT->Set();
+	player->Render();
 	itemListUpperBox->Render();
 	resourceBox->Render();
 	stageBax->Render();
@@ -168,12 +267,16 @@ void Main::Render()
 
 void Main::ResizeScreen()
 {
-	cam1->viewport.x = 0.0f;
-	cam1->viewport.y = 0.0f;
-	cam1->viewport.width = App.GetWidth();
-	cam1->viewport.height = App.GetHeight();
-	cam1->width = App.GetWidth();
-	cam1->height = App.GetHeight();
+	Camera::main->viewport.x = 0.0f;
+	Camera::main->viewport.y = 0.0f;
+	Camera::main->viewport.width = App.GetWidth();
+	Camera::main->viewport.height = App.GetHeight();
+	Camera::main->width = App.GetWidth();
+	Camera::main->height = App.GetHeight();
+}
+
+void Main::move()
+{
 }
 
 int WINAPI wWinMain(HINSTANCE instance, HINSTANCE prevInstance, LPWSTR param, int command)

@@ -4,7 +4,7 @@ Player* Player::Create(string name)
 {
 	///11
 	Player* temp = new Player();
-	temp->LoadFile("Player.xml");
+	temp->LoadFile("Player2.xml");
 	temp->type = ObType::Actor;
 	temp->playerState = PlayerState::IDLE;
 	temp->attackState = PlayerAttackState::IDLE;
@@ -12,6 +12,7 @@ Player* Player::Create(string name)
 	temp->anim->ChangeAnimation(AnimationState::LOOP, 3, 0.1f);
 	temp->Find("mdlCommandoDualies")->rotation.y = 180.0f * ToRadian;
 	temp->Find("PlayerCam")->rotation.x = 0.0f;
+	temp->rotation.y = 0;
 
 	/** 스텟*/
 	temp->moveSpeed = 7.0f;
@@ -85,6 +86,22 @@ void Player::Update()
 		else if (attackState == PlayerAttackState::IDLE)
 			dir += Vector3(0, 0, 1);
 	}
+	//if (INPUT->KeyPress('W'))
+	//{
+	//	dir += GetForward();
+	//}
+	//if (INPUT->KeyPress('S'))
+	//{
+	//	dir += -GetForward();
+	//}
+	//if (INPUT->KeyPress('A'))
+	//{
+	//	dir += -GetRight();
+	//}
+	//if (INPUT->KeyPress('D'))
+	//{
+	//	dir += GetRight();
+	//}
 	dir.Normalize();
 
 
@@ -208,6 +225,9 @@ void Player::FSM()
 		}
 	}
 	// 플레이어 이동 FSM
+
+	// 플레이어 점프
+	// 플레이어 점프
 
 	if (isRButton)
 	{
@@ -448,7 +468,6 @@ void Player::Move(Vector3 Target)
 		Vector3 Dir;
 
 		MoveWorldPos(Find("RootNode")->GetForward() * moveSpeed * DELTA);
-		//MoveWorldPos(Target * velocity * DELTA);
 
 		if (playerState == PlayerState::IDLE)
 			Find("RootNode")->rotation.y = lastRot;
@@ -469,7 +488,7 @@ void Player::Move(Vector3 Target)
 		}
 
 		MoveWorldPos(Dir * moveSpeed * DELTA);
-		//Find("RootNode")->rotation.y = atan2f(GetForward().z, GetForward().x) - HALFPI;
+		Find("RootNode")->rotation.y = 0;
 	}
 }
 
