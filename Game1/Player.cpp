@@ -86,23 +86,17 @@ void Player::Update()
 		else if (attackState == PlayerAttackState::IDLE)
 			dir += Vector3(0, 0, 1);
 	}
-	//if (INPUT->KeyPress('W'))
-	//{
-	//	dir += GetForward();
-	//}
-	//if (INPUT->KeyPress('S'))
-	//{
-	//	dir += -GetForward();
-	//}
-	//if (INPUT->KeyPress('A'))
-	//{
-	//	dir += -GetRight();
-	//}
-	//if (INPUT->KeyPress('D'))
-	//{
-	//	dir += GetRight();
-	//}
 	dir.Normalize();
+
+	// 점프
+	if (not isJump)
+	{
+		if (INPUT->KeyDown(VK_SPACE))
+		{
+			isJump = true;
+			gravity = -50.0f * DELTA;
+		}
+	}
 
 
 	if (isRoll) //구르고 있을때
@@ -490,6 +484,14 @@ void Player::Move(Vector3 Target)
 		MoveWorldPos(Dir * moveSpeed * DELTA);
 		Find("RootNode")->rotation.y = 0;
 	}
+}
+
+void Player::Jump()
+{
+	gravityDir = -GetUp();
+	gravity += 1.0f * DELTA;
+
+	MoveWorldPos(gravityDir * gravity );
 }
 
 void Player::Fire(Vector3 dest, float power)

@@ -47,20 +47,16 @@ private:
 	UI* q_Font;
 
 
-	Item* item1;
-	Item* item2;
-	Item* item3;
-	Item* item4;
-	Item* item5;
-	Item* item6;
-	Item* item7;
+	wstring playerHp;
+	wstring hpSlash;
+	wstring playerMaxHp;
+	wstring lv;
+	wstring playerLv;
 
-	Item_Normal* itemNormal;
-	Item_Rare* itemRare;
-	ItemBox* itemBox;
+	int playerhp = 100;
+	int playermaxhp = 100;
 
-
-
+	RECT rect;
 public:
 	void ReadMtl(string file);
 	Main();
@@ -73,6 +69,7 @@ public:
 	virtual void Render() override;
 	virtual void ResizeScreen() override;
 
+	void RenderFont();
 
 	void move();
 };

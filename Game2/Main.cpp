@@ -7,9 +7,6 @@ Main::Main()
 	cam1 = Camera::Create();
 	cam1->LoadFile("Cam.xml");
 
-	player = Actor::Create("Player");
-	player->LoadFile("Player2.xml");
-
 	itemListUpperBox = UI::Create();
 	itemListUpperBox->LoadFile("UI_InGame_ItemListUpperBox.xml");
 
@@ -87,30 +84,6 @@ void Main::Init()
 	Camera::main->width = App.GetWidth();
 	Camera::main->height = App.GetHeight();
 
-
-	
-	item1 = new Item(1);
-	item2 = new Item(2);
-	item3 = new Item(3);
-	item4 = new Item(4);
-	item5 = new Item(5);
-	item6 = new Item(6);
-	item7 = new Item(7);
-
-	itemNormal = new Item_Normal("NormalItem");
-	itemRare = new Item_Rare("RareItem");
-
-	itemNormal->add(item1);
-	itemNormal->add(item2);
-	itemNormal->add(item3);
-	itemNormal->add(item4);
-
-	itemRare->add(item5);
-	itemRare->add(item6);
-	itemRare->add(item7);
-
-
-	itemBox->add(itemNormal);
 }
 
 void Main::Release()
@@ -120,84 +93,29 @@ void Main::Release()
 void Main::Update()
 {
 	ImGui::Text("isClick : %d", (int)isClick);
+	ImGui::Text("rect left : %d", (int)rect.left);
+	ImGui::Text("rect top : %d", (int)rect.top);
+	ImGui::Text("d : %.2f", (float)playerhp / (float)playermaxhp);
 
 	ImGui::Begin("Hierarchy");
-	expBox->RenderHierarchy();
-	player->RenderHierarchy();
-	exp->RenderHierarchy();
+	hp->RenderHierarchy();
+	//exp->RenderHierarchy();
 	ImGui::End();
 
+	//playerhp = max(playerhp, 0);
+
+	
+	// 0.12 * 0.9 = 0.108
+	if (INPUT->KeyDown('K'))
+	{
+		playerhp -= 10;
+		hPBox->scale.x *= (float)(playermaxhp -playerhp) / (float)playermaxhp;
+		hp->scale.x -= hPBox->scale.x;
+	}
+	
+
+
 	cam1->ControlMainCam();
-
-
-	player->MoveWorldPos(dir * 2 * DELTA);
-
-	if(INPUT->KeyPress('W'))
-	{
-		dir += player->GetForward();
-	}
-	if (INPUT->KeyPress('S'))
-	{
-		dir += -player->GetForward();
-	}
-	if (INPUT->KeyPress('A'))
-	{
-		dir += -player->GetRight();
-	}
-	if (INPUT->KeyPress('D'))
-	{
-		dir += player->GetRight();
-	}
-	dir.Normalize();
-
-	if (not isClick)
-	{
-		if (INPUT->KeyDown('W'))
-		{
-			player->anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
-		}
-		if (INPUT->KeyDown('S'))
-		{
-			player->anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
-		}
-		if (INPUT->KeyDown('A'))
-		{
-			player->anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
-		}
-		if (INPUT->KeyDown('D'))
-		{
-			player->anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
-		}
-		player->Find("RootNode")->rotation.y = atan2f(-dir.z, dir.x) + HALFPI;
-	}
-	else
-	{
-		if (INPUT->KeyDown('W'))
-			player->anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
-		if (INPUT->KeyDown('S'))
-			player->anim->ChangeAnimation(AnimationState::LOOP, 2, 0.1f);
-		if (INPUT->KeyDown('A'))
-			player->anim->ChangeAnimation(AnimationState::LOOP, 4, 0.1f);
-		if (INPUT->KeyDown('D'))
-			player->anim->ChangeAnimation(AnimationState::LOOP, 5, 0.1f);
-		player->Find("RootNode")->rotation.y = player->rotation.y;
-	}
-	
-
-	
-
-
-	if (INPUT->KeyPress(VK_LBUTTON))
-	{
-		isClick = true;
-	}
-	else
-	{
-		if (TIMER->GetTick(clickTime, 4.0f))
-		{
-			isClick = false;
-		}
-	}
 
 	Camera::main->Update();
 	itemListUpperBox->Update();
@@ -223,7 +141,6 @@ void Main::Update()
 	hp->Update();
 	expBox->Update();
 	exp->Update();
-	player->Update();
 }
 
 void Main::LateUpdate()
@@ -237,9 +154,10 @@ void Main::PreRender()
 
 void Main::Render()
 {
+	
+
 	Camera::main->Set();
 	LIGHT->Set();
-	player->Render();
 	itemListUpperBox->Render();
 	resourceBox->Render();
 	stageBax->Render();
@@ -263,6 +181,8 @@ void Main::Render()
 	hp->Render();
 	expBox->Render();
 	exp->Render();
+
+	RenderFont();
 }
 
 void Main::ResizeScreen()
@@ -273,6 +193,55 @@ void Main::ResizeScreen()
 	Camera::main->viewport.height = App.GetHeight();
 	Camera::main->width = App.GetWidth();
 	Camera::main->height = App.GetHeight();
+}
+
+void Main::RenderFont()
+{
+	//Level = L"≥≠¿Ãµµ : ";
+	//character = L"ƒ≥∏Ø≈Õ : ";
+	//
+	//
+	//RECT rect;
+	//rect.left = (gameStartButton->GetWorldPos().x + 1) * App.GetHalfWidth() - gameStartButton->scale.y * App.GetHalfWidth() * 2;
+	//rect.top = (1 - gameStartButton->GetWorldPos().y) * App.GetHalfHeight() - gameStartButton->scale.x * App.GetHalfWidth() * 2;
+	//rect.right = App.GetWidth();
+	//rect.bottom = App.GetHeight();
+	//DWRITE->RenderText(Level, rect, 20, L"πŸ≈¡√º", Color(1, 1, 1, 1), DWRITE_FONT_WEIGHT_BOLD);
+
+
+
+
+	
+	lv = L"Lv : ";
+	rect.left = (expBox->GetWorldPos().x + 1) * App.GetHalfWidth() - expBox->scale.x * App.GetHalfWidth() * 1.7f;
+	rect.top = (1 - expBox->GetWorldPos().y) * App.GetHalfHeight() - 10;
+	rect.right = App.GetWidth();
+	rect.bottom = App.GetHeight();
+	DWRITE->RenderText(lv, rect, 30, L"πŸ≈¡√º", Color(1, 1, 1, 1), DWRITE_FONT_WEIGHT_BOLD);
+
+	hpSlash = L" / ";
+	rect.left = (hPBox->GetWorldPos().x + 1) * App.GetHalfWidth() - hPBox->scale.x * App.GetHalfWidth() * 0.1f;
+	rect.top = (1 - hPBox->GetWorldPos().y) * App.GetHalfHeight() - hPBox->scale.x * App.GetHalfWidth() * 0.12f;
+	rect.right = App.GetWidth();
+	rect.bottom = App.GetHeight();
+	DWRITE->RenderText(hpSlash, rect, 30, L"πŸ≈¡√º", Color(1, 1, 1, 1), DWRITE_FONT_WEIGHT_BOLD);
+
+
+	playerHp = to_wstring(playerhp);
+	rect.left = (hPBox->GetWorldPos().x + 1) * App.GetHalfWidth() - hPBox->scale.x * App.GetHalfWidth() * 0.4f;
+	rect.top = (1 - hPBox->GetWorldPos().y) * App.GetHalfHeight() - hPBox->scale.x * App.GetHalfWidth() * 0.12f;
+	rect.right = App.GetWidth();
+	rect.bottom = App.GetHeight();
+	DWRITE->RenderText(playerHp, rect, 30, L"πŸ≈¡√º", Color(1, 1, 1, 1), DWRITE_FONT_WEIGHT_BOLD);
+
+	playerMaxHp = to_wstring(playermaxhp);
+	rect.left = (hPBox->GetWorldPos().x + 1) * App.GetHalfWidth() + hPBox->scale.x * App.GetHalfWidth() * 0.2f;
+	rect.top = (1 - hPBox->GetWorldPos().y) * App.GetHalfHeight() - hPBox->scale.x * App.GetHalfWidth() * 0.12f;
+	rect.right = App.GetWidth();
+	rect.bottom = App.GetHeight();
+	DWRITE->RenderText(playerMaxHp, rect, 30, L"πŸ≈¡√º", Color(1, 1, 1, 1), DWRITE_FONT_WEIGHT_BOLD);
+
+
 }
 
 void Main::move()

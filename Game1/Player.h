@@ -132,21 +132,24 @@ private:
     float               LButtonFireTime; // 좌클릭 발사타임
     float               RSkillFireTime;  //  R스킬 발사시간(공속에 따라 더빠르게 발사가능)
     float               RSkillFire;  //  R스킬 발사시간(공속에 따라 더빠르게 발사가능)
-
-    /** 임시스텟*/
-    float               velocity;       // 이동속도
-           //공격력
+    
+    Vector3             gravityDir;
+    float               gravity;
 
     Player();
     virtual ~Player();
 public:
-    float               attack = 10;
+    bool                isJump;         // 점프했는지
+
+
+
     void	Update() override;
     void	Render(shared_ptr<Shader> pShader = nullptr) override;
 
     void    FSM();
     void    AinmChange(PlayerState state);
     void    Move(Vector3 Target);
+    void    Jump();
 
     void    Fire(Vector3 dest, float power);
     void    WolrdUpdate();

@@ -165,12 +165,35 @@ void Scene1::LateUpdate()
     playerTop.position = GM->player->GetWorldPos() + Vector3(0, 100, 0);
     playerTop.direction = Vector3(0, -1, 0);
 
-    Vector3 hit;
+    Ray playerJumpRay;
+    playerTop.position = GM->player->GetWorldPos() + Vector3(0, 1, 0);
+    playerTop.direction = Vector3(0, -1, 0);
 
+    Vector3 hit;
     if (Utility::RayIntersectMap(playerTop, GM->map, hit))//맵과 몬스터 레이 이용해 플레이어 y값 잡기
     {
         GM->player->SetWorldPosY(hit.y);
     }
+
+    //if (not GM->player->isJump)
+    //{
+    //    if (Utility::RayIntersectMap(playerTop, GM->map, hit))//맵과 몬스터 레이 이용해 플레이어 y값 잡기
+    //    {
+    //        GM->player->SetWorldPosY(hit.y);
+    //    }
+    //}
+    //else
+    //{
+    //    GM->player->Jump();
+    //
+    //    if (Utility::RayIntersectMap(playerJumpRay, GM->map, hit))//맵과 몬스터 레이 이용해 플레이어 y값 잡기
+    //    {
+    //        float length = (playerJumpRay.position - hit).Length();
+    //        if (length < 1.1f)
+    //            GM->player->isJump = false;
+    //    }
+    //}
+    
 
     //GM->player->WolrdUpdate();
 
