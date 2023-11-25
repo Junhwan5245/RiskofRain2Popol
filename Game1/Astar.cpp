@@ -135,7 +135,7 @@ bool Astar::GetNearNode(Vector3 coord, int& idxX, int& idxZ)
     if (TerrainIdxX < 0 or TerrainIdxZ < 0 or
         TerrainIdxX >= size - 1 or TerrainIdxZ >= size - 1)
     {
-        //cout << "OutofRange" << endl;
+       /* cout << "OutofRange" << endl;*/
         return false;
     }
 
@@ -154,7 +154,7 @@ bool Astar::PathFinding(Vector3 start, Vector3 end, OUT vector<Vector3>& way)
     int sourX, sourZ, destX, destZ;
     GetNearNode(start, sourX, sourZ);
     GetNearNode(end, destX, destZ);
-
+    
 
     if (Tiles[destZ][destX].pass == false ||
         Tiles[sourZ][sourX].pass == false)

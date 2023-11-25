@@ -1,6 +1,6 @@
 #pragma once
 #define MAXMONSIZE 50 //최대 몬스터량
-#define MONCREATESIZE 5 //한번에 생성되는 몬스터량
+#define MONCREATESIZE 3 //한번에 생성되는 몬스터량
 
 class Scene1 : public Scene
 {
@@ -22,6 +22,7 @@ private:
 
 
     bool isMainCam;     // 메인캠 전환키 (임시용)
+    float           renewtime = 0.0f;
 public:
     Scene1();
     ~Scene1();

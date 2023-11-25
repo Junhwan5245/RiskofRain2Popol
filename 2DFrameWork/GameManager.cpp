@@ -4,6 +4,7 @@
 
 GameManager::~GameManager()
 {
+	
 }
 
 void GameManager::Init()
@@ -19,7 +20,6 @@ void GameManager::Update()
 	
 	for (auto it = bulletPool.begin(); it != bulletPool.end(); it++)//총알 업데이트
 	{
-		(*it)->Fire((*it)->fireDir, (*it)->power, Vector3());
 		(*it)->Update();
 	}
 }

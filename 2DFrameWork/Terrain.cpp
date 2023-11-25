@@ -5,13 +5,14 @@ Terrain* Terrain::Create(string name)
 	Terrain* map = new Terrain();
 	map->type = ObType::Terrain;
 	map->name = name;
-	map->garo = 512;
-	map->size = 512 * 512;
+	map->garo = 256;
+	map->size = 256 * 256;
 	map->uvScale = 1.0f;
 	map->CreateMesh(map->garo);
 	map->shader = RESOURCE->shaders.Load("5.Cube.hlsl");
 	map->material = new Material();
-    return map;
+	
+	return map;
 }
 ID3D11ComputeShader* Terrain::computeShader = nullptr;
 void Terrain::CreateStaticMember()
@@ -529,7 +530,7 @@ void Terrain::PerlinNoise()
 	VertexTerrain* vertices = (VertexTerrain*)mesh->vertices;
 
 
-	double heightExponent = 20;
+	double heightExponent = 5;
 
 	for (int i = 0; i < garo; i++)
 	{

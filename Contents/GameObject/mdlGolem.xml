@@ -1,17 +1,18 @@
 <Root Name="Root" Visible="true" ObType="1" BoneIndex="0">
     <Skeleton File="mdlGolemMesh/mdlGolemMesh.skel" BoneIndexCount="48"/>
     <Animations AnimSize="20" File0="mdlGolemMesh/mdlGolemAni0.anim" File1="mdlGolemMesh/mdlGolemAni1.anim" File2="mdlGolemMesh/mdlGolemAni2.anim" File3="mdlGolemMesh/mdlGolemAni3.anim" File4="mdlGolemMesh/mdlGolemAni4.anim" File5="mdlGolemMesh/mdlGolemAni5.anim" File6="mdlGolemMesh/mdlGolemAni6.anim" File7="mdlGolemMesh/mdlGolemAni7.anim" File8="mdlGolemMesh/mdlGolemAni8.anim" File9="mdlGolemMesh/mdlGolemAni9.anim" File10="mdlGolemMesh/mdlGolemAni10.anim" File11="mdlGolemMesh/mdlGolemAni11.anim" File12="mdlGolemMesh/mdlGolemAni12.anim" File13="mdlGolemMesh/mdlGolemAni13.anim" File14="mdlGolemMesh/mdlGolemAni14.anim" File15="mdlGolemMesh/mdlGolemAni15.anim" File16="mdlGolemMesh/mdlGolemAni16.anim" File17="mdlGolemMesh/mdlGolemAni17.anim" File18="mdlGolemMesh/mdlGolemAni18.anim" File19="mdlGolemMesh/mdlGolemAni19.anim"/>
+    <Material File="mdlGolem/Default-Material.mtl"/>
     <Transform>
         <Position X="0" Y="0" Z="0"/>
         <Scale X="1" Y="1" Z="1"/>
         <Rotation X="0" Y="0" Z="0"/>
     </Transform>
-    <Children Size="1"/>
+    <Children Size="2"/>
     <Child0 Name="RootNode" Visible="true" ObType="0" BoneIndex="1">
         <Transform>
             <Position X="0" Y="0" Z="0"/>
             <Scale X="1" Y="1" Z="1"/>
-            <Rotation X="0" Y="0" Z="-0"/>
+            <Rotation X="0" Y="3.1415758" Z="0"/>
         </Transform>
         <Children Size="3"/>
         <Child0 Name="GolemArmature" Visible="true" ObType="0" BoneIndex="4">
@@ -422,7 +423,7 @@
         <Child2 Name="golem" Visible="true" ObType="0" BoneIndex="3">
             <Mesh File="mdlGolemMesh/golem.mesh"/>
             <Shader File="4.Cube.hlsl"/>
-            <Material File="mdlGolem1/matGolem.mtl"/>
+            <Material File="mdlGolem/Default-Material.mtl"/>
             <Transform>
                 <Position X="0" Y="0" Z="0"/>
                 <Scale X="1" Y="1" Z="1"/>
@@ -431,4 +432,12 @@
             <Children Size="0"/>
         </Child2>
     </Child0>
+    <Child1 Name="lazerstart" Visible="true" ObType="0" BoneIndex="-1">
+        <Transform>
+            <Position X="0" Y="3.5999999" Z="0"/>
+            <Scale X="1" Y="1" Z="1"/>
+            <Rotation X="0" Y="0" Z="0"/>
+        </Transform>
+        <Children Size="0"/>
+    </Child1>
 </Root>

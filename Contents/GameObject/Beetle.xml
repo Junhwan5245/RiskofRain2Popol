@@ -1,6 +1,11 @@
 <Root Name="Beetle" Visible="true" ObType="1" BoneIndex="0">
     <Skeleton File="beetleMesh/beetleMesh.skel" BoneIndexCount="48"/>
     <Animations AnimSize="43" File0="beetleMesh/mdlBeetleAni0.anim" File1="beetleMesh/mdlBeetleAni1.anim" File2="beetleMesh/mdlBeetleAni2.anim" File3="beetleMesh/mdlBeetleAni3.anim" File4="beetleMesh/mdlBeetleAni4.anim" File5="beetleMesh/mdlBeetleAni5.anim" File6="beetleMesh/mdlBeetleAni6.anim" File7="beetleMesh/mdlBeetleAni7.anim" File8="beetleMesh/mdlBeetleAni8.anim" File9="beetleMesh/mdlBeetleAni9.anim" File10="beetleMesh/mdlBeetleAni10.anim" File11="beetleMesh/mdlBeetleAni11.anim" File12="beetleMesh/mdlBeetleAni12.anim" File13="beetleMesh/mdlBeetleAni13.anim" File14="beetleMesh/mdlBeetleAni14.anim" File15="beetleMesh/mdlBeetleAni15.anim" File16="beetleMesh/mdlBeetleAni16.anim" File17="beetleMesh/mdlBeetleAni17.anim" File18="beetleMesh/mdlBeetleAni18.anim" File19="/mdlLemurianAni0.anim" File20="/mdlLemurianAni1.anim" File21="/mdlLemurianAni2.anim" File22="/mdlLemurianAni3.anim" File23="/mdlLemurianAni4.anim" File24="/mdlLemurianAni5.anim" File25="/mdlLemurianAni6.anim" File26="/mdlLemurianAni7.anim" File27="/mdlLemurianAni8.anim" File28="/mdlLemurianAni9.anim" File29="/mdlLemurianAni10.anim" File30="/mdlLemurianAni11.anim" File31="/mdlLemurianAni12.anim" File32="/mdlLemurianAni13.anim" File33="/mdlLemurianAni14.anim" File34="/mdlLemurianAni15.anim" File35="/mdlLemurianAni16.anim" File36="/mdlLemurianAni17.anim" File37="/mdlLemurianAni18.anim" File38="/mdlLemurianAni19.anim" File39="/mdlLemurianAni20.anim" File40="/mdlLemurianAni21.anim" File41="/mdlLemurianAni22.anim" File42="/mdlLemurianAni23.anim"/>
+    <Collider ColliderType="2" Visible="true">
+        <Position X="0" Y="1.2" Z="0"/>
+        <Scale X="1" Y="1.45" Z="1"/>
+        <Rotation X="0" Y="0" Z="0"/>
+    </Collider>
     <Transform>
         <Position X="0" Y="0" Z="0"/>
         <Scale X="0.5" Y="0.5" Z="0.5"/>
@@ -19,7 +24,7 @@
             <Transform>
                 <Position X="0" Y="0" Z="0"/>
                 <Scale X="1" Y="1" Z="1"/>
-                <Rotation X="1.5707963" Y="3.1415925" Z="0"/>
+                <Rotation X="1.5707961" Y="0" Z="0"/>
             </Transform>
             <Children Size="1"/>
             <Child0 Name="ROOT" Visible="true" ObType="0" BoneIndex="4">
@@ -111,7 +116,7 @@
                             <Child0 Name="Head_end" Visible="true" ObType="0" BoneIndex="8">
                                 <Shader File="4.Cube.hlsl"/>
                                 <Transform>
-                                    <Position X="-5.4572968e-33" Y="0.35822356" Z="2.0959946e-05"/>
+                                    <Position X="-5.4572968e-33" Y="0" Z="2.0959946e-05"/>
                                     <Scale X="1" Y="1" Z="1"/>
                                     <Rotation X="0" Y="0" Z="-0"/>
                                 </Transform>

@@ -22,12 +22,13 @@ Player* Player::Create(string name)
 	temp->attack = 12; // 증가계수 + 2.4
 	temp->defend = 0;
 	/** 스텟*/
-
+	
 	temp->isRight = false;
 	temp->isRoll = false;
 	temp->isLButton = false;
 	temp->isRButton = false;
 	temp->isRSkill = false;
+	
 	return temp;
 }
 
@@ -223,6 +224,7 @@ void Player::FSM()
 	// 플레이어 점프
 	// 플레이어 점프
 
+	// 우클릭스킬 쿨타임
 	if (isRButton)
 	{
 		if (TIMER->GetTick(m2Timer, 4.0f))
@@ -231,6 +233,7 @@ void Player::FSM()
 		}
 	}
 	
+	// R스킬 쿨타임
 	if (isRSkill)
 	{
 		if (TIMER->GetTick(rTimer, 10.0f))

@@ -24,19 +24,18 @@ void Bullet::SetPos(Vector3 pos)
 
 void Bullet::CollisionWithMap()//맵과 총알 충돌
 {
-	for (auto it = GM->bulletPool.begin(); it != GM->bulletPool.end(); it++)
+	
+	Vector3 hit;
+	BulletRay.position = GetWorldPos();
+	BulletRay.direction =GetForward();
+	if (Utility::RayIntersectMap(BulletRay, GM->map, hit))//맵과 몬스터 레이 이용해 몬스터 y값 잡기
 	{
-		Vector3 hit;
-		(*it)->BulletRay.position = (*it)->GetWorldPos();
-		(*it)->BulletRay.direction =(*it)->GetForward();
-		if (Utility::RayIntersectMap((*it)->BulletRay, GM->map, hit))//맵과 몬스터 레이 이용해 몬스터 y값 잡기
+		if ((hit - GetWorldPos()).Length() < 1.0f)
 		{
-			if ((hit - (*it)->GetWorldPos()).Length() < 1.0f)
-			{
-				(*it)->isCollsion = true;
-			}
+			isCollsion = true;
 		}
 	}
+	
 
 }
 
@@ -55,14 +54,14 @@ void Bullet::Update()
 		GM->player->Hp -= 7;//플레이어 피깎기
 
 	}
-	//for (auto& monster : GM->monsterPool)//총알과 몬스터와의 충돌
-	//{
-	//	if (this->Intersect(monster->Find("RootNode")))
-	//	{
-	//		this->isCollsion = true;
-	//		monster->Hp -= 7;//플레이어 피깎기
-	//	}
-	//}
+	for (auto& monster : GM->monsterPool)//총알과 몬스터와의 충돌
+	{
+		if (this->Intersect(monster->Find("RootNode")))
+		{
+			this->isCollsion = true;
+			monster->Hp -= 7;//플레이어 피깎기
+		}
+	}
 
 
 	

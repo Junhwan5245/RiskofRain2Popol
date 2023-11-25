@@ -14,6 +14,9 @@ public:
 	void	AttackAnimations() override;
 	void	MoveAnimations() override;
 	void	DeadAnimations() override;
+	Vector3 tempLazerDir;
+	class GolemLazer* lazer;
+	bool oneTime = false;
 
 private:
 	Golem();

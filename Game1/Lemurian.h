@@ -14,7 +14,6 @@ public:
 	void	AttackAnimations() override;
 	void	MoveAnimations() override;
 	void	DeadAnimations() override;
-	Vector3 last;
 	float bulletCreateTime = 0.0f;
 
 private:

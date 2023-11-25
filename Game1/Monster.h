@@ -3,7 +3,8 @@
 enum class MonsterType
 {
 	BEETLE,
-	LEMURIAN
+	LEMURIAN,
+	GOLEM
 };
 enum class MonsterState 
 {
@@ -31,12 +32,13 @@ public:
 	int Hp=100;
 	Vector3 PlayerDir;//총알발사를 위한 플레이어 고정값
 	vector<Vector3> way;
+	Vector3 last;
+	float dieTimer;
 	
 	void Stare();
 	
 	
 protected:
-	
 	
 	virtual void IdleAnimations()=0;
 	virtual void AttackAnimations() = 0;

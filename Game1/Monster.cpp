@@ -22,6 +22,10 @@ Monster* Monster::Create(string name,MonsterType monType)
         temp = Lemurian::Create(name);
         break;
 
+    case MonsterType::GOLEM:
+        temp = Golem::Create(name);
+        break;
+      
     default:
         return temp;
         break;
@@ -35,7 +39,7 @@ Monster* Monster::Create(string name,MonsterType monType)
     temp->Hp = 100;
     temp->state = MonsterState::IDLE;
     temp->type = ObType::Actor;
-
+    temp->dieTimer = 0.0f;
    
 
     return temp;
@@ -57,6 +61,10 @@ Monster* Monster::Create(Monster* src, MonsterType monType)
         temp = Lemurian::Create();
         break;
 
+    case MonsterType::GOLEM:
+        temp = Golem::Create();
+        break;
+
     default:
         return temp;
         break;
@@ -66,7 +74,7 @@ Monster* Monster::Create(Monster* src, MonsterType monType)
     temp->IdleAnimations();
     temp->state = MonsterState::IDLE;
     temp->type = ObType::Actor;
-
+    temp->dieTimer = 0.0f;
    
     return temp;
 }
@@ -74,6 +82,12 @@ Monster* Monster::Create(Monster* src, MonsterType monType)
 void Monster::Update()
 {
     ImGui::Text("animIdx : %d", anim->nextAnimator.animIdx);
+
+    if (Hp <= 0)
+    {
+        DeadAnimations();
+        state == MonsterState::DEAD;
+    }
 
     Stare();
 
@@ -119,11 +133,27 @@ void Monster::MonFSM()
         {
             MoveAnimations();//move애니메이션 넣기
             state = MonsterState::MOVE;
+            return;
         }
     }
 
     if (state == MonsterState::MOVE)
     {
+        if (!way.empty())
+        {
+            Vector3 temp=way.back() - GetWorldPos();
+            temp.Normalize();
+            MoveWorldPos(temp*moveSpeed*DELTA);
+
+            float distanceThreshold = 0.1f;
+           
+            if ((way.back() - GetWorldPos()).Length() < distanceThreshold)
+            {
+                way.pop_back();
+            }
+        }
+
+
 
         if ((monVec - playerVec).Length() < this->range)
         {
@@ -148,13 +178,22 @@ void Monster::MonFSM()
 
     if (state == MonsterState::DEAD)
     {
+       
         DeadAnimations();
 
         if (anim->GetPlayTime() >= 0.9)
         {
            //5초를 재고 없애기 소멸 상태를 만든다?
+
+            dieTimer += DELTA;
+
+            if (dieTimer >= 5.0f)
+            {
+                //삭제
+            }
         }
     }
+
 	
 }
 

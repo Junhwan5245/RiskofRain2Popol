@@ -3,12 +3,21 @@
 Golem* Golem::Create(string name)
 {
 	Golem* golem = new Golem();
-	golem->LoadFile("Lemurian.xml");
+	golem->LoadFile("mdlGolem.xml");
 	golem->type = ObType::Actor;
 	golem->IdleAnimations();
-	golem->range = 10;
+	golem->range = 20;
+	golem->moveSpeed = 5.0f;
+	golem->Find("ROOT")->rootMotion = true;
+	
 
-	/*golem->Find("base")->rootMotion = true;*/
+	golem->lazer = GolemLazer::Create("Lazer");
+	golem->lazer->LoadFile("GolemLazer.xml");
+	golem->lazer->visible = false;
+	GM->bulletPool.push_back(golem->lazer);
+	
+	
+
 	return golem;
 }
 
@@ -16,24 +25,95 @@ void Golem::Update()
 {
 	Monster::Update();
 
-	//last = root->Find("base")->GetWorldPos();
+	/*last = root->Find("base")->GetWorldPos();*/
 
 	/*root->Find("frontHp")->scale.x = Hp * 1.7 / 100;*/
 
+	static float laserTimer = 0.0f;
+
+	if (state == MonsterState::MOVE)
+	{
+		if (anim->GetPlayTime() >= 1.0f)
+		{
+			Vector3 minus = Find("ROOT")->GetWorldPos() - last;
+			minus.y = 0.0f;
+			SetWorldPos(Find("ROOT")->GetWorldPos());
+			Transform::Update();
+			last = Find("ROOT")->GetWorldPos();
+			anim->ChangeAnimation(AnimationState::ONCE_LAST, 3, 0.0f);
+		}
+	}
+
+	
+	if (state == MonsterState::ATTACK)
+	{
+		
+		laserTimer += DELTA;
+
+		
 
 
-	//if (state == MonsterState::MOVE)
-	//{
-	//	if (anim->GetPlayTime() >= 1.0f)
-	//	{
-	//		Vector3 minus = root->Find("base")->GetWorldPos() - last;
-	//		minus.y = 0.0f;
-	//		MoveWorldPos(minus);
-	//		Transform::Update();
-	//		last = root->Find("base")->GetWorldPos();
-	//		anim->ChangeAnimation(AnimationState::ONCE_LAST, 3, 0.0f);
-	//	}
-	//}
+		
+		if (laserTimer <= 3.0f || laserTimer >= 6.0f)
+		{
+			
+			if (!oneTime)
+			{
+				lazer->SetWorldPos(root->Find("lazerstart")->GetWorldPos());
+				oneTime = true;
+			}
+			
+			lazer->visible = true;
+			
+	
+			Vector3 dir = GM->player->GetWorldPos() - root->Find("lazerstart")->GetWorldPos();
+			dir.Normalize();
+
+			lazer->root->SetWorldPos((root->Find("lazerstart")->GetWorldPos() + GM->player->GetWorldPos()) * 0.5f);
+			lazer->scale.z = (root->Find("lazerstart")->GetWorldPos().z + GM->player->GetWorldPos().z) * 0.5f;
+
+			lazer->rotation.x = -asinf(dir.y);
+			lazer->rotation.y = atan2f(dir.x, dir.z);
+			
+			lazer->isFire = true;
+			
+		}
+		else
+		{
+			oneTime = false;
+			lazer->visible = false;
+			tempLazerDir = GM->player->Find("RootNode")->GetWorldPos() - root->Find("lazerstart")->GetWorldPos();
+			tempLazerDir.Normalize();//레이저 사라지기 직전 방향저장
+
+			// 레이저를 가림
+		}
+		
+		if (laserTimer >= 3.0f && laserTimer < 3.5f)
+		{
+			// 총알 발사
+			GolemBullet* temp = GolemBullet::Create("GolemBullet");
+			temp->SetPos(root->Find("lazerstart")->GetWorldPos());
+		
+			temp->fireDir = tempLazerDir;
+			/*temp->rotation.y = atan2f(temp->fireDir.x, temp->fireDir.z);*/
+			temp->rotation.x = -asinf(tempLazerDir.y);
+			temp->rotation.y = atan2f(temp->fireDir.x, temp->fireDir.z);
+			temp->power = 40;
+			temp->isFire = true;
+			GM->bulletPool.push_back(temp);
+		}
+
+		if (laserTimer >= 9.0f)
+		{
+			laserTimer = 0.0f;
+		}
+	}
+	
+
+		/*lazer->RenderHierarchy();
+		lazer->Update();*/
+	
+
 
 
 }
@@ -41,6 +121,7 @@ void Golem::Update()
 void Golem::Render(shared_ptr<Shader> pShader)
 {
 	Monster::Render(pShader);
+	/*lazer->Render();*/
 }
 
 void Golem::Move(Vector3 Target)
