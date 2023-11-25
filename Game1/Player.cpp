@@ -20,12 +20,13 @@ Player* Player::Create(string name)
 	temp->attack = 12; // 증가계수 + 2.4
 	temp->defend = 0;
 	/** 스텟*/
-
+	
 	temp->isRight = false;
 	temp->isRoll = false;
 	temp->isLButton = false;
 	temp->isRButton = false;
 	temp->isRSkill = false;
+	
 	return temp;
 }
 

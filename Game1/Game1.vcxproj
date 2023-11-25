@@ -21,8 +21,11 @@
   <ItemGroup>
     <ClInclude Include="Astar.h" />
     <ClInclude Include="Beetle.h" />
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Golem.h" />
+    <ClInclude Include="GolemBullet.h" />
+    <ClInclude Include="GolemLazer.h" />
     <ClInclude Include="Lemurian.h" />
     <ClInclude Include="LemurianBullet.h" />
     <ClInclude Include="LemurianBulletTrail.h" />
@@ -40,8 +43,11 @@
   <ItemGroup>
     <ClCompile Include="Astar.cpp" />
     <ClCompile Include="Beetle.cpp" />
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Golem.cpp" />
+    <ClCompile Include="GolemBullet.cpp" />
+    <ClCompile Include="GolemLazer.cpp" />
     <ClCompile Include="Lemurian.cpp" />
     <ClCompile Include="LemurianBullet.cpp" />
     <ClCompile Include="LemurianBulletTrail.cpp" />

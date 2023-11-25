@@ -44,6 +44,15 @@
       <Filter>Monster</Filter>
     </ClInclude>
     <ClInclude Include="LemurianBulletTrail.h" />
+    <ClInclude Include="GolemBullet.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="GolemLazer.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -88,6 +97,15 @@
       <Filter>Monster</Filter>
     </ClCompile>
     <ClCompile Include="LemurianBulletTrail.cpp" />
+    <ClCompile Include="GolemBullet.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="GolemLazer.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">

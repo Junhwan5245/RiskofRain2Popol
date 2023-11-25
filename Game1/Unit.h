@@ -5,6 +5,7 @@ public:
 	static Unit* Create(string name = "Unit");
 	static Unit* Create(Unit* src);
 	int Hp;				// 체력
+	float moveSpeed;
 
 protected:
 	Unit();
@@ -13,7 +14,7 @@ protected:
 
 
 	/** 공통 스텟*/
-	float moveSpeed;	// 이동 속도
+		// 이동 속도
 
 	int maxHp;			// 최대 체력
 	int defend;			// 방어막

@@ -23,18 +23,20 @@ Scene1::Scene1()
     GM->map->LoadFile("Terrain.xml");
     GM->map->CreateStructuredBuffer();
     loadCount++;
-    //map->PerlinNoise();//펄린노이즈 적용
+    GM->map->PerlinNoise();//펄린노이즈 적용
 
     for (int i = 0; i < MONCREATESIZE; ++i)
     {
-        int num = RANDOM->Int(0, 1);
+        int num = i;
+      /*  int num = 0;*/
+        
         auto newMonster = Monster::Create("Monster", MonsterType(num));
         GM->monsterPool.push_back(newMonster);
     }
     loadCount++;
 
     astar = new Astar();
-    astar->CreateNode(GM->map, 200);
+    astar->CreateNode(GM->map,50);
     
 }
 Scene1::~Scene1()
@@ -59,28 +61,31 @@ void Scene1::Update()
     for (auto& monster : GM->monsterPool)
     {
         ImGui::Text("MosterState : %d", monster->state);
+        ImGui::Text("MosterHp : %d", monster->Hp);
     }
 
     if (ImGui::Button("Perlin"))
-    {
+    { 
         GM->map->PerlinNoise();
     }
 
     if (GM->monsterPool.size()<MAXMONSIZE)
     {
         
-
         if (monsterCreationTimer >= monsterCreationInterval)
         {
             monsterCreationTimer = 0.0f;
             for (int i = 0; i < MONCREATESIZE; ++i)
             {
                
-                int num = RANDOM->Int(0, 1);
+                int num = RANDOM->Int(0, 2);
+               
                
                 auto newMonster = Monster::Create("Monster", MonsterType(num));
                
+      
                 GM->monsterPool.push_back(newMonster);
+
                
              
             }
@@ -103,10 +108,19 @@ void Scene1::Update()
     ////playerCam->RenderHierarchy();
     for (auto& monster : GM->monsterPool)
     {
-       monster->RenderHierarchy();
+        monster->RenderHierarchy();
     }
     GM->map->RenderHierarchy();
+
+   
+
     ImGui::End();
+
+    /* Golem* temp1 = dynamic_cast<Golem*>(monster);
+      if (temp1)
+          temp1->Rendertemp();*/
+    
+
 
     
     
@@ -115,6 +129,10 @@ void Scene1::Update()
     ////playerCam->Update();
     for (auto& monster : GM->monsterPool)
     {
+        if (TIMER->GetTick(renewtime, 1.0f))
+        {
+            astar->PathFinding(monster->GetWorldPos(), GM->player->GetWorldPos(), monster->way);
+        }
        monster->Update();
     }
     GM->map->Update();
@@ -138,8 +156,6 @@ void Scene1::LateUpdate()
         GM->player->SetWorldPosY(hit.y);
     }
 
-    //GM->player->WolrdUpdate();
-
     for (auto& monster : GM->monsterPool)
     {
         Ray monTop;
@@ -149,53 +165,9 @@ void Scene1::LateUpdate()
         {
             monster->SetWorldPosY(hit.y);
         }
-
-        if (monster->state == MonsterState::MOVE)//IDLE 상태일때 길찾기 실행
-        {
-        astar->PathFinding(monster->GetWorldPos(), GM->player->GetWorldPos(), monster->way);
-        }
-
-        if (monster->state == MonsterState::ATTACK)
-        {
-            monster->way.clear();
-        }
-
-
-        if (not monster->way.empty())//monster->way 가 있을때 
-        {
-            if (TIMER->GetTick(time, 0.1f))
-            {
-                Vector3 currentPosition = monster->GetWorldPos();
-
-                if (monster->way.size() >= 2)//way back()을 하게되면 way.back()과 몬스터의 getworldpos가 같기 때문에 안움직임 
-                {
-                    Vector3 targetPosition = monster->way[monster->way.size() - 2];
-
-
-                    Vector3 direction = targetPosition - currentPosition;
-                    direction.Normalize();
-
-
-                    float speed = 20.0f;
-                    monster->MoveWorldPos(direction * speed * DELTA);
-
-                    float distanceThreshold = 0.1f;
-                    if ((targetPosition - monster->GetWorldPos()).Length() < distanceThreshold)
-                    {
-                        monster->way.pop_back();
-                    }
-                }
-
-                else// 이렇게 처리하는게 맞나?
-                {
-
-                }
-
-            }
-        }
-
-           
-            /*Lemurian* temp1 = dynamic_cast<Lemurian*>(monster);
+    }
+          
+           /*Lemurian* temp1 = dynamic_cast<Lemurian*>(monster);
             if (temp1) 
                 temp1->CollisionBulletToMap(GM->map);*/
          
@@ -203,7 +175,7 @@ void Scene1::LateUpdate()
 
 
         //monster->WolrdUpdate();
-    }
+    //}
     GM->LateUpdate();
 }
 
