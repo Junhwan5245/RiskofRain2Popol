@@ -124,8 +124,14 @@ private:
     bool                isRButton;      // 우클릭이 눌렸는지
     bool                isRSkill;       // R이 눌렸는지
     
-    float               attackSpeed = 0.2f;    // 공속
-    float               LButtonFireTime;// 좌클릭 발사타임
+    float               m2Timer;
+    float               lShiftTimer;
+    float               rTimer;
+
+    float               attackSpeed = 0.16f;    // 공속
+    float               LButtonFireTime; // 좌클릭 발사타임
+    float               RSkillFireTime;  //  R스킬 발사시간(공속에 따라 더빠르게 발사가능)
+    float               RSkillFire;  //  R스킬 발사시간(공속에 따라 더빠르게 발사가능)
 
     /** 임시스텟*/
     float               velocity;       // 이동속도

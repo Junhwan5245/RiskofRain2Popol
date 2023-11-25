@@ -23,6 +23,7 @@
     <ClInclude Include="Beetle.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="InGameUI.h" />
     <ClInclude Include="Golem.h" />
     <ClInclude Include="GolemBullet.h" />
     <ClInclude Include="GolemLazer.h" />
@@ -45,6 +46,7 @@
     <ClCompile Include="Beetle.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="InGameUI.cpp" />
     <ClCompile Include="Golem.cpp" />
     <ClCompile Include="GolemBullet.cpp" />
     <ClCompile Include="GolemLazer.cpp" />

@@ -11,6 +11,7 @@ Player* Player::Create(string name)
 	temp->skillState = SkillState::NONE;
 	temp->anim->ChangeAnimation(AnimationState::LOOP, 3, 0.1f);
 	temp->Find("mdlCommandoDualies")->rotation.y = 180.0f * ToRadian;
+	temp->Find("PlayerCam")->rotation.x = 0.0f;
 
 	/** 스텟*/
 	temp->moveSpeed = 7.0f;
@@ -40,9 +41,10 @@ Player::~Player()
 
 void Player::Update()
 {
-	//cout << GetForward().x << endl;
-	//cout << GetForward().y << endl;
-	//cout << GetForward().z << endl;
+	ImGui::Text("M2CoolTime : %.2f", m2Timer);
+	ImGui::Text("isRButton : %d\n", (int)isRButton);
+	ImGui::Text("RCoolTime : %.2f", rTimer);
+	ImGui::Text("isRSkill : %d\n", (int)isRSkill);
 
 	Vector3 Rot;
 	Rot.x = INPUT->movePosition.y * 0.003f;
@@ -208,14 +210,31 @@ void Player::FSM()
 	}
 	// 플레이어 이동 FSM
 
+	// 우클릭스킬 쿨타임
+	if (isRButton)
+	{
+		if (TIMER->GetTick(m2Timer, 4.0f))
+		{
+			isRButton = false;
+		}
+	}
+	
+	// R스킬 쿨타임
+	if (isRSkill)
+	{
+		if (TIMER->GetTick(rTimer, 10.0f))
+		{
+			isRSkill = false;
+		}
+	}
 
 	// 플레이어 공격 FSM
 	if (attackState == PlayerAttackState::IDLE)
 	{
 		//IDLE -> ATTACK
-		if (INPUT->KeyPress(VK_LBUTTON))
-			//or INPUT->KeyPress(VK_RBUTTON) 
-			//or INPUT->KeyPress('R'))
+		if (INPUT->KeyPress(VK_LBUTTON)
+			or (isRButton == false and INPUT->KeyPress(VK_RBUTTON))
+			or (isRSkill == false and INPUT->KeyPress('R')))
 		{
 			attackState = PlayerAttackState::ATTACK;
 			//anim->ChangeAnimation(AnimationState::LOOP, 21, 0.1f);
@@ -237,58 +256,130 @@ void Player::FSM()
 	}
 	else if (attackState == PlayerAttackState::ATTACK)
 	{
-		if (INPUT->KeyPress(VK_LBUTTON))
+		/** M1 스킬 */
 		{
-			attackStopTime = 0.0f;
-			skillState = SkillState::LBUTTON;
-			isLButton = true;
-		}
-		if (INPUT->KeyUp(VK_LBUTTON))
-		{
-			isLButton = false;
-		}
-		if (isLButton)
-		{
-			if (TIMER->GetTick(LButtonFireTime, attackSpeed))
+			if (INPUT->KeyPress(VK_LBUTTON))
 			{
-				isRight = !isRight;
-				
-				PlayerBullet* temp = PlayerBullet::Create();
-				Vector3 pos;
-				
-				if (isRight)
-					pos = Find("gun.r.muzzle")->GetWorldPos();
-				else pos = Find("gun.l.muzzle")->GetWorldPos();
-				
-				temp->SetPos(pos);
-				
-				GM->bulletPool.push_back(temp);
-				
-				for (auto it = GM->bulletPool.begin(); it != GM->bulletPool.end(); it++)
+				attackStopTime = 0.0f;
+				skillState = SkillState::LBUTTON;
+			}
+			if (INPUT->KeyUp(VK_LBUTTON))
+			{
+				skillState = SkillState::NONE;
+			}
+			if (skillState == SkillState::LBUTTON)
+			{
+				if (TIMER->GetTick(LButtonFireTime, attackSpeed))
 				{
-					if (not (*it)->isFire)
+					isRight = !isRight;
+
+					PlayerBullet* temp = PlayerBullet::Create();
+					Vector3 pos;
+
+					if (isRight)
+						pos = Find("gun.r.muzzle")->GetWorldPos();
+					else pos = Find("gun.l.muzzle")->GetWorldPos();
+
+					temp->SetPos(pos);
+
+					GM->bulletPool.push_back(temp);
+
+					for (auto it = GM->bulletPool.begin(); it != GM->bulletPool.end(); it++)
 					{
-						(*it)->Fire(GetForward(), 1.0f, rotation);
-						break;
+						if (not (*it)->isFire)
+						{
+							(*it)->Fire(GetForward(), 10.0f, rotation);
+							break;
+						}
 					}
 				}
 			}
 		}
+		
+		/** M2 스킬 */
+		{
+			if (isRButton)
+			{
+				if (skillState == SkillState::RBUTTON)
+				{
+					PlayerBullet* temp = PlayerBullet::Create();
+					Vector3 pos;
 
-		//if (INPUT->KeyPress(VK_RBUTTON))
-		//{
-		//	attackStopTime = 0.0f;
-		//	attack = Attack::RBUTTON;
-		//	isRButton = true;
-		//}
-		//if (INPUT->KeyPress('R'))
-		//{
-		//	attackStopTime = 0.0f;
-		//	attack = Attack::R;
-		//	isRSkill = true;
-		//}
+					pos = Find("gun.r.muzzle")->GetWorldPos();
 
+					temp->SetPos(pos);
 
+					GM->bulletPool.push_back(temp);
+
+					for (auto it = GM->bulletPool.begin(); it != GM->bulletPool.end(); it++)
+					{
+						if (not (*it)->isFire)
+						{
+							(*it)->Fire(GetForward(), 10.0f, rotation);
+							break;
+						}
+					}
+					skillState = SkillState::NONE;
+				}
+			}
+			else
+			{
+				if (INPUT->KeyDown(VK_RBUTTON))
+				{
+					attackStopTime = 0.0f;
+					skillState = SkillState::RBUTTON;
+					isRButton = true;
+				}
+			}
+		}
+		
+		/** R 스킬*/
+		{
+			if (isRSkill)
+			{
+				if (skillState == SkillState::R)
+				{
+					RSkillFireTime += DELTA;
+
+					if (RSkillFireTime <= 1.0f)
+					{
+						if (TIMER->GetTick(RSkillFire, attackSpeed))
+						{
+							PlayerBullet* temp = PlayerBullet::Create();
+							Vector3 pos;
+
+							pos = Find("gun.r.muzzle")->GetWorldPos();
+
+							temp->SetPos(pos);
+
+							GM->bulletPool.push_back(temp);
+
+							for (auto it = GM->bulletPool.begin(); it != GM->bulletPool.end(); it++)
+							{
+								if (not (*it)->isFire)
+								{
+									(*it)->Fire(GetForward(), 20.0f, rotation);
+									break;
+								}
+							}
+						}
+					}
+					else // RSkillFireTime이 1.0f을 넘어갈때
+					{
+						skillState = SkillState::NONE;
+					}
+				}
+			}
+			else
+			{
+				if (INPUT->KeyDown('R'))
+				{
+					attackStopTime = 0.0f;
+					skillState = SkillState::R;
+					isRSkill = true;
+				}
+			}
+		}
 
 		// ATTACK -> IDLE
 		// 공격하지않고 4초가 지나면서 공격상태는 IDLE로 바뀌고, 플레이어의 애니메이션도 변경
@@ -381,7 +472,7 @@ void Player::Move(Vector3 Target)
 		}
 
 		MoveWorldPos(Dir * moveSpeed * DELTA);
-		//Find("RootNode")->rotation.y = atan2f(GetForward().z, GetForward().x) - HALFPI;
+		//Find("RootNode")->rotation.y = rotation.y;
 	}
 }
 

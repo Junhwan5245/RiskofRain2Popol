@@ -92,7 +92,7 @@ void Monster::Update()
     Stare();
 
     MonFSM();
-
+    Stare();
     Unit::Update();
 }
  
@@ -106,7 +106,13 @@ void Monster::WolrdUpdate()
     GameObject::Update();
 }
 
-
+void Monster::Stare()
+{
+    Vector3 tempDir = GM->player->GetWorldPos() - this->GetWorldPos();
+    tempDir.Normalize();
+    float stareDir = atan2f(tempDir.x, tempDir.z);
+    this->rotation.y = stareDir + PI;
+}
 
 void Monster::MonFSM()
 {
@@ -211,16 +217,3 @@ void Monster::SetRandomPosition()
     this->SetWorldPosX(GM->player->GetWorldPos().x + offsetX);
     this->SetWorldPosZ(GM->player->GetWorldPos().z + offsetZ);
 }
-
-void Monster::Stare()
-{
-    Vector3 tempDir = GM->player->GetWorldPos() - this->GetWorldPos();
-    tempDir.Normalize();
-    float stareDir = atan2f(tempDir.x, tempDir.z);
-    this->rotation.y = stareDir;
-
-}
-
-
-
-

@@ -1,24 +1,36 @@
 #pragma once
+
+enum class SelectType
+{
+    Explain,
+    Skill,
+    SkillChange,
+};
+
 class PlayerSelectScene : public Scene
 {
 private:
     Camera* cam1;
 
+    SelectType  selectType;
+
     //Actor*  select_player;  //선택된 캐릭터 액터
     UI* bg;
 
-    UI* gameStartButton;
+    UI* gameStartButton;        // 시작
+    UI* backButton;             // 뒤로가기
 
     UI* playerSelectBox;        // 좌측 큰 창
     UI* playerSelect[16];       // 캐릭터 선택칸 + 16
 
+    UI* playerExplainButton;    // 개요 버튼
     UI* playerExplain;          // 개요
     // 1개 추가 (글씨만 적혀있는거)
 
-    UI* playerSkill;            // 스킬
-    // 5개 추가 (스킬 설명들)
+    UI* playerSkillButton;      // 스킬
+    UI* playerSkill[4];         // 스킬 0 : LButton, 1 : RButton, 2 : LShift, 3 : R
 
-    UI* playerSKillChange;      // 장전
+    UI* playerSKillChangeButton;      // 장전
     // 19개의 UI박스 추가 (스킬 변경)
 
     UI* optionSelectBox;        // 우측 큰 창
@@ -37,6 +49,10 @@ private:
     UI* ui;
 
 public:
+    ~PlayerSelectScene();
+    PlayerSelectScene();
+
+
     // Scene을(를) 통해 상속됨
     virtual void Init() override;
     virtual void Release() override;

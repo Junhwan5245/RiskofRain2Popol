@@ -1,87 +1,70 @@
 #include "stdafx.h"
 #include "Main.h"
-#include <shlwapi.h>
-#pragma comment(lib, "shlwapi.lib")
 
-void Main::ReadMtl(string file)
-{
-	ifstream fin;
-	fin.open("../Contents/" + file);
-	if (fin.is_open())
-	{
-		string name;
-		while (!fin.eof())
-		{
-			string Input;
-			fin >> Input;
-			if (Input == "newmtl")
-			{
-				fin >> name;
-				mtlList[name] = new  Material();
-			}
-			else if (Input == "Ka")
-			{
-				fin >> mtlList[name]->ambient.x;
-				fin >> mtlList[name]->ambient.y;
-				fin >> mtlList[name]->ambient.z;
-			}
-			else if (Input == "Kd")
-			{
-				fin >> mtlList[name]->diffuse.x;
-				fin >> mtlList[name]->diffuse.y;
-				fin >> mtlList[name]->diffuse.z;
-			}
-			else if (Input == "Ks")
-			{
-				fin >> mtlList[name]->specular.x;
-				fin >> mtlList[name]->specular.y;
-				fin >> mtlList[name]->specular.z;
-			}
-			else if (Input == "map_Kd")
-			{
-				mtlList[name]->diffuse.w = 1.0f;
-				string TexName;
-				fin >> TexName;
-
-				{
-					size_t tok = file.find_last_of(".");
-					string filename = file.substr(0, tok);
-					string checkPath = "../Contents/Texture/" + filename;
-					//이경로가 있는지 체크
-					if (!PathFileExistsA(checkPath.c_str()))
-					{
-						//없으면 만들어라
-						CreateDirectoryA(checkPath.c_str(), NULL);
-					}
-					string orgin = "../Assets/" + TexName;
-					string copy = "../Contents/Texture/" + file.substr(0, tok) + "/" + TexName;
-					bool isCheck = true;
-					CopyFileA(orgin.c_str(), copy.c_str(), isCheck);
-					mtlList[name]->diffuseMap = make_shared<Texture>();
-					mtlList[name]->diffuseMap->LoadFile(TexName);
-					//temp->diffuse.w = 1.0f;
-				}
-				{
-					size_t tok = file.find_last_of(".");
-					string filename = file.substr(0, tok);
-					string checkPath = "../Contents/Material/" + filename;
-					//이경로가 있는지 체크
-					if (!PathFileExistsA(checkPath.c_str()))
-					{
-						//없으면 만들어라
-						CreateDirectoryA(checkPath.c_str(), NULL);
-					}
-					//file/name.mtl
-					mtlList[name]->SaveFile(filename + "/" + name + ".mtl");
-				}
-			}
-		}
-	}
-}
 
 Main::Main()
 {
-	
+	cam1 = Camera::Create();
+	cam1->LoadFile("Cam.xml");
+
+	itemListUpperBox = UI::Create();
+	itemListUpperBox->LoadFile("UI_InGame_ItemListUpperBox.xml");
+
+	resourceBox = UI::Create();
+	resourceBox->LoadFile("UI_InGame_ResourceBox.xml");
+
+	stageBax = UI::Create();
+	stageBax->LoadFile("UI_InGame_StageBox.xml");
+
+	tab_Image = UI::Create();
+	tab_Image->LoadFile("UI_InGame_Tab_Image.xml");
+	tab_Font = UI::Create();
+	tab_Font->LoadFile("UI_InGame_Tab_Font.xml");
+
+	ctrl_Image = UI::Create();
+	ctrl_Image->LoadFile("UI_InGame_Ctrl_Image.xml");
+	ctrl_Font = UI::Create();
+	ctrl_Font->LoadFile("UI_InGame_Ctrl_Font.xml");
+
+	m1_Image = UI::Create();
+	m1_Image->LoadFile("UI_InGame_M1_Image.xml");
+	m1_Font = UI::Create();
+	m1_Font->LoadFile("UI_InGame_M1_Font.xml");
+
+
+	m2_Image = UI::Create();
+	m2_Image->LoadFile("UI_InGame_M2_Image.xml");
+	m2_Font = UI::Create();
+	m2_Font->LoadFile("UI_InGame_M2_Font.xml");
+
+	shift_Image = UI::Create();
+	shift_Image->LoadFile("UI_InGame_Shift_Image.xml");
+	shift_Font = UI::Create();
+	shift_Font->LoadFile("UI_InGame_Shift_Font.xml");
+
+	r_Image = UI::Create();
+	r_Image->LoadFile("UI_InGame_R_Image.xml");
+	r_Font = UI::Create();
+	r_Font->LoadFile("UI_InGame_R_Font.xml");
+
+	q_Image = UI::Create();
+	q_Image->LoadFile("UI_InGame_Q_Image.xml");
+	q_Font = UI::Create();
+	q_Font->LoadFile("UI_InGame_Q_Font.xml");
+
+	hPBox = UI::Create();
+	hPBox->LoadFile("UI_InGame_PlayerHpBar_Image.xml");
+	hp = UI::Create();
+	hp->LoadFile("UI_InGame_PlayerHp_Image.xml");
+
+
+	expBox = UI::Create();
+	expBox->LoadFile("UI_InGame_PlayerExpBar_Image.xml");
+	exp = UI::Create();
+	exp->LoadFile("UI_InGame_PlayerExp_Image.xml");
+
+	level = UI::Create();
+
 
 	//투명 이미지출력
 }
@@ -92,10 +75,7 @@ Main::~Main()
 }
 void Main::Init()
 {
-	grid = Grid::Create();
-
-	cam1 = Camera::Create();
-	cam1->LoadFile("Cam.xml");
+	
 	Camera::main = cam1;
 	cam1->viewport.x = 0.0f;
 	cam1->viewport.y = 0.0f;
@@ -104,128 +84,6 @@ void Main::Init()
 	cam1->width = App.GetWidth();
 	cam1->height = App.GetHeight();
 
-
-	root = Actor::Create();
-	ifstream fin;
-	string file = "box.obj";
-
-	fin.open("../Contents/" + file);
-	if (fin.is_open())
-	{
-		int GCount = 0;
-		vector<VertexPTN> Vertices;
-		vector<UINT> Indices;
-		vector<Vector3> P;
-		vector<Vector2> T;
-		vector<Vector3> N;
-		string name;
-		string TexName;
-		while (not fin.eof())
-		{
-			string tag;
-			fin >> tag;
-			
-			if (tag == "mtllib")
-			{
-				string file;
-				fin >> file;
-				ReadMtl(file.substr(2, file.size()));
-			}
-			if (tag == "v")
-			{
-				Vector3 pos;
-				fin >> pos.x >> pos.y >> pos.z;
-				P.push_back(pos);
-				//cout << pos.x << "," << pos.y << "," <<pos.z << endl;
-			}
-			else if (tag == "vt")
-			{
-				Vector2 uv;
-				//fin >> uv.x >> uv.y;
-				
-				float temp;
-				fin >> uv.x >> uv.y >> temp;
-				uv.y *= -1.0f;
-				T.push_back(uv);
-			}
-			else if (tag == "vn")
-			{
-				Vector3 normal;
-				fin >> normal.x >> normal.y >> normal.z;
-				N.push_back(normal);
-				//cout << uv.x << "," << uv.y << endl;
-			}
-			else if (tag == "f")
-			{
-				int idx[3]; char slash;
-				VertexPTN pt;
-				for (int i = 0; i < 3; i++)
-				{
-					fin >> idx[0] >> slash >> idx[1] >> slash >> idx[2];
-
-					//cout << idx[0] << "," << idx[1] << endl;
-
-					pt.position = P[idx[0] - 1];
-					pt.uv = T[idx[1] - 1];
-					pt.normal = N[idx[2] - 1];
-					Indices.push_back(Vertices.size());
-					Vertices.push_back(pt);
-				}
-			}
-			else if (tag == "g")
-			{
-				GCount++;
-				if (GCount == 2)
-				{
-					fin >> name;
-				}
-				if (GCount == 3)
-				{
-					GameObject* child = GameObject::Create(name);
-					child->mesh =
-						make_shared<Mesh>(&Vertices[0], Vertices.size(), Indices.data(), Indices.size(), VertexType::PTN);
-					child->shader
-						= RESOURCE->shaders.Load("3.Cube.hlsl");
-					root->AddChild(child);
-					GCount = 1;
-					Vertices.clear();
-					Indices.clear();
-					child->material = mtlList[TexName];
-					//child->texture = mapKd[TexName];
-					{
-						size_t tok = file.find_last_of(".");
-						string checkPath = "../Contents/Mesh/" + file.substr(0, tok);
-						if (!PathFileExistsA(checkPath.c_str()))
-						{
-							CreateDirectoryA(checkPath.c_str(), NULL);
-						}
-
-						child->mesh->SaveFile(file.substr(0, tok) + "/" + name + ".mesh");
-					}
-				}
-			}
-			else if (tag == "usemtl")
-			{
-				fin >> TexName;
-			}
-			//한줄 넘기기
-			char c[128];
-			fin.getline(c, 128);
-		}
-
-		/*for (int i = 0; i < Vertices.size(); i++)
-		{
-			cout << Vertices[i].position.x << ",";
-			cout << Vertices[i].position.y << ",";
-			cout << Vertices[i].position.z << endl;
-		}*/
-
-
-		//다읽고난 후 메쉬 생성
-		
-	}
-
-	
 
 }
 
@@ -237,15 +95,37 @@ void Main::Update()
 
 {
 	ImGui::Begin("Hierarchy");
-	root->RenderHierarchy();
+	expBox->RenderHierarchy();
+	exp->RenderHierarchy();
 	ImGui::End();
 
 	cam1->ControlMainCam();
 
-	root->Update();
-	grid->Update();
 
 	cam1->Update();
+	itemListUpperBox->Update();
+	resourceBox->Update();
+	stageBax->Update();
+
+	tab_Image->Update();
+	tab_Font->Update();
+	ctrl_Image->Update();
+	ctrl_Font->Update();
+	m1_Image->Update();
+	m1_Font->Update();
+	m2_Image->Update();
+	m2_Font->Update();
+	shift_Image->Update();
+	shift_Font->Update();
+	r_Image->Update();
+	r_Font->Update();
+	q_Image->Update();
+	q_Font->Update();
+
+	hPBox->Update();
+	hp->Update();
+	expBox->Update();
+	exp->Update();
 }
 
 void Main::LateUpdate()
@@ -261,8 +141,29 @@ void Main::Render()
 {
 	cam1->Set();
 	LIGHT->Set();
-	grid->Render();
-	root->Render();
+	itemListUpperBox->Render();
+	resourceBox->Render();
+	stageBax->Render();
+
+	tab_Image->Render();
+	tab_Font->Render();
+	ctrl_Image->Render();
+	ctrl_Font->Render();
+	m1_Image->Render();
+	m1_Font->Render();
+	m2_Image->Render();
+	m2_Font->Render();
+	shift_Image->Render();
+	shift_Font->Render();
+	r_Image->Render();
+	r_Font->Render();
+	q_Image->Render();
+	q_Font->Render();
+
+	hPBox->Render();
+	hp->Render();
+	expBox->Render();
+	exp->Render();
 }
 
 void Main::ResizeScreen()

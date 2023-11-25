@@ -4,11 +4,14 @@ class LoadingScene : public Scene
 private:
     Camera* cam1;
     Grid* grid;
-    UI* bono;
+    UI* bg;
     thread* t1;
 
     float     loadingPersent;
 public:
+    LoadingScene();
+    ~LoadingScene();
+
     // Scene을(를) 통해 상속됨
     virtual void Init() override;
     virtual void Release() override;

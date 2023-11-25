@@ -6,6 +6,8 @@ class Scene1 : public Scene
 {
 private:
     Camera*     cam1;
+    class InGameUI* ui;
+
     Camera*     playerCam;
     Grid*       grid;
     Monster*    monster;
@@ -15,6 +17,11 @@ private:
     class Astar* astar;
 
     float			time = 0;
+    
+    //const float monsterCreationInterval = 20.0f;
+
+
+    bool isMainCam;     // 메인캠 전환키 (임시용)
     float           renewtime = 0.0f;
 public:
     Scene1();

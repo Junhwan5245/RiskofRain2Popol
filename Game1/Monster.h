@@ -34,6 +34,9 @@ public:
 	Vector3 last;
 	float dieTimer;
 	
+	void Stare();
+	
+	
 protected:
 	
 	virtual void IdleAnimations()=0;
@@ -43,7 +46,7 @@ protected:
 
 	virtual void    MonFSM();
 	void	SetRandomPosition();
-	void	Stare();
+	//void	Stare();
 	MonsterState     GetState() { return state; }
 	Monster();
 	virtual ~Monster();

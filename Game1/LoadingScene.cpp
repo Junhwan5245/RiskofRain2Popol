@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "LoadingScene.h"
 #include "StartScene.h"
+#include "PlayerSelectScene.h"
 #include "Scene1.h"
 
 wstring loadObejct;
@@ -8,8 +9,17 @@ int     loadCount = 0;
 
 void CreateScene1()
 {
-    SCENE->AddScene("SC1", new Scene1);
     SCENE->AddScene("StartScene", new StartScene);
+    SCENE->AddScene("PlayerSelect", new PlayerSelectScene);
+    SCENE->AddScene("SC1", new Scene1);
+}
+
+LoadingScene::LoadingScene()
+{
+}
+
+LoadingScene::~LoadingScene()
+{
 }
 
 void LoadingScene::Init()
@@ -20,8 +30,15 @@ void LoadingScene::Init()
     cam1->LoadFile("Cam.xml");
     Camera::main = cam1;
 
-    bono = UI::Create();
-    bono->LoadFile("UI.xml");
+    cam1->viewport.x = 0.0f;
+    cam1->viewport.y = 0.0f;
+    cam1->viewport.width = App.GetWidth();
+    cam1->viewport.height = App.GetHeight();
+    cam1->width = App.GetWidth();
+    cam1->height = App.GetHeight();
+
+    bg = UI::Create();
+    bg->LoadFile("UI_LoadingScene_BackGround.xml");
 
     t1 = new thread(CreateScene1);
 }
@@ -40,44 +57,24 @@ void LoadingScene::Update()
     ImGui::Begin("Hierarchy");
     grid->RenderHierarchy();
     cam1->RenderHierarchy();
-    bono->RenderHierarchy();
+    bg->RenderHierarchy();
     ImGui::End();
     grid->Update();
     cam1->Update();
-    bono->Update();
+    bg->Update();
 
-    //lodingPersent += 500 * DELTA;
-    loadingPersent = min(min(25 * loadCount, 99), loadingPersent += 0.01f);
+
+    loadingPersent = min(min(17 * loadCount, 99), loadingPersent += 0.025f);
     ImGui::Text("loadCount : %d", loadCount);
 
-    //if (loadCount == 1)
-    //{
-    //    lodingPersent = min(lodingPersent, 19);
-    //}
-    //else if (loadCount == 2)
-    //{
-    //    //lodingPersent += DELTA;
-    //    lodingPersent = min(lodingPersent, 49);
-    //}
-    //else if (loadCount == 3)
-    //{
-    //    //lodingPersent += DELTA;
-    //    lodingPersent = min(lodingPersent, 74);
-    //}
-    //else if (loadCount == 4)
-    //{
-    //    //lodingPersent += DELTA;
-    //    lodingPersent = min(lodingPersent, 99);
-    //}
-    //else 
-    if (loadCount == 5)
+    if (loadCount == 7)
     {
         loadingPersent = 100;
         Render();
         //Sleep(1000);
         for (int i = 0; i < 1000; i++)
         {
-
+    
         }
         SCENE->ChangeScene("StartScene");
     }
@@ -96,20 +93,25 @@ void LoadingScene::PreRender()
 void LoadingScene::Render()
 {
     wstring persent = to_wstring((int)loadingPersent) + L"%";
-    DWRITE->RenderText(persent, RECT{0,0,1000,300}, 50, L"¹ÙÅÁÃ¼", Color(1, 0, 0, 1));
+    RECT rect;
+    rect.left = App.GetWidth() - 100;
+    rect.top = App.GetHeight() - 100;
+    rect.right = App.GetWidth();
+    rect.bottom = App.GetHeight();
+
+    DWRITE->RenderText(persent, rect, 50, L"¹ÙÅÁÃ¼", Color(1, 1, 1, 1), DWRITE_FONT_WEIGHT_BOLD);
     cam1->Set();
     LIGHT->Set();
     grid->Render();
-    bono->Render();
+    bg->Render();
 }
 
 void LoadingScene::ResizeScreen()
 {
-    Camera::main->viewport.x = 0.0f;
-    Camera::main->viewport.y = 0.0f;
-    Camera::main->viewport.width = App.GetWidth();
-    Camera::main->viewport.height = App.GetHeight();
-
-    Camera::main->width = App.GetWidth();
-    Camera::main->height = App.GetHeight();
+    cam1->viewport.x = 0.0f;
+    cam1->viewport.y = 0.0f;
+    cam1->viewport.width = App.GetWidth();
+    cam1->viewport.height = App.GetHeight();
+    cam1->width = App.GetWidth();
+    cam1->height = App.GetHeight();
 }
