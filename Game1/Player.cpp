@@ -86,22 +86,6 @@ void Player::Update()
 		else if (attackState == PlayerAttackState::IDLE)
 			dir += Vector3(0, 0, 1);
 	}
-	//if (INPUT->KeyPress('W'))
-	//{
-	//	dir += GetForward();
-	//}
-	//if (INPUT->KeyPress('S'))
-	//{
-	//	dir += -GetForward();
-	//}
-	//if (INPUT->KeyPress('A'))
-	//{
-	//	dir += -GetRight();
-	//}
-	//if (INPUT->KeyPress('D'))
-	//{
-	//	dir += GetRight();
-	//}
 	dir.Normalize();
 
 
