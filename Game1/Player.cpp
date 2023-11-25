@@ -88,6 +88,16 @@ void Player::Update()
 	}
 	dir.Normalize();
 
+	// 점프
+	if (not isJump)
+	{
+		if (INPUT->KeyDown(VK_SPACE))
+		{
+			isJump = true;
+			gravity = -50.0f * DELTA;
+		}
+	}
+
 
 	if (isRoll) //구르고 있을때
 	{
@@ -474,6 +484,14 @@ void Player::Move(Vector3 Target)
 		MoveWorldPos(Dir * moveSpeed * DELTA);
 		Find("RootNode")->rotation.y = 0;
 	}
+}
+
+void Player::Jump()
+{
+	gravityDir = -GetUp();
+	gravity += 1.0f * DELTA;
+
+	MoveWorldPos(gravityDir * gravity );
 }
 
 void Player::Fire(Vector3 dest, float power)
