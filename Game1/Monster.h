@@ -52,7 +52,5 @@ protected:
 	Monster();
 	virtual ~Monster();
 	int range=0;
-	
-
 };
 

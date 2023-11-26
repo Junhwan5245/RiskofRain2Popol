@@ -290,14 +290,14 @@ void PlayerSelectScene::UIClick()
     // 시작버튼 클릭시 게임 시작
     ((UI*)gameStartButton)->mouseDown = [&]
     {
-        cout << "시작버튼 클릭" << endl;
+        //cout << "시작버튼 클릭" << endl;
         SCENE->ChangeScene("SC1");
     };
 
     // 뒤로버튼 클릭시 시작화면으로 이동
     ((UI*)backButton)->mouseDown = [&]
     {
-        cout << "뒤로가기버튼 클릭" << endl;
+        //cout << "뒤로가기버튼 클릭" << endl;
         //SCENE->AddScene("SC1", new Scene1);
         SCENE->ChangeScene("StartScene");
     };
@@ -361,24 +361,24 @@ void PlayerSelectScene::RenderFont()
     rect.top = (1 - gameStartButton->GetWorldPos().y) * App.GetHalfHeight() - gameStartButton->scale.x * App.GetHalfWidth() * 2;
     rect.right = App.GetWidth();
     rect.bottom = App.GetHeight();
-    DWRITE->RenderText(Level, rect, 20, L"바탕체", Color(1, 1, 1, 1), DWRITE_FONT_WEIGHT_BOLD);
+    DWRITE->RenderText(Level, rect, 20, L"Noto Sans CJK KR Regular", Color(1, 1, 1, 1), DWRITE_FONT_WEIGHT_BOLD);
 
     rect.left = (gameStartButton->GetWorldPos().x + 1) * App.GetHalfWidth();
     rect.top = (1 - gameStartButton->GetWorldPos().y) * App.GetHalfHeight() - gameStartButton->scale.x * App.GetHalfWidth() * 2;
     rect.right = App.GetWidth();
     rect.bottom = App.GetHeight();
-    DWRITE->RenderText(Level_select, rect, 20, L"바탕체", Color(1, 1, 1, 1), DWRITE_FONT_WEIGHT_BOLD);
+    DWRITE->RenderText(Level_select, rect, 20, L"Noto Sans CJK KR Regular", Color(1, 1, 1, 1), DWRITE_FONT_WEIGHT_BOLD);
 
 
     rect.left = (gameStartButton->GetWorldPos().x + 1) * App.GetHalfWidth() - gameStartButton->scale.y * App.GetHalfWidth() * 2;
     rect.top = (1 - gameStartButton->GetWorldPos().y) * App.GetHalfHeight() - gameStartButton->scale.x * App.GetHalfWidth() * 1.5f;
     rect.right = App.GetWidth();
     rect.bottom = App.GetHeight();
-    DWRITE->RenderText(character, rect, 20, L"바탕체", Color(1, 1, 1, 1), DWRITE_FONT_WEIGHT_BOLD);
+    DWRITE->RenderText(character, rect, 20, L"Noto Sans CJK KR Regular", Color(1, 1, 1, 1), DWRITE_FONT_WEIGHT_BOLD);
 
     rect.left = (gameStartButton->GetWorldPos().x + 1) * App.GetHalfWidth();
     rect.top = (1 - gameStartButton->GetWorldPos().y) * App.GetHalfHeight() - gameStartButton->scale.x * App.GetHalfWidth() * 1.5f;
     rect.right = App.GetWidth();
     rect.bottom = App.GetHeight();
-    DWRITE->RenderText(character_select, rect, 20, L"바탕체", Color(1, 1, 1, 1), DWRITE_FONT_WEIGHT_BOLD);
+    DWRITE->RenderText(character_select, rect, 20, L"Noto Sans CJK KR Regular", Color(1, 1, 1, 1), DWRITE_FONT_WEIGHT_BOLD);
 }

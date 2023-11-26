@@ -111,7 +111,7 @@ void Monster::Stare()
     Vector3 tempDir = GM->player->GetWorldPos() - this->GetWorldPos();
     tempDir.Normalize();
     float stareDir = atan2f(tempDir.x, tempDir.z);
-    this->rotation.y = stareDir + PI;
+    this->rotation.y = stareDir;
 }
 
 void Monster::MonFSM()
