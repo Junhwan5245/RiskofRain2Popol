@@ -211,15 +211,15 @@ LRESULT Window::WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)
 	}
 	if (message == WM_GETMINMAXINFO)
 	{
-		((LPMINMAXINFO)lParam)->ptMinTrackSize.x = 1280;
-		((LPMINMAXINFO)lParam)->ptMinTrackSize.y = 720;
-		((LPMINMAXINFO)lParam)->ptMaxTrackSize.x = 1280;
-		((LPMINMAXINFO)lParam)->ptMaxTrackSize.y = 720;
-
-		((LPMINMAXINFO)lParam)->ptMaxSize.x = 1280;
-		((LPMINMAXINFO)lParam)->ptMaxSize.y = 720;
-		((LPMINMAXINFO)lParam)->ptMaxPosition.x = App.x;
-		((LPMINMAXINFO)lParam)->ptMaxPosition.y = App.y;
+		//((LPMINMAXINFO)lParam)->ptMinTrackSize.x = 1280;
+		//((LPMINMAXINFO)lParam)->ptMinTrackSize.y = 720;
+		//((LPMINMAXINFO)lParam)->ptMaxTrackSize.x = 1280;
+		//((LPMINMAXINFO)lParam)->ptMaxTrackSize.y = 720;
+		//
+		//((LPMINMAXINFO)lParam)->ptMaxSize.x = 1280;
+		//((LPMINMAXINFO)lParam)->ptMaxSize.y = 720;
+		//((LPMINMAXINFO)lParam)->ptMaxPosition.x = App.x;
+		//((LPMINMAXINFO)lParam)->ptMaxPosition.y = App.y;
 
 		return 0;
 	}

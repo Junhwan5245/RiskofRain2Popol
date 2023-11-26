@@ -47,12 +47,13 @@ void Player::Update()
 	ImGui::Text("RCoolTime : %.2f", rTimer);
 	ImGui::Text("isRSkill : %d\n", (int)isRSkill);
 
-	Vector3 Rot;
-	Rot.x = INPUT->movePosition.y * 0.003f;
-	Rot.y = INPUT->movePosition.x * 0.005f;
-	mouseDir = Rot;
-	rotation.y += mouseDir.y;
-	Find("PlayerCam")->rotation.x += mouseDir.x;
+	//Vector3 Rot;
+	//Rot.x = INPUT->movePosition.y * 0.003f;
+	//Rot.y = INPUT->movePosition.x * 0.005f;
+	//mouseDir = Rot;
+	//rotation.y += mouseDir.y;
+	//Find("PlayerCam")->rotation.x += mouseDir.x;
+
 
 
 	lastRot = Find("RootNode")->rotation.y;

@@ -51,11 +51,11 @@ void Scene1::Init()
 
     Camera::main->viewport.x = 0.0f;
     Camera::main->viewport.y = 0.0f;
-    Camera::main->viewport.width = App.GetWidth();
-    Camera::main->viewport.height = App.GetHeight();
+    Camera::main->viewport.width = 1280;
+    Camera::main->viewport.height = 720;
     
-    Camera::main->width = App.GetWidth();
-    Camera::main->height = App.GetHeight();
+    Camera::main->width = 1280;
+    Camera::main->height = 720;
 
     //Camera::main = (Camera*)GM->player->Find("PlayerCam");
 }
@@ -68,8 +68,6 @@ void Scene1::Update()
 {
     monsterCreationTimer += DELTA;
 
-    if (INPUT->KeyDown('V'))
-        isMainCam = !isMainCam;
     Camera::main->viewport.x = 0.0f;
     Camera::main->viewport.y = 0.0f;
     Camera::main->viewport.width = App.GetWidth();
@@ -77,6 +75,12 @@ void Scene1::Update()
 
     Camera::main->width = App.GetWidth();
     Camera::main->height = App.GetHeight();
+
+
+    // 카메라 전환 (작업용 : cam1 , 플레이어 : (Camera*)GM->player->Find("PlayerCam");
+    if (INPUT->KeyDown('V'))
+        isMainCam = !isMainCam;
+
     if (isMainCam)
     {
         Camera::main = cam1;
@@ -84,6 +88,7 @@ void Scene1::Update()
     else
     {
         Camera::main = (Camera*)GM->player->Find("PlayerCam");
+        MouseHold();
     }
 
     ImGui::Text("TIMER : %.2f", monsterCreationTimer);
@@ -242,19 +247,26 @@ void Scene1::ResizeScreen()
 {
     Camera::main->viewport.x = 0.0f;
     Camera::main->viewport.y = 0.0f;
-    Camera::main->viewport.width = App.GetWidth();
-    Camera::main->viewport.height = App.GetHeight();
-    Camera::main->width = App.GetWidth();
-    Camera::main->height = App.GetHeight();
+    Camera::main->viewport.width = 1280;
+    Camera::main->viewport.height = 720;
 
 
+    Camera::main->width = 1280;
+    Camera::main->height = 720;
+}
 
-    //(Camera*)(GM->player->Find("PlayerCam"))->viewport.x = 0.0f;
-    //(Camera*)GM->player->Find("PlayerCam")->viewport.y = 0.0f;
-    //(Camera*)GM->player->Find("PlayerCam")->viewport.width = App.GetWidth();
-    //(Camera*)GM->player->Find("PlayerCam")->viewport.height = App.GetHeight();
-    //(Camera*)GM->player->Find("PlayerCam")->width = App.GetWidth();
-    //(Camera*)GM->player->Find("PlayerCam")->height = App.GetHeight();
+void Scene1::MouseHold()
+{
+    POINT ptMouse;
+    ptMouse.x = App.GetHalfWidth();
+    ptMouse.y = App.GetHalfHeight();
+    Vector3 Rot;
+    Rot.x = (INPUT->position.y - ptMouse.y) * 0.003f;
+    Rot.y = (INPUT->position.x - ptMouse.x) * 0.003f;
+    GM->player->rotation.y += Rot.y;
+    GM->player->Find("PlayerCam")->rotation.x += Rot.x;
+    ClientToScreen(App.GetHandle(), &ptMouse);
+    SetCursorPos(ptMouse.x, ptMouse.y);
 }
 
 
