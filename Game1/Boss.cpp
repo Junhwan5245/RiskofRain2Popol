@@ -65,124 +65,132 @@ void Boss::MonFSM()
 	Vector3 playerVec = Vector3(GM->player->GetWorldPos().x, 0, GM->player->GetWorldPos().z);
 	Vector3 bossVec = Vector3(this->GetWorldPos().x, 0, this->GetWorldPos().z);
 
-	if (bState == BossState::IDLE)
+	if (Hp > 0)
 	{
-		/*stateChangeTime = 0.0f;*/
-		if (TIMER->GetTick(stateChangeTime, 5.0f))//초가 지나게 되면
+		if (bState == BossState::IDLE)
 		{
-			MoveAnimations();//move애니메이션 넣기
-			anim->aniScale = 0.1f;
-			bState = BossState::MOVE;
-			return;
-		}
-	}
-
-	if (bState == BossState::MOVE)//move일때 길찾기와 attack으로 넘어가는 상태 
-	{
-		anim->aniScale = 1.0f;
-
-		if (!way.empty())
-		{
-			Vector3 temp = way.back() - GetWorldPos();
-			temp.Normalize();
-			MoveWorldPos(temp * moveSpeed * DELTA);
-
-			float distanceThreshold = 0.1f;
-
-			if ((way.back() - GetWorldPos()).Length() < distanceThreshold)
+			/*stateChangeTime = 0.0f;*/
+			if (TIMER->GetTick(stateChangeTime, 5.0f))//초가 지나게 되면
 			{
-				way.pop_back();
+				MoveAnimations();//move애니메이션 넣기
+				anim->aniScale = 0.1f;
+				bState = BossState::MOVE;
+				return;
 			}
 		}
 
-		if ((bossVec - playerVec).Length()<this->range)
+		if (bState == BossState::MOVE)//move일때 길찾기와 attack으로 넘어가는 상태 
 		{
-			//거리로 비교한뒤에 만약 attack상태에 들어오면 int num이란 값 두고 이게 공격발사하고 1이되야만 move로 이동
-			AttackAnimations();
-			bState = BossState::ATTACK;
-		}
-	}
+			anim->aniScale = 1.0f;
 
-	if (bState == BossState::ATTACK)
-	{
-		
+			if (!way.empty())
+			{
+				Vector3 temp = way.back() - GetWorldPos();
+				temp.Normalize();
+				MoveWorldPos(temp * moveSpeed * DELTA);
+
+				float distanceThreshold = 0.1f;
+
+				if ((way.back() - GetWorldPos()).Length() < distanceThreshold)
+				{
+					way.pop_back();
+				}
+			}
+
+			if ((bossVec - playerVec).Length() < this->range)
+			{
+				//거리로 비교한뒤에 만약 attack상태에 들어오면 int num이란 값 두고 이게 공격발사하고 1이되야만 move로 이동
+				AttackAnimations();
+				bState = BossState::ATTACK;
+			}
+		}
+
+		if (bState == BossState::ATTACK)
+		{
+
 			//attack2 애니메이션
-		if (TIMER->GetTick(bulletTimer1, 5.0f))
-		{
-			for (int i = 0; i < 3; i++)
+			if (TIMER->GetTick(bulletTimer1, 5.0f))
 			{
-				BossBullet1* temp = BossBullet1::Create("BossBullet1");
-				
-				if (i == 0) 
+				for (int i = 0; i < 3; i++)
 				{
-					temp->SetPos(root->Find("Tentacle1.008_end")->GetWorldPos());
-					temp->fireDir = GM->player->GetWorldPos() - root->Find("Tentacle1.008_end")->GetWorldPos();
-				}
-				else if (i == 1) 
-				{
-					temp->SetPos(root->Find("Tentacle2.008_end")->GetWorldPos()); 
-					temp->fireDir = GM->player->GetWorldPos() - root->Find("Tentacle2.008_end")->GetWorldPos();
-				}
-				else if (i == 2) 
-				{
-					temp->SetPos(root->Find("Tentacle3.008_end")->GetWorldPos()); 
-					temp->fireDir = GM->player->GetWorldPos() - root->Find("Tentacle3.008_end")->GetWorldPos();
+					BossBullet1* temp = BossBullet1::Create("BossBullet1");
+
+					if (i == 0)
+					{
+						temp->SetPos(root->Find("Tentacle1.008_end")->GetWorldPos());
+						temp->fireDir = GM->player->GetWorldPos() - root->Find("Tentacle1.008_end")->GetWorldPos();
+					}
+					else if (i == 1)
+					{
+						temp->SetPos(root->Find("Tentacle2.008_end")->GetWorldPos());
+						temp->fireDir = GM->player->GetWorldPos() - root->Find("Tentacle2.008_end")->GetWorldPos();
+					}
+					else if (i == 2)
+					{
+						temp->SetPos(root->Find("Tentacle3.008_end")->GetWorldPos());
+						temp->fireDir = GM->player->GetWorldPos() - root->Find("Tentacle3.008_end")->GetWorldPos();
+					}
+
+
+					temp->fireDir.Normalize();
+					temp->power = 10;
+					temp->isFire = true;
+					GM->bulletPool.push_back(temp);
+
+					Attack2Animations();
+					bState = BossState::ATTACK2;
 				}
 
-				
-				temp->fireDir.Normalize();
-				temp->power = 10;
-				temp->isFire = true;
-				GM->bulletPool.push_back(temp);
-
-				Attack2Animations();
-				bState = BossState::ATTACK2;
 			}
 
+
+			//if ((GetWorldPos() - GM->player->GetWorldPos()).Length() > this->range)
+			//{
+			//	//기존에 하던 공격은 마저 하고 move상태로 전환하기 총알 발사시에 bool 값으로 총알 발사 뒤 인지 체크하고
+			//	MoveAnimations();
+			//	bState = BossState::MOVE;
+			//}
 		}
 
-
-		//if ((GetWorldPos() - GM->player->GetWorldPos()).Length() > this->range)
-		//{
-		//	//기존에 하던 공격은 마저 하고 move상태로 전환하기 총알 발사시에 bool 값으로 총알 발사 뒤 인지 체크하고
-		//	MoveAnimations();
-		//	bState = BossState::MOVE;
-		//}
-	}
-
-	if (bState == BossState::ATTACK2)
-	{
-		if (TIMER->GetTick(bulletTimer2, 5.0f))//5초마다 GM->bulletPool에 푸쉬
+		if (bState == BossState::ATTACK2)
 		{
-			
-				BossBullet2* temp = BossBullet2::Create("BossBullet1");
-				temp->SetPos(root->GetWorldPos());
-				temp->fireDir = GM->player->GetWorldPos() - this->GetWorldPos();
+			if (TIMER->GetTick(bulletTimer2, 5.0f))//5초마다 GM->bulletPool에 푸쉬
+			{
+
+				BossBullet2* temp = BossBullet2::Create("BossBullet2");
+				temp->SetPos(Find("bullet2start")->GetWorldPos());
+				temp->fireDir = GM->player->Find("RootNode")->GetWorldPos() - Find("bullet2start")->GetWorldPos();
 				temp->fireDir.Normalize();
-				temp->power = 10;
+				temp->power = 3;
 				temp->isFire = true;
 				GM->bulletPool.push_back(temp);
 
 				AttackAnimations();
-				bState = BossState::ATTACK;		
+				bState = BossState::ATTACK;
+			}
 		}
+
+	}
+	else
+	{
+		bState == BossState::DEAD;
 	}
 
 	if (bState == BossState::DEAD)
 	{
-		DeadAnimations();
 
-		if (anim->GetPlayTime() >= 0.9)
+		if (!isHpZero)
 		{
-			//5초를 재고 없애기 소멸 상태를 만든다?
-
-			dieTimer += DELTA;
-
-			if (dieTimer >= 5.0f)
-			{
-				//삭제
-			}
+			isHpZero = true;
+			DeadAnimations();
 		}
+		if (TIMER->GetTick(dieTimer, 5.0f))
+		{
+			isDead = true;
+		}
+
+
+		return;
 	}
 
 
@@ -191,7 +199,7 @@ void Boss::MonFSM()
 
 void Boss::IdleAnimations()
 {
-	anim->ChangeAnimation(AnimationState::ONCE_LAST, 1, 0.0f);
+	anim->ChangeAnimation(AnimationState::ONCE_LAST, 6, 0.0f);
 }
 
 void Boss::AttackAnimations()

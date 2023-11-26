@@ -156,8 +156,10 @@ void Monster::MonFSM()
 
             if ((monVec - playerVec).Length() < this->range)
             {
+                isHit = false;
                 AttackAnimations();
                 state = MonsterState::ATTACK;
+               
             }
         }
 
@@ -169,7 +171,7 @@ void Monster::MonFSM()
         //}
         if (state == MonsterState::ATTACK)
         {
-            if (anim->GetPlayTime() >= 0.9)
+            if (anim->GetPlayTime() >= 0.98)
             {
                 MoveAnimations();
                 state = MonsterState::MOVE;  // 수정된 부분

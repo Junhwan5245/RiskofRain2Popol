@@ -36,7 +36,8 @@ public:
 	bool	isDead = false;
 	float dieTimer;
 	bool	isHpZero = false;
-	
+	bool	isHit = false;//µüÁ¤¹ú·¹ Ãæµ¹À» À§ÇÑ bool
+
 	void Stare();
 	Monster();
 	virtual ~Monster();

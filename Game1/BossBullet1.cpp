@@ -46,7 +46,9 @@ void BossBullet1::Update()
 
 void BossBullet1::Render(shared_ptr<Shader> pShader)
 {
+	
 	Bullet::Render(pShader);
+	
 }
 
 void BossBullet1::Fire(Vector3 dir, float power, Vector3 rotation)

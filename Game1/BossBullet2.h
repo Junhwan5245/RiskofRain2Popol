@@ -6,6 +6,7 @@ class BossBullet2 : public Bullet
     private:
         BossBullet2();
         float exploreTime;
+        bool  isExplore = false;
     public:
         virtual ~BossBullet2();
         void	Update() override;

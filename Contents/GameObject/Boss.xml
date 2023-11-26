@@ -12,7 +12,7 @@
         <Scale X="6" Y="6" Z="6"/>
         <Rotation X="0" Y="0" Z="0"/>
     </Transform>
-    <Children Size="1"/>
+    <Children Size="2"/>
     <Child0 Name="RootNode" Visible="true" ObType="0" BoneIndex="1">
         <Transform>
             <Position X="0" Y="0" Z="0"/>
@@ -394,4 +394,12 @@
             <Children Size="0"/>
         </Child2>
     </Child0>
+    <Child1 Name="bullet2start" Visible="true" ObType="1" BoneIndex="-1">
+        <Transform>
+            <Position X="0" Y="6.1083336" Z="0"/>
+            <Scale X="1" Y="1" Z="1"/>
+            <Rotation X="0" Y="0" Z="0"/>
+        </Transform>
+        <Children Size="0"/>
+    </Child1>
 </Root>

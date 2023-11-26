@@ -33,6 +33,7 @@ void Golem::Update()
 
 	if (state == MonsterState::MOVE)
 	{
+		
 		if (anim->GetPlayTime() >= 1.0f)
 		{
 			Vector3 minus = Find("ROOT")->GetWorldPos() - last;
@@ -42,6 +43,8 @@ void Golem::Update()
 			last = Find("ROOT")->GetWorldPos();
 			anim->ChangeAnimation(AnimationState::ONCE_LAST, 3, 0.0f);
 		}
+
+		lazer->visible = false;
 	}
 
 	
@@ -63,12 +66,15 @@ void Golem::Update()
 			
 			lazer->visible = true;
 			
-	
-			Vector3 dir = GM->player->GetWorldPos() - root->Find("lazerstart")->GetWorldPos();
+
+			Vector3 dir = GM->player->Find("base")->GetWorldPos() - root->Find("lazerstart")->GetWorldPos();
 			dir.Normalize();
 
-			lazer->root->SetWorldPos((root->Find("lazerstart")->GetWorldPos() + GM->player->GetWorldPos()) * 0.5f);
-			lazer->scale.z = (root->Find("lazerstart")->GetWorldPos().z + GM->player->GetWorldPos().z) * 0.5f;
+			lazer->root->SetWorldPos((root->Find("lazerstart")->GetWorldPos() + GM->player->Find("base")->GetWorldPos()) * 0.5f);
+			/*lazer->scale.z = (root->Find("lazerstart")->GetWorldPos().z + GM->player->GetWorldPos().z) * 0.5f;*/
+
+			float lazerLength = (root->Find("lazerstart")->GetWorldPos() - GM->player->Find("base")->GetWorldPos()).Length();
+			lazer->scale.z = lazerLength*0.5;
 
 			lazer->rotation.x = -asinf(dir.y);
 			lazer->rotation.y = atan2f(dir.x, dir.z);
@@ -80,7 +86,7 @@ void Golem::Update()
 		{
 			oneTime = false;
 			lazer->visible = false;
-			tempLazerDir = GM->player->Find("RootNode")->GetWorldPos() - root->Find("lazerstart")->GetWorldPos();
+			tempLazerDir = GM->player->Find("base")->GetWorldPos() - root->Find("lazerstart")->GetWorldPos();
 			tempLazerDir.Normalize();//레이저 사라지기 직전 방향저장
 
 			// 레이저를 가림
@@ -105,6 +111,8 @@ void Golem::Update()
 		{
 			laserTimer = 0.0f;
 		}
+
+		
 	}
 	
 

@@ -14,6 +14,7 @@ public:
 	void	AttackAnimations() override;
 	void	MoveAnimations() override;
 	void	DeadAnimations() override;
+	
 
 private:
 	Beetle();
