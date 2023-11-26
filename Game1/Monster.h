@@ -12,8 +12,9 @@ enum class MonsterState
 	MOVE,
 	ATTACK,
 	DEAD,
-
 };
+
+// 난이도 관련해서 하나 추가해야할듯
 
 class Monster : public Unit
 {
@@ -54,7 +55,5 @@ protected:
 	
 	
 	int range=0;
-	
-
 };
 

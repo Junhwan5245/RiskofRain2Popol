@@ -130,7 +130,6 @@ void Window::Create()
 	wndClass.lpszMenuName = NULL;
 	wndClass.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
 	wndClass.cbSize = sizeof(WNDCLASSEX);
-
 	WORD wHr = RegisterClassExW(&wndClass);
 	assert(wHr != 0);
 
@@ -209,6 +208,20 @@ LRESULT Window::WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)
 			//exit(0);
 			PostQuitMessage(0);
 		}
+	}
+	if (message == WM_GETMINMAXINFO)
+	{
+		//((LPMINMAXINFO)lParam)->ptMinTrackSize.x = 1280;
+		//((LPMINMAXINFO)lParam)->ptMinTrackSize.y = 720;
+		//((LPMINMAXINFO)lParam)->ptMaxTrackSize.x = 1280;
+		//((LPMINMAXINFO)lParam)->ptMaxTrackSize.y = 720;
+		//
+		//((LPMINMAXINFO)lParam)->ptMaxSize.x = 1280;
+		//((LPMINMAXINFO)lParam)->ptMaxSize.y = 720;
+		//((LPMINMAXINFO)lParam)->ptMaxPosition.x = App.x;
+		//((LPMINMAXINFO)lParam)->ptMaxPosition.y = App.y;
+
+		return 0;
 	}
 
 	if (message == WM_CLOSE || message == WM_DESTROY)

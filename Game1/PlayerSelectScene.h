@@ -11,8 +11,12 @@ class PlayerSelectScene : public Scene
 {
 private:
     Camera* cam1;
-
+    Actor* player_select;
+    UI* playerRoll;
     SelectType  selectType;
+
+    int playerSelectNum = 0;        //  0 : Default 1 : Commando  2: ???  3 : ???      
+    
 
     //Actor*  select_player;  //선택된 캐릭터 액터
     UI* bg;
@@ -30,7 +34,7 @@ private:
     UI* playerSkillButton;      // 스킬
     UI* playerSkill[4];         // 스킬 0 : LButton, 1 : RButton, 2 : LShift, 3 : R
 
-    UI* playerSKillChangeButton;      // 장전
+    UI* playerSKillChangeButton;      // 장전 
     // 19개의 UI박스 추가 (스킬 변경)
 
     UI* optionSelectBox;        // 우측 큰 창
@@ -48,6 +52,14 @@ private:
 
     UI* ui;
 
+    wstring Level;
+    wstring Level_select;
+    wstring character;
+    wstring character_select;
+
+
+    int     level = 0;  // 0 = Defualt 1 = easy  2 = normal  3 = hard
+
 public:
     ~PlayerSelectScene();
     PlayerSelectScene();
@@ -61,4 +73,8 @@ public:
     virtual void PreRender() override;
     virtual void Render() override;
     virtual void ResizeScreen() override;
+
+
+    void UIClick();
+    void RenderFont();
 };

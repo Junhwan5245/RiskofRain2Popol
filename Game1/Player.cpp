@@ -4,7 +4,7 @@ Player* Player::Create(string name)
 {
 	///11
 	Player* temp = new Player();
-	temp->LoadFile("Player.xml");
+	temp->LoadFile("Player2.xml");
 	temp->type = ObType::Actor;
 	temp->playerState = PlayerState::IDLE;
 	temp->attackState = PlayerAttackState::IDLE;
@@ -12,6 +12,7 @@ Player* Player::Create(string name)
 	temp->anim->ChangeAnimation(AnimationState::LOOP, 3, 0.1f);
 	temp->Find("mdlCommandoDualies")->rotation.y = 180.0f * ToRadian;
 	temp->Find("PlayerCam")->rotation.x = 0.0f;
+	temp->rotation.y = 0;
 
 	/** 스텟*/
 	temp->moveSpeed = 7.0f;
@@ -46,12 +47,13 @@ void Player::Update()
 	ImGui::Text("RCoolTime : %.2f", rTimer);
 	ImGui::Text("isRSkill : %d\n", (int)isRSkill);
 
-	Vector3 Rot;
-	Rot.x = INPUT->movePosition.y * 0.003f;
-	Rot.y = INPUT->movePosition.x * 0.005f;
-	mouseDir = Rot;
-	rotation.y += mouseDir.y;
-	Find("PlayerCam")->rotation.x += mouseDir.x;
+	//Vector3 Rot;
+	//Rot.x = INPUT->movePosition.y * 0.003f;
+	//Rot.y = INPUT->movePosition.x * 0.005f;
+	//mouseDir = Rot;
+	//rotation.y += mouseDir.y;
+	//Find("PlayerCam")->rotation.x += mouseDir.x;
+
 
 
 	lastRot = Find("RootNode")->rotation.y;
@@ -87,6 +89,16 @@ void Player::Update()
 			dir += Vector3(0, 0, 1);
 	}
 	dir.Normalize();
+
+	// 점프
+	if (not isJump)
+	{
+		if (INPUT->KeyDown(VK_SPACE))
+		{
+			isJump = true;
+			gravity = -50.0f * DELTA;
+		}
+	}
 
 
 	if (isRoll) //구르고 있을때
@@ -209,6 +221,9 @@ void Player::FSM()
 		}
 	}
 	// 플레이어 이동 FSM
+
+	// 플레이어 점프
+	// 플레이어 점프
 
 	// 우클릭스킬 쿨타임
 	if (isRButton)
@@ -451,7 +466,6 @@ void Player::Move(Vector3 Target)
 		Vector3 Dir;
 
 		MoveWorldPos(Find("RootNode")->GetForward() * moveSpeed * DELTA);
-		//MoveWorldPos(Target * velocity * DELTA);
 
 		if (playerState == PlayerState::IDLE)
 			Find("RootNode")->rotation.y = lastRot;
@@ -472,8 +486,16 @@ void Player::Move(Vector3 Target)
 		}
 
 		MoveWorldPos(Dir * moveSpeed * DELTA);
-		//Find("RootNode")->rotation.y = rotation.y;
+		Find("RootNode")->rotation.y = 0;
 	}
+}
+
+void Player::Jump()
+{
+	gravityDir = -GetUp();
+	gravity += 1.0f * DELTA;
+
+	MoveWorldPos(gravityDir * gravity );
 }
 
 void Player::Fire(Vector3 dest, float power)
