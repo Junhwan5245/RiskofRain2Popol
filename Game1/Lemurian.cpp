@@ -99,7 +99,7 @@ void Lemurian::MoveAnimations()
 
 void Lemurian::DeadAnimations()
 {
-	anim->ChangeAnimation(AnimationState::LOOP, 6, 0.0f);
+	anim->ChangeAnimation(AnimationState::ONCE_LAST, 6, 0.0f);
 }
 
 Lemurian::Lemurian()

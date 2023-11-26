@@ -50,8 +50,6 @@ void Golem::Update()
 		
 		laserTimer += DELTA;
 
-		
-
 
 		
 		if (laserTimer <= 3.0f || laserTimer >= 6.0f)

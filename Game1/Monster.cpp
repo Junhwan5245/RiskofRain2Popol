@@ -81,13 +81,8 @@ Monster* Monster::Create(Monster* src, MonsterType monType)
 
 void Monster::Update()
 {
-    /*ImGui::Text("animIdx : %d", anim->nextAnimator.animIdx);*/
-
-    if (Hp <= 0)
-    {
-        DeadAnimations();
-        state == MonsterState::DEAD;
-    }
+    ImGui::Text("animIdx : %d", anim->nextAnimator.animIdx);
+    ImGui::Text("animPlaytime : %.2f", anim->GetPlayTime());
 
     Stare();
 
@@ -119,79 +114,90 @@ void Monster::MonFSM()
     Vector3 playerVec = Vector3(GM->player->GetWorldPos().x,0, GM->player->GetWorldPos().z);
     Vector3 monVec = Vector3(this->GetWorldPos().x,0, this->GetWorldPos().z);
     //상태 FSM
-    if (state == MonsterState::IDLE)
+   
+    
+    if (Hp > 0)
     {
-        /*stateChangeTime += DELTA;*/
-
-
-        //if (stateChangeTime > stateChangeInterval)
-        //{
-        //    MoveAnimations();//move애니메이션 넣기
-        //    state = MonsterState::MOVE;
-        //}
-        if (TIMER->GetTick(stateChangeTime, 5.0f))
+        if (state == MonsterState::IDLE)
         {
-            MoveAnimations();//move애니메이션 넣기
-            state = MonsterState::MOVE;
-            return;
-        }
-    }
+            /*stateChangeTime += DELTA;*/
 
-    if (state == MonsterState::MOVE)
-    {
-        if (!way.empty())
-        {
-            Vector3 temp=way.back() - GetWorldPos();
-            temp.Normalize();
-            MoveWorldPos(temp*moveSpeed*DELTA);
 
-            float distanceThreshold = 0.1f;
-           
-            if ((way.back() - GetWorldPos()).Length() < distanceThreshold)
+            //if (stateChangeTime > stateChangeInterval)
+            //{
+            //    MoveAnimations();//move애니메이션 넣기
+            //    state = MonsterState::MOVE;
+            //}
+            if (TIMER->GetTick(stateChangeTime, 5.0f))
             {
-                way.pop_back();
+                MoveAnimations();//move애니메이션 넣기
+                state = MonsterState::MOVE;
+                return;
+            }
+        }
+
+        if (state == MonsterState::MOVE)
+        {
+            if (!way.empty())
+            {
+                Vector3 temp = way.back() - GetWorldPos();
+                temp.Normalize();
+                MoveWorldPos(temp * moveSpeed * DELTA);
+
+                float distanceThreshold = 0.1f;
+
+                if ((way.back() - GetWorldPos()).Length() < distanceThreshold)
+                {
+                    way.pop_back();
+                }
+            }
+
+
+
+            if ((monVec - playerVec).Length() < this->range)
+            {
+                AttackAnimations();
+                state = MonsterState::ATTACK;
             }
         }
 
 
-
-        if ((monVec - playerVec).Length() < this->range)
+        //공격 FSM
+        //if (monAttState == MonsterAttackState::IDLE)
+        //{
+        //   AttackAnimations();//공격 애니메이션
+        //}
+        if (state == MonsterState::ATTACK)
         {
-            AttackAnimations();
-            state = MonsterState::ATTACK;
+            if (anim->GetPlayTime() >= 0.9)
+            {
+                MoveAnimations();
+                state = MonsterState::MOVE;  // 수정된 부분
+            }
         }
+    }
+
+
+    else 
+    { 
+        state = MonsterState::DEAD;
     }
     
-    //공격 FSM
-    //if (monAttState == MonsterAttackState::IDLE)
-    //{
-    //   AttackAnimations();//공격 애니메이션
-    //}
-    if (state == MonsterState::ATTACK)
-    {
-        if (anim->GetPlayTime() >= 0.9)
-        {
-            MoveAnimations();
-            state = MonsterState::MOVE;
-        }
-    }
-
     if (state == MonsterState::DEAD)
     {
-       
-        DeadAnimations();
-
-        if (anim->GetPlayTime() >= 0.9)
+        
+        if (!isHpZero)
         {
-           //5초를 재고 없애기 소멸 상태를 만든다?
-
-            dieTimer += DELTA;
-
-            if (dieTimer >= 5.0f)
-            {
-                //삭제
-            }
+            isHpZero = true;
+            DeadAnimations();
         }
+        if (TIMER->GetTick(dieTimer, 5.0f))
+        {
+            isDead = true;
+        }
+        
+      
+        return;
     }
 
 	

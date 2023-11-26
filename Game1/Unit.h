@@ -6,10 +6,12 @@ public:
 	static Unit* Create(Unit* src);
 	int Hp;				// Ã¼·Â
 	float moveSpeed;
-
-protected:
 	Unit();
 	virtual ~Unit();
+
+protected:
+	/*Unit();
+	virtual ~Unit();*/
 	Vector3 dir;
 
 

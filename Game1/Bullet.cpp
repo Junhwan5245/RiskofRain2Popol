@@ -59,7 +59,7 @@ void Bullet::Update()
 		if (this->Intersect(monster->Find("RootNode")))
 		{
 			this->isCollsion = true;
-			monster->Hp -= 7;//플레이어 피깎기
+			monster->Hp -= 20;//플레이어 피깎기
 		}
 	}
 

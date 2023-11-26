@@ -32,10 +32,13 @@ public:
 	Vector3 PlayerDir;//총알발사를 위한 플레이어 고정값
 	vector<Vector3> way;
 	Vector3 last;
+	bool	isDead = false;
 	float dieTimer;
+	bool	isHpZero = false;
 	
 	void Stare();
-	
+	Monster();
+	virtual ~Monster();
 	
 protected:
 	
@@ -48,8 +51,8 @@ protected:
 	void	SetRandomPosition();
 	//void	Stare();
 	MonsterState     GetState() { return state; }
-	Monster();
-	virtual ~Monster();
+	
+	
 	int range=0;
 	
 
