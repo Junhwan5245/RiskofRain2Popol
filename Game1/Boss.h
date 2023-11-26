@@ -1,4 +1,14 @@
 #pragma once
+enum class BossState
+{
+	IDLE,//move까지 포함
+	MOVE,
+	ATTACK,
+	ATTACK2,
+	DEAD,
+};
+
+
 class Boss : public Monster
 {
 public:
@@ -9,11 +19,16 @@ public:
 
 	void    Move(Vector3 Target);
 	void    WolrdUpdate();
-	void    MonFSM();
+	void    MonFSM() override;
 	void	IdleAnimations() override;
 	void	AttackAnimations() override;
 	void	MoveAnimations() override;
 	void	DeadAnimations() override;
+	void	Attack2Animations();
+	BossState bState;
+	float	attackTimer;
+	float	bulletTimer1;
+	float	bulletTimer2;
 
 private:
 	Boss();

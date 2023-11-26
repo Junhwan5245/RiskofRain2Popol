@@ -550,6 +550,8 @@ void Terrain::PerlinNoise()
 	mesh->UpdateBuffer();
 }
 
+
+
 bool Terrain::ComPutePicking(Ray WRay, OUT Vector3& HitPoint)
 {
 	int triSize = (garo - 1) * (garo - 1) * 2;

@@ -24,6 +24,9 @@
 #include "GolemBullet.h"
 #include "LemurianBulletTrail.h"
 #include "GolemLazer.h"
+#include "BossBullet1.h"
+#include "BossBullet2.h"
+
 
 #include "Boss.h"
 

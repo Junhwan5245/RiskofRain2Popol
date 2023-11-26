@@ -56,6 +56,12 @@
     <ClInclude Include="Boss.h">
       <Filter>Monster</Filter>
     </ClInclude>
+    <ClInclude Include="BossBullet1.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="BossBullet2.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -110,6 +116,12 @@
       <Filter>Monster</Filter>
     </ClCompile>
     <ClCompile Include="Boss.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="BossBullet1.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="BossBullet2.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
   </ItemGroup>
