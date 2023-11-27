@@ -5,13 +5,11 @@ extern int     loadCount;
 
 Scene1::Scene1()
 {
-    grid = Grid::Create();
-    grid->visible = false;
+    escape = EscapeShip::Create();
     loadCount++;
 
     cam1 = Camera::Create();
     cam1->LoadFile("Cam.xml");
-    
     loadCount++;
 
 
@@ -26,14 +24,14 @@ Scene1::Scene1()
     loadCount++;
     GM->map->PerlinNoise();//펄린노이즈 적용
 
-    for (int i = 0; i < MONCREATESIZE; ++i)
-    {
-        int num = i;
-      /*  int num = 0;*/
-        
-        auto newMonster = Monster::Create("Monster", MonsterType(num));
-        GM->monsterPool.push_back(newMonster);
-    }
+    //for (int i = 0; i < MONCREATESIZE; ++i)
+    //{
+    //    int num = i;
+    //  /*  int num = 0;*/
+    //    
+    //    auto newMonster = Monster::Create("Monster", MonsterType(num));
+    //    GM->monsterPool.push_back(newMonster);
+    //}
     loadCount++;
 
     astar = new Astar();
@@ -47,7 +45,7 @@ Scene1::~Scene1()
 
 void Scene1::Init()
 {
-    Camera::main = cam1;
+    Camera::main = (Camera*)escape->Find("EscapeCam");
 
     Camera::main->viewport.x = 0.0f;
     Camera::main->viewport.y = 0.0f;
@@ -57,7 +55,8 @@ void Scene1::Init()
     Camera::main->width = 1280;
     Camera::main->height = 720;
 
-    //Camera::main = (Camera*)GM->player->Find("PlayerCam");
+    
+    escape->SetPos();
 }
 
 void Scene1::Release()
@@ -75,24 +74,48 @@ void Scene1::Update()
 
     Camera::main->width = App.GetWidth();
     Camera::main->height = App.GetHeight();
+    Camera::main->ControlMainCam();
 
-
-    // 카메라 전환 (작업용 : cam1 , 플레이어 : (Camera*)GM->player->Find("PlayerCam");
-    if (INPUT->KeyDown('V'))
-        isMainCam = !isMainCam;
-
-    if (isMainCam)
+    
+    if (GM->player->isEscape) //플레이어가 탐사정에 있을때
     {
-        Camera::main = cam1;
+        // 플레이어의 위치를 탐사정에 고정
+        GM->player->SetWorldPos(escape->Find("EscapePodMesh")->GetWorldPos());
+        // 탐사정에 고정일때 카메라는 탐사정의 Root값에서 탐사정을 바라보는 카메라로
+        Vector3 dir = GM->player->GetWorldPos() - escape->Find("EscapeCam")->GetWorldPos();
+        dir.Normalize();
+
+        escape->Find("EscapeCam")->rotation.x = -asinf(dir.y);
+        Camera::main = (Camera*)escape->Find("EscapeCam");
+        if (INPUT->KeyDown('E'))
+        {
+            GM->player->isEscape = false;
+        }
     }
     else
     {
-        Camera::main = (Camera*)GM->player->Find("PlayerCam");
-        MouseHold();
+        // V키를 눌렀을때 작업용 카메라, 플레이어 카메라 스위치
+        if (INPUT->KeyDown('V'))
+            isMainCam = !isMainCam;
+        // 카메라 전환 (작업용 : cam1 , 플레이어 : (Camera*)GM->player->Find("PlayerCam") , escapeCam );
+        if (isMainCam)
+        {
+            Camera::main = cam1;
+            Camera::main->ControlMainCam();
+        }
+        else
+        {
+            Camera::main = (Camera*)GM->player->Find("PlayerCam");
+            MouseHold();
+        }
     }
 
+
     ImGui::Text("TIMER : %.2f", monsterCreationTimer);
+    ImGui::Text("FPS: %d", TIMER->GetFramePerSecond());
+    ImGui::Text("Stagelevel : %d", level);
     ImGui::Text("HP : %d", GM->player->Hp);
+
     for (auto& monster : GM->monsterPool)
     {
         ImGui::Text("MosterState : %d", monster->state);
@@ -104,64 +127,40 @@ void Scene1::Update()
         GM->map->PerlinNoise();
     }
 
-    if (GM->monsterPool.size()<MAXMONSIZE)
-    {
-        
-        if (monsterCreationTimer >= monsterCreationInterval)
-        {
-            monsterCreationTimer = 0.0f;
-            for (int i = 0; i < MONCREATESIZE; ++i)
-            {
-               
-                int num = RANDOM->Int(0, 2);
-               
-               
-                auto newMonster = Monster::Create("Monster", MonsterType(num));
-               
-      
-                GM->monsterPool.push_back(newMonster);
-
-               
-             
-            }
-          
-        }
-    }
+    //if (GM->monsterPool.size()<MAXMONSIZE)
+    //{
+    //    if (monsterCreationTimer >= monsterCreationInterval)
+    //    {
+    //        monsterCreationTimer = 0.0f;
+    //        for (int i = 0; i < MONCREATESIZE; ++i)
+    //        {
+    //            int num = RANDOM->Int(0, 2);
+    //            auto newMonster = Monster::Create("Monster", MonsterType(num));
+    //            GM->monsterPool.push_back(newMonster);
+    //        }
+    //    }
+    //}
     
     //downcasting으로 자식에만 있는 함수에 접근하는 방법
 
-    Camera::main->ControlMainCam();
-    Camera::main->Update();
-    
-    
-    ImGui::Text("FPS: %d", TIMER->GetFramePerSecond());
 
-
+    
     ImGui::Begin("Hierarchy");
-    ////cam1->RenderHierarchy();
     GM->player->PlayerRenderHierarchy();
-    ////playerCam->RenderHierarchy();
     for (auto& monster : GM->monsterPool)
     {
         monster->RenderHierarchy();
     }
     GM->map->RenderHierarchy();
-
-   
-
+    escape->RenderHierarchy();
     ImGui::End();
 
     /* Golem* temp1 = dynamic_cast<Golem*>(monster);
       if (temp1)
           temp1->Rendertemp();*/
     
+    Camera::main->Update();
 
-
-    
-    
-    grid->Update();
-
-    ////playerCam->Update();
     for (auto& monster : GM->monsterPool)
     {
         if (TIMER->GetTick(renewtime, 1.0f))
@@ -173,12 +172,9 @@ void Scene1::Update()
     GM->map->Update();
     GM->Update();//총알
     GM->player->Update();
-    
-
-    //map->Update();
+    escape->Update();
 
     ui->Update();
-
 }
 
 void Scene1::LateUpdate()
@@ -208,15 +204,11 @@ void Scene1::LateUpdate()
             monster->SetWorldPosY(hit.y);
         }
     }
-          
-           /*Lemurian* temp1 = dynamic_cast<Lemurian*>(monster);
-            if (temp1) 
-                temp1->CollisionBulletToMap(GM->map);*/
-         
-        
 
-
-        //monster->WolrdUpdate();
+    /*Lemurian* temp1 = dynamic_cast<Lemurian*>(monster);
+    if (temp1) 
+    temp1->CollisionBulletToMap(GM->map);*/
+    //monster->WolrdUpdate();
     //}
     GM->LateUpdate();
 }
@@ -230,9 +222,8 @@ void Scene1::Render()
 {
     LIGHT->Set();
     Camera::main->Set();
-    //playerCam->Set();
-    grid->Render();
-   GM->map->Render();
+
+    GM->map->Render();
    
     for (auto& monster : GM->monsterPool)
     {
@@ -240,6 +231,7 @@ void Scene1::Render()
     }
     GM->Render();
     GM->player->Render();
+    escape->Render();
     ui->Render();
 }
 
@@ -267,6 +259,11 @@ void Scene1::MouseHold()
     GM->player->Find("PlayerCam")->rotation.x += Rot.x;
     ClientToScreen(App.GetHandle(), &ptMouse);
     SetCursorPos(ptMouse.x, ptMouse.y);
+}
+
+void Scene1::SetScene(int stagelv)
+{
+    level = stagelv;
 }
 
 

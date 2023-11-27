@@ -15,11 +15,14 @@ protected:
 
 	/** 공통 스텟*/
 		// 이동 속도
-
+	int lv;				// 레벨 (플레이어 : 경험치로, 몬스터 : 시간으로?)
 	int maxHp;			// 최대 체력
-	int defend;			// 방어막
+	int exp;			// 경험치 (플레이어 : 몬스터 처치시 얻게 되는 exp, 몬스터 : 죽을때 플레이어에게 주게 되는 exp)
+
+
 
 	float attack;		// 공격력
+	int defend;			// 방어막
 
 
 

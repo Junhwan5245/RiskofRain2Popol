@@ -4,7 +4,7 @@ Player* Player::Create(string name)
 {
 	///11
 	Player* temp = new Player();
-	temp->LoadFile("Player2.xml");
+	temp->LoadFile("Player.xml");
 	temp->type = ObType::Actor;
 	temp->playerState = PlayerState::IDLE;
 	temp->attackState = PlayerAttackState::IDLE;
@@ -16,9 +16,11 @@ Player* Player::Create(string name)
 
 	/** 스텟*/
 	temp->moveSpeed = 7.0f;
-
+	temp->lv = 1;
 	temp->maxHp = 110; // 증가계수 + 33
 	temp->Hp = 110;
+	temp->exp = 0;
+	temp->maxExp = 100;	// 증가계수 + 10%
 	temp->attack = 12; // 증가계수 + 2.4
 	temp->defend = 0;
 	/** 스텟*/
@@ -47,12 +49,8 @@ void Player::Update()
 	ImGui::Text("RCoolTime : %.2f", rTimer);
 	ImGui::Text("isRSkill : %d\n", (int)isRSkill);
 
-	//Vector3 Rot;
-	//Rot.x = INPUT->movePosition.y * 0.003f;
-	//Rot.y = INPUT->movePosition.x * 0.005f;
-	//mouseDir = Rot;
-	//rotation.y += mouseDir.y;
-	//Find("PlayerCam")->rotation.x += mouseDir.x;
+	// 레벨업 시스템
+
 
 
 
@@ -498,10 +496,6 @@ void Player::Jump()
 	MoveWorldPos(gravityDir * gravity );
 }
 
-void Player::Fire(Vector3 dest, float power)
-{
-}
-
 void Player::WolrdUpdate()
 {
 	GameObject::Update();
@@ -511,4 +505,9 @@ void Player::PlayerRenderHierarchy()
 {
 	this->RenderHierarchy();
 	
+}
+
+void Player::SetPos(Vector3 pos)
+{
+	SetWorldPos(pos);
 }

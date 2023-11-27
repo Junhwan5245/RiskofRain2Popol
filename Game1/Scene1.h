@@ -5,24 +5,20 @@
 class Scene1 : public Scene
 {
 private:
-    Camera*     cam1;
+    Camera*         cam1;
     class InGameUI* ui;
 
-    Camera*     playerCam;
-    Grid*       grid;
-    Monster*    monster;
-   /* Terrain*    map;*/
-    float monsterCreationTimer = 0.0f;
-    const float monsterCreationInterval = 10.0f;
-    class Astar* astar;
-
-    float			time = 0;
-    
-    //const float monsterCreationInterval = 20.0f;
+    EscapeShip*     escape;
+    class Astar*    astar;
 
 
-    bool isMainCam;     // 메인캠 전환키 (임시용)
+    float           monsterCreationTimer = 0.0f;                  // 게임 플레이 시간
+    const float     monsterCreationInterval = 10.0f;        // 몬스터 생성 주기
+
+
+    bool            isMainCam;     // 메인캠 전환키 (임시용)
     float           renewtime = 0.0f;
+    int             level;
 public:
     Scene1();
     ~Scene1();
@@ -38,5 +34,6 @@ public:
   
 
     void MouseHold();
+    void SetScene(int stagelv);
 };
 

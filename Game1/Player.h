@@ -136,11 +136,14 @@ private:
     Vector3             gravityDir;
     float               gravity;
 
+    /** 플레이어만 가지고 있을 스텟*/
+    float               maxExp;
+
     Player();
     virtual ~Player();
 public:
     bool                isJump;         // 점프했는지
-
+    bool                isEscape = true;       // 탐사정에 있는가?
 
 
     void	Update() override;
@@ -151,7 +154,7 @@ public:
     void    Move(Vector3 Target);
     void    Jump();
 
-    void    Fire(Vector3 dest, float power);
+    void    SetPos(Vector3 pos);
     void    WolrdUpdate();
     void    PlayerRenderHierarchy();
 
