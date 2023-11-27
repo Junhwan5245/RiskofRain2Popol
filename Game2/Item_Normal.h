@@ -4,12 +4,17 @@
 class Item_Normal : public ItemComponent
 {
 private:
-	vector<ItemComponent*> normalItems;
-	string id;
+	map<string, ItemComponent*> normalItems; // string : naem(key)
+
+
+
 
 public:
-	Item_Normal(string i);
+	Item_Normal();
+	void Init();
 	void add(ItemComponent* item);
 	void list() const;
+
+
 };
 

@@ -19,20 +19,32 @@
             <Rotation X="0" Y="0" Z="0"/>
         </Transform>
         <UI PivotX="0" PivotY="0"/>
-        <Children Size="2"/>
+        <Children Size="3"/>
         <Child0 Name="LeftBottom_Exp" Visible="true" ObType="4">
             <Mesh File="6.UI.mesh"/>
             <Shader File="6.UI.hlsl"/>
             <Material File="UI_InGame_LeftBottom_Exp.mtl"/>
             <Transform>
                 <Position X="-0.96923083" Y="0" Z="0"/>
-                <Scale X="0.28599998" Y="0.89999998" Z="1"/>
+                <Scale X="0" Y="0.89999998" Z="1"/>
                 <Rotation X="0" Y="0" Z="0"/>
             </Transform>
             <UI PivotX="1" PivotY="0"/>
             <Children Size="0"/>
         </Child0>
-        <Child1 Name="LeftBottom_LvFont" Visible="true" ObType="4">
+        <Child1 Name="LeftBottom_ExpBarscale" Visible="true" ObType="4">
+            <Mesh File="6.UI.mesh"/>
+            <Shader File="6.UI.hlsl"/>
+            <Material File="UI_InGame_LeftBottom_ExpBarscale.mtl"/>
+            <Transform>
+                <Position X="0" Y="0" Z="0"/>
+                <Scale X="1" Y="1" Z="1"/>
+                <Rotation X="0" Y="0" Z="0"/>
+            </Transform>
+            <UI PivotX="0" PivotY="0"/>
+            <Children Size="0"/>
+        </Child1>
+        <Child2 Name="LeftBottom_LvFont" Visible="true" ObType="4">
             <Mesh File="6.UI.mesh"/>
             <Shader File="6.UI.hlsl"/>
             <Material File="UI_InGame_LeftBottom_LvFont.mtl"/>
@@ -43,7 +55,7 @@
             </Transform>
             <UI PivotX="0" PivotY="0"/>
             <Children Size="0"/>
-        </Child1>
+        </Child2>
     </Child0>
     <Child1 Name="LeftBottom_PlayerHpBar" Visible="true" ObType="4">
         <Mesh File="6.UI.mesh"/>

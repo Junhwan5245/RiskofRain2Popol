@@ -8,9 +8,6 @@
     <ClInclude Include="LoadingScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Unit.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Player.h">
       <Filter>Player</Filter>
@@ -58,6 +55,9 @@
     </ClInclude>
     <ClInclude Include="EscapeShip.h">
       <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

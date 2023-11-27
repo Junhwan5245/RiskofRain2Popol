@@ -43,8 +43,7 @@ void Main::Release()
 void Main::Update()
 {
 	ImGui::Text("WorldTime : %.2f", TIMER->GetWorldTime());
-	ImGui::Text("app.width : %.2f", App.GetWidth());
-	ImGui::Text("app.height : %.2f", App.GetHeight());
+	ImGui::Text("playerattack : %.2f", playerattack);
 	             
 
 	ImGui::Begin("Hierarchy");
@@ -52,6 +51,21 @@ void Main::Update()
 	leftBottom->RenderHierarchy();
 	rightBottom->RenderHierarchy();
 	ImGui::End();
+
+	
+
+	if (playerexp >= playerMaxexp)
+	{
+		playerexp = 0;
+		leftBottom->Find("LeftBottom_Exp")->scale.x = 0;
+		playerlv++;
+		playermaxhp = playermaxhp + (33 * (playerlv - 1));
+		playerhp = playermaxhp;	// 레벨업시 최대채력의 10%회복
+		playerMaxexp = playerMaxexp * (1 + 0.1f * (playerlv - 1));
+		playerattack = playerattack + 2.4f;
+	}
+
+
 
 	if (INPUT->KeyDown('K')) // 체력이 까일때마다 hpUI의 스케일값 조정하기 
 	{
@@ -65,7 +79,7 @@ void Main::Update()
 	{
 		playerexp += 11; // 11 : 몬스터가 가지고 있을 Exp값
 
-		float scale = leftBottom->Find("LeftBottom_ExpBar")->scale.x * playerexp / (float)playerMaxexp;
+		float scale = leftBottom->Find("LeftBottom_ExpBarscale")->scale.x * playerexp / (float)playerMaxexp;
 		leftBottom->Find("LeftBottom_Exp")->scale.x = scale;
 		isGoalClear = !isGoalClear;
 	}

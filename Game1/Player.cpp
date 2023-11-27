@@ -18,7 +18,7 @@ Player* Player::Create(string name)
 	temp->moveSpeed = 7.0f;
 	temp->lv = 1;
 	temp->maxHp = 110; // 증가계수 + 33
-	temp->Hp = 110;
+	temp->hp = 110;
 	temp->exp = 0;
 	temp->maxExp = 100;	// 증가계수 + 10%
 	temp->attack = 12; // 증가계수 + 2.4
@@ -50,10 +50,21 @@ void Player::Update()
 	ImGui::Text("isRSkill : %d\n", (int)isRSkill);
 
 	// 레벨업 시스템
+	// 레벨에 따른 maxHp , maxExp 조정
 
 
+	//if (exp >= maxExp)
+	//{
+	//	exp = 0;
+	//	leftBottom->Find("LeftBottom_Exp")->scale.x = 0;
+	//	playerlv++;
+	//	playermaxhp = playermaxhp + (33 * (playerlv - 1));
+	//	playerhp = playermaxhp;	// 레벨업시 최대채력의 10%회복
+	//	playerMaxexp = playerMaxexp * (1 + 0.1f * (playerlv - 1));
+	//	playerattack = playerattack + 2.4f;
+	//}
 
-
+    
 	lastRot = Find("RootNode")->rotation.y;
 	lastRot_root = rotation.y;
 	dir = Vector3();

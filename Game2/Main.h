@@ -36,6 +36,7 @@ private:
 	int playerlv = 1;
 	int playerhp = 120;
 	int playermaxhp = 120;
+	float playerattack = 12;
 
 	int playerexp = 0;
 	int playerMaxexp = 150;
