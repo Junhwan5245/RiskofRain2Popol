@@ -1,5 +1,5 @@
 #pragma once
-class Item2
+class Item2 : public Item
 {
 public:
 	void Create();

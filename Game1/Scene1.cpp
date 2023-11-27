@@ -24,14 +24,14 @@ Scene1::Scene1()
     loadCount++;
     GM->map->PerlinNoise();//펄린노이즈 적용
 
-    //for (int i = 0; i < MONCREATESIZE; ++i)
-    //{
-    //    int num = i;
-    //  /*  int num = 0;*/
-    //    
-    //    auto newMonster = Monster::Create("Monster", MonsterType(num));
-    //    GM->monsterPool.push_back(newMonster);
-    //}
+    for (int i = 0; i < MONCREATESIZE; ++i)
+    {
+        int num = i;
+      /*  int num = 0;*/
+        
+        auto newMonster = Monster::Create("Monster", MonsterType(num));
+        GM->monsterPool.push_back(newMonster);
+    }
     loadCount++;
 
     astar = new Astar();
@@ -114,7 +114,7 @@ void Scene1::Update()
     ImGui::Text("TIMER : %.2f", monsterCreationTimer);
     ImGui::Text("FPS: %d", TIMER->GetFramePerSecond());
     ImGui::Text("Stagelevel : %d", level);
-    ImGui::Text("HP : %d", GM->player->Hp);
+    ImGui::Text("HP : %d", GM->player->hp);
 
     for (auto& monster : GM->monsterPool)
     {

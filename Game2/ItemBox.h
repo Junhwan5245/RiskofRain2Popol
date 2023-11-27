@@ -3,10 +3,16 @@ class ItemBox : public ItemComponent
 {
 private:
 	vector<ItemComponent*> items;
-	string id;
+	//ItemComponent* items;
+	
+	// map<map<string, int> Item*> itemList; // string : key°ª, int : °¹¼ö, Item* °´Ã¼
+
+	int itemLevel;		// 1 = normal  2 = rare
+
 
 public:
-	ItemBox(string i);
+	ItemBox();
+	void Init();
 	void add(ItemComponent* item);
 	void list() const;
 };

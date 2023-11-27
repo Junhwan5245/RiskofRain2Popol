@@ -1,6 +1,7 @@
 #pragma once
-class Item3
+class Item3 : public Item
 {
+	friend class ItemComponent;
 public:
 	void Create();
 

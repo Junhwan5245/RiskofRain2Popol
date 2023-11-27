@@ -1,7 +1,22 @@
 #include "stdafx.h"
 
-ItemBox::ItemBox(string i) : id(i)
+ItemBox::ItemBox()
 {
+}
+
+void ItemBox::Init()
+{
+	switch (itemLevel)
+	{
+	case 1:
+		Item_Normal * normal = new Item_Normal();
+		add(normal);
+
+	case 2:
+
+	default:
+		break;
+	}
 }
 
 void ItemBox::add(ItemComponent* item)
@@ -11,9 +26,9 @@ void ItemBox::add(ItemComponent* item)
 
 void ItemBox::list() const
 {
-	cout << id << endl;
-	for (auto it = items.begin(); it != items.end(); it++)
+	// 플레이어와 상호작용 (상자를 열었을때)
+	for (auto& item : items)
 	{
-		(*it)->list();
+		
 	}
 }

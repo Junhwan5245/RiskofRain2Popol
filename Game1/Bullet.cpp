@@ -51,7 +51,7 @@ void Bullet::Update()
 	{
 		//소멸 시키고
 		this->isCollsion = true;
-		GM->player->Hp -= 7;//플레이어 피깎기
+		GM->player->hp -= 7;//플레이어 피깎기
 
 	}
 	for (auto& monster : GM->monsterPool)//총알과 몬스터와의 충돌
@@ -59,7 +59,7 @@ void Bullet::Update()
 		if (this->Intersect(monster->Find("RootNode")))
 		{
 			this->isCollsion = true;
-			monster->Hp -= 7;//플레이어 피깎기
+			monster->hp -= 7;//플레이어 피깎기
 		}
 	}
 

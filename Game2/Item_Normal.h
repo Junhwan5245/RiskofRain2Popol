@@ -3,6 +3,8 @@
 // Composite
 class Item_Normal : public ItemComponent
 {
+	friend class Item;
+
 private:
 	map<string, ItemComponent*> normalItems; // string : naem(key)
 
