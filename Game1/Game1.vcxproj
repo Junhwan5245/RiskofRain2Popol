@@ -28,6 +28,7 @@
     <ClInclude Include="Golem.h" />
     <ClInclude Include="GolemBullet.h" />
     <ClInclude Include="GolemLazer.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="Lemurian.h" />
     <ClInclude Include="LemurianBullet.h" />
     <ClInclude Include="LemurianBulletTrail.h" />
@@ -52,6 +53,7 @@
     <ClCompile Include="Golem.cpp" />
     <ClCompile Include="GolemBullet.cpp" />
     <ClCompile Include="GolemLazer.cpp" />
+    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Lemurian.cpp" />
     <ClCompile Include="LemurianBullet.cpp" />
     <ClCompile Include="LemurianBulletTrail.cpp" />

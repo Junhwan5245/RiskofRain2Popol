@@ -47,19 +47,26 @@ void Bullet::Update()
 
 	CollisionWithMap();
 
-	if (this->Intersect(GM->player->Find("RootNode"))) //총알과 플레이어 충돌
-	{
-		//소멸 시키고
-		this->isCollsion = true;
-		GM->player->hp -= 7;//플레이어 피깎기
+	//if (this->Intersect(GM->player->Find("RootNode"))) //총알과 플레이어 충돌
+	//{
+	//	//소멸 시키고
+	//	this->isCollsion = true;
+	//	GM->player->hp -= 7;//플레이어 피깎기
+	//}
 
-	}
 	for (auto& monster : GM->monsterPool)//총알과 몬스터와의 충돌
 	{
+		if (this->Intersect(GM->player->Find("RootNode"))) //총알과 플레이어 충돌
+		{
+			//소멸 시키고
+			this->isCollsion = true;
+			GM->player->hp -= monster->attack;//플레이어 피깎기
+		}
+
 		if (this->Intersect(monster->Find("RootNode")))
 		{
 			this->isCollsion = true;
-			monster->hp -= 7;//플레이어 피깎기
+			monster->hp -= GM->player->attack;//플레이어 피깎기
 		}
 	}
 

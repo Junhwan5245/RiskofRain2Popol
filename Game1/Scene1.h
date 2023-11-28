@@ -11,6 +11,8 @@ private:
     EscapeShip*     escape;
     class Astar*    astar;
 
+    Actor* item;        // 임의의 아이템
+
 
     float           monsterCreationTimer = 0.0f;                  // 게임 플레이 시간
     const float     monsterCreationInterval = 10.0f;        // 몬스터 생성 주기

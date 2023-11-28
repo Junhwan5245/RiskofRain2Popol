@@ -59,6 +59,9 @@
     <ClInclude Include="Unit.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -116,6 +119,9 @@
       <Filter>Monster</Filter>
     </ClCompile>
     <ClCompile Include="EscapeShip.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
       <Filter>Player</Filter>
     </ClCompile>
   </ItemGroup>

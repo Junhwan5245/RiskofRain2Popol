@@ -6,6 +6,9 @@ extern int     loadCount;
 Scene1::Scene1()
 {
     escape = EscapeShip::Create();
+
+    item = Actor::Create("Item");
+    item->LoadFile("Item_APRound.xml");
     loadCount++;
 
     cam1 = Camera::Create();
@@ -24,14 +27,14 @@ Scene1::Scene1()
     loadCount++;
     GM->map->PerlinNoise();//펄린노이즈 적용
 
-    for (int i = 0; i < MONCREATESIZE; ++i)
-    {
-        int num = i;
-      /*  int num = 0;*/
-        
-        auto newMonster = Monster::Create("Monster", MonsterType(num));
-        GM->monsterPool.push_back(newMonster);
-    }
+    //for (int i = 0; i < MONCREATESIZE; ++i)
+    //{
+    //    int num = i;
+    //  /*  int num = 0;*/
+    //    
+    //    auto newMonster = Monster::Create("Monster", MonsterType(num));
+    //    GM->monsterPool.push_back(newMonster);
+    //}
     loadCount++;
 
     astar = new Astar();
@@ -153,6 +156,7 @@ void Scene1::Update()
     }
     GM->map->RenderHierarchy();
     escape->RenderHierarchy();
+    item->RenderHierarchy();
     ImGui::End();
 
     /* Golem* temp1 = dynamic_cast<Golem*>(monster);
@@ -173,6 +177,7 @@ void Scene1::Update()
     GM->Update();//총알
     GM->player->Update();
     escape->Update();
+    item->Update();
 
     ui->Update();
 }
@@ -205,6 +210,22 @@ void Scene1::LateUpdate()
         }
     }
 
+    //임시
+    Ray itemTop;
+    itemTop.position = item->GetWorldPos() + Vector3(0, 10, 0);
+    itemTop.direction = Vector3(0, -1, 0);
+    if (Utility::RayIntersectMap(itemTop, GM->map, hit))//맵과 몬스터 레이 이용해 몬스터 y값 잡기
+    {
+        item->SetWorldPosY(hit.y);
+    }
+
+    if (GM->player->Find("RootNode")->Intersect(item->Find("APRoundPickup.obj")))
+    {
+        GM->player->GetItemInven()->AddItem("APRound");
+    }
+
+    //임시
+
     /*Lemurian* temp1 = dynamic_cast<Lemurian*>(monster);
     if (temp1) 
     temp1->CollisionBulletToMap(GM->map);*/
@@ -232,6 +253,7 @@ void Scene1::Render()
     GM->Render();
     GM->player->Render();
     escape->Render();
+    item->Render();
     ui->Render();
 }
 

@@ -23,6 +23,8 @@ Player* Player::Create(string name)
 	temp->maxExp = 100;	// 증가계수 + 10%
 	temp->attack = 12; // 증가계수 + 2.4
 	temp->defend = 0;
+	temp->gold = 15;
+	temp->luna = 2;
 	/** 스텟*/
 	
 	temp->isRight = false;
@@ -36,6 +38,7 @@ Player* Player::Create(string name)
 
 Player::Player()
 {
+	itemInven = new Inventory();
 }
 
 Player::~Player()
@@ -51,18 +54,6 @@ void Player::Update()
 
 	// 레벨업 시스템
 	// 레벨에 따른 maxHp , maxExp 조정
-
-
-	//if (exp >= maxExp)
-	//{
-	//	exp = 0;
-	//	leftBottom->Find("LeftBottom_Exp")->scale.x = 0;
-	//	playerlv++;
-	//	playermaxhp = playermaxhp + (33 * (playerlv - 1));
-	//	playerhp = playermaxhp;	// 레벨업시 최대채력의 10%회복
-	//	playerMaxexp = playerMaxexp * (1 + 0.1f * (playerlv - 1));
-	//	playerattack = playerattack + 2.4f;
-	//}
 
     
 	lastRot = Find("RootNode")->rotation.y;
@@ -280,6 +271,8 @@ void Player::FSM()
 	}
 	else if (attackState == PlayerAttackState::ATTACK)
 	{
+		Ray mouseRay = Utility::MouseToRay((Camera*)Find("PlayerCam"));
+
 		/** M1 스킬 */
 		{
 			if (INPUT->KeyPress(VK_LBUTTON))
@@ -308,11 +301,12 @@ void Player::FSM()
 
 					GM->bulletPool.push_back(temp);
 
+					Vector3 d = pos - mouseRay.position;
 					for (auto it = GM->bulletPool.begin(); it != GM->bulletPool.end(); it++)
 					{
 						if (not (*it)->isFire)
 						{
-							(*it)->Fire(GetForward(), 10.0f, rotation);
+							(*it)->Fire(mouseRay.direction, 10.0f, rotation);
 							break;
 						}
 					}
@@ -348,7 +342,7 @@ void Player::FSM()
 			}
 			else
 			{
-				if (INPUT->KeyDown(VK_RBUTTON))
+				if (INPUT->KeyPress(VK_RBUTTON))
 				{
 					attackStopTime = 0.0f;
 					skillState = SkillState::RBUTTON;
@@ -396,7 +390,7 @@ void Player::FSM()
 			}
 			else
 			{
-				if (INPUT->KeyDown('R'))
+				if (INPUT->KeyPress('R'))
 				{
 					attackStopTime = 0.0f;
 					skillState = SkillState::R;
@@ -505,6 +499,20 @@ void Player::Jump()
 	gravity += 1.0f * DELTA;
 
 	MoveWorldPos(gravityDir * gravity );
+}
+
+void Player::LevelUp(UI* ui)
+{ // ui : leftBottom;
+	if (exp >= maxExp)
+	{
+		exp = 0;
+		ui->Find("LeftBottom_Exp")->scale.x = 0;
+		lv++;
+		maxHp = maxHp + (33 * (lv - 1));
+		hp = maxHp;	// 레벨업시 최대채력의 10%회복
+		maxExp = maxExp * (1 + 0.1f * (lv - 1));
+		attack = attack + 2.4f;
+	}
 }
 
 void Player::WolrdUpdate()
