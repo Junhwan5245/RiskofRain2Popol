@@ -6,7 +6,7 @@ Beetle* Beetle::Create(string name)
 	beetle->LoadFile("Beetle.xml");
 	beetle->type = ObType::Actor;
 	beetle->IdleAnimations();
-	beetle->range = 3;
+	beetle->range = 1;
 	
 	beetle->moveSpeed = 10.0f; // 증가계수 24
 	beetle->maxHp = 80; // 증가계수 24
@@ -40,6 +40,22 @@ void Beetle::Update()
 			anim->ChangeAnimation(AnimationState::ONCE_LAST, 1, 0.0f);
 		}
 	}
+
+	if (state == MonsterState::ATTACK)
+	{
+		
+		if (Find("Head")->Intersect(GM->player->Find("RootNode")))
+		{
+			if (!isHit)
+			{
+				GM->player->Hp -= 10;
+				isHit = true;
+			}
+		}
+
+	}
+
+	
 
 }
 

@@ -7,10 +7,12 @@ public:
 	int hp;				// 체력					// Get함수로 변경
 	float attack;		// 공격력				// Get함수로 변경
 	float moveSpeed;
-
-protected:
 	Unit();
 	virtual ~Unit();
+
+protected:
+	/*Unit();
+	virtual ~Unit();*/
 	Vector3 dir;
 
 

@@ -1,5 +1,7 @@
 #include "framework.h"
+#include "../Game1/Unit.h"
 #include "../Game1/Bullet.h"
+#include "../Game1/Monster.h"
 #include "GameManager.h"
 
 GameManager::~GameManager()
@@ -40,6 +42,21 @@ void GameManager::LateUpdate()
 			}
 		), bulletPool.end()
 	);//총알 삭제 조건(isCollsion=true)->총알이 플레이어나 몬스터 collider에 충돌 or 맵에 충돌
+
+	monsterPool.erase(
+		std::remove_if(
+			monsterPool.begin(), monsterPool.end(),
+			[&](class Monster* monster)
+			{
+				if (monster->isDead)
+				{
+					delete monster;
+					return true;
+				}
+		
+			}
+		), monsterPool.end()
+				);
 
 }
 
