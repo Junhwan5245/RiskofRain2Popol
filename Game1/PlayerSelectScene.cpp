@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "Scene1.h"
 #include "PlayerSelectScene.h"
 
 extern int     loadCount;
@@ -291,6 +292,7 @@ void PlayerSelectScene::UIClick()
     ((UI*)gameStartButton)->mouseDown = [&]
     {
         //cout << "시작버튼 클릭" << endl;
+        reinterpret_cast<Scene1*>(SCENE->GetScene("SC1"))->SetScene(level);
         SCENE->ChangeScene("SC1");
     };
 

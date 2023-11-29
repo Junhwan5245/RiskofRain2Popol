@@ -9,7 +9,7 @@ Lemurian* Lemurian::Create(string name)
 	/*lemurian->anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);*/
 	lemurian->moveSpeed = 7.0f; // 증가계수 24
 	lemurian->maxHp = 80; // 증가계수 24
-	lemurian->Hp = 80;
+	lemurian->hp = 80;
 	lemurian->defend = 0;
 
 	lemurian->attack = 12.0f;	//증가계수 2.4

@@ -25,6 +25,7 @@
     <ClInclude Include="BossBullet1.h" />
     <ClInclude Include="BossBullet2.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="EscapeShip.h" />
     <ClInclude Include="InGameUI.h" />
     <ClInclude Include="Golem.h" />
     <ClInclude Include="GolemBullet.h" />
@@ -34,6 +35,7 @@
     <ClInclude Include="ItemBox_Normal.h" />
     <ClInclude Include="ItemBox_Rare.h" />
     <ClInclude Include="Item_Syringe.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="Lemurian.h" />
     <ClInclude Include="LemurianBullet.h" />
     <ClInclude Include="LemurianBulletTrail.h" />
@@ -55,10 +57,12 @@
     <ClCompile Include="BossBullet1.cpp" />
     <ClCompile Include="BossBullet2.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="EscapeShip.cpp" />
     <ClCompile Include="InGameUI.cpp" />
     <ClCompile Include="Golem.cpp" />
     <ClCompile Include="GolemBullet.cpp" />
     <ClCompile Include="GolemLazer.cpp" />
+    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemBox.cpp" />
     <ClCompile Include="ItemBox_Normal.cpp" />

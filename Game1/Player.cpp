@@ -4,7 +4,7 @@ Player* Player::Create(string name)
 {
 	///11
 	Player* temp = new Player();
-	temp->LoadFile("Player2.xml");
+	temp->LoadFile("Player.xml");
 	temp->type = ObType::Actor;
 	temp->playerState = PlayerState::IDLE;
 	temp->attackState = PlayerAttackState::IDLE;
@@ -16,11 +16,15 @@ Player* Player::Create(string name)
 
 	/** 스텟*/
 	temp->moveSpeed = 7.0f;
-
+	temp->lv = 1;
 	temp->maxHp = 110; // 증가계수 + 33
-	temp->Hp = 110;
+	temp->hp = 110;
+	temp->exp = 0;
+	temp->maxExp = 100;	// 증가계수 + 10%
 	temp->attack = 12; // 증가계수 + 2.4
 	temp->defend = 0;
+	temp->gold = 15;
+	temp->luna = 2;
 	/** 스텟*/
 	
 	temp->isRight = false;
@@ -34,6 +38,7 @@ Player* Player::Create(string name)
 
 Player::Player()
 {
+	itemInven = new Inventory();
 }
 
 Player::~Player()
@@ -47,15 +52,10 @@ void Player::Update()
 	ImGui::Text("RCoolTime : %.2f", rTimer);
 	ImGui::Text("isRSkill : %d\n", (int)isRSkill);
 
-	//Vector3 Rot;
-	//Rot.x = INPUT->movePosition.y * 0.003f;
-	//Rot.y = INPUT->movePosition.x * 0.005f;
-	//mouseDir = Rot;
-	//rotation.y += mouseDir.y;
-	//Find("PlayerCam")->rotation.x += mouseDir.x;
+	// 레벨업 시스템
+	// 레벨에 따른 maxHp , maxExp 조정
 
-
-
+    
 	lastRot = Find("RootNode")->rotation.y;
 	lastRot_root = rotation.y;
 	dir = Vector3();
@@ -271,6 +271,8 @@ void Player::FSM()
 	}
 	else if (attackState == PlayerAttackState::ATTACK)
 	{
+		Ray mouseRay = Utility::MouseToRay((Camera*)Find("PlayerCam"));
+
 		/** M1 스킬 */
 		{
 			if (INPUT->KeyPress(VK_LBUTTON))
@@ -299,11 +301,12 @@ void Player::FSM()
 
 					GM->bulletPool.push_back(temp);
 
+					Vector3 d = pos - mouseRay.position;
 					for (auto it = GM->bulletPool.begin(); it != GM->bulletPool.end(); it++)
 					{
 						if (not (*it)->isFire)
 						{
-							(*it)->Fire(GetForward(), 10.0f, rotation);
+							(*it)->Fire(mouseRay.direction, 10.0f, rotation);
 							break;
 						}
 					}
@@ -339,7 +342,7 @@ void Player::FSM()
 			}
 			else
 			{
-				if (INPUT->KeyDown(VK_RBUTTON))
+				if (INPUT->KeyPress(VK_RBUTTON))
 				{
 					attackStopTime = 0.0f;
 					skillState = SkillState::RBUTTON;
@@ -387,7 +390,7 @@ void Player::FSM()
 			}
 			else
 			{
-				if (INPUT->KeyDown('R'))
+				if (INPUT->KeyPress('R'))
 				{
 					attackStopTime = 0.0f;
 					skillState = SkillState::R;
@@ -498,8 +501,18 @@ void Player::Jump()
 	MoveWorldPos(gravityDir * gravity );
 }
 
-void Player::Fire(Vector3 dest, float power)
-{
+void Player::LevelUp(UI* ui)
+{ // ui : leftBottom;
+	if (exp >= maxExp)
+	{
+		exp = 0;
+		ui->Find("LeftBottom_Exp")->scale.x = 0;
+		lv++;
+		maxHp = maxHp + (33 * (lv - 1));
+		hp = maxHp;	// 레벨업시 최대채력의 10%회복
+		maxExp = maxExp * (1 + 0.1f * (lv - 1));
+		attack = attack + 2.4f;
+	}
 }
 
 void Player::WolrdUpdate()
@@ -511,4 +524,9 @@ void Player::PlayerRenderHierarchy()
 {
 	this->RenderHierarchy();
 	
+}
+
+void Player::SetPos(Vector3 pos)
+{
+	SetWorldPos(pos);
 }

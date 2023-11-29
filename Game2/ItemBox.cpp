@@ -12,10 +12,10 @@ void ItemBox::add(ItemComponent* item)
 
 void ItemBox::list() const
 {
-	
-	for (auto it = items.begin(); it != items.end(); it++)
+	// 플레이어와 상호작용 (상자를 열었을때)
+	for (auto& item : items)
 	{
-		(*it)->list();
+		
 	}
 }
 

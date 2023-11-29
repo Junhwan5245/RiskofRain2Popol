@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-Item::Item(int v) : value(v)
+Item::Item()
 {
 }
 

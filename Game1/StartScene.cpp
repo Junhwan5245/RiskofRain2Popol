@@ -43,8 +43,9 @@ void StartScene::Init()
 
     ((UI*)playerSelect)->mouseDown = [&]
     {
-        cout << "playerSelect 클릭" << endl;
+        //cout << "playerSelect 클릭" << endl;
         SCENE->ChangeScene("PlayerSelect");
+        //SCENE->ChangeScene("SC1");
     };
     ((UI*)option)->mouseDown = [&]
     {
@@ -52,7 +53,7 @@ void StartScene::Init()
     };
     ((UI*)exit)->mouseDown = [&]
     {
-        cout << "exit 클릭" << endl;
+        //cout << "exit 클릭" << endl;
         PostQuitMessage(0);
     };
 }

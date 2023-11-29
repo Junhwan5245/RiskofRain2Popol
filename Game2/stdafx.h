@@ -1,6 +1,7 @@
 #pragma once
 #include "../2DFrameWork/framework.h"
 #pragma comment (lib,"../Build/2DFrameWork/2DFrameWork.lib")
+#include <map>
 
 // InGame에서 Timer를 나타내기 위해서 사용되는 라이브러리
 #include <sstream> //stringstream을 쓰기위한 라이브러리
@@ -13,4 +14,8 @@
 #include "Item_Rare.h"
 #include "ItemBox.h"
 #include "Item.h"
-#include "item1.h"
+
+#include "Item1.h"
+#include "Item2.h"
+#include "Item3.h"
+#include "Item4.h"

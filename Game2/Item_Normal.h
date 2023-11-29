@@ -3,13 +3,20 @@
 // Composite
 class Item_Normal : public ItemComponent
 {
+	friend class Item;
+
 private:
-	vector<ItemComponent*> normalItems;
-	
+	map<string, ItemComponent*> normalItems; // string : naem(key)
+
+
+
 
 public:
 	Item_Normal();
+	void Init();
 	void add(ItemComponent* item);
 	void list() const;
+
+
 };
 

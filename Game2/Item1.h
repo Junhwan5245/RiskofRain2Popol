@@ -1,11 +1,6 @@
 #pragma once
 class Item1 : public Item
 {
-private:
-	string	name;
-	int		price;
-	string	grade;
-
 public:
 	Item1();
 	~Item1();

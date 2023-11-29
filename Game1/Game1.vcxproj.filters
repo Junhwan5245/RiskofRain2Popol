@@ -8,9 +8,6 @@
     <ClInclude Include="LoadingScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Unit.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Player.h">
       <Filter>Player</Filter>
@@ -77,6 +74,15 @@
     <ClInclude Include="Item_Syringe.h">
       <Filter>Item</Filter>
     </ClInclude>
+    <ClInclude Include="EscapeShip.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -138,6 +144,12 @@
     </ClCompile>
     <ClCompile Include="BossBullet2.cpp">
       <Filter>Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="EscapeShip.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>Item</Filter>

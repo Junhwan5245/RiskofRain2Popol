@@ -9,6 +9,8 @@
 /**Unit*/
 #include "Unit.h"
 #include "Player.h"
+#include "Inventory.h"
+#include "EscapeShip.h"
 #include "Monster.h"
 #include "Beetle.h"
 #include "Lemurian.h"

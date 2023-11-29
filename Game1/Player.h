@@ -1,77 +1,4 @@
 #pragma once
-
-/**
-player Animation
-Commando
-
-애니메이션 #115933  == #1074766 == #1076287 == 1139078
-선택창 #115885
-앉아서 쉬기? #272820
-
-// 이동상태
-2번 앞으로 걷기
-3번 뒤로 가기
-4번 가만히 있기
-5번 왼쪽
-6번 오른쪽
-
-7번 가만히 있기..
-
-// 달리기 상태
-8번 앞으로 뛰기
-
-// 슬라이딩 및 구르기 상태
-9번 슬라이딩
-
-// 쉬프트 스킬
-10번 좌로구르기
-11번 우로구르기
-12번 앞으로 구르기
-13번 뒤로 구르기
-
-// 공중에 떠있는 상태
-14번 점프 시작 모션
-15번 공중에 잠깐 떠있는 모션
-16번 점프
-17번 착지 (높은곳에서 떨어질때도 이모션)
-
-// 공격?
-18번 장전?
-19번 뭔가를 던지고 있는데 모르겠음?
-20번 한팔로 뭔가를 하네?
-21번 팔을 내리는 모션
-22번 공격모션인가?
-23번 정면 보면서 팔벌리는중
-24번 우측 보면서 팔벌리는중
-25번 정면 보고 팔벌리면서 안움직음
-26번 정면 보고 팔벌리면서 상체만 까딱
-27번 정면 보고 팔벌리면서 상체만 좀 더 빠르게 까딱
-
-28번 두팔을 아래 정면 위로 하는 모션
-29번 좌에서 우로 뭔가를 쏘는거같은 모션
-30번 오른팔 가만히 왼팔로만 뭔가를 쏜다?
-31번 왼팔 가만히 오른팔로만 뭔가를 쏘기
-32번 뭔가 피격모션인듯
-33번 ? 그냥 상체를 우측으로 까딱
-34번 ? 상테를 좌측으로 까딱
-*/
-
-/**
-이번주 작업해야할것
-- 캐릭터 선택창 씬 완료
-    - 선택 캐릭터 구현, 스킬 및 캐릭터 설명
-    - 스킬 변경 구현
-    - -> 선택한 캐릭터, 선택한 스킬, 선택한 난이도로 캐릭터 생성 후 게임씬 진입
-
-- 플레이어 완료
-    - 점프, 우클릭, R스킬 구현
-    - 스텟 구현
-
-- 게임씬 UI ?
-    - UI 배치 및 캐릭터 레벨 or 체력바 UI
-*/
-
-
 enum class PlayerState
 {
     // 움직임
@@ -103,7 +30,7 @@ public:
     static Player* Create(string name = "Player");
 
 private:
-    
+    class Inventory*          itemInven;
 
     PlayerState         playerState;    // 플레이어 이동상태
     PlayerAttackState   attackState;    // 플레이어 공격상태 // 공격상태냐 아니면 
@@ -123,7 +50,9 @@ private:
     bool                isLButton;      // 좌클릭이 눌렸는지
     bool                isRButton;      // 우클릭이 눌렸는지
     bool                isRSkill;       // R이 눌렸는지
-    
+    bool                isDead;         // 죽었는지 (피가 0이면 사망처리)
+
+
     float               m2Timer;
     float               lShiftTimer;
     float               rTimer;
@@ -136,11 +65,14 @@ private:
     Vector3             gravityDir;
     float               gravity;
 
+    /** 플레이어만 가지고 있을 스텟*/
+    float               maxExp;
+
     Player();
     virtual ~Player();
 public:
     bool                isJump;         // 점프했는지
-
+    bool                isEscape = true;       // 탐사정에 있는가?
 
 
     void	Update() override;
@@ -150,8 +82,10 @@ public:
     void    AinmChange(PlayerState state);
     void    Move(Vector3 Target);
     void    Jump();
+    void    LevelUp(UI* ui);
 
-    void    Fire(Vector3 dest, float power);
+
+    void    SetPos(Vector3 pos);
     void    WolrdUpdate();
     void    PlayerRenderHierarchy();
 
@@ -159,5 +93,6 @@ public:
     /** Get함수*/
     //Vector3 GetLast() { return last; };
     PlayerState     GetPlayerState() { return playerState; }
+    Inventory* GetItemInven() { return itemInven; }
 };
 

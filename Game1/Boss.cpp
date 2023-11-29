@@ -9,8 +9,8 @@ Boss* Boss::Create(string name)
 	boss->range = 20;
 
 	boss->moveSpeed = 2.0f; // 증가계수 24
-	boss->maxHp = 80; // 증가계수 24
-	boss->Hp = 80;
+	boss->maxHp = 800; // 증가계수 24
+	boss->hp = 800;
 	boss->defend = 0;
 
 	boss->attack = 12.0f;	//증가계수 2.4

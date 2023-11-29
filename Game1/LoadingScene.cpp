@@ -9,9 +9,9 @@ int     loadCount = 0;
 
 void CreateScene1()
 {
-    SCENE->AddScene("StartScene", new StartScene);
-    SCENE->AddScene("PlayerSelect", new PlayerSelectScene);
     SCENE->AddScene("SC1", new Scene1);
+    SCENE->AddScene("PlayerSelect", new PlayerSelectScene);
+    SCENE->AddScene("StartScene", new StartScene);
 }
 
 LoadingScene::LoadingScene()
@@ -45,8 +45,8 @@ void LoadingScene::Init()
 
 void LoadingScene::Release()
 {
-    t1->join();
-    delete t1;
+    //t1->join();
+    //delete t1;
 }
 
 void LoadingScene::Update()
@@ -70,12 +70,8 @@ void LoadingScene::Update()
     if (loadCount == 7)
     {
         loadingPersent = 100;
-        Render();
+        //Render();
         //Sleep(1000);
-        for (int i = 0; i < 1000; i++)
-        {
-    
-        }
         SCENE->ChangeScene("StartScene");
     }
 

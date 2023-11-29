@@ -10,7 +10,7 @@ Beetle* Beetle::Create(string name)
 	
 	beetle->moveSpeed = 10.0f; // 증가계수 24
 	beetle->maxHp = 80; // 증가계수 24
-	beetle->Hp = 80;
+	beetle->hp = 80;
 	beetle->defend = 0;
 
 	beetle->attack = 12.0f;	//증가계수 2.4
@@ -24,7 +24,7 @@ void Beetle::Update()
 {
 	Monster::Update();
 
-	root->Find("frontHp")->scale.x = Hp * 1.7 / 100;
+	root->Find("frontHp")->scale.x = hp * 1.7 / 100;
 
 
 	if (state == MonsterState::MOVE)
