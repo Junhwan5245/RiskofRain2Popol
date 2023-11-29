@@ -4,6 +4,10 @@ Item_Normal::Item_Normal(string i) : id(i)
 {
 }
 
+Item_Normal::Item_Normal()
+{
+}
+
 void Item_Normal::add(ItemComponent* item)
 {
 	normalItems.push_back(item);

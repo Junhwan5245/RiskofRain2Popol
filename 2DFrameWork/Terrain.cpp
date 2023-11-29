@@ -522,32 +522,64 @@ void Terrain::RenderDetail()
 	}
 }
 
+//void Terrain::PerlinNoise()
+//{
+//	siv::PerlinNoise perlin(RANDOM->Int(0, 10000));
+//
+//	double tmp = 0.02;//완만도 낮게하면 완만해짐 
+//	VertexTerrain* vertices = (VertexTerrain*)mesh->vertices;
+//
+//
+//	double heightExponent = 5;
+//
+//	for (int i = 0; i < garo; i++)
+//	{
+//		for (int j = 0; j < garo; j++)
+//		{
+//			double x = (double)i * tmp;  // 펄린노이즈의 x좌표
+//			double y = (double)j * tmp;  // 펄린노이즈의 y좌표
+//			double z = 0.5;               // 지형의 높이 변화에 영향 크게하면 높아짐 지형
+//
+//			double noiseValueIsland = perlin.noise3D(x, y, z);
+//
+//			// Apply a power function to control the smoothness of the terrain
+//			vertices[i * garo + j].position.y = noiseValueIsland * heightExponent;
+//		}
+//	}
+//
+//	mesh->UpdateBuffer();
+//}
+
 void Terrain::PerlinNoise()
 {
-	siv::PerlinNoise perlin(RANDOM->Int(0, 10000));
+	SafeReset(mesh);
+	size = garo * garo;
+	CreateMesh(garo);
 
-	double tmp = 0.02;//완만도 낮게하면 완만해짐 
+	// 난수 시드를 사용하여 펄린 노이즈 생성
+	siv::PerlinNoise	perlin(RANDOM->Int(0, 10000));
+
+	double				frequencyScale{ 1.0 / garo * 2 };    // 맵 크기에 따른 주파수 스케일 조정
+
 	VertexTerrain* vertices = (VertexTerrain*)mesh->vertices;
-
-
-	double heightExponent = 5;
-
 	for (int i = 0; i < garo; i++)
 	{
 		for (int j = 0; j < garo; j++)
 		{
-			double x = (double)i * tmp;  // 펄린노이즈의 x좌표
-			double y = (double)j * tmp;  // 펄린노이즈의 y좌표
-			double z = 0.5;               // 지형의 높이 변화에 영향 크게하면 높아짐 지형
+			double x = (double)i * frequencyScale;		// 펄린노이즈의 x좌표
+			double y = (double)j * frequencyScale;		// 펄린노이즈의 y좌표
+			double z = 0.5;								// 지형의 높이 변화에 영향
 
-			double noiseValueIsland = perlin.noise3D(x, y, z);
+			double noiseValueIsland = IslandNoise(perlin, x, y, z, i, j);		// i, j는 정점의 인덱스
 
-			// Apply a power function to control the smoothness of the terrain
-			vertices[i * garo + j].position.y = noiseValueIsland * heightExponent;
+			// 최종 높이
+			vertices[i * garo + j].position.y = noiseValueIsland;
 		}
 	}
 
 	mesh->UpdateBuffer();
+	UpdateNormal();
+	UpdateStructuredBuffer();
 }
 
 
@@ -617,4 +649,25 @@ bool Terrain::ComPutePicking(Ray WRay, OUT Vector3& HitPoint)
 	}
 
 	return false;
+}
+
+double Terrain::IslandNoise(siv::PerlinNoise& perlin, double x, double y, double z, int i, int j)
+{
+	// 펄린 노이즈 값을 계산
+	double noiseValue = perlin.noise3D(x * baseFrequency, y * baseFrequency, z);
+
+	// 지형의 중앙으로부터의 거리를 계산
+	double distanceToCenter = sqrt(pow(i - garo / 2.0, 2) + pow(j - garo / 2.0, 2));
+	// 지형 중앙부터 가장자리까지의 최대 거리를 계산
+	double maxDistance = sqrt(2) * (garo / 2.0);
+	// 높이 계수를 계산하여 지형의 중앙 부분이 높아지도록 함
+	double heightFactor = pow((1.0 - (distanceToCenter / maxDistance)), 2) * 2.0;
+	// 각 지점에서 가장자리까지의 최소 거리를 계산
+	double minEdgeDistance = min(min(i, garo - 1 - i), min(j, garo - 1 - j));
+	// 가장자리 계수를 계산하여 지형의 가장자리가 낮아지도록 함
+	double edgeFactor = amplitude * pow((maxDistance - minEdgeDistance) / maxDistance, edgeSteepness * 2);
+	// 중앙과의 거리에 따라 선형적으로 높이 가중치 조정 (distanceFactor가 5라면, 중앙에서 +5 ~ 최대 거리에서 -5)
+	double centralDistanceFactor = distanceFactor - (distanceFactor * 2) * (distanceToCenter / maxDistance);
+
+	return (noiseValue * amplitude * heightFactor - edgeFactor) + centralDistanceFactor;
 }

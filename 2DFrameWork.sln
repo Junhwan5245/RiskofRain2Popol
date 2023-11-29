@@ -10,11 +10,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game1", "Game1\Game1.vcxpro
 		{C2138BC9-A195-455F-91A6-5FF469EB5E61} = {C2138BC9-A195-455F-91A6-5FF469EB5E61}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game2", "Game2\Game2.vcxproj", "{E4AABC26-46D5-436A-BE00-FF12933156D1}"
-	ProjectSection(ProjectDependencies) = postProject
-		{C2138BC9-A195-455F-91A6-5FF469EB5E61} = {C2138BC9-A195-455F-91A6-5FF469EB5E61}
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{E3F02C0D-0DAD-4181-A968-85F48C12D251}"
 	ProjectSection(SolutionItems) = preProject
 		Shaders\0.Cube.hlsl = Shaders\0.Cube.hlsl
@@ -31,6 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{E3F0
 		Shaders\4.Instance.hlsl = Shaders\4.Instance.hlsl
 		Shaders\4.Instance_CR.hlsl = Shaders\4.Instance_CR.hlsl
 		Shaders\4.Instance_Shadow.hlsl = Shaders\4.Instance_Shadow.hlsl
+		Shaders\4.Water.hlsl = Shaders\4.Water.hlsl
 		Shaders\5.Cube.hlsl = Shaders\5.Cube.hlsl
 		Shaders\5.Cube_CR.hlsl = Shaders\5.Cube_CR.hlsl
 		Shaders\5.Cube_Shadow.hlsl = Shaders\5.Cube_Shadow.hlsl
@@ -70,6 +66,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GameObject", "GameObject", 
 		Contents\Texture\bono.png = Contents\Texture\bono.png
 		Contents\Texture\bono3.png = Contents\Texture\bono3.png
 		Contents\GameObject\Boss.xml = Contents\GameObject\Boss.xml
+		Contents\GameObject\BossBullet1.xml = Contents\GameObject\BossBullet1.xml
 		Contents\GameObject\BossBullet2.xml = Contents\GameObject\BossBullet2.xml
 		Contents\GameObject\box.xml = Contents\GameObject\box.xml
 		Contents\GameObject\bullet.xml = Contents\GameObject\bullet.xml
@@ -90,6 +87,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GameObject", "GameObject", 
 		Contents\GameObject\Terrain.xml = Contents\GameObject\Terrain.xml
 		Contents\GameObject\UI.xml = Contents\GameObject\UI.xml
 		Contents\GameObject\Vam.xml = Contents\GameObject\Vam.xml
+		Contents\GameObject\water.xml = Contents\GameObject\water.xml
 		Contents\GameObject\Zamong.xml = Contents\GameObject\Zamong.xml
 	EndProjectSection
 EndProject
@@ -122,14 +120,6 @@ Global
 		{62755BC4-7433-469B-8413-314F6EC62971}.Release|x64.Build.0 = Release|x64
 		{62755BC4-7433-469B-8413-314F6EC62971}.Release|x86.ActiveCfg = Release|Win32
 		{62755BC4-7433-469B-8413-314F6EC62971}.Release|x86.Build.0 = Release|Win32
-		{E4AABC26-46D5-436A-BE00-FF12933156D1}.Debug|x64.ActiveCfg = Debug|x64
-		{E4AABC26-46D5-436A-BE00-FF12933156D1}.Debug|x64.Build.0 = Debug|x64
-		{E4AABC26-46D5-436A-BE00-FF12933156D1}.Debug|x86.ActiveCfg = Debug|Win32
-		{E4AABC26-46D5-436A-BE00-FF12933156D1}.Debug|x86.Build.0 = Debug|Win32
-		{E4AABC26-46D5-436A-BE00-FF12933156D1}.Release|x64.ActiveCfg = Release|x64
-		{E4AABC26-46D5-436A-BE00-FF12933156D1}.Release|x64.Build.0 = Release|x64
-		{E4AABC26-46D5-436A-BE00-FF12933156D1}.Release|x86.ActiveCfg = Release|Win32
-		{E4AABC26-46D5-436A-BE00-FF12933156D1}.Release|x86.Build.0 = Release|Win32
 		{AA547DFB-B6A2-48EE-B8B0-7B4791B28C6D}.Debug|x64.ActiveCfg = Debug|x64
 		{AA547DFB-B6A2-48EE-B8B0-7B4791B28C6D}.Debug|x64.Build.0 = Debug|x64
 		{AA547DFB-B6A2-48EE-B8B0-7B4791B28C6D}.Debug|x86.ActiveCfg = Debug|Win32

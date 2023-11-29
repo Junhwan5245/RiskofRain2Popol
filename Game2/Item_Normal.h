@@ -5,10 +5,10 @@ class Item_Normal : public ItemComponent
 {
 private:
 	vector<ItemComponent*> normalItems;
-	string id;
+	
 
 public:
-	Item_Normal(string i);
+	Item_Normal();
 	void add(ItemComponent* item);
 	void list() const;
 };

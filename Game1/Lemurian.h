@@ -14,7 +14,7 @@ public:
 	void	AttackAnimations() override;
 	void	MoveAnimations() override;
 	void	DeadAnimations() override;
-	float bulletCreateTime = 0.0f;
+	float	bulletCreateTime = 0.0f;
 
 private:
 	Lemurian();

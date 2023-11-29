@@ -11,10 +11,13 @@ private:
     Camera*     playerCam;
     Grid*       grid;
     Monster*    monster;
-   /* Terrain*    map;*/
     float monsterCreationTimer = 0.0f;
     const float monsterCreationInterval = 200.0f;
     class Astar* astar;
+    Sky*         skybox;
+    Water*       water;
+    ItemBox*     itemBox;
+   
 
     float			time = 0;
     

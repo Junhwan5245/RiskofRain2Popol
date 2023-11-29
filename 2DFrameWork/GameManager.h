@@ -4,6 +4,7 @@ class GameManager : public Singleton<GameManager>
 
 public:
 	/*class Player* pl;*/
+	vector<class Item*> items;
 	vector<class Monster*> monsterPool;
 	class Player* player;
 	vector<class Bullet*> bulletPool;

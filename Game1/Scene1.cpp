@@ -14,6 +14,8 @@ Scene1::Scene1()
     
     loadCount++;
 
+    skybox = Sky::Create();
+    water = Water::Create();
 
     GM->player = Player::Create();
     loadCount++;
@@ -26,18 +28,23 @@ Scene1::Scene1()
     loadCount++;
     GM->map->PerlinNoise();//펄린노이즈 적용
 
-    for (int i = 0; i < MONCREATESIZE; ++i)
-    {
-        /*int num = i;*/
-        int num = 2;
-        
-        auto newMonster = Monster::Create("Monster", MonsterType(num));
-        GM->monsterPool.push_back(newMonster);
-    }
+    GM->map->Update();
+    itemBox = ItemBox::Create();
+    
+    //for (int i = 0; i < MONCREATESIZE; ++i)
+    //{
+    //    /*int num = i;*/
+    //    int num = 2;
+    //    
+    //    auto newMonster = Monster::Create("Monster", MonsterType(num));
+    //    GM->monsterPool.push_back(newMonster);
+    //}
     loadCount++;
     
    /*auto boss = Boss::Create("Boss");
    GM->monsterPool.push_back(boss);*/
+    int num = 0;
+   
 
     astar = new Astar();
     astar->CreateNode(GM->map,50);
@@ -133,6 +140,8 @@ void Scene1::Update()
     
     //downcasting으로 자식에만 있는 함수에 접근하는 방법
 
+    /*LIGHT->RenderDetail();*/
+
     Camera::main->ControlMainCam();
     Camera::main->Update();
     
@@ -148,8 +157,14 @@ void Scene1::Update()
     {
         monster->RenderHierarchy();
     }
-    GM->map->RenderHierarchy();
+    for (auto& temp : GM->items)
+    {
+        temp->item->RenderHierarchy();
+    }
 
+    GM->map->RenderHierarchy();
+    water->RenderHierarchy();
+    
    
 
     ImGui::End();
@@ -161,7 +176,7 @@ void Scene1::Update()
 
 
     
-    
+    itemBox->Update();
     grid->Update();
 
     ////playerCam->Update();
@@ -174,8 +189,16 @@ void Scene1::Update()
        monster->Update();
     }
     GM->map->Update();
+
+    for (auto& item : GM->items)
+    {
+        item->Update();
+    }
+
+    water->Update();
     GM->Update();//총알
     GM->player->Update();
+   
     
 
     //map->Update();
@@ -211,6 +234,11 @@ void Scene1::LateUpdate()
             monster->SetWorldPosY(hit.y);
         }
     }
+
+    
+    
+   
+    
           
            /*Lemurian* temp1 = dynamic_cast<Lemurian*>(monster);
             if (temp1) 
@@ -233,17 +261,26 @@ void Scene1::Render()
 {
     LIGHT->Set();
     Camera::main->Set();
+    skybox->Render();
     //playerCam->Set();
     grid->Render();
-   GM->map->Render();
-   
+    GM->map->Render();
+   water->Render();
+   itemBox->Render();
+   for (auto& item : GM->items)
+    {
+       item->Render();
+    }
     for (auto& monster : GM->monsterPool)
     {
         monster->Render();
     }
     
+    
+
     GM->Render();
     GM->player->Render();
+    
     ui->Render();
 }
 

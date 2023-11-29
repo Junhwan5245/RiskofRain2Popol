@@ -1,4 +1,5 @@
 #pragma once
+#include "PerlinNoise.hpp"
 class Terrain : public Actor
 {
     struct InputDesc
@@ -45,6 +46,11 @@ public:
 	int				size;
 	float			uvScale;
 	int				garo;
+
+    double          baseFrequency{ 5.0 };            // 기본 주파수
+    double          amplitude{ 5.0 };           // 진폭
+    double          edgeSteepness{ 2.0 };            // 가장자리 경사의 가파름 조절
+    double          distanceFactor{ 5 };             // 중앙과의 거리에 따른 높이 계수
     //CS            컴퓨트 쉐이더로 피킹할때만 만들기
     void            CreateStructuredBuffer();
     void            DeleteStructuredBuffer();
@@ -56,6 +62,7 @@ public:
 	void			UpdateNormal();
 	void	        RenderDetail();
     void            PerlinNoise();
+    double          IslandNoise(siv::PerlinNoise& perlin, double x, double y, double z, int i, int j);
 
     bool            ComPutePicking(Ray WRay, OUT Vector3& HitPoint);
 };
