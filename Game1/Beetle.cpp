@@ -48,7 +48,7 @@ void Beetle::Update()
 		{
 			if (!isHit)
 			{
-				GM->player->Hp -= 10;
+				GM->player->hp -= 10;
 				isHit = true;
 			}
 		}

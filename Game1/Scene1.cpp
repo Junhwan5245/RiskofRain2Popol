@@ -185,7 +185,7 @@ void Scene1::Update()
 
     
     itemBox->Update();
-    grid->Update();
+   
     Camera::main->Update();
 
     for (auto& monster : GM->monsterPool)
@@ -268,7 +268,7 @@ void Scene1::Render()
     Camera::main->Set();
     skybox->Render();
     //playerCam->Set();
-    grid->Render();
+    
     GM->map->Render();
    water->Render();
    itemBox->Render();
