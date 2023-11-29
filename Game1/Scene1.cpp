@@ -175,7 +175,6 @@ void Scene1::Update()
    
 
     escape->RenderHierarchy();
-    item->RenderHierarchy();
     ImGui::End();
 
     /* Golem* temp1 = dynamic_cast<Golem*>(monster);
@@ -208,7 +207,7 @@ void Scene1::Update()
     GM->Update();//ÃÑ¾Ë
     GM->player->Update();
     escape->Update();
-    item->Update();
+   
 
     ui->Update();
 }
@@ -287,7 +286,7 @@ void Scene1::Render()
     GM->Render();
     GM->player->Render();
     escape->Render();
-    item->Render();
+   
     ui->Render();
 }
 
