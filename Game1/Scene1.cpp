@@ -27,15 +27,18 @@ Scene1::Scene1()
     loadCount++;
     GM->map->PerlinNoise();//펄린노이즈 적용
 
-    //for (int i = 0; i < MONCREATESIZE; ++i)
-    //{
-    //    int num = i;
-    //  /*  int num = 0;*/
-    //    
-    //    auto newMonster = Monster::Create("Monster", MonsterType(num));
-    //    GM->monsterPool.push_back(newMonster);
-    //}
+    for (int i = 0; i < MONCREATESIZE; ++i)
+    {
+        /*int num = i;*/
+        int num = 2;
+        
+        auto newMonster = Monster::Create("Monster", MonsterType(num));
+        GM->monsterPool.push_back(newMonster);
+    }
     loadCount++;
+    
+   /*auto boss = Boss::Create("Boss");
+   GM->monsterPool.push_back(boss);*/
 
     astar = new Astar();
     astar->CreateNode(GM->map,50);
@@ -202,7 +205,7 @@ void Scene1::LateUpdate()
     for (auto& monster : GM->monsterPool)
     {
         Ray monTop;
-        monTop.position = monster->GetWorldPos() + Vector3(0, 100, 0);
+        monTop.position = monster->GetWorldPos() + Vector3(0, 1000, 0);
         monTop.direction = Vector3(0, -1, 0);
         if (Utility::RayIntersectMap(monTop, GM->map, hit))//맵과 몬스터 레이 이용해 몬스터 y값 잡기
         {
@@ -250,6 +253,7 @@ void Scene1::Render()
     {
         monster->Render();
     }
+    
     GM->Render();
     GM->player->Render();
     escape->Render();

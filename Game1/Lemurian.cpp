@@ -48,7 +48,7 @@ void Lemurian::Update()
 
 	if (state == MonsterState::ATTACK)//attack 상태일때 총알 발사하기
 	{
-		if (TIMER->GetTick(bulletCreateTime, 1.0f))//5초마다 GM->bulletPool에 푸쉬
+		if (TIMER->GetTick(bulletCreateTime, 3.0f))//5초마다 GM->bulletPool에 푸쉬
 		{
 			/*PlayerDir = GM->player->GetWorldPos();*/
 			LemurianBullet* temp = LemurianBullet::Create("LemurianBullet");
@@ -100,7 +100,7 @@ void Lemurian::MoveAnimations()
 
 void Lemurian::DeadAnimations()
 {
-	anim->ChangeAnimation(AnimationState::LOOP, 6, 0.0f);
+	anim->ChangeAnimation(AnimationState::ONCE_LAST, 6, 0.0f);
 }
 
 Lemurian::Lemurian()

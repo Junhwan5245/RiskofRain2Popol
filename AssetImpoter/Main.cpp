@@ -284,8 +284,9 @@ void Main::Render()
     BLEND->Set(false);
 
     grid->Render();
+    BLEND->Set(true);
     temp->Render();
-   
+    BLEND->Set(false);
 }
 
 void Main::ResizeScreen()
