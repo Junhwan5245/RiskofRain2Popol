@@ -13,6 +13,7 @@ Item_Syringe::~Item_Syringe()
 
 void Item_Syringe::Operate()
 {
+	GM->player->attackSpeed += GM->player->attackSpeed * 0.15f;
 }
 
 void Item_Syringe::Update()

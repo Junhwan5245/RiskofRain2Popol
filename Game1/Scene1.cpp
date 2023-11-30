@@ -243,11 +243,21 @@ void Scene1::LateUpdate()
     // 아이템과 플레이어의 충돌이 일어나면서 E키를 눌렀을때
     for (auto& i : GM->items)
     {
-        if (GM->player->Find("RootNode")->Intersect(i->item->Find("syringe.obj")))
+        if (GM->player->Find("RootNode")->Intersect(i->item->Find("Collider")))
         {
             if (INPUT->KeyDown('E'))
             {
+                // 상자에서 나온 아이템을 player Inventory에 추가
                 GM->player->GetItemInven()->AddItem(i->item->name);
+                i->Operate();
+                // 아이템의 능력발동?
+
+
+                // player Inventory에 추가된 아이템은 삭제
+                cout << "아이템 '" << i->item->name << "'가 삭제됩니다." << endl;
+                // 한번에 하나의 상자만 연다는 가정하에 items를 전체 clear
+                // 만약에 여러개를 연다고 하면, remove if로 변경
+                GM->items.clear();
             }
         }
     }

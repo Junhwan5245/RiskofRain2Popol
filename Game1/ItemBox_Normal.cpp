@@ -27,7 +27,8 @@ void ItemBox_Normal::CreateItem()
 {
 	Item* temp = nullptr;
 	int size = NormalItemPool::SizeNoraml;
-	switch (RANDOM->Int(0, size - 1))
+	//switch (RANDOM->Int(0, size - 1))
+	switch (0)
 	{
 	case NormalItemPool::Syringe:
 		temp = new Item_Syringe();

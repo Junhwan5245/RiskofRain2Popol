@@ -57,7 +57,6 @@ private:
     float               lShiftTimer;
     float               rTimer;
 
-    float               attackSpeed = 0.16f;    // 공속
     float               LButtonFireTime; // 좌클릭 발사타임
     float               RSkillFireTime;  //  R스킬 발사시간(공속에 따라 더빠르게 발사가능)
     float               RSkillFire;  //  R스킬 발사시간(공속에 따라 더빠르게 발사가능)
@@ -72,6 +71,7 @@ private:
     virtual ~Player();
 public:
     bool                isJump;         // 점프했는지
+    float               attackSpeed = 0.16f;    // 공속
     bool                isEscape = true;       // 탐사정에 있는가?
 
 
@@ -84,7 +84,7 @@ public:
     void    Jump();
     void    LevelUp(UI* ui);
 
-
+    void    StatGUI();
     void    SetPos(Vector3 pos);
     void    WolrdUpdate();
     void    PlayerRenderHierarchy();

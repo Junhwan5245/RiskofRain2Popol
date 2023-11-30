@@ -52,6 +52,9 @@ void Player::Update()
 	ImGui::Text("RCoolTime : %.2f", rTimer);
 	ImGui::Text("isRSkill : %d\n", (int)isRSkill);
 
+
+	StatGUI();
+
 	// 레벨업 시스템
 	// 레벨에 따른 maxHp , maxExp 조정
 
@@ -527,6 +530,23 @@ void Player::PlayerRenderHierarchy()
 {
 	this->RenderHierarchy();
 	
+}
+
+void Player::StatGUI()
+{
+	ImGui::Begin("Stat");
+	ImGui::Text("\tPlayer Stat\t\t");
+	ImGui::Text("player Gold\t : %d", gold);
+	ImGui::Text("player Luna\t : %d", luna);
+	ImGui::Text("player Lv\t : %d\t\t", lv);
+	ImGui::Text("player Hp\t : %d", (int)hp);
+	ImGui::Text("player MaxHp\t : %d\t\t", (int)maxHp);
+	ImGui::Text("player attack\t : %.2f", attack);
+	ImGui::Text("player attackSpeed : %.2f", attackSpeed);
+	ImGui::Text("player defend\t : %d", defend);
+	ImGui::Text("player moveSpeed : %.2f", moveSpeed);
+	ImGui::Text("player moveSpeed : %.2f", moveSpeed);
+	ImGui::End();
 }
 
 void Player::SetPos(Vector3 pos)

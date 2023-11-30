@@ -14,7 +14,8 @@ ItemBox* ItemBox::Create()
 	ItemBox();
 	int num = RANDOM->Int(0,1);
 
-	switch (num)
+	//switch (num)
+	switch (0)
 	{
 	case 0:
 		return new ItemBox_Normal();

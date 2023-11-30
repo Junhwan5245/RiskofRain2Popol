@@ -94,11 +94,21 @@
     <ClInclude Include="Item_TriTipDagger.h">
       <Filter>Item\Normal</Filter>
     </ClInclude>
-    <ClInclude Include="Item_Feather.h" />
-    <ClInclude Include="Item_Infusion.h" />
-    <ClInclude Include="Item_Seed.h" />
-    <ClInclude Include="Item_AttackUp.h" />
-    <ClInclude Include="Item_DefendUp.h" />
+    <ClInclude Include="Item_AttackUp.h">
+      <Filter>Item\Rare</Filter>
+    </ClInclude>
+    <ClInclude Include="Item_DefendUp.h">
+      <Filter>Item\Rare</Filter>
+    </ClInclude>
+    <ClInclude Include="Item_Feather.h">
+      <Filter>Item\Rare</Filter>
+    </ClInclude>
+    <ClInclude Include="Item_Infusion.h">
+      <Filter>Item\Rare</Filter>
+    </ClInclude>
+    <ClInclude Include="Item_Seed.h">
+      <Filter>Item\Rare</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -193,11 +203,21 @@
     <ClCompile Include="Item_TriTipDagger.cpp">
       <Filter>Item\Normal</Filter>
     </ClCompile>
-    <ClCompile Include="Item_Feather.cpp" />
-    <ClCompile Include="Item_Infusion.cpp" />
-    <ClCompile Include="Item_Seed.cpp" />
-    <ClCompile Include="Item_AttackUp.cpp" />
-    <ClCompile Include="Item_DefendUp.cpp" />
+    <ClCompile Include="Item_AttackUp.cpp">
+      <Filter>Item\Rare</Filter>
+    </ClCompile>
+    <ClCompile Include="Item_DefendUp.cpp">
+      <Filter>Item\Rare</Filter>
+    </ClCompile>
+    <ClCompile Include="Item_Feather.cpp">
+      <Filter>Item\Rare</Filter>
+    </ClCompile>
+    <ClCompile Include="Item_Infusion.cpp">
+      <Filter>Item\Rare</Filter>
+    </ClCompile>
+    <ClCompile Include="Item_Seed.cpp">
+      <Filter>Item\Rare</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">
