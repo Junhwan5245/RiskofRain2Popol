@@ -25,4 +25,7 @@ void Inventory::AddItem(string name)
         itemList[name]++;
         cout << "아이템 '" << name << "'의 개수는 " << itemList[name] << "개 입니다." << endl;
     }
+
+    cout << "아이템 '" << name << "'가 삭제됩니다." << endl;
+    GM->items.clear();
 }

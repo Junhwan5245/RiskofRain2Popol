@@ -7,17 +7,12 @@
     </Transform>
     <Children Size="1"/>
     <Child0 Name="APRoundPickup.obj" Visible="true" ObType="0" BoneIndex="0">
-        <Collider ColliderType="2" Visible="true">
-            <Position X="0" Y="0" Z="0"/>
-            <Scale X="1" Y="1" Z="1"/>
-            <Rotation X="0" Y="0" Z="0"/>
-        </Collider>
         <Transform>
             <Position X="0" Y="1" Z="0"/>
             <Scale X="1" Y="1" Z="1"/>
             <Rotation X="0" Y="0" Z="-0"/>
         </Transform>
-        <Children Size="2"/>
+        <Children Size="3"/>
         <Child0 Name="APRoundPickup" Visible="true" ObType="0" BoneIndex="0">
             <Shader File="4.Cube.hlsl"/>
             <Transform>
@@ -38,5 +33,18 @@
             </Transform>
             <Children Size="0"/>
         </Child1>
+        <Child2 Name="Collider" Visible="true" ObType="0" BoneIndex="-1">
+            <Collider ColliderType="2" Visible="true">
+                <Position X="0" Y="0" Z="0"/>
+                <Scale X="1" Y="1" Z="1"/>
+                <Rotation X="0" Y="0" Z="0"/>
+            </Collider>
+            <Transform>
+                <Position X="0" Y="0" Z="0"/>
+                <Scale X="1" Y="1" Z="1"/>
+                <Rotation X="0" Y="0" Z="0"/>
+            </Transform>
+            <Children Size="0"/>
+        </Child2>
     </Child0>
 </Root>

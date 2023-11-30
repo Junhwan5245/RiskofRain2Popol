@@ -1,12 +1,11 @@
 #pragma once
-class Item_Syringe : public Item
-{ 
+class Item_AttackUp : public Item
+{
 public:
-    Item_Syringe();
-    virtual ~Item_Syringe();
+    Item_AttackUp();
+    virtual ~Item_AttackUp();
     void	Operate()   override;
     void	Update()    override;
     void	Render()    override;
 };
-
 

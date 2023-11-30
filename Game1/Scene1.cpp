@@ -89,7 +89,7 @@ void Scene1::Update()
     Camera::main->height = App.GetHeight();
     Camera::main->ControlMainCam();
 
-    
+    // 카메라 스위치
     if (GM->player->isEscape) //플레이어가 탐사정에 있을때
     {
         // 플레이어의 위치를 탐사정에 고정
@@ -127,7 +127,6 @@ void Scene1::Update()
     ImGui::Text("TIMER : %.2f", monsterCreationTimer);
     ImGui::Text("FPS: %d", TIMER->GetFramePerSecond());
     ImGui::Text("Stagelevel : %d", level);
-    ImGui::Text("HP : %d", GM->player->hp);
 
     for (auto& monster : GM->monsterPool)
     {
@@ -140,19 +139,19 @@ void Scene1::Update()
         GM->map->PerlinNoise();
     }
 
-    if (GM->monsterPool.size()<MAXMONSIZE)
-    {
-        if (monsterCreationTimer >= monsterCreationInterval)
-        {
-            monsterCreationTimer = 0.0f;
-            for (int i = 0; i < MONCREATESIZE; ++i)
-            {
-                int num = RANDOM->Int(0, 2);
-                auto newMonster = Monster::Create("Monster", MonsterType(num));
-                GM->monsterPool.push_back(newMonster);
-            }
-        }
-    }
+    //if (GM->monsterPool.size()<MAXMONSIZE)
+    //{
+    //    if (monsterCreationTimer >= monsterCreationInterval)
+    //    {
+    //        monsterCreationTimer = 0.0f;
+    //        for (int i = 0; i < MONCREATESIZE; ++i)
+    //        {
+    //            int num = RANDOM->Int(0, 2);
+    //            auto newMonster = Monster::Create("Monster", MonsterType(num));
+    //            GM->monsterPool.push_back(newMonster);
+    //        }
+    //    }
+    //}
     
     //downcasting으로 자식에만 있는 함수에 접근하는 방법
 
@@ -241,9 +240,17 @@ void Scene1::LateUpdate()
     }
 
     
-    
-   
-    
+    // 아이템과 플레이어의 충돌이 일어나면서 E키를 눌렀을때
+    for (auto& i : GM->items)
+    {
+        if (GM->player->Find("RootNode")->Intersect(i->item->Find("syringe.obj")))
+        {
+            if (INPUT->KeyDown('E'))
+            {
+                GM->player->GetItemInven()->AddItem(i->item->name);
+            }
+        }
+    }
           
            /*Lemurian* temp1 = dynamic_cast<Lemurian*>(monster);
             if (temp1) 
@@ -270,9 +277,9 @@ void Scene1::Render()
     //playerCam->Set();
     
     GM->map->Render();
-   water->Render();
-   itemBox->Render();
-   for (auto& item : GM->items)
+    water->Render();
+    itemBox->Render();
+    for (auto& item : GM->items)
     {
        item->Render();
     }

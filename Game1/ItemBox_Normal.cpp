@@ -25,12 +25,21 @@ void ItemBox_Normal::Render()
 
 void ItemBox_Normal::CreateItem()
 {
-	Item* temp=nullptr;
+	Item* temp = nullptr;
 	int size = NormalItemPool::SizeNoraml;
-	switch (RANDOM->Int(1, size))
+	switch (RANDOM->Int(0, size - 1))
 	{
-	case 1:
+	case NormalItemPool::Syringe:
 		temp = new Item_Syringe();
+		break;
+	case NormalItemPool::APRound:
+		temp = new Item_APRound();
+		break;
+	case NormalItemPool::Glasses:
+		temp = new Item_Glasses();
+		break;
+	case NormalItemPool::TriTipDagger:
+		temp = new Item_TriTipDagger();
 		break;
 		
 

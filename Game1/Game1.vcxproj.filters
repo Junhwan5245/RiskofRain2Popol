@@ -36,11 +36,9 @@
     <ClInclude Include="LemurianBullet.h">
       <Filter>Monster</Filter>
     </ClInclude>
-    <ClInclude Include="Astar.h" />
     <ClInclude Include="Golem.h">
       <Filter>Monster</Filter>
     </ClInclude>
-    <ClInclude Include="LemurianBulletTrail.h" />
     <ClInclude Include="InGameUI.h">
       <Filter>UI</Filter>
     </ClInclude>
@@ -71,9 +69,6 @@
     <ClInclude Include="ItemBox_Rare.h">
       <Filter>Item</Filter>
     </ClInclude>
-    <ClInclude Include="Item_Syringe.h">
-      <Filter>Item</Filter>
-    </ClInclude>
     <ClInclude Include="EscapeShip.h">
       <Filter>Player</Filter>
     </ClInclude>
@@ -83,6 +78,27 @@
     <ClInclude Include="Inventory.h">
       <Filter>Player</Filter>
     </ClInclude>
+    <ClInclude Include="Astar.h" />
+    <ClInclude Include="LemurianBulletTrail.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Item_APRound.h">
+      <Filter>Item\Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="Item_Glasses.h">
+      <Filter>Item\Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="Item_Syringe.h">
+      <Filter>Item\Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="Item_TriTipDagger.h">
+      <Filter>Item\Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="Item_Feather.h" />
+    <ClInclude Include="Item_Infusion.h" />
+    <ClInclude Include="Item_Seed.h" />
+    <ClInclude Include="Item_AttackUp.h" />
+    <ClInclude Include="Item_DefendUp.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -122,11 +138,9 @@
     <ClCompile Include="LemurianBullet.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
-    <ClCompile Include="Astar.cpp" />
     <ClCompile Include="Golem.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
-    <ClCompile Include="LemurianBulletTrail.cpp" />
     <ClCompile Include="InGameUI.cpp">
       <Filter>UI</Filter>
     </ClCompile>
@@ -163,9 +177,27 @@
     <ClCompile Include="ItemBox.cpp">
       <Filter>Item</Filter>
     </ClCompile>
-    <ClCompile Include="Item_Syringe.cpp">
-      <Filter>Item</Filter>
+    <ClCompile Include="Astar.cpp" />
+    <ClCompile Include="LemurianBulletTrail.cpp">
+      <Filter>Monster</Filter>
     </ClCompile>
+    <ClCompile Include="Item_APRound.cpp">
+      <Filter>Item\Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="Item_Glasses.cpp">
+      <Filter>Item\Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="Item_Syringe.cpp">
+      <Filter>Item\Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="Item_TriTipDagger.cpp">
+      <Filter>Item\Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="Item_Feather.cpp" />
+    <ClCompile Include="Item_Infusion.cpp" />
+    <ClCompile Include="Item_Seed.cpp" />
+    <ClCompile Include="Item_AttackUp.cpp" />
+    <ClCompile Include="Item_DefendUp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">
@@ -188,6 +220,12 @@
     </Filter>
     <Filter Include="Item">
       <UniqueIdentifier>{0f39bc1a-4ac1-4ee0-9158-e9f2f1818a72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Item\Normal">
+      <UniqueIdentifier>{d835bf27-742f-4190-b4a0-507b4fd9d14d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Item\Rare">
+      <UniqueIdentifier>{7159fd02-bf91-4647-ab89-dfc179734405}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

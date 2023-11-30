@@ -272,7 +272,9 @@ void Player::FSM()
 	else if (attackState == PlayerAttackState::ATTACK)
 	{
 		Ray mouseRay = Utility::MouseToRay((Camera*)Find("PlayerCam"));
-
+		ImGui::Text("MouseRay posx : %.2f", mouseRay.position.x);
+		ImGui::Text("MouseRay posy : %.2f", mouseRay.position.y);
+		ImGui::Text("MouseRay posz : %.2f", mouseRay.position.z);
 		/** M1 ½ºÅ³ */
 		{
 			if (INPUT->KeyPress(VK_LBUTTON))
@@ -298,7 +300,7 @@ void Player::FSM()
 					else pos = Find("gun.l.muzzle")->GetWorldPos();
 
 					temp->SetPos(pos);
-					temp->scale = Vector3(0.1, 0.1, 0.1);
+					temp->scale = Vector3(0.05, 0.05, 0.05);
 
 					GM->bulletPool.push_back(temp);
 
@@ -307,7 +309,7 @@ void Player::FSM()
 					{
 						if (not (*it)->isFire)
 						{
-							(*it)->Fire(mouseRay.direction, 10.0f, rotation);
+							(*it)->Fire(d, 20.0f, rotation);
 							break;
 						}
 					}
@@ -327,14 +329,14 @@ void Player::FSM()
 					pos = Find("gun.r.muzzle")->GetWorldPos();
 
 					temp->SetPos(pos);
-
+					temp->scale = Vector3(0.2, 0.2, 0.2);
 					GM->bulletPool.push_back(temp);
 
 					for (auto it = GM->bulletPool.begin(); it != GM->bulletPool.end(); it++)
 					{
 						if (not (*it)->isFire)
 						{
-							(*it)->Fire(GetForward(), 10.0f, rotation);
+							(*it)->Fire(GetForward(), 20.0f, rotation);
 							break;
 						}
 					}
@@ -370,7 +372,7 @@ void Player::FSM()
 							pos = Find("gun.r.muzzle")->GetWorldPos();
 
 							temp->SetPos(pos);
-
+							temp->scale = Vector3(0.05, 0.05, 0.05);
 							GM->bulletPool.push_back(temp);
 
 							for (auto it = GM->bulletPool.begin(); it != GM->bulletPool.end(); it++)

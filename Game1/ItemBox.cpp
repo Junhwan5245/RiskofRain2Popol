@@ -43,7 +43,10 @@ void ItemBox::Init()
 
 void ItemBox::Update()
 {
-	Interaction();
+	if (not isOpen)
+		Interaction();
+	else
+		itemBox->visible = false;
 
 	itemBox->Update();
 }
@@ -64,6 +67,7 @@ void ItemBox::Interaction()
 	{
 		if (INPUT->KeyDown('E'))
 		{
+			isOpen = true;
 			CreateItem();
 		}
 	}

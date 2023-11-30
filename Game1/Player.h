@@ -94,5 +94,12 @@ public:
     //Vector3 GetLast() { return last; };
     PlayerState     GetPlayerState() { return playerState; }
     Inventory* GetItemInven() { return itemInven; }
+
+    float GetM2CoolTime() { return m2Timer; }
+    float GetLShiftCoolTime() { return lShiftTimer; }
+    float GetRCoolTime() { return rTimer; }
+
+    int   GetLv() { return lv; }
+    float GetMaxHp() { return maxHp; }
 };
 

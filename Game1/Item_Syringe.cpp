@@ -2,8 +2,9 @@
 
 Item_Syringe::Item_Syringe()
 {
-	item->LoadFile("Player2.xml");
-	itemType = ItemType::RARE;
+	item->LoadFile("Item_Syringe.xml");
+	item->name = "Syringe";
+	itemType = ItemType::NORMAL;
 }
 
 Item_Syringe::~Item_Syringe()

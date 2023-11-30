@@ -1,18 +1,29 @@
 #pragma once
 enum NormalItemPool
 {
-	WALK,
+	Syringe,
+	APRound,
+	Glasses,
+	TriTipDagger,
 	SizeNoraml
 };
 
 enum RareItemPool
 {
-	SYRINGE,
+	Feather,
+	Infusion,
+	Seed,
+	AttackUp,
+	DefendUp,
 	SizeRare
 };
 
 class ItemBox
 {
+private:
+	bool isOpen = false;
+
+
 public:
 	ItemBox();
 	~ItemBox();
