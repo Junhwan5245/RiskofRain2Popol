@@ -130,19 +130,19 @@ void Scene1::Update()
         GM->map->PerlinNoise();
     }
 
-    //if (GM->monsterPool.size()<MAXMONSIZE)
-    //{
-    //    if (monsterCreationTimer >= monsterCreationInterval)
-    //    {
-    //        monsterCreationTimer = 0.0f;
-    //        for (int i = 0; i < MONCREATESIZE; ++i)
-    //        {
-    //            int num = RANDOM->Int(0, 2);
-    //            auto newMonster = Monster::Create("Monster", MonsterType(num));
-    //            GM->monsterPool.push_back(newMonster);
-    //        }
-    //    }
-    //}
+    if (GM->monsterPool.size()<MAXMONSIZE)
+    {
+        if (monsterCreationTimer >= monsterCreationInterval)
+        {
+            monsterCreationTimer = 0.0f;
+            for (int i = 0; i < MONCREATESIZE; ++i)
+            {
+                int num = RANDOM->Int(0, 2);
+                auto newMonster = Monster::Create("Monster", MonsterType(num));
+                GM->monsterPool.push_back(newMonster);
+            }
+        }
+    }
     
     //downcasting으로 자식에만 있는 함수에 접근하는 방법
 
@@ -165,14 +165,14 @@ void Scene1::Update()
     
     Camera::main->Update();
 
-    for (auto& monster : GM->monsterPool)
-    {
-        if (TIMER->GetTick(renewtime, 1.0f))
-        {
-            astar->PathFinding(monster->GetWorldPos(), GM->player->GetWorldPos(), monster->way);
-        }
-       monster->Update();
-    }
+    //for (auto& monster : GM->monsterPool)
+    //{
+    //    if (TIMER->GetTick(renewtime, 1.0f))
+    //    {
+    //        astar->PathFinding(monster->GetWorldPos(), GM->player->GetWorldPos(), monster->way);
+    //    }
+    //   monster->Update();
+    //}
     GM->map->Update();
     GM->Update();//총알
     GM->player->Update();

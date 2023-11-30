@@ -298,6 +298,7 @@ void Player::FSM()
 					else pos = Find("gun.l.muzzle")->GetWorldPos();
 
 					temp->SetPos(pos);
+					temp->scale = Vector3(0.1, 0.1, 0.1);
 
 					GM->bulletPool.push_back(temp);
 

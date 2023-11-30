@@ -24,12 +24,13 @@ Main::~Main()
 void Main::Init()
 {
 	Camera::main = cam1;
+	
 	Camera::main->viewport.x = 0.0f;
 	Camera::main->viewport.y = 0.0f;
-	Camera::main->viewport.width = App.GetWidth();
-	Camera::main->viewport.height = App.GetHeight();
-	Camera::main->width = App.GetWidth();
-	Camera::main->height = App.GetHeight();
+	Camera::main->viewport.width = 1600;
+	Camera::main->viewport.height = 900;
+	Camera::main->width = 1600;
+	Camera::main->height = 900;
 
 	leftBottom->Find("LeftBottom_Exp")->scale.x = 0;
 
@@ -42,16 +43,22 @@ void Main::Release()
 
 void Main::Update()
 {
+
+	Vector3 mousePos = Utility::MouseToNDC();
 	ImGui::Text("WorldTime : %.2f", TIMER->GetWorldTime());
 	ImGui::Text("playerattack : %.2f", playerattack);
-	             
+	ImGui::Text("app Width : %.2f", App.GetWidth());
+	ImGui::Text("app Height : %.2f", App.GetHeight());
+	ImGui::Text("mousePos x : %.2f", mousePos.x);
+	ImGui::Text("mousePos y : %.2f", mousePos.y);
+	ImGui::Text("mousePos z : %.2f", mousePos.z);
+
 
 	ImGui::Begin("Hierarchy");
 	upper->RenderHierarchy();
 	leftBottom->RenderHierarchy();
 	rightBottom->RenderHierarchy();
 	ImGui::End();
-
 	
 
 	if (playerexp >= playerMaxexp)

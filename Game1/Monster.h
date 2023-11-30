@@ -4,7 +4,8 @@ enum class MonsterType
 {
 	BEETLE,
 	LEMURIAN,
-	GOLEM
+	GOLEM,
+	BOSS
 };
 enum class MonsterState 
 {
