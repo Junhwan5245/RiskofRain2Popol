@@ -15,5 +15,8 @@ public:
 	void Init();
 	void add(ItemComponent* item);
 	void list() const;
+	void Update();
+	void Render();
+	void Interection();//상호작용함수
 };
 

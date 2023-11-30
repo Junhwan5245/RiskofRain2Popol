@@ -2,8 +2,17 @@
 class Item1 : public Item
 {
 public:
-	void Create();
+	Item1();
+	~Item1();
 
-	int s;
+	static Item1* Create(string itemName, int itemPrice, string itemGrade);
+
+	int getPrice() const override {
+		return price;
+	}
+
+	string getGrade() const override {
+		return grade;
+	}
 };
 

@@ -30,6 +30,11 @@
     <ClInclude Include="Golem.h" />
     <ClInclude Include="GolemBullet.h" />
     <ClInclude Include="GolemLazer.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemBox.h" />
+    <ClInclude Include="ItemBox_Normal.h" />
+    <ClInclude Include="ItemBox_Rare.h" />
+    <ClInclude Include="Item_Syringe.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Lemurian.h" />
     <ClInclude Include="LemurianBullet.h" />
@@ -58,6 +63,11 @@
     <ClCompile Include="GolemBullet.cpp" />
     <ClCompile Include="GolemLazer.cpp" />
     <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemBox.cpp" />
+    <ClCompile Include="ItemBox_Normal.cpp" />
+    <ClCompile Include="ItemBox_Rare.cpp" />
+    <ClCompile Include="Item_Syringe.cpp" />
     <ClCompile Include="Lemurian.cpp" />
     <ClCompile Include="LemurianBullet.cpp" />
     <ClCompile Include="LemurianBulletTrail.cpp" />
@@ -72,6 +82,8 @@
     <ClCompile Include="Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="window.ini" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

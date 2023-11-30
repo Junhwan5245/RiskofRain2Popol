@@ -8,8 +8,16 @@ private:
     Camera*         cam1;
     class InGameUI* ui;
 
+    Camera*     playerCam;
+    Grid*       grid;
+    Monster*    monster;
+    
+    class Astar* astar;
+    Sky*         skybox;
+    Water*       water;
+    ItemBox*     itemBox;
+   
     EscapeShip*     escape;
-    class Astar*    astar;
 
     Actor* item;        // 임의의 아이템
 

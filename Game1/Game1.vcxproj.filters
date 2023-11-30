@@ -59,6 +59,21 @@
     <ClInclude Include="BossBullet2.h">
       <Filter>Monster</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBox.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBox_Normal.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBox_Rare.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item_Syringe.h">
+      <Filter>Item</Filter>
+    </ClInclude>
     <ClInclude Include="EscapeShip.h">
       <Filter>Player</Filter>
     </ClInclude>
@@ -136,6 +151,21 @@
     <ClCompile Include="Inventory.cpp">
       <Filter>Player</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBox_Normal.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBox_Rare.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBox.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item_Syringe.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">
@@ -156,8 +186,13 @@
     <Filter Include="UI">
       <UniqueIdentifier>{d0ffe025-656a-4455-9dbb-349d9cc2f042}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Item">
+      <UniqueIdentifier>{0f39bc1a-4ac1-4ee0-9158-e9f2f1818a72}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="window.ini" />
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>

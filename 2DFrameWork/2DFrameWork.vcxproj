@@ -199,6 +199,7 @@
     <ClInclude Include="UI.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="VertexType.h" />
+    <ClInclude Include="Water.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="Xml.h" />
   </ItemGroup>
@@ -239,6 +240,7 @@
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="Water.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="Xml.cpp" />
   </ItemGroup>

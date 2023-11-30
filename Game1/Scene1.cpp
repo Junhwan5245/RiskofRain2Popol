@@ -15,6 +15,8 @@ Scene1::Scene1()
     cam1->LoadFile("Cam.xml");
     loadCount++;
 
+    skybox = Sky::Create();
+    water = Water::Create();
 
     GM->player = Player::Create();
     loadCount++;
@@ -27,18 +29,23 @@ Scene1::Scene1()
     loadCount++;
     GM->map->PerlinNoise();//펄린노이즈 적용
 
-    for (int i = 0; i < MONCREATESIZE; ++i)
-    {
-        /*int num = i;*/
-        int num = 2;
-        
-        auto newMonster = Monster::Create("Monster", MonsterType(num));
-        GM->monsterPool.push_back(newMonster);
-    }
+    GM->map->Update();
+    itemBox = ItemBox::Create();
+    
+    //for (int i = 0; i < MONCREATESIZE; ++i)
+    //{
+    //    /*int num = i;*/
+    //    int num = 2;
+    //    
+    //    auto newMonster = Monster::Create("Monster", MonsterType(num));
+    //    GM->monsterPool.push_back(newMonster);
+    //}
     loadCount++;
     
    /*auto boss = Boss::Create("Boss");
    GM->monsterPool.push_back(boss);*/
+    int num = 0;
+   
 
     astar = new Astar();
     astar->CreateNode(GM->map,50);
@@ -157,15 +164,28 @@ void Scene1::Update()
     {
         monster->RenderHierarchy();
     }
+    for (auto& temp : GM->items)
+    {
+        temp->item->RenderHierarchy();
+    }
+
     GM->map->RenderHierarchy();
+    water->RenderHierarchy();
+    
+   
+
     escape->RenderHierarchy();
-    item->RenderHierarchy();
     ImGui::End();
 
     /* Golem* temp1 = dynamic_cast<Golem*>(monster);
       if (temp1)
           temp1->Rendertemp();*/
     
+
+
+    
+    itemBox->Update();
+   
     Camera::main->Update();
 
     //for (auto& monster : GM->monsterPool)
@@ -177,10 +197,17 @@ void Scene1::Update()
     //   monster->Update();
     //}
     GM->map->Update();
+
+    for (auto& item : GM->items)
+    {
+        item->Update();
+    }
+
+    water->Update();
     GM->Update();//총알
     GM->player->Update();
     escape->Update();
-    item->Update();
+   
 
     ui->Update();
 }
@@ -213,26 +240,19 @@ void Scene1::LateUpdate()
         }
     }
 
-    //임시
-    Ray itemTop;
-    itemTop.position = item->GetWorldPos() + Vector3(0, 10, 0);
-    itemTop.direction = Vector3(0, -1, 0);
-    if (Utility::RayIntersectMap(itemTop, GM->map, hit))//맵과 몬스터 레이 이용해 몬스터 y값 잡기
-    {
-        item->SetWorldPosY(hit.y);
-    }
+    
+    
+   
+    
+          
+           /*Lemurian* temp1 = dynamic_cast<Lemurian*>(monster);
+            if (temp1) 
+                temp1->CollisionBulletToMap(GM->map);*/
+         
+        
 
-    if (GM->player->Find("RootNode")->Intersect(item->Find("APRoundPickup.obj")))
-    {
-        GM->player->GetItemInven()->AddItem("APRound");
-    }
 
-    //임시
-
-    /*Lemurian* temp1 = dynamic_cast<Lemurian*>(monster);
-    if (temp1) 
-    temp1->CollisionBulletToMap(GM->map);*/
-    //monster->WolrdUpdate();
+        //monster->WolrdUpdate();
     //}
     GM->LateUpdate();
 }
@@ -246,18 +266,27 @@ void Scene1::Render()
 {
     LIGHT->Set();
     Camera::main->Set();
-
+    skybox->Render();
+    //playerCam->Set();
+    
     GM->map->Render();
-   
+   water->Render();
+   itemBox->Render();
+   for (auto& item : GM->items)
+    {
+       item->Render();
+    }
     for (auto& monster : GM->monsterPool)
     {
         monster->Render();
     }
     
+    
+
     GM->Render();
     GM->player->Render();
     escape->Render();
-    item->Render();
+   
     ui->Render();
 }
 

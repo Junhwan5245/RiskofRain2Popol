@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Bullet" Collapsed="true">
+    <Position X="6.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAgAAAAAAAAAgEAQAIAAAAAEEAEAEABAQIAAQAAA=</HashCode>
+      <FileName>Bullet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unit" Collapsed="true">
+    <Position X="5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAAAAEKAAAAAAYAAAAACAAAAAAECAABBAAAAAQAA=</HashCode>
+      <FileName>Unit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoadingScene" Collapsed="true">
+    <Position X="14.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAwAAAAAACIAAAIAAAAQIAAAAAAAAEAAABgCBBAAAAA=</HashCode>
+      <FileName>LoadingScene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerSelectScene" Collapsed="true">
+    <Position X="18" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IE4IAAgoAhAAGAIQAQARIAAAAwEAAkABBJRSABAQEIA=</HashCode>
+      <FileName>PlayerSelectScene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scene1" Collapsed="true">
+    <Position X="14.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwBAgAAAQKQEAAAgAAQMAAAACAAAMAAIBACARoAAAA=</HashCode>
+      <FileName>Scene1.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StartScene" Collapsed="true">
+    <Position X="16.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwAAAAAAgECEAJIAAAQIAAAAAAAAEAAABASADAAAAA=</HashCode>
+      <FileName>StartScene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Beetle" Collapsed="true">
+    <Position X="2.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQABAAACJAAAAAAAAACAACAAAAAAEgAABgAAAAAQAA=</HashCode>
+      <FileName>Beetle.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Boss" Collapsed="true">
+    <Position X="7.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAACJACAAEAQAAAAAGAAAAAAFgAABgAAAAAQAE=</HashCode>
+      <FileName>Boss.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BossBullet1" Collapsed="true">
+    <Position X="7.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwAAAAAAAAAAAAAAAAAAAAAAAAEAEAAABAAAAAQAAA=</HashCode>
+      <FileName>BossBullet1.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BossBullet2" Collapsed="true">
+    <Position X="12" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAIAAABEIEAAABAAAAAQAAA=</HashCode>
+      <FileName>BossBullet2.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Golem" Collapsed="true">
+    <Position X="9.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAACJAAAAAAAAAACACAAABAAEgAABgAhAAEQAA=</HashCode>
+      <FileName>Golem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GolemBullet" Collapsed="true">
+    <Position X="0.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAABAAEAEAAABAAAAAQAAA=</HashCode>
+      <FileName>GolemBullet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GolemLazer" Collapsed="true">
+    <Position X="3" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAACQAAAAEAEAAABAAAAAAAAA=</HashCode>
+      <FileName>GolemLazer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lemurian" Collapsed="true">
+    <Position X="5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAACJAAAAAAAAABAACAAAAAAEgAABiAAAAAQAA=</HashCode>
+      <FileName>Lemurian.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LemurianBullet" Collapsed="true">
+    <Position X="5.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAIAAAAAAAAAAAAAABAAEAEAAABAAAAAAAIA=</HashCode>
+      <FileName>LemurianBullet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Monster" Collapsed="true">
+    <Position X="6.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAEAJCBAAAgAgCAAAAACAADAACEoEAhgAAQAAQoA=</HashCode>
+      <FileName>Monster.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player" Collapsed="true">
+    <Position X="0.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQ4GABAAAoAAAAIFBAAAAIiAAEAEAECQcRQABQIEAhA=</HashCode>
+      <FileName>Player.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerBullet" Collapsed="true">
+    <Position X="9.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAABAAAAAAAAAAAAAAAAEAEAAABAAAABAAAA=</HashCode>
+      <FileName>PlayerBullet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InGameUI" Collapsed="true">
+    <Position X="16.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EBQCABgABIAAQAAAQAAQAAiACBECAERIAhBKAAAAAwA=</HashCode>
+      <FileName>InGameUI.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Item" Collapsed="true">
+    <Position X="2.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAEAAAAAEAAABAQgAAAAAA=</HashCode>
+      <FileName>Item.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemBox" Collapsed="true">
+    <Position X="1.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAIAAAACAAEAAAAAAAAAAAAAEAAABASggACAAA=</HashCode>
+      <FileName>ItemBox.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemBox_Normal" Collapsed="true">
+    <Position X="0.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABACAAAAAAA=</HashCode>
+      <FileName>ItemBox_Normal.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemBox_Rare" Collapsed="true">
+    <Position X="2.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQAAAAAAAAEAAAAAAAAAAAAAAAAAEAAABAAAAAAAAA=</HashCode>
+      <FileName>ItemBox_Rare.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Item_Syringe" Collapsed="true">
+    <Position X="5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAIAAAAAAAAAAAAAAEAACBAAgAAAAAA=</HashCode>
+      <FileName>Item_Syringe.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tile" Collapsed="true">
+    <Position X="18" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAoABAAEAAAAAIAAAQAAAAAAAAAAGEBAAAA=</HashCode>
+      <FileName>Astar.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Astar" Collapsed="true">
+    <Position X="14.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAIIEAAAACAAAAAAIAAQAAQAAAAAI=</HashCode>
+      <FileName>Astar.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LemurianBulletTrail" Collapsed="true">
+    <Position X="18" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQRAAAAgEAAEACAAAAQAACAAGAYAAAGoBAAIEBAIAA=</HashCode>
+      <FileName>LemurianBulletTrail.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Main" Collapsed="true">
+    <Position X="16.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAQIAAAAAAAAEAAABADBBAAAAA=</HashCode>
+      <FileName>Main.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="compare" Collapsed="true">
+    <Position X="14.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Astar.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="BulletType" Collapsed="true">
+    <Position X="16.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>Bullet.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="SelectType" Collapsed="true">
+    <Position X="16.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>PlayerSelectScene.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BossState" Collapsed="true">
+    <Position X="14.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAgAAAAAAggAAAAAAAAAAAAIA=</HashCode>
+      <FileName>Boss.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MonsterType" Collapsed="true">
+    <Position X="16.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAIAAAAAQAA=</HashCode>
+      <FileName>Monster.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MonsterState" Collapsed="true">
+    <Position X="14.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAgAAAAAAgAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>Monster.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PlayerState" Collapsed="true">
+    <Position X="14.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAACACAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Player.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PlayerAttackState" Collapsed="true">
+    <Position X="18" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Player.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="SkillState" Collapsed="true">
+    <Position X="18" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQBAAAQAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Player.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ItemType" Collapsed="true">
+    <Position X="18" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ItemBox.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>

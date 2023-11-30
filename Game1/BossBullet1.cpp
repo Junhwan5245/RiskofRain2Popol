@@ -30,7 +30,7 @@ void BossBullet1::Update()
 	{
 		//소멸 시키고
 		this->isCollsion = true;
-		GM->player->Hp -= 7;//플레이어 피깎기
+		GM->player->hp -= 7;//플레이어 피깎기
 
 	}
 	//for (auto& monster : GM->monsterPool)//총알과 몬스터와의 충돌

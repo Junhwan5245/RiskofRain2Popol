@@ -33,3 +33,10 @@
 #include "Boss.h"
 
 #include "Astar.h"
+
+//Item
+#include "Item.h"
+#include "ItemBox.h"
+#include "ItemBox_Normal.h"
+#include "ItemBox_Rare.h"
+#include "Item_Syringe.h"
