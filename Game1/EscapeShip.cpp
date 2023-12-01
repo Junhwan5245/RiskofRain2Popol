@@ -27,8 +27,8 @@ void EscapeShip::Render(shared_ptr<Shader> pShader)
 
 void EscapeShip::SetPos()
 {
-	float randX = RANDOM->Float(-100.0f, 100.0f);
-	float randZ = RANDOM->Float(-100.0f, 100.0f);
+	float randX = RANDOM->Float(-50.0f, 50.0f);
+	float randZ = RANDOM->Float(-50.0f, 50.0f);
     
     Vector3 pos = Vector3(randX, 0, randZ);
     //Vector3 pos = Vector3(0, 0, 0);

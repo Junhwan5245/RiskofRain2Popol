@@ -5,6 +5,7 @@ Golem* Golem::Create(string name)
 	Golem* golem = new Golem();
 	golem->LoadFile("mdlGolem.xml");
 	golem->type = ObType::Actor;
+	golem->monsterType = MonsterType::GOLEM;
 	golem->IdleAnimations();
 	golem->range = 20;
 	golem->moveSpeed = 5.0f;

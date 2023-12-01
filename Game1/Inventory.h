@@ -11,5 +11,7 @@ public:
 	~Inventory();
 
 	void AddItem(string name);
+
+	map<string, int> GetItemList() { return itemList; }
 };
 

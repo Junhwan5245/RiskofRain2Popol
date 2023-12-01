@@ -12,7 +12,8 @@ Item_TriTipDagger::~Item_TriTipDagger()
 }
 
 void Item_TriTipDagger::Operate()
-{
+{//15%(중첩당 +15%)확률로 적에게 출혈 발생. 기본피해 240%
+
 }
 
 void Item_TriTipDagger::Update()

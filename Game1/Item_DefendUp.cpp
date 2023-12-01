@@ -12,7 +12,7 @@ Item_DefendUp::~Item_DefendUp()
 }
 
 void Item_DefendUp::Operate()
-{
+{// 방어력 증가
 }
 
 void Item_DefendUp::Update()

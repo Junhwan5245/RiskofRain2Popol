@@ -12,7 +12,7 @@ Item_AttackUp::~Item_AttackUp()
 }
 
 void Item_AttackUp::Operate()
-{
+{// 공격력 증가
 }
 
 void Item_AttackUp::Update()

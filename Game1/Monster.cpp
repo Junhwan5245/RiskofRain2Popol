@@ -8,7 +8,7 @@ Monster::~Monster()
 {
 }
 
-Monster* Monster::Create(string name,MonsterType monType)
+Monster* Monster::Create(string name,MonsterType monType, Vector3 pos)
 {
     Monster* temp = nullptr;
     
@@ -34,7 +34,7 @@ Monster* Monster::Create(string name,MonsterType monType)
     temp->maxHp = 100;  // 몬스터마다의 체력으로 변경
     temp->Hp = 100;     // 몬스터마다의 체력으로 변경
 
-    temp->SetRandomPosition();
+    temp->SetRandomPosition(pos);
     temp->IdleAnimations();
     temp->Hp = 100;
     temp->state = MonsterState::IDLE;
@@ -47,7 +47,7 @@ Monster* Monster::Create(string name,MonsterType monType)
 	
 
 
-Monster* Monster::Create(Monster* src, MonsterType monType)
+Monster* Monster::Create(Monster* src, MonsterType monType, Vector3 pos)
 {
     Monster* temp = nullptr;
 
@@ -70,7 +70,7 @@ Monster* Monster::Create(Monster* src, MonsterType monType)
         break;
     }
 
-    temp->SetRandomPosition();
+    temp->SetRandomPosition(pos);
     temp->IdleAnimations();
     temp->state = MonsterState::IDLE;
     temp->type = ObType::Actor;
@@ -183,6 +183,18 @@ void Monster::MonFSM()
     else 
     { 
         state = MonsterState::DEAD;
+        static int count = 0;
+
+        // 몬스터가 죽었을때의 위치에서 적용해주기
+        auto iter = GM->player->GetItemInven()->GetItemList().find("Infusion");
+        if (iter != GM->player->GetItemInven()->GetItemList().end())
+        {//있다면 적 처치당 maxHp + 1 (중첩 +1) 최대 100(중첩 +100)
+            if (count < 100 * iter->second)
+            {
+                GM->player->maxHp += 1;
+                count++;
+            }
+        }
     }
     
     if (state == MonsterState::DEAD)
@@ -205,7 +217,7 @@ void Monster::MonFSM()
 	
 }
 
-void Monster::SetRandomPosition()
+void Monster::SetRandomPosition(Vector3 pos)
 {
     int minDistance = 1;
     int maxDistance = 5;
@@ -222,6 +234,6 @@ void Monster::SetRandomPosition()
     float offsetX = distance * 5 * cos(radianAngle);
     float offsetZ = distance * 5 * sin(radianAngle);
 
-    this->SetWorldPosX(GM->player->GetWorldPos().x + offsetX);
-    this->SetWorldPosZ(GM->player->GetWorldPos().z + offsetZ);
+    this->SetWorldPosX(pos.x + offsetX);
+    this->SetWorldPosZ(pos.z + offsetZ);
 }

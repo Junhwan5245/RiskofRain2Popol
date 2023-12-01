@@ -12,7 +12,7 @@ Item_Syringe::~Item_Syringe()
 }
 
 void Item_Syringe::Operate()
-{
+{//공격속도 15%(중첩당+15%)증가
 	GM->player->attackSpeed += GM->player->attackSpeed * 0.15f;
 }
 

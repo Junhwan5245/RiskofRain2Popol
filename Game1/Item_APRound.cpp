@@ -12,7 +12,8 @@ Item_APRound::~Item_APRound()
 }
 
 void Item_APRound::Operate()
-{
+{//보스에게 20%(중첩당 +20%) 추가 피해
+
 }
 
 void Item_APRound::Update()

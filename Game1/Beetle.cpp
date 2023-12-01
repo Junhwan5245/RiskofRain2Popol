@@ -5,6 +5,7 @@ Beetle* Beetle::Create(string name)
 	Beetle* beetle = new Beetle();
 	beetle->LoadFile("Beetle.xml");
 	beetle->type = ObType::Actor;
+	beetle->monsterType = MonsterType::BEETLE;
 	beetle->IdleAnimations();
 	beetle->range = 1;
 	

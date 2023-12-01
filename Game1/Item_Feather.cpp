@@ -12,7 +12,8 @@ Item_Feather::~Item_Feather()
 }
 
 void Item_Feather::Operate()
-{
+{//최대 점프 횟수 1증가
+
 }
 
 void Item_Feather::Update()

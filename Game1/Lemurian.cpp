@@ -5,6 +5,7 @@ Lemurian* Lemurian::Create(string name)
 	Lemurian* lemurian = new Lemurian();
 	lemurian->LoadFile("Lemurian.xml");
 	lemurian->type = ObType::Actor;
+	lemurian->monsterType = MonsterType::LEMURIAN;
 	lemurian->IdleAnimations();
 	/*lemurian->anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);*/
 	lemurian->moveSpeed = 7.0f; // 증가계수 24

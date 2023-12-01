@@ -12,7 +12,7 @@ Item_Seed::~Item_Seed()
 }
 
 void Item_Seed::Operate()
-{
+{//피해를 입으면 1(중첩당 + 1)의 체력 치유
 }
 
 void Item_Seed::Update()

@@ -16,6 +16,8 @@ public:
     void    SetPos(Vector3 pos) override;
     void    Fire(Vector3 dir, float power, Vector3 rotation) override;
 
+    void    Attack();
+
     //bool    GetIsFire() { return isFire; }
 };
 
