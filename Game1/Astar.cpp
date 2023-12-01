@@ -7,7 +7,7 @@ Astar::Astar()
 }
 
 
-void Astar::CreateNode(Terrain* map, int size)
+void Astar::CreateNode(Terrain* map, int size, list<Collider*> collider)
 {
     map->Update();
     target = map;
@@ -40,6 +40,7 @@ void Astar::CreateNode(Terrain* map, int size)
             Tiles[z][x].idxX = x;
             Tiles[z][x].idxZ = z;
 
+            Tiles[z][x].pass = true;
             //for (auto k = map->children.begin(); k != map->children.end(); k++)
             //{
             //    Tiles[z][x].pass = true;
@@ -54,6 +55,12 @@ void Astar::CreateNode(Terrain* map, int size)
             //        }
             //    }
             //}
+
+            for (auto& k : collider)
+            {
+                if (k->Intersect(Pos))
+                    Tiles[z][x].pass = false;
+            }
         }
 
     }
@@ -98,7 +105,7 @@ void Astar::ResizeNode(int size)
             Tiles[z][x].idxX = x;
             Tiles[z][x].idxZ = z;
 
-            /*for (auto k = target->children.begin(); k != target->children.end(); k++)
+            for (auto k = target->children.begin(); k != target->children.end(); k++)
             {
                 Tiles[z][x].pass = true;
                 if (k->second->collider)
@@ -108,7 +115,7 @@ void Astar::ResizeNode(int size)
                         Tiles[z][x].pass = false;
                     }
                 }
-            }*/
+            }
         }
 
     }

@@ -25,11 +25,10 @@ void Boss::Update()
 	/*Monster::Update();*/
 	ImGui::Text("BossState : %d", bState);
 	
-
 	Stare();
-
+	
 	MonFSM();
-
+	
 	Actor::Update();
 	if (bState == BossState::MOVE)
 	{
@@ -43,6 +42,7 @@ void Boss::Update()
 			anim->ChangeAnimation(AnimationState::ONCE_LAST, 1, 0.0f);
 		}
 	}
+	
 	
 }
 

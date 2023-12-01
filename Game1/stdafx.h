@@ -32,6 +32,7 @@
 
 #include "Boss.h"
 
+#include "Teleport.h"
 #include "Astar.h"
 
 //Item
@@ -40,3 +41,8 @@
 #include "ItemBox_Normal.h"
 #include "ItemBox_Rare.h"
 #include "Item_Syringe.h"
+
+
+//Feature
+#include "Feature.h"
+#include "Rock1.h"

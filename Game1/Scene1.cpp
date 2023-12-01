@@ -7,13 +7,11 @@ Scene1::Scene1()
 {
     escape = EscapeShip::Create();
 
-    item = Actor::Create("Item");
-    item->LoadFile("Item_APRound.xml");
-    loadCount++;
-
     cam1 = Camera::Create();
     cam1->LoadFile("Cam.xml");
     loadCount++;
+
+    teleport = new Teleport();
 
     skybox = Sky::Create();
     water = Water::Create();
@@ -30,25 +28,39 @@ Scene1::Scene1()
     GM->map->PerlinNoise();//펄린노이즈 적용
 
     GM->map->Update();
+
+    for (int i = 0; i < 20; i++)
+    {
+        Rock1* rock1;
+        rock1 = new Rock1();
+        GM->featurePool.push_back(rock1);
+    }
+    
+    for (auto& feature : GM->featurePool)
+    {
+        colliders.emplace_back(feature->feature->Find("RootNode")->collider);
+    }
+
     itemBox = ItemBox::Create();
     
-    //for (int i = 0; i < MONCREATESIZE; ++i)
-    //{
-    //    /*int num = i;*/
-    //    int num = 2;
-    //    
-    //    auto newMonster = Monster::Create("Monster", MonsterType(num));
-    //    GM->monsterPool.push_back(newMonster);
-    //}
+   for (int i = 0; i < MONCREATESIZE; ++i)
+   {
+       int num = i;
+       /*int num = 2;*/
+       
+       auto newMonster = Monster::Create("Monster", MonsterType(num));
+       GM->monsterPool.push_back(newMonster);
+   }
     loadCount++;
     
-   /*auto boss = Boss::Create("Boss");
-   GM->monsterPool.push_back(boss);*/
+    boss = Boss::Create("Boss");
+   
     int num = 0;
    
 
     astar = new Astar();
-    astar->CreateNode(GM->map,50);
+
+    astar->CreateNode(GM->map,50,colliders);
     
 }
 Scene1::~Scene1()
@@ -183,7 +195,8 @@ void Scene1::Update()
     
 
 
-    
+    teleport->Update();
+
     itemBox->Update();
    
     Camera::main->Update();
@@ -203,10 +216,15 @@ void Scene1::Update()
         item->Update();
     }
 
+    for (auto& feature : GM->featurePool)
+    {
+        feature->Update();
+    }
     water->Update();
     GM->Update();//총알
     GM->player->Update();
     escape->Update();
+   
    
 
     ui->Update();
@@ -240,21 +258,17 @@ void Scene1::LateUpdate()
         }
     }
 
-    
-    
    
-    
-          
-           /*Lemurian* temp1 = dynamic_cast<Lemurian*>(monster);
-            if (temp1) 
-                temp1->CollisionBulletToMap(GM->map);*/
-         
-        
-
-
-        //monster->WolrdUpdate();
-    //}
     GM->LateUpdate();
+
+    if (teleport->teleport->Find("RootNode")->Intersect(GM->player->Find("RootNode")))
+    {
+        if (INPUT->KeyDown('E'))
+        { 
+            GM->monsterPool.push_back(boss);
+            //게이지 채우는 것 시작
+        }
+    }
 }
 
 void Scene1::PreRender()
@@ -281,12 +295,15 @@ void Scene1::Render()
         monster->Render();
     }
     
-    
+    for (auto& feature : GM->featurePool)
+    {
+        feature->Render();
+    }
 
     GM->Render();
     GM->player->Render();
     escape->Render();
-   
+    teleport->Render();
     ui->Render();
 }
 

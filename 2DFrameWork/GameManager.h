@@ -4,10 +4,11 @@ class GameManager : public Singleton<GameManager>
 
 public:
 	/*class Player* pl;*/
-	vector<class Item*> items;
-	vector<class Monster*> monsterPool;
-	class Player* player;
-	vector<class Bullet*> bulletPool;
+	vector<class Item*> items;//아이템 담아놓는 벡터
+	vector<class Monster*> monsterPool;//몬스터 담아놓는 벡터
+	class Player* player;//플레이어
+	vector<class Bullet*> bulletPool;//총알 담는 벡터
+	vector<class Feature*> featurePool;//지형물 담는 벡터
 	class Terrain* map; 
 
 	virtual ~GameManager();
@@ -17,6 +18,7 @@ public:
 	virtual void LateUpdate();
 	virtual void Render();
 	virtual void ResizeScreen();
+	
 };
 
 

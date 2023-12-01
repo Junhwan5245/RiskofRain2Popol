@@ -26,6 +26,7 @@
     <ClInclude Include="BossBullet2.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="EscapeShip.h" />
+    <ClInclude Include="Feature.h" />
     <ClInclude Include="InGameUI.h" />
     <ClInclude Include="Golem.h" />
     <ClInclude Include="GolemBullet.h" />
@@ -45,9 +46,11 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerBullet.h" />
     <ClInclude Include="PlayerSelectScene.h" />
+    <ClInclude Include="Rock1.h" />
     <ClInclude Include="Scene1.h" />
     <ClInclude Include="StartScene.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Teleport.h" />
     <ClInclude Include="Unit.h" />
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +61,7 @@
     <ClCompile Include="BossBullet2.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="EscapeShip.cpp" />
+    <ClCompile Include="Feature.cpp" />
     <ClCompile Include="InGameUI.cpp" />
     <ClCompile Include="Golem.cpp" />
     <ClCompile Include="GolemBullet.cpp" />
@@ -77,8 +81,10 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerBullet.cpp" />
     <ClCompile Include="PlayerSelectScene.cpp" />
+    <ClCompile Include="Rock1.cpp" />
     <ClCompile Include="Scene1.cpp" />
     <ClCompile Include="StartScene.cpp" />
+    <ClCompile Include="Teleport.cpp" />
     <ClCompile Include="Unit.cpp" />
   </ItemGroup>
   <ItemGroup>

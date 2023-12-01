@@ -4,7 +4,7 @@ enum class MonsterType
 {
 	BEETLE,
 	LEMURIAN,
-	GOLEM
+	GOLEM,
 };
 enum class MonsterState 
 {
@@ -50,6 +50,7 @@ protected:
 	virtual void DeadAnimations() = 0;
 
 	virtual void    MonFSM();
+	void	SetFirstPos();
 	void	SetRandomPosition();
 	//void	Stare();
 	MonsterState     GetState() { return state; }

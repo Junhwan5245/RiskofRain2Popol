@@ -16,16 +16,18 @@ private:
     Sky*         skybox;
     Water*       water;
     ItemBox*     itemBox;
-   
-    EscapeShip*     escape;
+    Boss*        boss;
+    EscapeShip*  escape;
+    Teleport*    teleport;
 
     Actor* item;        // 임의의 아이템
 
-
+    list<Collider*> colliders;
+  
     float           monsterCreationTimer = 0.0f;                  // 게임 플레이 시간
     const float     monsterCreationInterval = 10.0f;        // 몬스터 생성 주기
 
-
+   
     bool            isMainCam;     // 메인캠 전환키 (임시용)
     float           renewtime = 0.0f;
     int             level;
