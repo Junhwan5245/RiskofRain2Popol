@@ -3,14 +3,14 @@
     <Animations AnimSize="2" File0="Chest2/mdlChest2ani0.anim" File1="Chest2/mdlChest2ani1.anim"/>
     <Transform>
         <Position X="0" Y="0" Z="0"/>
-        <Scale X="1" Y="1" Z="1"/>
+        <Scale X="0.40000001" Y="0.40000001" Z="0.40000001"/>
         <Rotation X="0" Y="0" Z="0"/>
     </Transform>
     <Children Size="1"/>
     <Child0 Name="RootNode" Visible="true" ObType="0" BoneIndex="1">
         <Collider ColliderType="2" Visible="true">
-            <Position X="0" Y="1.3" Z="-0.34999999"/>
-            <Scale X="2.3" Y="1.5" Z="2"/>
+            <Position X="-0.15000001" Y="1.35" Z="-0.25"/>
+            <Scale X="2.2" Y="1.95" Z="2"/>
             <Rotation X="0" Y="0" Z="0"/>
         </Collider>
         <Transform>

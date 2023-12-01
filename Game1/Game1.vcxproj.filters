@@ -109,6 +109,15 @@
     <ClInclude Include="Item_Seed.h">
       <Filter>Item\Rare</Filter>
     </ClInclude>
+    <ClInclude Include="Teleport.h">
+      <Filter>Feature</Filter>
+    </ClInclude>
+    <ClInclude Include="Feature.h">
+      <Filter>Feature</Filter>
+    </ClInclude>
+    <ClInclude Include="Rock1.h">
+      <Filter>Feature</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -218,6 +227,15 @@
     <ClCompile Include="Item_Seed.cpp">
       <Filter>Item\Rare</Filter>
     </ClCompile>
+    <ClCompile Include="Teleport.cpp">
+      <Filter>Feature</Filter>
+    </ClCompile>
+    <ClCompile Include="Feature.cpp">
+      <Filter>Feature</Filter>
+    </ClCompile>
+    <ClCompile Include="Rock1.cpp">
+      <Filter>Feature</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">
@@ -246,6 +264,9 @@
     </Filter>
     <Filter Include="Item\Rare">
       <UniqueIdentifier>{7159fd02-bf91-4647-ab89-dfc179734405}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Feature">
+      <UniqueIdentifier>{99e64ebc-c022-40f6-a98c-3005c2174cb9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -3,7 +3,7 @@
 
 ItemBox_Normal::ItemBox_Normal()
 {
-	itemBox->LoadFile("Lemurian.xml");
+	itemBox->LoadFile("Chest2.xml");
 	ItemBox::Init();
 }
 

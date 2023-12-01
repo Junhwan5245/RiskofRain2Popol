@@ -34,7 +34,7 @@ Monster* Monster::Create(string name,MonsterType monType, Vector3 pos)
     temp->maxHp = 100;  // 몬스터마다의 체력으로 변경
     temp->Hp = 100;     // 몬스터마다의 체력으로 변경
 
-    temp->SetRandomPosition(pos);
+    temp->SetFirstPos();
     temp->IdleAnimations();
     temp->Hp = 100;
     temp->state = MonsterState::IDLE;
@@ -47,37 +47,41 @@ Monster* Monster::Create(string name,MonsterType monType, Vector3 pos)
 	
 
 
-Monster* Monster::Create(Monster* src, MonsterType monType, Vector3 pos)
-{
-    Monster* temp = nullptr;
-
-    switch (monType)
-    {
-    case MonsterType::BEETLE:
-        temp = Beetle::Create();
-        break;
-
-    case MonsterType::LEMURIAN:
-        temp = Lemurian::Create();
-        break;
-
-    case MonsterType::GOLEM:
-        temp = Golem::Create();
-        break;
-
-    default:
-        return temp;
-        break;
-    }
-
-    temp->SetRandomPosition(pos);
-    temp->IdleAnimations();
-    temp->state = MonsterState::IDLE;
-    temp->type = ObType::Actor;
-    temp->dieTimer = 0.0f;
-   
-    return temp;
-}
+//Monster* Monster::Create(Monster* src, MonsterType monType)
+//{
+//    Monster* temp = nullptr;
+//
+//    switch (monType)
+//    {
+//    case MonsterType::BEETLE:
+//        temp = Beetle::Create();
+//        break;
+//
+//    case MonsterType::LEMURIAN:
+//        temp = Lemurian::Create();
+//        break;
+//
+//    case MonsterType::GOLEM:
+//        temp = Golem::Create();
+//        break;
+//
+//    case MonsterType::BOSS:
+//        temp = Boss::Create();
+//        break;
+//
+//    default:
+//        return temp;
+//        break;
+//    }
+//
+//    temp->SetRandomPosition();
+//    temp->IdleAnimations();
+//    temp->state = MonsterState::IDLE;
+//    temp->type = ObType::Actor;
+//    temp->dieTimer = 0.0f;
+//   
+//    return temp;
+//}
 
 void Monster::Update()
 {
@@ -215,6 +219,12 @@ void Monster::MonFSM()
     }
 
 	
+}
+
+void Monster::SetFirstPos()
+{
+    this->SetWorldPosX(RANDOM->Int(-30,30));
+    this->SetWorldPosZ(RANDOM->Int(-30,30));
 }
 
 void Monster::SetRandomPosition(Vector3 pos)

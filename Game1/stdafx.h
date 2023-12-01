@@ -32,6 +32,7 @@
 
 #include "Boss.h"
 
+#include "Teleport.h"
 #include "Astar.h"
 
 //Item
@@ -49,3 +50,9 @@
 #include "Item_Seed.h"
 #include "Item_AttackUp.h"
 #include "Item_DefendUp.h"
+
+
+
+//Feature
+#include "Feature.h"
+#include "Rock1.h"

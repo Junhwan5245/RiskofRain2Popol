@@ -5,7 +5,6 @@ enum class MonsterType
 	BEETLE,
 	LEMURIAN,
 	GOLEM,
-	BOSS
 };
 enum class MonsterState 
 {
@@ -52,6 +51,7 @@ protected:
 
 	virtual void    MonFSM();
 	void	SetRandomPosition(Vector3 pos);
+	void	SetFirstPos();
 	//void	Stare();
 	MonsterState     GetState() { return state; }
 	

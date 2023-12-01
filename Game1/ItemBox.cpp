@@ -40,6 +40,8 @@ void ItemBox::Init()
 	{
 		itemBox->SetWorldPosY(hit.y);
 	}
+	isOpen = false;
+	isFirst = false;
 }
 
 void ItemBox::Update()
@@ -66,10 +68,24 @@ void ItemBox::Interaction()
 {
 	if (itemBox->Find("RootNode")->Intersect(GM->player->Find("RootNode")))
 	{
-		if (INPUT->KeyDown('E'))
+		if (!isOpen)
+		{
+			if (INPUT->KeyDown('E'))
+			{
+				itemBox->anim->ChangeAnimation(AnimationState::ONCE_LAST, 0, 0.0f);
+				isOpen = true;
+				isFirst = true;
+			}
+		}
+	}
+
+	if (isFirst)
+	{
+		if (TIMER->GetTick(openTime, 2.0f))
 		{
 			isOpen = true;
 			CreateItem();
+			isFirst = false;
 		}
 	}
 }

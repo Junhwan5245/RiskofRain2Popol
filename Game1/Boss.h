@@ -29,6 +29,7 @@ public:
 	float	attackTimer;
 	float	bulletTimer1;
 	float	bulletTimer2;
+	bool	isTemp;
 
 private:
 	Boss();
