@@ -278,6 +278,10 @@ void Player::FSM()
 		ImGui::Text("MouseRay posx : %.2f", mouseRay.position.x);
 		ImGui::Text("MouseRay posy : %.2f", mouseRay.position.y);
 		ImGui::Text("MouseRay posz : %.2f", mouseRay.position.z);
+
+		ImGui::Text("\n\nplayer posx : %.2f", GetWorldPos().x);
+		ImGui::Text("player posy : %.2f", GetWorldPos().y);
+		ImGui::Text("player posz : %.2f", GetWorldPos().z);
 		/** M1 스킬 */
 		{
 			if (INPUT->KeyPress(VK_LBUTTON))
@@ -301,18 +305,22 @@ void Player::FSM()
 					if (isRight)
 						pos = Find("gun.r.muzzle")->GetWorldPos();
 					else pos = Find("gun.l.muzzle")->GetWorldPos();
-
 					temp->SetPos(pos);
+
+					Vector3 dir = pos - mouseRay.position; // 그 방향
+					dir.Normalize();
+
+					//temp->rotation.x = -asinf(dir.y); // 그 방향으로 바라보는
+
 					temp->scale = Vector3(0.05, 0.05, 0.05);
 
 					GM->bulletPool.push_back(temp);
 
-					Vector3 d = pos - mouseRay.position;
 					for (auto it = GM->bulletPool.begin(); it != GM->bulletPool.end(); it++)
 					{
 						if (not (*it)->isFire)
 						{
-							(*it)->Fire(d, 20.0f, rotation);
+							(*it)->Fire(mouseRay.direction, 200.0f, rotation);
 							break;
 						}
 					}

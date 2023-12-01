@@ -21,8 +21,6 @@ enum RareItemPool
 class ItemBox
 {
 private:
-	bool isOpen = false;
-
 
 public:
 	ItemBox();

@@ -88,7 +88,6 @@ void Bullet::Fire(Vector3 dir, float power, Vector3 rotation)
 	isFire = true;
 	this->power = power;
 	this->fireDir = dir;
-	Vector3 rot = dir - GetWorldPos();
 	this->rotation.x = HALFPI;
 	this->rotation.y = rotation.y;
 }

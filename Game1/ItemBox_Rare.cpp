@@ -26,7 +26,7 @@ void ItemBox_Rare::CreateItem()
 
 	int size = RareItemPool::SizeRare;
 
-	switch(RANDOM->Int(0, size -1))
+	switch(RANDOM->Int(0, (size - 1)))
 	{
 	case RareItemPool::Feather:
 		temp = new Item_Feather();

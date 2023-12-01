@@ -80,7 +80,8 @@ void Scene1::Init()
     Camera::main->width = 1280;
     Camera::main->height = 720;
 
-    
+    //escape->SetWorldPos(Vector3());
+    //escape->anim->ChangeAnimation(AnimationState::ONCE_LAST, 0, 0.1f);
     escape->SetPos();
 }
 
@@ -159,7 +160,7 @@ void Scene1::Update()
             for (int i = 0; i < MONCREATESIZE; ++i)
             {
                 int num = RANDOM->Int(0, 2);
-                auto newMonster = Monster::Create("Monster", MonsterType(num), GM->player->GetWorldPos());
+                auto newMonster = Monster::Create("Monster", MonsterType(num));
                 GM->monsterPool.push_back(newMonster);
             }
         }
@@ -202,10 +203,18 @@ void Scene1::Update()
 
     for (auto& monster : GM->monsterPool)
     {
-        if (TIMER->GetTick(renewtime, 1.0f))
+        if (GM->player->isEscape)
         {
-            astar->PathFinding(monster->GetWorldPos(), GM->player->GetWorldPos(), monster->way);
+            monster->way.clear();
         }
+        else
+        {
+            if (TIMER->GetTick(renewtime, 1.0f))
+            {
+                astar->PathFinding(monster->GetWorldPos(), GM->player->GetWorldPos(), monster->way);
+            }
+        }
+
        monster->Update();
     }
     GM->map->Update();

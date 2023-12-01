@@ -19,8 +19,7 @@ enum class MonsterState
 class Monster : public Unit
 {
 public:
-	static Monster* Create(string name, MonsterType monType, Vector3 pos);//다른 곳에서 생성자로 접근 불가능하게 하기 위해서
-	static Monster* Create(Monster* src, MonsterType monType, Vector3 pos);
+	static Monster* Create(string name, MonsterType monType);//다른 곳에서 생성자로 접근 불가능하게 하기 위해서
 	void   Update();
 	void   Render(shared_ptr<Shader> pShader = nullptr);
 	void    WolrdUpdate();
@@ -50,7 +49,7 @@ protected:
 	virtual void DeadAnimations() = 0;
 
 	virtual void    MonFSM();
-	void	SetRandomPosition(Vector3 pos);
+	void	SetRandomPosition();
 	void	SetFirstPos();
 	//void	Stare();
 	MonsterState     GetState() { return state; }

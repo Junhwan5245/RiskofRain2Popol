@@ -15,7 +15,7 @@ ItemBox* ItemBox::Create()
 	int num = RANDOM->Int(0,1);
 
 	//switch (num)
-	switch (0)
+	switch (num)
 	{
 	case 0:
 		return new ItemBox_Normal();
@@ -46,10 +46,8 @@ void ItemBox::Init()
 
 void ItemBox::Update()
 {
-	if (not isOpen)
-		Interaction();
-	else
-		itemBox->visible = false;
+	Interaction();
+		
 
 	itemBox->Update();
 }
@@ -81,9 +79,8 @@ void ItemBox::Interaction()
 
 	if (isFirst)
 	{
-		if (TIMER->GetTick(openTime, 2.0f))
+		if (itemBox->anim->GetPlayTime() >= 0.99)
 		{
-			isOpen = true;
 			CreateItem();
 			isFirst = false;
 		}

@@ -5,7 +5,6 @@ Boss* Boss::Create(string name)
 	Boss* boss = new Boss();
 	boss->LoadFile("Boss.xml");
 	boss->type = ObType::Actor;
-	boss->monsterType = MonsterType::BOSS;
 	boss->IdleAnimations();
 	boss->range = 20;
 

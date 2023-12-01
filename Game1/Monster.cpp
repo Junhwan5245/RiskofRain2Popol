@@ -8,7 +8,7 @@ Monster::~Monster()
 {
 }
 
-Monster* Monster::Create(string name,MonsterType monType, Vector3 pos)
+Monster* Monster::Create(string name,MonsterType monType)
 {
     Monster* temp = nullptr;
     
@@ -44,44 +44,6 @@ Monster* Monster::Create(string name,MonsterType monType, Vector3 pos)
 
     return temp;
 }
-	
-
-
-//Monster* Monster::Create(Monster* src, MonsterType monType)
-//{
-//    Monster* temp = nullptr;
-//
-//    switch (monType)
-//    {
-//    case MonsterType::BEETLE:
-//        temp = Beetle::Create();
-//        break;
-//
-//    case MonsterType::LEMURIAN:
-//        temp = Lemurian::Create();
-//        break;
-//
-//    case MonsterType::GOLEM:
-//        temp = Golem::Create();
-//        break;
-//
-//    case MonsterType::BOSS:
-//        temp = Boss::Create();
-//        break;
-//
-//    default:
-//        return temp;
-//        break;
-//    }
-//
-//    temp->SetRandomPosition();
-//    temp->IdleAnimations();
-//    temp->state = MonsterState::IDLE;
-//    temp->type = ObType::Actor;
-//    temp->dieTimer = 0.0f;
-//   
-//    return temp;
-//}
 
 void Monster::Update()
 {
@@ -190,15 +152,15 @@ void Monster::MonFSM()
         static int count = 0;
 
         // 몬스터가 죽었을때의 위치에서 적용해주기
-        auto iter = GM->player->GetItemInven()->GetItemList().find("Infusion");
-        if (iter != GM->player->GetItemInven()->GetItemList().end())
-        {//있다면 적 처치당 maxHp + 1 (중첩 +1) 최대 100(중첩 +100)
-            if (count < 100 * iter->second)
-            {
-                GM->player->maxHp += 1;
-                count++;
-            }
-        }
+        //auto iter = GM->player->GetItemInven()->GetItemList().find("Infusion");
+        //if (iter != GM->player->GetItemInven()->GetItemList().end())
+        //{//있다면 적 처치당 maxHp + 1 (중첩 +1) 최대 100(중첩 +100)
+        //    if (count < 100 * iter->second)
+        //    {
+        //        GM->player->maxHp += 1;
+        //        count++;
+        //    }
+        //}
     }
     
     if (state == MonsterState::DEAD)
@@ -227,7 +189,7 @@ void Monster::SetFirstPos()
     this->SetWorldPosZ(RANDOM->Int(-30,30));
 }
 
-void Monster::SetRandomPosition(Vector3 pos)
+void Monster::SetRandomPosition()
 {
     int minDistance = 1;
     int maxDistance = 5;
@@ -244,6 +206,6 @@ void Monster::SetRandomPosition(Vector3 pos)
     float offsetX = distance * 5 * cos(radianAngle);
     float offsetZ = distance * 5 * sin(radianAngle);
 
-    this->SetWorldPosX(pos.x + offsetX);
-    this->SetWorldPosZ(pos.z + offsetZ);
+    this->SetWorldPosX(GM->player->GetWorldPos().x + offsetX);
+    this->SetWorldPosZ(GM->player->GetWorldPos().z + offsetZ);
 }
