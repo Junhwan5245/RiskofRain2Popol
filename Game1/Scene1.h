@@ -8,10 +8,7 @@ private:
     Camera*         cam1;
     class InGameUI* ui;
 
-    Camera*     playerCam;
-    Grid*       grid;
-    Monster*    monster;
-    
+
     class Astar* astar;
     Sky*         skybox;
     Water*       water;
