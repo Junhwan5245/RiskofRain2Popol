@@ -149,7 +149,8 @@ void Window::Create()
 		WS_EX_APPWINDOW
 		, App.appName.c_str()
 		, App.appName.c_str()
-		, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_OVERLAPPEDWINDOW
+		, WS_OVERLAPPED | WS_SYSMENU
+		//, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_OVERLAPPEDWINDOW
 		, CW_USEDEFAULT
 		, CW_USEDEFAULT
 		, CW_USEDEFAULT
@@ -209,20 +210,16 @@ LRESULT Window::WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)
 			PostQuitMessage(0);
 		}
 	}
-	if (message == WM_GETMINMAXINFO)
-	{
-		//((LPMINMAXINFO)lParam)->ptMinTrackSize.x = 1280;
-		//((LPMINMAXINFO)lParam)->ptMinTrackSize.y = 720;
-		//((LPMINMAXINFO)lParam)->ptMaxTrackSize.x = 1280;
-		//((LPMINMAXINFO)lParam)->ptMaxTrackSize.y = 720;
-		//
-		//((LPMINMAXINFO)lParam)->ptMaxSize.x = 1280;
-		//((LPMINMAXINFO)lParam)->ptMaxSize.y = 720;
-		//((LPMINMAXINFO)lParam)->ptMaxPosition.x = App.x;
-		//((LPMINMAXINFO)lParam)->ptMaxPosition.y = App.y;
 
-		return 0;
-	}
+	//if (message == WM_GETMINMAXINFO)
+	//{
+	//	((MINMAXINFO*)lParam)->ptMaxTrackSize.x = 1600.0f;
+	//	((MINMAXINFO*)lParam)->ptMaxTrackSize.y = 900.0f;
+	//	((MINMAXINFO*)lParam)->ptMinTrackSize.x = 1600.0f;
+	//	((MINMAXINFO*)lParam)->ptMinTrackSize.x = 900.0f;
+	//
+	//	return 0;
+	//}
 
 	if (message == WM_CLOSE || message == WM_DESTROY)
 	{
