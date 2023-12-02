@@ -201,14 +201,16 @@ void Scene1::Update()
    
     Camera::main->Update();
 
-    //for (auto& monster : GM->monsterPool)
-    //{
-    //    if (TIMER->GetTick(renewtime, 1.0f))
-    //    {
-    //        astar->PathFinding(monster->GetWorldPos(), GM->player->GetWorldPos(), monster->way);
-    //    }
-    //   monster->Update();
-    //}
+
+    for (auto& monster : GM->monsterPool)
+    {
+        if (TIMER->GetTick(renewtime, 1.0f))
+        {
+            astar->PathFinding(monster->GetWorldPos(), GM->player->GetWorldPos(), monster->way);
+        }
+       monster->Update();
+    }
+
     GM->map->Update();
 
     for (auto& item : GM->items)

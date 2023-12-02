@@ -28,7 +28,7 @@ void Lemurian::Update()
 
 	ImGui::Text("Lemurian attack : %.2f", attack);
 
-	root->Find("frontHp")->scale.x = Hp * 1.7 / 100;
+	root->Find("frontHp")->scale.x = hp * 1.7 / 100;
 
 
 

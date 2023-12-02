@@ -28,8 +28,6 @@ public:
 	MonsterType  monType;
 	float stateChangeTime=0.0f;
 	float stateChangeInterval=5.0f;
-	int maxHp = 100;
-	int Hp=100;
 	Vector3 PlayerDir;//총알발사를 위한 플레이어 고정값
 	vector<Vector3> way;
 	Vector3 last;

@@ -28,6 +28,7 @@ void GolemBullet::Update()
 
 	/*trail->RenderDetail();
 	trail->Update();*/
+
 	Bullet::Update();
 
 }

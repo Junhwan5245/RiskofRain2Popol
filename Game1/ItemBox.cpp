@@ -75,7 +75,7 @@ void ItemBox::Interaction()
 		}
 	}
 
-	if (isFirst)
+	if (isFirst) 
 	{
 		if (TIMER->GetTick(openTime, 2.0f))
 		{
