@@ -61,18 +61,19 @@ private:
     float               LButtonFireTime; // 좌클릭 발사타임
     float               RSkillFireTime;  //  R스킬 발사시간(공속에 따라 더빠르게 발사가능)
     float               RSkillFire;  //  R스킬 발사시간(공속에 따라 더빠르게 발사가능)
-    
-    Vector3             gravityDir;
-    float               gravity;
 
     /** 플레이어만 가지고 있을 스텟*/
-    float               maxExp;
 
     Player();
     virtual ~Player();
+
 public:
-    bool                isJump;         // 점프했는지
+    Vector3             gravityDir;
+    float               gravity;
+    bool                isJump = false;         // 점프했는지
+    bool                isJumpFinish = false;   // 점프 마지막 
     float               attackSpeed = 0.16f;    // 공속
+    float               maxExp;
     bool                isEscape = true;       // 탐사정에 있는가?
 
 

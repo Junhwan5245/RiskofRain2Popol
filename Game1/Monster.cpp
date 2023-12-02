@@ -168,6 +168,11 @@ void Monster::MonFSM()
         if (!isHpZero)
         {
             isHpZero = true;
+            GM->player->exp += exp;
+            GM->player->gold += gold;
+            
+            float scale = GM->ui->leftBottom->Find("LeftBottom_ExpBarscale")->scale.x * GM->player->exp / (float)GM->player->maxExp;
+            GM->ui->leftBottom->Find("LeftBottom_Exp")->scale.x = scale;
             DeadAnimations();
         }
         if (TIMER->GetTick(dieTimer, 5.0f))

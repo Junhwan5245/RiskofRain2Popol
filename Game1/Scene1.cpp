@@ -236,15 +236,54 @@ void Scene1::LateUpdate()
     playerTop.position = GM->player->GetWorldPos() + Vector3(0, 100, 0);
     playerTop.direction = Vector3(0, -1, 0);
 
-    Ray playerJumpRay;
-    playerTop.position = GM->player->GetWorldPos() + Vector3(0, 1, 0);
-    playerTop.direction = Vector3(0, -1, 0);
+    
 
     Vector3 hit;
     if (Utility::RayIntersectMap(playerTop, GM->map, hit))//맵과 몬스터 레이 이용해 플레이어 y값 잡기
     {
-        GM->player->SetWorldPosY(hit.y);
+        // float lenght = GM->player->GetWorldPos().y - hit.y;
+        // if (lenght < 3 and lenght > 0.2f)
+        // {
+        //     if (not GM->player->isJumpFinish)
+        //     {
+        //         GM->player->anim->ChangeAnimation(AnimationState::ONCE_LAST, 16, 0.1f);
+        //         GM->player->isJumpFinish = true;
+        //     }
+        // }
+
+        //GM->player->SetWorldPosY(hit.y);
+        if (hit.y > GM->player->GetWorldPos().y)
+        {
+            GM->player->SetWorldPosY(hit.y + 0.001);
+            GM->player->gravity = 0.0f;
+            GM->player->isJumpFinish = false;
+            GM->player->isJump = false;
+        }
     }
+
+    //else
+    //{
+    //    Vector3 hit2;
+    //    Ray playerJumpRay;
+    //    playerTop.position = GM->player->GetWorldPos() + Vector3(0, 2, 0);
+    //    playerTop.direction = Vector3(0, -1, 0);
+    //
+    //    if (Utility::RayIntersectTri(playerJumpRay, GM->map, hit2))
+    //    {
+    //        if (GM->player->GetWorldPos().y < hit.y)
+    //        {
+    //            GM->player->SetWorldPosY(hit.y);
+    //            GM->player->gravity = 0.0f;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        //맵 밖으로 못나가게
+    //        GM->player->gravity = 0.0f;
+    //    }
+    //}
+
+
 
     for (auto& monster : GM->monsterPool)
     {

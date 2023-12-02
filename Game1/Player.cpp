@@ -96,15 +96,15 @@ void Player::Update()
 	dir.Normalize();
 
 	// 점프
-	if (not isJump)
-	{
-		if (INPUT->KeyDown(VK_SPACE))
-		{
-			isJump = true;
-			gravity = -50.0f * DELTA;
-		}
-	}
+	MoveWorldPos(Vector3(0, -1, 0) * gravity * DELTA);
+	gravity += 5.f * DELTA;
 
+	if (INPUT->KeyDown(VK_SPACE))
+	{
+		isJump = true;
+		anim->ChangeAnimation(AnimationState::ONCE_LAST, 15, 0.1f);
+		gravity = -5.0f;
+	}
 	
 
 
@@ -137,89 +137,71 @@ void Player::Render(shared_ptr<Shader> pShader)
 void Player::FSM()
 {
 	// 플레이어 이동 FSM
-	if (playerState == PlayerState::IDLE)
+	if (not isJump)
 	{
-		moveSpeed = 7.0f;
-		// IDLE-> WALK 키를 눌렀을 때
-		if (INPUT->KeyPress('W') or INPUT->KeyPress('S') or
-			INPUT->KeyPress('A') or INPUT->KeyPress('D'))
+		if (playerState == PlayerState::IDLE)
 		{
-			playerState = PlayerState::WALK;
-			AinmChange(playerState);
+			moveSpeed = 7.0f;
+			// IDLE-> WALK 키를 눌렀을 때
+			if (INPUT->KeyPress('W') or INPUT->KeyPress('S') or
+				INPUT->KeyPress('A') or INPUT->KeyPress('D'))
+			{
+				playerState = PlayerState::WALK;
+				AinmChange(playerState);
+			}
 		}
-	}
-	else if (playerState == PlayerState::WALK)
-	{
-		moveSpeed = 7.0f;
-
-		if (attackState == PlayerAttackState::ATTACK)
+		else if (playerState == PlayerState::WALK)
 		{
-			// 키를 눌렀을때 애니메이션 변환
-			if (INPUT->KeyDown('W'))
-				anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
-			if (INPUT->KeyDown('S'))
-				anim->ChangeAnimation(AnimationState::LOOP, 2, 0.1f);
-			if (INPUT->KeyDown('A'))
-				anim->ChangeAnimation(AnimationState::LOOP, 4, 0.1f);
-			if (INPUT->KeyDown('D'))
-				anim->ChangeAnimation(AnimationState::LOOP, 5, 0.1f);
+			moveSpeed = 7.0f;
+
+			if (attackState == PlayerAttackState::ATTACK)
+			{
+				// 키를 눌렀을때 애니메이션 변환
+				if (INPUT->KeyDown('W'))
+					anim->ChangeAnimation(AnimationState::LOOP, 1, 0.1f);
+				if (INPUT->KeyDown('S'))
+					anim->ChangeAnimation(AnimationState::LOOP, 2, 0.1f);
+				if (INPUT->KeyDown('A'))
+					anim->ChangeAnimation(AnimationState::LOOP, 4, 0.1f);
+				if (INPUT->KeyDown('D'))
+					anim->ChangeAnimation(AnimationState::LOOP, 5, 0.1f);
+			}
+
+			// WALK -> IDLE 키를 아무것도 누르지 않았을때
+			if (not(INPUT->KeyPress('W') or INPUT->KeyPress('S') or
+				INPUT->KeyPress('A') or INPUT->KeyPress('D')))
+			{
+				playerState = PlayerState::IDLE;
+				AinmChange(playerState);
+			}
+
+			// WALK ->RUN // L컨트롤을 눌렀을 때
+			if (INPUT->KeyDown(VK_LCONTROL))
+			{
+				playerState = PlayerState::RUN;
+				AinmChange(playerState);
+			}
+
+			// WALK ->ROLL // L쉬프트를 눌렀을 때
+			if (INPUT->KeyDown(VK_LSHIFT))
+			{
+				playerState = PlayerState::ROLL;
+				isRoll = true;
+				AinmChange(playerState);
+			}
 		}
-
-		// WALK -> IDLE 키를 아무것도 누르지 않았을때
-		if (not(INPUT->KeyPress('W') or INPUT->KeyPress('S') or
-			INPUT->KeyPress('A') or INPUT->KeyPress('D')))
+		else if (playerState == PlayerState::RUN)
 		{
-			playerState = PlayerState::IDLE;
-			AinmChange(playerState);
-		}
+			moveSpeed = 10.0f;
 
-		// WALK ->RUN // L컨트롤을 눌렀을 때
-		if (INPUT->KeyDown(VK_LCONTROL))
-		{
-			playerState = PlayerState::RUN;
-			AinmChange(playerState);
-		}
+			// RUN -> WALK
+			if (not INPUT->KeyPress('W') or INPUT->KeyPress('S') or INPUT->KeyPress(VK_LBUTTON))
+			{
+				playerState = PlayerState::WALK;
+				AinmChange(playerState);
+			}
 
-		// WALK ->ROLL // L쉬프트를 눌렀을 때
-		if (INPUT->KeyDown(VK_LSHIFT))
-		{
-			playerState = PlayerState::ROLL;
-			isRoll = true;
-			AinmChange(playerState);
-		}
-	}
-	else if (playerState == PlayerState::RUN)
-	{
-		moveSpeed = 10.0f;
-
-		// RUN -> WALK
-		if (not INPUT->KeyPress('W') or INPUT->KeyPress('S') or INPUT->KeyPress(VK_LBUTTON))
-		{
-			playerState = PlayerState::WALK;
-			AinmChange(playerState);
-		}
-
-		// RUN -> IDLE
-		if (not(INPUT->KeyPress('W') or INPUT->KeyPress('S') or
-			INPUT->KeyPress('A') or INPUT->KeyPress('D')))
-		{
-			playerState = PlayerState::IDLE;
-			AinmChange(playerState);
-		}
-	}
-	else if (playerState == PlayerState::ROLL)
-	{
-		moveSpeed = 12.0f;
-
-		// 구르는 애니메이션이 끝날때 ROLL-> WALK or IDLE로 상태 변경
-		if (anim->GetPlayTime() >= 0.99)
-		{
-			//ROLL -> WALK
-			playerState = PlayerState::WALK;
-			AinmChange(playerState);
-
-
-			// ROLL -> IDLE
+			// RUN -> IDLE
 			if (not(INPUT->KeyPress('W') or INPUT->KeyPress('S') or
 				INPUT->KeyPress('A') or INPUT->KeyPress('D')))
 			{
@@ -227,7 +209,29 @@ void Player::FSM()
 				AinmChange(playerState);
 			}
 		}
+		else if (playerState == PlayerState::ROLL)
+		{
+			moveSpeed = 12.0f;
+
+			// 구르는 애니메이션이 끝날때 ROLL-> WALK or IDLE로 상태 변경
+			if (anim->GetPlayTime() >= 0.99)
+			{
+				//ROLL -> WALK
+				playerState = PlayerState::WALK;
+				AinmChange(playerState);
+
+
+				// ROLL -> IDLE
+				if (not(INPUT->KeyPress('W') or INPUT->KeyPress('S') or
+					INPUT->KeyPress('A') or INPUT->KeyPress('D')))
+				{
+					playerState = PlayerState::IDLE;
+					AinmChange(playerState);
+				}
+			}
+		}
 	}
+
 	// 플레이어 이동 FSM
 
 	// 플레이어 점프
@@ -279,7 +283,7 @@ void Player::FSM()
 	}
 	else if (attackState == PlayerAttackState::ATTACK)
 	{
-		Ray mouseRay = Utility::MouseToRay((Camera*)Find("PlayerCam"));
+		Ray mouseRay = Utility::MouseToRay((Camera*)Find("FireCam"));
 		ImGui::Text("MouseRay posx : %.2f", mouseRay.position.x);
 		ImGui::Text("MouseRay posy : %.2f", mouseRay.position.y);
 		ImGui::Text("MouseRay posz : %.2f", mouseRay.position.z);
@@ -539,11 +543,11 @@ void Player::LevelUp()
 		if (monster->hp <= 0 and monster->state == MonsterState::DEAD)
 		{// 몬스터가 죽었을때
 			// player exp 추가
-			exp += monster->exp;
-			gold += monster->gold;
-
-			float scale = GM->ui->leftBottom->Find("LeftBottom_ExpBarscale")->scale.x * exp / (float)maxExp;
-			GM->ui->leftBottom->Find("LeftBottom_Exp")->scale.x = scale;
+			//exp += monster->exp;
+			//gold += monster->gold;
+			//
+			//float scale = GM->ui->leftBottom->Find("LeftBottom_ExpBarscale")->scale.x * exp / (float)maxExp;
+			//GM->ui->leftBottom->Find("LeftBottom_Exp")->scale.x = scale;
 		}
 	}
 
