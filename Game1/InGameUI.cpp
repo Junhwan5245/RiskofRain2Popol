@@ -32,6 +32,39 @@ void InGameUI::Update()
 {
 	Vector3 mousePos = Utility::MouseToNDC();
 
+	//// 레벨업 시스템
+	//if (playerexp >= playerMaxexp)
+	//{
+	//	playerexp = 0;
+	//	leftBottom->Find("LeftBottom_Exp")->scale.x = 0;
+	//	playerlv++;
+	//	playermaxhp = playermaxhp + (33 * (playerlv - 1));
+	//	playerhp = playermaxhp;	// 레벨업시 최대채력의 10%회복
+	//	playerMaxexp = playerMaxexp * (1 + 0.1f * (playerlv - 1));
+	//	playerattack = playerattack + 2.4f;
+	//}
+	//
+	//
+	//// 체력 까이는
+	//if (INPUT->KeyDown('K')) // 체력이 까일때마다 hpUI의 스케일값 조정하기 
+	//{
+	//	playerhp -= 13; // 13 : 몬스터의 attack값
+	//
+	//	float scale = leftBottom->Find("LeftBottom_PlayerHpBar")->scale.x * (float)playerhp / (float)playermaxhp;
+	//	leftBottom->Find("LeftBottom_PlayerHp")->scale.x = scale;
+	//}
+	//
+	//// exp
+	//if (INPUT->KeyDown('J')) // 몬스터를 잡고나서 얻는 경험치로 expUI스케일값 조정하기
+	//{
+	//	playerexp += 11; // 11 : 몬스터가 가지고 있을 Exp값
+	//
+	//	float scale = leftBottom->Find("LeftBottom_ExpBarscale")->scale.x * playerexp / (float)playerMaxexp;
+	//	leftBottom->Find("LeftBottom_Exp")->scale.x = scale;
+	//	isGoalClear = !isGoalClear;
+	//}
+
+
 
 
 	upper->Update();

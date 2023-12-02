@@ -12,6 +12,8 @@ Lemurian* Lemurian::Create(string name)
 	lemurian->maxHp = 80; // 증가계수 24
 	lemurian->hp = 80;
 	lemurian->defend = 0;
+	lemurian->gold = 17;
+	lemurian->exp = 20;
 
 	lemurian->attack = 12.0f;	//증가계수 2.4
 	lemurian->range = 10;
@@ -29,7 +31,7 @@ void Lemurian::Update()
 
 	ImGui::Text("Lemurian attack : %.2f", attack);
 
-	root->Find("frontHp")->scale.x = Hp * 1.7 / 100;
+	root->Find("frontHp")->scale.x = hp * 1.7 / 100;
 
 
 

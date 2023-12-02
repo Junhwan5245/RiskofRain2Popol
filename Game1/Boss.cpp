@@ -11,6 +11,8 @@ Boss* Boss::Create(string name)
 	boss->moveSpeed = 2.0f; // 증가계수 24
 	boss->maxHp = 800; // 증가계수 24
 	boss->hp = 800;
+	boss->gold = 60;
+	boss->exp = 80;
 	boss->defend = 0;
 
 	boss->attack = 12.0f;	//증가계수 2.4
@@ -65,7 +67,7 @@ void Boss::MonFSM()
 	Vector3 playerVec = Vector3(GM->player->GetWorldPos().x, 0, GM->player->GetWorldPos().z);
 	Vector3 bossVec = Vector3(this->GetWorldPos().x, 0, this->GetWorldPos().z);
 
-	if (Hp > 0)
+	if (hp > 0)
 	{
 		if (bState == BossState::IDLE)
 		{

@@ -83,7 +83,8 @@ public:
     void    AinmChange(PlayerState state);
     void    Move(Vector3 Target);
     void    Jump();
-    void    LevelUp(UI* ui);
+    void    LevelUp();
+    void    DecreaseHP();
 
     void    StatGUI();
     void    SetPos(Vector3 pos);

@@ -61,6 +61,7 @@ void Bullet::Update()
 			//소멸 시키고
 			this->isCollsion = true;
 			GM->player->hp -= monster->attack;//플레이어 피깎기
+			GM->player->DecreaseHP();
 		}
 
 		//if (this->Intersect(monster->Find("RootNode")))

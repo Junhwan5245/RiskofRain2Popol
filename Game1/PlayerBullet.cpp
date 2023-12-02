@@ -67,7 +67,7 @@ void PlayerBullet::Attack()
 
 			
 			
-			monster->Hp -= damage;//플레이어 피깎기
+			monster->hp -= damage;//플레이어 피깎기
 		}
 	}
 }

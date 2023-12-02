@@ -32,11 +32,10 @@ Monster* Monster::Create(string name,MonsterType monType)
     }
 
     temp->maxHp = 100;  // 몬스터마다의 체력으로 변경
-    temp->Hp = 100;     // 몬스터마다의 체력으로 변경
+    temp->hp = 100;     // 몬스터마다의 체력으로 변경
 
     temp->SetFirstPos();
     temp->IdleAnimations();
-    temp->Hp = 100;
     temp->state = MonsterState::IDLE;
     temp->type = ObType::Actor;
     temp->dieTimer = 0.0f;
@@ -82,7 +81,7 @@ void Monster::MonFSM()
     //상태 FSM
    
     
-    if (Hp > 0)
+    if (hp > 0)
     {
         if (state == MonsterState::IDLE)
         {

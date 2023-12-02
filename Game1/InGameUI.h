@@ -3,13 +3,12 @@ class InGameUI
 {
 public:
 	static InGameUI* Create(string name = "InGameUI");
-
-private:
 	/** ¿Œ∞‘¿” UI */
 	UI* upper;
-
 	UI* leftBottom;
 	UI* rightBottom;
+
+private:
 
 
 

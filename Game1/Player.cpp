@@ -55,8 +55,10 @@ void Player::Update()
 
 	StatGUI();
 
+
 	// 레벨업 시스템
 	// 레벨에 따른 maxHp , maxExp 조정
+	LevelUp();
 
     
 	lastRot = Find("RootNode")->rotation.y;
@@ -102,6 +104,9 @@ void Player::Update()
 			gravity = -50.0f * DELTA;
 		}
 	}
+
+	
+
 
 
 	if (isRoll) //구르고 있을때
@@ -515,18 +520,40 @@ void Player::Jump()
 	MoveWorldPos(gravityDir * gravity );
 }
 
-void Player::LevelUp(UI* ui)
+void Player::LevelUp()
 { // ui : leftBottom;
 	if (exp >= maxExp)
 	{
 		exp = 0;
-		ui->Find("LeftBottom_Exp")->scale.x = 0;
+		GM->ui->leftBottom->Find("LeftBottom_Exp")->scale.x = 0;
 		lv++;
 		maxHp = maxHp + (33 * (lv - 1));
 		hp = maxHp;	// 레벨업시 최대채력의 10%회복
 		maxExp = maxExp * (1 + 0.1f * (lv - 1));
 		attack = attack + 2.4f;
 	}
+
+
+	for (auto& monster : GM->monsterPool)
+	{
+		if (monster->hp <= 0 and monster->state == MonsterState::DEAD)
+		{// 몬스터가 죽었을때
+			// player exp 추가
+			exp += monster->exp;
+			gold += monster->gold;
+
+			float scale = GM->ui->leftBottom->Find("LeftBottom_ExpBarscale")->scale.x * exp / (float)maxExp;
+			GM->ui->leftBottom->Find("LeftBottom_Exp")->scale.x = scale;
+		}
+	}
+
+
+}
+
+void Player::DecreaseHP()
+{
+	float scale = GM->ui->leftBottom->Find("LeftBottom_PlayerHpBar")->scale.x * (float)hp / (float)maxHp;
+	GM->ui->leftBottom->Find("LeftBottom_PlayerHp")->scale.x = scale;
 }
 
 void Player::WolrdUpdate()

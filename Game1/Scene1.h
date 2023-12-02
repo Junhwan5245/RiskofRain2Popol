@@ -6,8 +6,6 @@ class Scene1 : public Scene
 {
 private:
     Camera*         cam1;
-    class InGameUI* ui;
-
 
     class Astar* astar;
     Sky*         skybox;
@@ -17,7 +15,6 @@ private:
     EscapeShip*  escape;
     Teleport*    teleport;
 
-    Actor* item;        // 임의의 아이템
 
     list<Collider*> colliders;
   
@@ -27,7 +24,7 @@ private:
    
     bool            isMainCam;     // 메인캠 전환키 (임시용)
     float           renewtime = 0.0f;
-    int             level;
+    int             level; // 난이도
 public:
     Scene1();
     ~Scene1();

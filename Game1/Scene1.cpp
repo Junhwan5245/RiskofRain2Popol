@@ -19,7 +19,7 @@ Scene1::Scene1()
     GM->player = Player::Create();
     loadCount++;
 
-    ui = InGameUI::Create();
+    GM->ui = InGameUI::Create();
 
     GM->map = Terrain::Create();
     GM->map->LoadFile("Terrain.xml");
@@ -141,17 +141,14 @@ void Scene1::Update()
     ImGui::Text("FPS: %d", TIMER->GetFramePerSecond());
     ImGui::Text("Stagelevel : %d", level);
 
-    for (auto& monster : GM->monsterPool)
-    {
-        ImGui::Text("MosterState : %d", monster->state);
-        ImGui::Text("MosterHp : %d", monster->Hp);
-    }
 
     if (ImGui::Button("Perlin"))
     { 
         GM->map->PerlinNoise();
     }
 
+
+    // 몬스터 랜덤 위치 생성
     if (GM->monsterPool.size()<MAXMONSIZE)
     {
         if (monsterCreationTimer >= monsterCreationInterval)
@@ -167,6 +164,8 @@ void Scene1::Update()
     }
     
     //downcasting으로 자식에만 있는 함수에 접근하는 방법
+
+
 
 
     
@@ -195,12 +194,9 @@ void Scene1::Update()
     
 
 
-    teleport->Update();
-
-    itemBox->Update();
-   
     Camera::main->Update();
-
+    teleport->Update();
+    itemBox->Update();
     for (auto& monster : GM->monsterPool)
     {
         if (GM->player->isEscape)
@@ -218,12 +214,10 @@ void Scene1::Update()
        monster->Update();
     }
     GM->map->Update();
-
     for (auto& item : GM->items)
     {
         item->Update();
     }
-
     for (auto& feature : GM->featurePool)
     {
         feature->Update();
@@ -232,10 +226,7 @@ void Scene1::Update()
     GM->Update();//총알
     GM->player->Update();
     escape->Update();
-   
-   
-
-    ui->Update();
+    GM->ui->Update();
 }
 
 void Scene1::LateUpdate()
@@ -289,16 +280,13 @@ void Scene1::LateUpdate()
             }
         }
     }
-          
-           /*Lemurian* temp1 = dynamic_cast<Lemurian*>(monster);
-            if (temp1) 
-                temp1->CollisionBulletToMap(GM->map);*/
-         
-        
+    
 
 
-        //monster->WolrdUpdate();
-    //}
+    /* dynamic_cast 방법
+    Lemurian* temp1 = dynamic_cast<Lemurian*>(monster);
+     if (temp1) 
+         temp1->CollisionBulletToMap(GM->map);*/
     GM->LateUpdate();
 
     if (teleport->teleport->Find("RootNode")->Intersect(GM->player->Find("RootNode")))
@@ -344,7 +332,7 @@ void Scene1::Render()
     GM->player->Render();
     escape->Render();
     teleport->Render();
-    ui->Render();
+    GM->ui->Render();
 }
 
 void Scene1::ResizeScreen()
