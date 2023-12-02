@@ -1,12 +1,11 @@
 #pragma once
-class Item_Syringe : public Item
-{ 
+class Item_Glasses : public Item
+{
 public:
-    Item_Syringe();
-    virtual ~Item_Syringe();
+    Item_Glasses();
+    virtual ~Item_Glasses();
     void	Operate()   override;
     void	Update()    override;
     void	Render()    override;
 };
-
 

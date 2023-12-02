@@ -29,6 +29,7 @@ class Player : public Unit
 public:
     static Player* Create(string name = "Player");
 
+
 private:
     class Inventory*          itemInven;
 
@@ -57,7 +58,6 @@ private:
     float               lShiftTimer;
     float               rTimer;
 
-    float               attackSpeed = 0.16f;    // 공속
     float               LButtonFireTime; // 좌클릭 발사타임
     float               RSkillFireTime;  //  R스킬 발사시간(공속에 따라 더빠르게 발사가능)
     float               RSkillFire;  //  R스킬 발사시간(공속에 따라 더빠르게 발사가능)
@@ -72,6 +72,7 @@ private:
     virtual ~Player();
 public:
     bool                isJump;         // 점프했는지
+    float               attackSpeed = 0.16f;    // 공속
     bool                isEscape = true;       // 탐사정에 있는가?
 
 
@@ -82,9 +83,10 @@ public:
     void    AinmChange(PlayerState state);
     void    Move(Vector3 Target);
     void    Jump();
-    void    LevelUp(UI* ui);
+    void    LevelUp();
+    void    DecreaseHP();
 
-
+    void    StatGUI();
     void    SetPos(Vector3 pos);
     void    WolrdUpdate();
     void    PlayerRenderHierarchy();
@@ -94,5 +96,12 @@ public:
     //Vector3 GetLast() { return last; };
     PlayerState     GetPlayerState() { return playerState; }
     Inventory* GetItemInven() { return itemInven; }
+
+    float GetM2CoolTime() { return m2Timer; }
+    float GetLShiftCoolTime() { return lShiftTimer; }
+    float GetRCoolTime() { return rTimer; }
+
+    int   GetLv() { return lv; }
+    float GetMaxHp() { return maxHp; }
 };
 

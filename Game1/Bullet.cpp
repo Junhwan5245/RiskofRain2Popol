@@ -61,13 +61,14 @@ void Bullet::Update()
 			//소멸 시키고
 			this->isCollsion = true;
 			GM->player->hp -= monster->attack;//플레이어 피깎기
+			GM->player->DecreaseHP();
 		}
 
-		if (this->Intersect(monster->Find("RootNode")))
-		{
-			this->isCollsion = true;
-			monster->Hp -= 20;//플레이어 피깎기
-		}
+		//if (this->Intersect(monster->Find("RootNode")))
+		//{
+		//	this->isCollsion = true;
+		//	monster->Hp -= 20;//플레이어 피깎기
+		//}
 	}
 
 
@@ -88,7 +89,6 @@ void Bullet::Fire(Vector3 dir, float power, Vector3 rotation)
 	isFire = true;
 	this->power = power;
 	this->fireDir = dir;
-	Vector3 rot = dir - GetWorldPos();
 	this->rotation.x = HALFPI;
 	this->rotation.y = rotation.y;
 }

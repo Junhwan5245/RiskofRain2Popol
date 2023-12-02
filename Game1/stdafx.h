@@ -41,6 +41,16 @@
 #include "ItemBox_Normal.h"
 #include "ItemBox_Rare.h"
 #include "Item_Syringe.h"
+#include "Item_APRound.h"
+#include "Item_Glasses.h"
+#include "Item_TriTipDagger.h"
+
+#include "Item_Feather.h"
+#include "Item_Infusion.h"
+#include "Item_Seed.h"
+#include "Item_AttackUp.h"
+#include "Item_DefendUp.h"
+
 
 
 //Feature

@@ -14,6 +14,7 @@ ItemBox* ItemBox::Create()
 	ItemBox();
 	int num = RANDOM->Int(0,1);
 
+	//switch (num)
 	switch (num)
 	{
 	case 0:
@@ -46,6 +47,7 @@ void ItemBox::Init()
 void ItemBox::Update()
 {
 	Interaction();
+		
 
 	itemBox->Update();
 }
@@ -77,7 +79,7 @@ void ItemBox::Interaction()
 
 	if (isFirst) 
 	{
-		if (TIMER->GetTick(openTime, 2.0f))
+		if (itemBox->anim->GetPlayTime() >= 0.99)
 		{
 			CreateItem();
 			isFirst = false;

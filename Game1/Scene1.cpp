@@ -19,7 +19,7 @@ Scene1::Scene1()
     GM->player = Player::Create();
     loadCount++;
 
-    ui = InGameUI::Create();
+    GM->ui = InGameUI::Create();
 
     GM->map = Terrain::Create();
     GM->map->LoadFile("Terrain.xml");
@@ -80,7 +80,8 @@ void Scene1::Init()
     Camera::main->width = 1280;
     Camera::main->height = 720;
 
-    
+    //escape->SetWorldPos(Vector3());
+    //escape->anim->ChangeAnimation(AnimationState::ONCE_LAST, 0, 0.1f);
     escape->SetPos();
 }
 
@@ -101,7 +102,7 @@ void Scene1::Update()
     Camera::main->height = App.GetHeight();
     Camera::main->ControlMainCam();
 
-    
+    // 카메라 스위치
     if (GM->player->isEscape) //플레이어가 탐사정에 있을때
     {
         // 플레이어의 위치를 탐사정에 고정
@@ -139,19 +140,15 @@ void Scene1::Update()
     ImGui::Text("TIMER : %.2f", monsterCreationTimer);
     ImGui::Text("FPS: %d", TIMER->GetFramePerSecond());
     ImGui::Text("Stagelevel : %d", level);
-    ImGui::Text("HP : %d", GM->player->hp);
 
-    for (auto& monster : GM->monsterPool)
-    {
-        ImGui::Text("MosterState : %d", monster->state);
-        ImGui::Text("MosterHp : %d", monster->Hp);
-    }
 
     if (ImGui::Button("Perlin"))
     { 
         GM->map->PerlinNoise();
     }
 
+
+    // 몬스터 랜덤 위치 생성
     if (GM->monsterPool.size()<MAXMONSIZE)
     {
         if (monsterCreationTimer >= monsterCreationInterval)
@@ -167,6 +164,8 @@ void Scene1::Update()
     }
     
     //downcasting으로 자식에만 있는 함수에 접근하는 방법
+
+
 
 
     
@@ -195,29 +194,30 @@ void Scene1::Update()
     
 
 
-    teleport->Update();
-
-    itemBox->Update();
-   
     Camera::main->Update();
-
-
+    teleport->Update();
+    itemBox->Update();
     for (auto& monster : GM->monsterPool)
     {
-        if (TIMER->GetTick(renewtime, 1.0f))
+        if (GM->player->isEscape)
         {
-            astar->PathFinding(monster->GetWorldPos(), GM->player->GetWorldPos(), monster->way);
+            monster->way.clear();
         }
+        else
+        {
+            if (TIMER->GetTick(renewtime, 1.0f))
+            {
+                astar->PathFinding(monster->GetWorldPos(), GM->player->GetWorldPos(), monster->way);
+            }
+        }
+
        monster->Update();
     }
-
     GM->map->Update();
-
     for (auto& item : GM->items)
     {
         item->Update();
     }
-
     for (auto& feature : GM->featurePool)
     {
         feature->Update();
@@ -226,10 +226,7 @@ void Scene1::Update()
     GM->Update();//총알
     GM->player->Update();
     escape->Update();
-   
-   
-
-    ui->Update();
+    GM->ui->Update();
 }
 
 void Scene1::LateUpdate()
@@ -260,7 +257,36 @@ void Scene1::LateUpdate()
         }
     }
 
-   
+    
+    // 아이템과 플레이어의 충돌이 일어나면서 E키를 눌렀을때
+    for (auto& i : GM->items)
+    {
+        if (GM->player->Find("RootNode")->Intersect(i->item->Find("Collider")))
+        {
+            if (INPUT->KeyDown('E'))
+            {
+                // 상자에서 나온 아이템을 player Inventory에 추가
+                GM->player->GetItemInven()->AddItem(i->item->name);
+
+                // 아이템의 능력
+                i->Operate();
+
+
+                // player Inventory에 추가된 아이템은 삭제
+                cout << "아이템 '" << i->item->name << "'가 삭제됩니다." << endl;
+                // 한번에 하나의 상자만 연다는 가정하에 items를 전체 clear
+                // 만약에 여러개를 연다고 하면, remove if로 변경
+                GM->items.clear();
+            }
+        }
+    }
+    
+
+
+    /* dynamic_cast 방법
+    Lemurian* temp1 = dynamic_cast<Lemurian*>(monster);
+     if (temp1) 
+         temp1->CollisionBulletToMap(GM->map);*/
     GM->LateUpdate();
 
     if (teleport->teleport->Find("RootNode")->Intersect(GM->player->Find("RootNode")))
@@ -286,9 +312,9 @@ void Scene1::Render()
     //playerCam->Set();
     
     GM->map->Render();
-   water->Render();
-   itemBox->Render();
-   for (auto& item : GM->items)
+    water->Render();
+    itemBox->Render();
+    for (auto& item : GM->items)
     {
        item->Render();
     }
@@ -306,7 +332,7 @@ void Scene1::Render()
     GM->player->Render();
     escape->Render();
     teleport->Render();
-    ui->Render();
+    GM->ui->Render();
 }
 
 void Scene1::ResizeScreen()

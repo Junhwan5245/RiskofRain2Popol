@@ -32,11 +32,10 @@ Monster* Monster::Create(string name,MonsterType monType)
     }
 
     temp->maxHp = 100;  // 몬스터마다의 체력으로 변경
-    temp->Hp = 100;     // 몬스터마다의 체력으로 변경
+    temp->hp = 100;     // 몬스터마다의 체력으로 변경
 
     temp->SetFirstPos();
     temp->IdleAnimations();
-    temp->Hp = 100;
     temp->state = MonsterState::IDLE;
     temp->type = ObType::Actor;
     temp->dieTimer = 0.0f;
@@ -44,44 +43,6 @@ Monster* Monster::Create(string name,MonsterType monType)
 
     return temp;
 }
-	
-
-
-//Monster* Monster::Create(Monster* src, MonsterType monType)
-//{
-//    Monster* temp = nullptr;
-//
-//    switch (monType)
-//    {
-//    case MonsterType::BEETLE:
-//        temp = Beetle::Create();
-//        break;
-//
-//    case MonsterType::LEMURIAN:
-//        temp = Lemurian::Create();
-//        break;
-//
-//    case MonsterType::GOLEM:
-//        temp = Golem::Create();
-//        break;
-//
-//    case MonsterType::BOSS:
-//        temp = Boss::Create();
-//        break;
-//
-//    default:
-//        return temp;
-//        break;
-//    }
-//
-//    temp->SetRandomPosition();
-//    temp->IdleAnimations();
-//    temp->state = MonsterState::IDLE;
-//    temp->type = ObType::Actor;
-//    temp->dieTimer = 0.0f;
-//   
-//    return temp;
-//}
 
 void Monster::Update()
 {
@@ -120,7 +81,7 @@ void Monster::MonFSM()
     //상태 FSM
    
     
-    if (Hp > 0)
+    if (hp > 0)
     {
         if (state == MonsterState::IDLE)
         {
@@ -187,6 +148,18 @@ void Monster::MonFSM()
     else 
     { 
         state = MonsterState::DEAD;
+        static int count = 0;
+
+        // 몬스터가 죽었을때의 위치에서 적용해주기
+        //auto iter = GM->player->GetItemInven()->GetItemList().find("Infusion");
+        //if (iter != GM->player->GetItemInven()->GetItemList().end())
+        //{//있다면 적 처치당 maxHp + 1 (중첩 +1) 최대 100(중첩 +100)
+        //    if (count < 100 * iter->second)
+        //    {
+        //        GM->player->maxHp += 1;
+        //        count++;
+        //    }
+        //}
     }
     
     if (state == MonsterState::DEAD)

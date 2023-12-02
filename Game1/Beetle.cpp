@@ -5,12 +5,15 @@ Beetle* Beetle::Create(string name)
 	Beetle* beetle = new Beetle();
 	beetle->LoadFile("Beetle.xml");
 	beetle->type = ObType::Actor;
+	beetle->monsterType = MonsterType::BEETLE;
 	beetle->IdleAnimations();
 	beetle->range = 1;
 	
 	beetle->moveSpeed = 10.0f; // 증가계수 24
 	beetle->maxHp = 80; // 증가계수 24
 	beetle->hp = 80;
+	beetle->gold = 15;
+	beetle->exp = 11;
 	beetle->defend = 0;
 
 	beetle->attack = 12.0f;	//증가계수 2.4

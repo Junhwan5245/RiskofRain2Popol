@@ -52,8 +52,13 @@ void Player::Update()
 	ImGui::Text("RCoolTime : %.2f", rTimer);
 	ImGui::Text("isRSkill : %d\n", (int)isRSkill);
 
+
+	StatGUI();
+
+
 	// 레벨업 시스템
 	// 레벨에 따른 maxHp , maxExp 조정
+	LevelUp();
 
     
 	lastRot = Find("RootNode")->rotation.y;
@@ -99,6 +104,9 @@ void Player::Update()
 			gravity = -50.0f * DELTA;
 		}
 	}
+
+	
+
 
 
 	if (isRoll) //구르고 있을때
@@ -272,7 +280,13 @@ void Player::FSM()
 	else if (attackState == PlayerAttackState::ATTACK)
 	{
 		Ray mouseRay = Utility::MouseToRay((Camera*)Find("PlayerCam"));
+		ImGui::Text("MouseRay posx : %.2f", mouseRay.position.x);
+		ImGui::Text("MouseRay posy : %.2f", mouseRay.position.y);
+		ImGui::Text("MouseRay posz : %.2f", mouseRay.position.z);
 
+		ImGui::Text("\n\nplayer posx : %.2f", GetWorldPos().x);
+		ImGui::Text("player posy : %.2f", GetWorldPos().y);
+		ImGui::Text("player posz : %.2f", GetWorldPos().z);
 		/** M1 스킬 */
 		{
 			if (INPUT->KeyPress(VK_LBUTTON))
@@ -296,18 +310,22 @@ void Player::FSM()
 					if (isRight)
 						pos = Find("gun.r.muzzle")->GetWorldPos();
 					else pos = Find("gun.l.muzzle")->GetWorldPos();
-
 					temp->SetPos(pos);
-					temp->scale = Vector3(0.1, 0.1, 0.1);
+
+					Vector3 dir = pos - mouseRay.position; // 그 방향
+					dir.Normalize();
+
+					//temp->rotation.x = -asinf(dir.y); // 그 방향으로 바라보는
+
+					temp->scale = Vector3(0.05, 0.05, 0.05);
 
 					GM->bulletPool.push_back(temp);
 
-					Vector3 d = pos - mouseRay.position;
 					for (auto it = GM->bulletPool.begin(); it != GM->bulletPool.end(); it++)
 					{
 						if (not (*it)->isFire)
 						{
-							(*it)->Fire(mouseRay.direction, 10.0f, rotation);
+							(*it)->Fire(mouseRay.direction, 200.0f, rotation);
 							break;
 						}
 					}
@@ -327,14 +345,14 @@ void Player::FSM()
 					pos = Find("gun.r.muzzle")->GetWorldPos();
 
 					temp->SetPos(pos);
-
+					temp->scale = Vector3(0.2, 0.2, 0.2);
 					GM->bulletPool.push_back(temp);
 
 					for (auto it = GM->bulletPool.begin(); it != GM->bulletPool.end(); it++)
 					{
 						if (not (*it)->isFire)
 						{
-							(*it)->Fire(GetForward(), 10.0f, rotation);
+							(*it)->Fire(GetForward(), 20.0f, rotation);
 							break;
 						}
 					}
@@ -370,7 +388,7 @@ void Player::FSM()
 							pos = Find("gun.r.muzzle")->GetWorldPos();
 
 							temp->SetPos(pos);
-
+							temp->scale = Vector3(0.05, 0.05, 0.05);
 							GM->bulletPool.push_back(temp);
 
 							for (auto it = GM->bulletPool.begin(); it != GM->bulletPool.end(); it++)
@@ -502,18 +520,40 @@ void Player::Jump()
 	MoveWorldPos(gravityDir * gravity );
 }
 
-void Player::LevelUp(UI* ui)
+void Player::LevelUp()
 { // ui : leftBottom;
 	if (exp >= maxExp)
 	{
 		exp = 0;
-		ui->Find("LeftBottom_Exp")->scale.x = 0;
+		GM->ui->leftBottom->Find("LeftBottom_Exp")->scale.x = 0;
 		lv++;
 		maxHp = maxHp + (33 * (lv - 1));
 		hp = maxHp;	// 레벨업시 최대채력의 10%회복
 		maxExp = maxExp * (1 + 0.1f * (lv - 1));
 		attack = attack + 2.4f;
 	}
+
+
+	for (auto& monster : GM->monsterPool)
+	{
+		if (monster->hp <= 0 and monster->state == MonsterState::DEAD)
+		{// 몬스터가 죽었을때
+			// player exp 추가
+			exp += monster->exp;
+			gold += monster->gold;
+
+			float scale = GM->ui->leftBottom->Find("LeftBottom_ExpBarscale")->scale.x * exp / (float)maxExp;
+			GM->ui->leftBottom->Find("LeftBottom_Exp")->scale.x = scale;
+		}
+	}
+
+
+}
+
+void Player::DecreaseHP()
+{
+	float scale = GM->ui->leftBottom->Find("LeftBottom_PlayerHpBar")->scale.x * (float)hp / (float)maxHp;
+	GM->ui->leftBottom->Find("LeftBottom_PlayerHp")->scale.x = scale;
 }
 
 void Player::WolrdUpdate()
@@ -525,6 +565,23 @@ void Player::PlayerRenderHierarchy()
 {
 	this->RenderHierarchy();
 	
+}
+
+void Player::StatGUI()
+{
+	ImGui::Begin("Stat");
+	ImGui::Text("\tPlayer Stat\t\t");
+	ImGui::Text("player Gold\t : %d", gold);
+	ImGui::Text("player Luna\t : %d", luna);
+	ImGui::Text("player Lv\t : %d\t\t", lv);
+	ImGui::Text("player Hp\t : %d", (int)hp);
+	ImGui::Text("player MaxHp\t : %d\t\t", (int)maxHp);
+	ImGui::Text("player attack\t : %.2f", attack);
+	ImGui::Text("player attackSpeed : %.2f", attackSpeed);
+	ImGui::Text("player defend\t : %d", defend);
+	ImGui::Text("player moveSpeed : %.2f", moveSpeed);
+	ImGui::Text("player moveSpeed : %.2f", moveSpeed);
+	ImGui::End();
 }
 
 void Player::SetPos(Vector3 pos)

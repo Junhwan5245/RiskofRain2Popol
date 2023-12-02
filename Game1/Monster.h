@@ -20,12 +20,11 @@ class Monster : public Unit
 {
 public:
 	static Monster* Create(string name, MonsterType monType);//다른 곳에서 생성자로 접근 불가능하게 하기 위해서
-	static Monster* Create(Monster* src, MonsterType monType);
 	void   Update();
 	void   Render(shared_ptr<Shader> pShader = nullptr);
 	void    WolrdUpdate();
 	MonsterState state;
-	MonsterType  monType;
+	MonsterType  monsterType;
 	float stateChangeTime=0.0f;
 	float stateChangeInterval=5.0f;
 	Vector3 PlayerDir;//총알발사를 위한 플레이어 고정값
@@ -48,8 +47,9 @@ protected:
 	virtual void DeadAnimations() = 0;
 
 	virtual void    MonFSM();
-	void	SetFirstPos();
 	void	SetRandomPosition();
+	void	SetFirstPos();
+
 	//void	Stare();
 	MonsterState     GetState() { return state; }
 	

@@ -26,10 +26,22 @@ void ItemBox_Rare::CreateItem()
 
 	int size = RareItemPool::SizeRare;
 
-	switch(RANDOM->Int(1, size))
+	switch(RANDOM->Int(0, (size - 1)))
 	{
-	case 1:
-		temp = new Item_Syringe();
+	case RareItemPool::Feather:
+		temp = new Item_Feather();
+		break;
+	case RareItemPool::Infusion:
+		temp = new Item_Infusion();
+		break;
+	case RareItemPool::Seed:
+		temp = new Item_Seed();
+		break;
+	case RareItemPool::AttackUp:
+		temp = new Item_AttackUp();
+		break;
+	case RareItemPool::DefendUp:
+		temp = new Item_DefendUp();
 		break;
 	
 	default:

@@ -5,12 +5,16 @@ Golem* Golem::Create(string name)
 	Golem* golem = new Golem();
 	golem->LoadFile("mdlGolem.xml");
 	golem->type = ObType::Actor;
+	golem->monsterType = MonsterType::GOLEM;
 	golem->IdleAnimations();
 	golem->range = 20;
 	golem->moveSpeed = 5.0f;
 	golem->Find("ROOT")->rootMotion = true;
-	golem->hp = 150;
-	golem->maxHp = 150;
+	golem->hp = 140;
+	golem->maxHp = 140;
+	golem->attack = 20;
+	golem->gold = 30;
+	golem->exp = 30;
 
 	golem->lazer = GolemLazer::Create("Lazer");
 	golem->lazer->LoadFile("GolemLazer.xml");
