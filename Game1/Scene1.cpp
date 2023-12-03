@@ -29,7 +29,6 @@ Scene1::Scene1()
 
     GM->map->Update();
 
-    
 
     for (int i = 0; i < 10; i++)
     {
@@ -194,12 +193,13 @@ void Scene1::Update()
 
     GM->map->RenderHierarchy();
     water->RenderHierarchy();
+   
     
    
 
     escape->RenderHierarchy();
     ImGui::End();
-
+    
     /* Golem* temp1 = dynamic_cast<Golem*>(monster);
       if (temp1)
           temp1->Rendertemp();*/
@@ -242,11 +242,14 @@ void Scene1::Update()
     }
     for (auto& particle : GM->particlePool)
     {
-        if (!particle->isPlaying)
+        if (particle)
         {
-            particle->Play();
+            if (!particle->isPlaying)
+            {
+                particle->Play();
+            }
+            particle->Update();
         }
-        particle->Update();
     }
 
     water->Update();

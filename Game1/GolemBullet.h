@@ -12,7 +12,7 @@ public:
     void	Update() override;
     void	Render(shared_ptr<Shader> pShader = nullptr);
     void    Fire(Vector3 dir, float power, Vector3 rotation) override;
-
+    Pop*    InitParticle();
 
     //bool    GetIsFire() { return isFire; }
 };

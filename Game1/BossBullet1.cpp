@@ -5,7 +5,6 @@ BossBullet1* BossBullet1::Create(string name)
 {
 	BossBullet1* bossBullet1 = new BossBullet1();
 	bossBullet1->LoadFile("BossBullet1.xml");
-	bossBullet1->bulletParticle->poptype = PopType::BOSSBULLET1;
 
 	bossBullet1->root->rotation.y = 180.0f * ToRadian;
 	bossBullet1->power = 20.0f;
@@ -56,4 +55,17 @@ void BossBullet1::Render(shared_ptr<Shader> pShader)
 void BossBullet1::Fire(Vector3 dir, float power, Vector3 rotation)
 {
 	Bullet::Fire(dir, power, rotation);
+}
+
+Pop* BossBullet1::InitParticle()
+{
+	
+	bulletParticle = Pop::Create();
+	bulletParticle->LoadFile("Particle_BossBullet1.xml");
+	bulletParticle->desc.gravity = 21;
+	bulletParticle->velocityScalar = 27;
+	bulletParticle->particleCount = 5;
+
+	return bulletParticle;
+	
 }

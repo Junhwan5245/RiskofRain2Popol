@@ -4,9 +4,8 @@
 LemurianBullet* LemurianBullet::Create(string name)
 {
 	LemurianBullet* lemurianB = new LemurianBullet();
-	lemurianB->bulletParticle = Pop::Create();
 	lemurianB->LoadFile("LemurianBulletmesh.xml");
-	lemurianB->bulletParticle->LoadFile("Particle_Fire.xml");
+	
 	/*lemurianB->trail = new LemurianBulletTrail();
 	lemurianB->trail->Top = lemurianB->Find("start");
 	lemurianB->trail->Bottom = lemurianB->Find("end");
@@ -55,4 +54,15 @@ void LemurianBullet::Render(shared_ptr<Shader> pShader)
 void LemurianBullet::Fire(Vector3 dir, float power, Vector3 rotation)
 {
 	Bullet::Fire(dir, power, rotation);
+}
+
+Pop* LemurianBullet::InitParticle()
+{
+	bulletParticle = Pop::Create();
+	bulletParticle->LoadFile("Particle_Fire.xml");
+	bulletParticle->desc.gravity = 21;
+	bulletParticle->velocityScalar = 22;
+	bulletParticle->particleCount = 15;
+
+	return bulletParticle;
 }

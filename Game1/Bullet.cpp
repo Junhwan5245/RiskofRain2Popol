@@ -7,6 +7,7 @@ Bullet* Bullet::Create(string name)
 	temp->isFire = false;
 	temp->isCollsion = false;
 	temp->extinctionTime = 0.0f;
+
 	
 	/*switch (temp->bulletParticle->poptype)
 	{
@@ -56,13 +57,19 @@ void Bullet::CollisionWithMap()//맵과 총알 충돌
 	{
 		if ((hit - GetWorldPos()).Length() < 1.0f)
 		{
-			bulletParticle->SetWorldPos(hit);
+			bulletParticle = InitParticle();
+			bulletParticle->SetWorldPos(GM->player->Find("RootNode")->GetWorldPos());
 			GM->particlePool.push_back(bulletParticle);
-			isCollsion = true;
+			this->isCollsion = true;
 		}
 	}
 	
 
+}
+
+Pop* Bullet::InitParticle()
+{
+	return nullptr;
 }
 
 void Bullet::Update()
@@ -92,6 +99,7 @@ void Bullet::Update()
 	{
 		if (this->Intersect(GM->player->Find("RootNode"))) //총알과 플레이어 충돌
 		{
+			bulletParticle = InitParticle();
 			bulletParticle->SetWorldPos(GM->player->Find("RootNode")->GetWorldPos());
 			GM->particlePool.push_back(bulletParticle);
 
@@ -112,12 +120,13 @@ void Bullet::Update()
 	{
 		if (this->Intersect(feature->feature->Find("RootNode"))) //총알과 지물 충돌
 		{
+			bulletParticle = InitParticle();
 			bulletParticle->SetWorldPos(feature->feature->Find("RootNode")->GetWorldPos());
 			GM->particlePool.push_back(bulletParticle);
 		
 			//소멸 시키고
 			this->isCollsion = true;
-
+		
 		}
 	}
 	
