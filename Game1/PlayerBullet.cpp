@@ -4,6 +4,7 @@ PlayerBullet* PlayerBullet::Create(string name)
 {
 	PlayerBullet* temp = new PlayerBullet();
 	temp->LoadFile("PlayerBullet.xml");
+	
 
 	return temp;
 }

@@ -32,14 +32,14 @@ ItemBox* ItemBox::Create()
 
 void ItemBox::Init()
 {
-	Vector3 hit;
-	Ray boxTop;
-	boxTop.position = itemBox->GetWorldPos() + Vector3(0, 1000, 0);
-	boxTop.direction = Vector3(0, -1, 0);
-	if (Utility::RayIntersectMap(boxTop, GM->map, hit))//맵과 몬스터 레이 이용해 몬스터 y값 잡기
-	{
-		itemBox->SetWorldPosY(hit.y);
-	}
+	int tempX = RANDOM->Int(-70, 50);
+	int tempY = RANDOM->Int(100, 200);
+	int tempZ = RANDOM->Int(-70, 50);
+
+	itemBox->SetWorldPosX(tempX);
+	itemBox->SetWorldPosY(tempY);
+	itemBox->SetWorldPosZ(tempZ);
+
 	isOpen = false;
 	isFirst = false;
 }

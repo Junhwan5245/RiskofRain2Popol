@@ -6,6 +6,30 @@ Bullet* Bullet::Create(string name)
 	temp->type = ObType::Actor;
 	temp->isFire = false;
 	temp->isCollsion = false;
+	temp->extinctionTime = 0.0f;
+	
+	/*switch (temp->bulletParticle->poptype)
+	{
+	case PopType::LEMURIANBULLET :
+		temp->bulletParticle->LoadFile("Particle_Fire.xml");
+		break;
+	case PopType::PLAYERBULLET:
+		temp->bulletParticle->LoadFile("Particle_Fire.xml");
+		break;
+	case PopType::GOLEMLAZER:
+		temp->bulletParticle->LoadFile("Particle_Fire.xml");
+		break;
+	case PopType::BOSSBULLET1:
+		temp->bulletParticle->LoadFile("Particle_Fire.xml");
+		break;
+	case PopType::BOSSBULLET2:
+		temp->bulletParticle->LoadFile("Particle_Fire.xml");
+		break;
+	default:
+		break;
+	
+	}*/
+	
 	return temp;
 }
 
@@ -32,6 +56,8 @@ void Bullet::CollisionWithMap()//맵과 총알 충돌
 	{
 		if ((hit - GetWorldPos()).Length() < 1.0f)
 		{
+			bulletParticle->SetWorldPos(hit);
+			GM->particlePool.push_back(bulletParticle);
 			isCollsion = true;
 		}
 	}
@@ -42,10 +68,18 @@ void Bullet::CollisionWithMap()//맵과 총알 충돌
 void Bullet::Update()
 {
 	if (!isFire) return;
+	Actor::Update();
+
 	Vector3 velocity = fireDir * power;
 	MoveWorldPos(velocity * DELTA);
 
 	CollisionWithMap();
+
+
+	if (TIMER->GetTick(extinctionTime, 10.0f))
+	{
+		this->isCollsion = true;
+	}
 
 	//if (this->Intersect(GM->player->Find("RootNode"))) //총알과 플레이어 충돌
 	//{
@@ -58,6 +92,9 @@ void Bullet::Update()
 	{
 		if (this->Intersect(GM->player->Find("RootNode"))) //총알과 플레이어 충돌
 		{
+			bulletParticle->SetWorldPos(GM->player->Find("RootNode")->GetWorldPos());
+			GM->particlePool.push_back(bulletParticle);
+
 			//소멸 시키고
 			this->isCollsion = true;
 			GM->player->hp -= monster->attack;//플레이어 피깎기
@@ -71,17 +108,30 @@ void Bullet::Update()
 		//}
 	}
 
+	for (auto& feature : GM->featurePool)
+	{
+		if (this->Intersect(feature->feature->Find("RootNode"))) //총알과 지물 충돌
+		{
+			bulletParticle->SetWorldPos(feature->feature->Find("RootNode")->GetWorldPos());
+			GM->particlePool.push_back(bulletParticle);
+		
+			//소멸 시키고
+			this->isCollsion = true;
 
+		}
+	}
 	
-	Actor::Update();
+	
+	
 }
 
 void Bullet::Render(shared_ptr<Shader> pShader)
 {
 	if (!isFire) return;
 
-	
+
 	Actor::Render();
+	
 }
 
 void Bullet::Fire(Vector3 dir, float power, Vector3 rotation)

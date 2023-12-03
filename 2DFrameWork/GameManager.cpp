@@ -58,11 +58,27 @@ void GameManager::LateUpdate()
 		), monsterPool.end()
 				);
 
+
+	particlePool.erase(
+		std::remove_if(
+			particlePool.begin(), particlePool.end(),
+			[&](class Pop* particle)
+			{
+				if (particle->isErasing)
+				{
+					delete particle;
+					return true;
+				}
+
+			}
+		), particlePool.end()
+				);
+
 }
 
 void GameManager::Render()
 {
-	
+
 	for (auto it = bulletPool.begin(); it != bulletPool.end(); it++)
 	{
 		(*it)->Render();

@@ -13,6 +13,7 @@ WPARAM Window::Run(Scene* main)
 	Skeleton::CreateStaticMember();
 	Terrain::CreateStaticMember();
 	CubeRenderTarget::CreateStaticMember();
+	Pop::CreateStaticMember();
 
 	MSG msg = { 0 };
 	while (true)
@@ -61,6 +62,7 @@ WPARAM Window::Run(Scene* main)
 	Skeleton::DeleteStaticMember();
 	Terrain::DeleteStaticMember();
 	CubeRenderTarget::DeleteStaticMember();
+	Pop::DeleteStaticMember();
 	TIMER->DeleteSingleton();
 	INPUT->DeleteSingleton();
 	GUI->DeleteSingleton();

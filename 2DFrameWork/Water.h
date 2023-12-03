@@ -5,7 +5,7 @@ private:
     float uvScale = 20.0f;
     struct WaterBuffer
     {
-        Vector2 velocity;
+        Vector2 velocity=Vector2(0.1,0.3);
         float time;
         float padding;
         Vector4 plane;

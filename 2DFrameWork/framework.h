@@ -122,6 +122,8 @@ extern Application App;//Extern Global
 #include "Billboard.h"
 #include "SlashTrail.h"
 #include "Water.h"
+#include "Particle.h"
+#include "Pop.h"
 
 
 #include "Utility.h"
@@ -145,3 +147,4 @@ extern Application App;//Extern Global
 #define RESOURCE	ResourceManager::GetInstance()
 #define RASTER	    RasterState::GetInstance()
 #define GM			GameManager::GetInstance()
+#define PARTICLE	GM->particleManager

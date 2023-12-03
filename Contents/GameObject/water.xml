@@ -4,7 +4,7 @@
     <Material File="Water.mtl"/>
     <Transform>
         <Position X="0" Y="-4.9000001" Z="0"/>
-        <Scale X="120" Y="1" Z="120"/>
+        <Scale X="200" Y="2" Z="200"/>
         <Rotation X="0" Y="0" Z="0"/>
     </Transform>
     <Children Size="0"/>

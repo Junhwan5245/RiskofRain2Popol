@@ -19,6 +19,9 @@ public:
     bool        isFire;
     bool        isCollsion;
     Ray         BulletRay;
+    float       extinctionTime;
+    Pop*        bulletParticle;
+
 
     void	Update();
     void	Render(shared_ptr<Shader> pShader = nullptr);

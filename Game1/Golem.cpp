@@ -165,7 +165,7 @@ void Golem::MoveAnimations()
 
 void Golem::DeadAnimations()
 {
-	anim->ChangeAnimation(AnimationState::LOOP, 5, 0.1f);
+	anim->ChangeAnimation(AnimationState::ONCE_LAST, 5, 0.1f);
 }
 
 Golem::Golem()

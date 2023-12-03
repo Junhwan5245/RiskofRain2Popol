@@ -4,7 +4,6 @@ class LemurianBullet : public Bullet
 public:
     static LemurianBullet* Create(string name = "LemurianBullet");
 private:
-
     LemurianBullet();
     
 public:

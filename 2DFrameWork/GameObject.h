@@ -9,7 +9,8 @@ enum class ObType
 	UI,
 	Sky,
 	Light,
-	Billboard
+	Billboard,
+	Pop
 };
 
 class GameObject : public Transform

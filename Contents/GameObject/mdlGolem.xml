@@ -442,7 +442,7 @@
         <Shader File="7.Billboard.hlsl"/>
         <Material File="backHp.mtl"/>
         <Transform>
-            <Position X="0.85000002" Y="4" Z="0"/>
+            <Position X="0.85000002" Y="4.4499998" Z="0"/>
             <Scale X="1.7" Y="0.15000001" Z="1"/>
             <Rotation X="0" Y="0" Z="0"/>
         </Transform>
@@ -453,7 +453,7 @@
         <Shader File="7.Billboard.hlsl"/>
         <Material File="frontHp.mtl"/>
         <Transform>
-            <Position X="0.85000002" Y="4" Z="0"/>
+            <Position X="0.85000002" Y="4.4499998" Z="0"/>
             <Scale X="1.7" Y="0.15000001" Z="1"/>
             <Rotation X="0" Y="0" Z="0"/>
         </Transform>

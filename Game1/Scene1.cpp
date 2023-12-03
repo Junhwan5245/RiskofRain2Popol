@@ -29,11 +29,18 @@ Scene1::Scene1()
 
     GM->map->Update();
 
-    for (int i = 0; i < 20; i++)
+    
+
+    for (int i = 0; i < 10; i++)
     {
         Rock1* rock1;
         rock1 = new Rock1();
         GM->featurePool.push_back(rock1);
+    }
+
+    for (int i = 0; i < 10; i++)
+    {
+        itembox[i] = ItemBox::Create();
     }
     
     for (auto& feature : GM->featurePool)
@@ -41,12 +48,12 @@ Scene1::Scene1()
         colliders.emplace_back(feature->feature->Find("RootNode")->collider);
     }
 
-    itemBox = ItemBox::Create();
+   /* itemBox = ItemBox::Create();*/
     
    for (int i = 0; i < MONCREATESIZE; ++i)
    {
-       int num = i;
-       /*int num = 2;*/
+       /*int num = i;*/
+       int num = 1;
        
        auto newMonster = Monster::Create("Monster", MonsterType(num));
        GM->monsterPool.push_back(newMonster);
@@ -60,7 +67,7 @@ Scene1::Scene1()
 
     astar = new Astar();
 
-    astar->CreateNode(GM->map,50,colliders);
+    astar->CreateNode(GM->map,100,colliders);
     
 }
 Scene1::~Scene1()
@@ -179,6 +186,11 @@ void Scene1::Update()
     {
         temp->item->RenderHierarchy();
     }
+    for (auto& feature : GM->featurePool)
+    {
+        feature->feature->RenderHierarchy();
+    }
+
 
     GM->map->RenderHierarchy();
     water->RenderHierarchy();
@@ -196,7 +208,13 @@ void Scene1::Update()
 
     Camera::main->Update();
     teleport->Update();
-    itemBox->Update();
+    /*itemBox->Update();*/
+
+    for (int i = 0; i < 10; i++)
+    {
+        itembox[i]->Update();
+    }
+
     for (auto& monster : GM->monsterPool)
     {
         if (GM->player->isEscape)
@@ -222,9 +240,20 @@ void Scene1::Update()
     {
         feature->Update();
     }
+    for (auto& particle : GM->particlePool)
+    {
+        if (!particle->isPlaying)
+        {
+            particle->Play();
+        }
+        particle->Update();
+    }
+
     water->Update();
+   
     GM->Update();//총알
     GM->player->Update();
+
     escape->Update();
     GM->ui->Update();
 }
@@ -256,6 +285,30 @@ void Scene1::LateUpdate()
             monster->SetWorldPosY(hit.y);
         }
     }
+
+    for (auto& feature : GM->featurePool)
+    {
+        Ray featureTop;
+        featureTop.position = feature->feature->GetWorldPos() + Vector3(0, 1000, 0);
+        featureTop.direction = Vector3(0, -1, 0);
+        if (Utility::RayIntersectMap(featureTop, GM->map, hit))//맵과 몬스터 레이 이용해 몬스터 y값 잡기
+        {
+            feature->feature->SetWorldPosY(hit.y);
+        }
+    }
+
+    for (int i = 0; i < 10; i++)
+    {
+        Vector3 hit;
+        Ray boxTop;
+        boxTop.position = itembox[i]->itemBox->GetWorldPos() + Vector3(0, 1000, 0);
+        boxTop.direction = Vector3(0, -1, 0);
+        if (Utility::RayIntersectMap(boxTop, GM->map, hit))//맵과 몬스터 레이 이용해 몬스터 y값 잡기
+        {
+            itembox[i]->itemBox->SetWorldPosY(hit.y);
+        }
+    }
+
 
     
     // 아이템과 플레이어의 충돌이 일어나면서 E키를 눌렀을때
@@ -313,7 +366,13 @@ void Scene1::Render()
     
     GM->map->Render();
     water->Render();
-    itemBox->Render();
+   
+  /*  itemBox->Render();*/
+    
+    for (int i = 0; i < 10; i++)
+    {
+        itembox[i]->Render();
+    }
     for (auto& item : GM->items)
     {
        item->Render();
@@ -327,9 +386,12 @@ void Scene1::Render()
     {
         feature->Render();
     }
-
-    GM->Render();
     GM->player->Render();
+    GM->Render();
+    for (auto& particle : GM->particlePool)
+    {
+        particle->Render();
+    }
     escape->Render();
     teleport->Render();
     GM->ui->Render();

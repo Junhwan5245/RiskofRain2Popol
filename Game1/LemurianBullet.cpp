@@ -4,7 +4,9 @@
 LemurianBullet* LemurianBullet::Create(string name)
 {
 	LemurianBullet* lemurianB = new LemurianBullet();
+	lemurianB->bulletParticle = Pop::Create();
 	lemurianB->LoadFile("LemurianBulletmesh.xml");
+	lemurianB->bulletParticle->LoadFile("Particle_Fire.xml");
 	/*lemurianB->trail = new LemurianBulletTrail();
 	lemurianB->trail->Top = lemurianB->Find("start");
 	lemurianB->trail->Bottom = lemurianB->Find("end");
@@ -40,6 +42,7 @@ void LemurianBullet::Update()
 	/*trail->RenderDetail();
 	trail->Update();*/
 	Bullet::Update();
+
 	
 }
 
