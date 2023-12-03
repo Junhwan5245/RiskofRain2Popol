@@ -56,8 +56,8 @@ void Bullet::CollisionWithMap()//¸Ê°ú ÃÑ¾Ë Ãæµ¹
 	{
 		if ((hit - GetWorldPos()).Length() < 1.0f)
 		{
-			bulletParticle->SetWorldPos(hit);
-			GM->particlePool.push_back(bulletParticle);
+			//bulletParticle->SetWorldPos(hit);
+			//GM->particlePool.push_back(bulletParticle);
 			isCollsion = true;
 		}
 	}
@@ -112,8 +112,8 @@ void Bullet::Update()
 	{
 		if (this->Intersect(feature->feature->Find("RootNode"))) //ÃÑ¾Ë°ú Áö¹° Ãæµ¹
 		{
-			bulletParticle->SetWorldPos(feature->feature->Find("RootNode")->GetWorldPos());
-			GM->particlePool.push_back(bulletParticle);
+			//bulletParticle->SetWorldPos(feature->feature->Find("RootNode")->GetWorldPos());
+			//GM->particlePool.push_back(bulletParticle);
 		
 			//¼Ò¸ê ½ÃÅ°°í
 			this->isCollsion = true;

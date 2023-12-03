@@ -17,6 +17,8 @@ InGameUI::InGameUI()
 	leftBottom->LoadFile("UI_InGame_LeftBottom.xml");
 	rightBottom = UI::Create();
 	rightBottom->LoadFile("UI_InGame_RightBottom.xml");
+
+	bossHPbar = UI::Create("bossHPbar");
 }
 
 InGameUI::~InGameUI()
@@ -70,6 +72,7 @@ void InGameUI::Update()
 	upper->Update();
 	leftBottom->Update();
 	rightBottom->Update();
+	bossHPbar->Update();
 }
 
 void InGameUI::Render()
@@ -77,6 +80,7 @@ void InGameUI::Render()
 	upper->Render();
 	leftBottom->Render();
 	rightBottom->Render();
+	bossHPbar->Render();
 
 	RenderFont();
 	PlayerInvenFont();
@@ -84,9 +88,10 @@ void InGameUI::Render()
 
 void InGameUI::RenderH()
 {
-	upper->RenderHierarchy();
-	leftBottom->RenderHierarchy();
-	rightBottom->RenderHierarchy();
+	//upper->RenderHierarchy();
+	//leftBottom->RenderHierarchy();
+	//rightBottom->RenderHierarchy();
+	bossHPbar->RenderHierarchy();
 }
 
 void InGameUI::ResizeScreen()

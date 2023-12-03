@@ -209,7 +209,7 @@ void Scene1::Update()
 
     Camera::main->Update();
     teleport->Update();
-    itemBox->Update();
+    //itemBox->Update();
 
     for (int i = 0; i < 10; i++)
     {

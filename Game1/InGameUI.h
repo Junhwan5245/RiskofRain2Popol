@@ -8,6 +8,8 @@ public:
 	UI* leftBottom;
 	UI* rightBottom;
 
+	UI* bossHPbar;
+
 private:
 
 

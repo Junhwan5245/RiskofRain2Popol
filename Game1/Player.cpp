@@ -283,7 +283,7 @@ void Player::FSM()
 	}
 	else if (attackState == PlayerAttackState::ATTACK)
 	{
-		Ray mouseRay = Utility::MouseToRay((Camera*)Find("FireCam"));
+		Ray mouseRay = Utility::MouseToRay((Camera*)Find("PlayerCam"));
 		ImGui::Text("MouseRay posx : %.2f", mouseRay.position.x);
 		ImGui::Text("MouseRay posy : %.2f", mouseRay.position.y);
 		ImGui::Text("MouseRay posz : %.2f", mouseRay.position.z);
