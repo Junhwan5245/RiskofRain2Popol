@@ -1,13 +1,13 @@
 <Root Name="Root" Visible="true" ObType="1" BoneIndex="0">
     <Skeleton File="eye/eye.skel" BoneIndexCount="4"/>
-    <Collider ColliderType="0" Visible="true">
-        <Position X="0" Y="-0.32000002" Z="0.25999999"/>
+    <Collider ColliderType="0" Visible="false">
+        <Position X="0" Y="0" Z="0.25999999"/>
         <Scale X="1" Y="1" Z="1"/>
         <Rotation X="0" Y="0" Z="0"/>
     </Collider>
     <Material File="BossBullet1.mtl"/>
     <Transform>
-        <Position X="0" Y="0" Z="0"/>
+        <Position X="0" Y="0.25" Z="0"/>
         <Scale X="2.5" Y="2.5" Z="2.5"/>
         <Rotation X="0" Y="0" Z="0"/>
     </Transform>

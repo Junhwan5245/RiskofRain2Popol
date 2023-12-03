@@ -1,13 +1,4 @@
 #pragma once
-enum class PopType
-{
-    LEMURIANBULLET,
-    GOLEMLAZER,
-    BOSSBULLET1,
-    BOSSBULLET2,
-    PLAYERBULLET
-};
-
 
 struct POP_DESC
 {
@@ -29,7 +20,7 @@ public:
     Vector2             particleScale = Vector2(0, 0); //이미지 크기값
     int                 particleCount = 100;
     float               velocityScalar = 10.0f;
-    PopType             poptype;
+    
     static void         CreateStaticMember();
     static void         DeleteStaticMember();
     static Pop* Create(string name = "Pop");

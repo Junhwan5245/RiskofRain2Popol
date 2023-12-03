@@ -51,8 +51,8 @@ Scene1::Scene1()
     
    for (int i = 0; i < MONCREATESIZE; ++i)
    {
-       /*int num = i;*/
-       int num = 1;
+       int num = i;
+      /* int num = 1;*/
        
        auto newMonster = Monster::Create("Monster", MonsterType(num));
        GM->monsterPool.push_back(newMonster);

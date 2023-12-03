@@ -6,7 +6,7 @@ Boss* Boss::Create(string name)
 	boss->LoadFile("Boss.xml");
 	boss->type = ObType::Actor;
 	boss->IdleAnimations();
-	boss->range = 20;
+	boss->range = 50;
 
 	boss->moveSpeed = 2.0f; // 증가계수 24
 	boss->maxHp = 800; // 증가계수 24

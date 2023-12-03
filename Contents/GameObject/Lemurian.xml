@@ -8,7 +8,7 @@
     </Transform>
     <Children Size="3"/>
     <Child0 Name="RootNode" Visible="true" ObType="0" BoneIndex="1">
-        <Collider ColliderType="2" Visible="true">
+        <Collider ColliderType="2" Visible="false">
             <Position X="0" Y="7.6666651" Z="-1.6666665"/>
             <Scale X="4.3499999" Y="7.5999999" Z="4.4000001"/>
             <Rotation X="0" Y="0" Z="0"/>
