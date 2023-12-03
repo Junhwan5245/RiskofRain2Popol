@@ -67,7 +67,16 @@ void InGameUI::Update()
 	//	isGoalClear = !isGoalClear;
 	//}
 
-
+	if (isGoalClear)
+	{
+		upper->Find("UpperRightBottom_GoalClear")->visible = true;
+		upper->Find("UpperRightBottom_GoalList")->visible = false;
+	}
+	else
+	{
+		upper->Find("UpperRightBottom_GoalClear")->visible = false;
+		upper->Find("UpperRightBottom_GoalList")->visible = true;
+	}
 
 
 	upper->Update();

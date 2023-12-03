@@ -146,7 +146,6 @@ void Scene1::Update()
     ImGui::Text("TIMER : %.2f", monsterCreationTimer);
     ImGui::Text("FPS: %d", TIMER->GetFramePerSecond());
     ImGui::Text("Stagelevel : %d", level);
-    ImGui::Text("boss Hp : %d", boss->hp);
 
 
     if (ImGui::Button("Perlin"))
@@ -248,7 +247,6 @@ void Scene1::Update()
             particle->Update();
         }
     }
-    boss->Update();
     water->Update();
     GM->Update();//총알
     //for (auto& bullet : GM->bulletPool)
@@ -274,17 +272,6 @@ void Scene1::LateUpdate()
     Vector3 hit;
     if (Utility::RayIntersectMap(playerTop, GM->map, hit))//맵과 몬스터 레이 이용해 플레이어 y값 잡기
     {
-        // float lenght = GM->player->GetWorldPos().y - hit.y;
-        // if (lenght < 3 and lenght > 0.2f)
-        // {
-        //     if (not GM->player->isJumpFinish)
-        //     {
-        //         GM->player->anim->ChangeAnimation(AnimationState::ONCE_LAST, 16, 0.1f);
-        //         GM->player->isJumpFinish = true;
-        //     }
-        // }
-
-        //GM->player->SetWorldPosY(hit.y);
         if (hit.y > GM->player->GetWorldPos().y)
         {
             GM->player->SetWorldPosY(hit.y + 0.001);
@@ -293,42 +280,6 @@ void Scene1::LateUpdate()
             GM->player->isJump = false;
         }
     }
-
-    //else
-    //{
-    //    Vector3 hit2;
-    //    Ray playerJumpRay;
-    //    playerTop.position = GM->player->GetWorldPos() + Vector3(0, 2, 0);
-    //    playerTop.direction = Vector3(0, -1, 0);
-    //
-    //    if (Utility::RayIntersectTri(playerJumpRay, GM->map, hit2))
-    //    {
-    //        if (GM->player->GetWorldPos().y < hit.y)
-    //        {
-    //            GM->player->SetWorldPosY(hit.y);
-    //            GM->player->gravity = 0.0f;
-    //        }
-    //    }
-    //    else
-    //    {
-    //        //맵 밖으로 못나가게
-    //        GM->player->gravity = 0.0f;
-    //    }
-    //}
-
-    //for (auto& playerBullet : GM->bulletPool)
-    //{
-    //    if (playerBullet->bulletType == BulletType::PLAYER)
-    //    {
-    //        if(playerBullet->Intersect(boss->Find("RootNode")))//보스와 충돌했다면
-    //        {
-    //            playerBullet->isCollsion = true;
-    //
-    //            int damage = GM->player->attack;
-    //            boss->hp -= damage;
-    //        }
-    //    }
-    //}
 
     for (auto& monster : GM->monsterPool)
     {
@@ -403,12 +354,18 @@ void Scene1::LateUpdate()
          temp1->CollisionBulletToMap(GM->map);*/
     GM->LateUpdate();
 
-    if (teleport->teleport->Find("RootNode")->Intersect(GM->player->Find("RootNode")))
+    if (not isBossCreate)
     {
-        if (INPUT->KeyDown('E'))
+        if (teleport->teleport->Find("RootNode")->Intersect(GM->player->Find("RootNode")))
         {
-            GM->monsterPool.push_back(boss);
-            //게이지 채우는 것 시작
+            if (INPUT->KeyDown('E'))
+            {
+                GM->ui->isGoalClear = true;
+                isBossCreate = true;
+                Boss* bos = Boss::Create();
+                GM->monsterPool.push_back(bos);
+                //게이지 채우는 것 시작
+            }
         }
     }
 }
@@ -427,7 +384,6 @@ void Scene1::Render()
     
     GM->map->Render();
     water->Render();
-    boss->Render();
   /*  itemBox->Render();*/
     
     for (int i = 0; i < 10; i++)

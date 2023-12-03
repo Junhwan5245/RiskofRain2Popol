@@ -5,6 +5,7 @@ Boss* Boss::Create(string name)
 	Boss* boss = new Boss();
 	boss->LoadFile("Boss.xml");
 	boss->type = ObType::Actor;
+	boss->monsterType = MonsterType::BOSS;
 	boss->IdleAnimations();
 	boss->range = 50;
 
@@ -25,7 +26,7 @@ Boss* Boss::Create(string name)
 void Boss::Update()
 {
 	/*Monster::Update();*/
-	//ImGui::Text("BossState : %d", bState);
+	ImGui::Text("Boss Hp : %d", hp);
 	
 	Stare();
 	

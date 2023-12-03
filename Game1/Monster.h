@@ -5,6 +5,7 @@ enum class MonsterType
 	BEETLE,
 	LEMURIAN,
 	GOLEM,
+	BOSS,
 };
 enum class MonsterState 
 {

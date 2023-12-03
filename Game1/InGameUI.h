@@ -9,12 +9,10 @@ public:
 	UI* rightBottom;
 
 	UI* bossHPbar;
+	bool isGoalClear = false;
+
 
 private:
-
-
-
-
 	wstring wplayerHp;
 	wstring whpSlash;
 	wstring wplayerMaxHp;

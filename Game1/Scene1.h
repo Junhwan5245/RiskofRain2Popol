@@ -23,6 +23,7 @@ private:
 
    
     bool            isMainCam;     // 메인캠 전환키 (임시용)
+    bool            isBossCreate = false;  // 보스 생성됬는지
     float           renewtime = 0.0f;
     int             level; // 난이도
 

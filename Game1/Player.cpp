@@ -351,14 +351,14 @@ void Player::FSM()
 					pos = Find("gun.r.muzzle")->GetWorldPos();
 
 					temp->SetPos(pos);
-					temp->scale = Vector3(0.2, 0.2, 0.2);
+					temp->scale = Vector3(0.4, 0.4, 0.4);
 					GM->bulletPool.push_back(temp);
 
 					for (auto it = GM->bulletPool.begin(); it != GM->bulletPool.end(); it++)
 					{
 						if (not (*it)->isFire)
 						{
-							(*it)->Fire(GetForward(), 20.0f, rotation);
+							(*it)->Fire(GetForward(), 200.0f, rotation);
 							break;
 						}
 					}
@@ -401,7 +401,7 @@ void Player::FSM()
 							{
 								if (not (*it)->isFire)
 								{
-									(*it)->Fire(GetForward(), 20.0f, rotation);
+									(*it)->Fire(GetForward(), 200.0f, rotation);
 									break;
 								}
 							}

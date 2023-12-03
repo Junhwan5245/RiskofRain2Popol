@@ -1,19 +1,19 @@
 <Root Name="Root" Visible="true" ObType="1" BoneIndex="0">
     <Skeleton File="mdlVagrant/mdlVagrant.skel" BoneIndexCount="43"/>
     <Animations AnimSize="12" File0="/mdlVagrantAni0.anim" File1="/mdlVagrantAni1.anim" File2="/mdlVagrantAni2.anim" File3="/mdlVagrantAni3.anim" File4="/mdlVagrantAni4.anim" File5="/mdlVagrantAni5.anim" File6="/mdlVagrantAni6.anim" File7="/mdlVagrantAni7.anim" File8="/mdlVagrantAni8.anim" File9="/mdlVagrantAni9.anim" File10="/mdlVagrantAni10.anim" File11="/mdlVagrantAni11.anim"/>
-    <Collider ColliderType="2" Visible="false">
-        <Position X="0" Y="5.1000004" Z="0"/>
-        <Scale X="1" Y="1" Z="1"/>
-        <Rotation X="0" Y="0" Z="0"/>
-    </Collider>
     <Material File="mdlVagrantAni/Default-Material.mtl"/>
     <Transform>
         <Position X="0" Y="26.200001" Z="0"/>
         <Scale X="6" Y="6" Z="6"/>
-        <Rotation X="0" Y="0" Z="0"/>
+        <Rotation X="0" Y="0.88381153" Z="0"/>
     </Transform>
     <Children Size="2"/>
     <Child0 Name="RootNode" Visible="true" ObType="0" BoneIndex="1">
+        <Collider ColliderType="2" Visible="true">
+            <Position X="0" Y="5" Z="0"/>
+            <Scale X="1" Y="1" Z="1"/>
+            <Rotation X="0" Y="0" Z="0"/>
+        </Collider>
         <Transform>
             <Position X="0" Y="0" Z="0"/>
             <Scale X="1" Y="1" Z="1"/>
