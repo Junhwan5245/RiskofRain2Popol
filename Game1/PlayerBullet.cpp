@@ -72,3 +72,14 @@ void PlayerBullet::Attack()
 		}
 	}
 }
+
+Pop* PlayerBullet::InitParticle()
+{
+	bulletParticle = Pop::Create();
+	bulletParticle->LoadFile("Particle_PlayerBullet.xml");
+	bulletParticle->desc.gravity = 21;
+	bulletParticle->velocityScalar = 27;
+	bulletParticle->particleCount = 5;
+
+	return bulletParticle;
+}

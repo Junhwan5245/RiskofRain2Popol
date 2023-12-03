@@ -42,3 +42,14 @@ void GolemBullet::Fire(Vector3 dir, float power, Vector3 rotation)
 {
 	Bullet::Fire(dir, power, rotation);
 }
+
+Pop* GolemBullet::InitParticle()
+{
+	bulletParticle = Pop::Create();
+	bulletParticle->LoadFile("Particle_GolemLazer.xml");
+	bulletParticle->desc.gravity = 9;
+	bulletParticle->velocityScalar = 18;
+	bulletParticle->particleCount = 20;
+
+	return bulletParticle;
+}

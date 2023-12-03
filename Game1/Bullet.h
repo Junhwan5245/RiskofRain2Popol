@@ -22,7 +22,7 @@ public:
     float       extinctionTime;
     Pop*        bulletParticle;
 
-
+    virtual Pop*    InitParticle();
     void	Update();
     void	Render(shared_ptr<Shader> pShader = nullptr);
     void    CollisionWithMap();

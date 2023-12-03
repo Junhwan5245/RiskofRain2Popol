@@ -14,7 +14,7 @@ private:
     Boss*        boss;
     EscapeShip*  escape;
     Teleport*    teleport;
-    
+   
 
     list<Collider*> colliders;
   
@@ -25,6 +25,7 @@ private:
     bool            isMainCam;     // 메인캠 전환키 (임시용)
     float           renewtime = 0.0f;
     int             level; // 난이도
+
 public:
     Scene1();
     ~Scene1();
