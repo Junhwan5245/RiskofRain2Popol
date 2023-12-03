@@ -47,10 +47,10 @@ Player::~Player()
 
 void Player::Update()
 {
-	ImGui::Text("M2CoolTime : %.2f", m2Timer);
-	ImGui::Text("isRButton : %d\n", (int)isRButton);
-	ImGui::Text("RCoolTime : %.2f", rTimer);
-	ImGui::Text("isRSkill : %d\n", (int)isRSkill);
+	//ImGui::Text("M2CoolTime : %.2f", m2Timer);
+	//ImGui::Text("isRButton : %d\n", (int)isRButton);
+	//ImGui::Text("RCoolTime : %.2f", rTimer);
+	//ImGui::Text("isRSkill : %d\n", (int)isRSkill);
 
 
 	StatGUI();
@@ -284,13 +284,13 @@ void Player::FSM()
 	else if (attackState == PlayerAttackState::ATTACK)
 	{
 		Ray mouseRay = Utility::MouseToRay((Camera*)Find("PlayerCam"));
-		ImGui::Text("MouseRay posx : %.2f", mouseRay.position.x);
-		ImGui::Text("MouseRay posy : %.2f", mouseRay.position.y);
-		ImGui::Text("MouseRay posz : %.2f", mouseRay.position.z);
-
-		ImGui::Text("\n\nplayer posx : %.2f", GetWorldPos().x);
-		ImGui::Text("player posy : %.2f", GetWorldPos().y);
-		ImGui::Text("player posz : %.2f", GetWorldPos().z);
+		//ImGui::Text("MouseRay posx : %.2f", mouseRay.position.x);
+		//ImGui::Text("MouseRay posy : %.2f", mouseRay.position.y);
+		//ImGui::Text("MouseRay posz : %.2f", mouseRay.position.z);
+		//
+		//ImGui::Text("\n\nplayer posx : %.2f", GetWorldPos().x);
+		//ImGui::Text("player posy : %.2f", GetWorldPos().y);
+		//ImGui::Text("player posz : %.2f", GetWorldPos().z);
 		/** M1 스킬 */
 		{
 			if (INPUT->KeyPress(VK_LBUTTON))
@@ -536,22 +536,6 @@ void Player::LevelUp()
 		maxExp = maxExp * (1 + 0.1f * (lv - 1));
 		attack = attack + 2.4f;
 	}
-
-
-	for (auto& monster : GM->monsterPool)
-	{
-		if (monster->hp <= 0 and monster->state == MonsterState::DEAD)
-		{// 몬스터가 죽었을때
-			// player exp 추가
-			//exp += monster->exp;
-			//gold += monster->gold;
-			//
-			//float scale = GM->ui->leftBottom->Find("LeftBottom_ExpBarscale")->scale.x * exp / (float)maxExp;
-			//GM->ui->leftBottom->Find("LeftBottom_Exp")->scale.x = scale;
-		}
-	}
-
-
 }
 
 void Player::DecreaseHP()

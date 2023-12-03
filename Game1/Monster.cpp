@@ -46,8 +46,8 @@ Monster* Monster::Create(string name,MonsterType monType)
 
 void Monster::Update()
 {
-    ImGui::Text("animIdx : %d", anim->nextAnimator.animIdx);
-    ImGui::Text("animPlaytime : %.2f", anim->GetPlayTime());
+    //ImGui::Text("animIdx : %d", anim->nextAnimator.animIdx);
+    //ImGui::Text("animPlaytime : %.2f", anim->GetPlayTime());
 
     Stare();
 

@@ -9,8 +9,8 @@ Boss* Boss::Create(string name)
 	boss->range = 20;
 
 	boss->moveSpeed = 2.0f; // 증가계수 24
-	boss->maxHp = 800; // 증가계수 24
-	boss->hp = 800;
+	boss->maxHp = 5000; // 증가계수 24
+	boss->hp = 5000;
 	boss->gold = 60;
 	boss->exp = 80;
 	boss->defend = 0;
@@ -25,7 +25,7 @@ Boss* Boss::Create(string name)
 void Boss::Update()
 {
 	/*Monster::Update();*/
-	ImGui::Text("BossState : %d", bState);
+	//ImGui::Text("BossState : %d", bState);
 	
 	Stare();
 	
@@ -222,6 +222,13 @@ void Boss::DeadAnimations()
 void Boss::Attack2Animations()
 {
 	anim->ChangeAnimation(AnimationState::ONCE_LAST, 4, 0.0f);
+}
+
+void Boss::DecreaseHP(float dam)
+{
+	hp -= dam;
+	float scale = GM->ui->bossHPbar->Find("bossHPBar")->scale.x * (float)hp / (float)maxHp;
+	GM->ui->bossHPbar->Find("bossHP")->scale.x = scale;
 }
 
 Boss::Boss()

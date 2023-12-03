@@ -151,3 +151,7 @@ void Bullet::Fire(Vector3 dir, float power, Vector3 rotation)
 	this->rotation.x = HALFPI;
 	this->rotation.y = rotation.y;
 }
+
+void Bullet::PlayerToBossAttack(Boss* boss)
+{
+}

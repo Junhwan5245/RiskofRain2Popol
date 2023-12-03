@@ -19,7 +19,6 @@ void GameManager::Release()
 
 void GameManager::Update()
 {
-	
 	for (auto it = bulletPool.begin(); it != bulletPool.end(); it++)//총알 업데이트
 	{
 		(*it)->Update();

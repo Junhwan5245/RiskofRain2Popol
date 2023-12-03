@@ -23,7 +23,7 @@ StartScene::StartScene()
     exit = UI::Create();
     exit->LoadFile("UI_StartScene_Exit.xml");
 
-   // idSelect = UI::Create("idSelect");
+    // idSelect = UI::Create("idSelect");
     //id = UI::Create("id");
     //newID = UI::Create("newId");
 

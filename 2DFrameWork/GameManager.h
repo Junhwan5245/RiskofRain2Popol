@@ -20,7 +20,6 @@ public:
 	virtual void LateUpdate();
 	virtual void Render();
 	virtual void ResizeScreen();
-	
 };
 
 

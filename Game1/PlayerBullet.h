@@ -17,7 +17,7 @@ public:
     void    Fire(Vector3 dir, float power, Vector3 rotation) override;
 
     void    Attack();
-    
+    void    PlayerToBossAttack(class Boss* boss);
     Pop*    InitParticle();
 
     //bool    GetIsFire() { return isFire; }

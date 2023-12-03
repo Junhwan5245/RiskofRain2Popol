@@ -25,6 +25,9 @@ public:
 	void	MoveAnimations() override;
 	void	DeadAnimations() override;
 	void	Attack2Animations();
+	void	DecreaseHP(float dam);
+
+
 	BossState bState;
 	float	attackTimer;
 	float	bulletTimer1;

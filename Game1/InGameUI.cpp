@@ -19,6 +19,7 @@ InGameUI::InGameUI()
 	rightBottom->LoadFile("UI_InGame_RightBottom.xml");
 
 	bossHPbar = UI::Create("bossHPbar");
+	bossHPbar->LoadFile("UI_InGame_BossHpBar.xml");
 }
 
 InGameUI::~InGameUI()
@@ -89,7 +90,7 @@ void InGameUI::Render()
 void InGameUI::RenderH()
 {
 	//upper->RenderHierarchy();
-	//leftBottom->RenderHierarchy();
+	leftBottom->RenderHierarchy();
 	//rightBottom->RenderHierarchy();
 	bossHPbar->RenderHierarchy();
 }

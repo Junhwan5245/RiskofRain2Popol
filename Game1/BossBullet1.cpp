@@ -61,7 +61,7 @@ Pop* BossBullet1::InitParticle()
 {
 	
 	bulletParticle = Pop::Create();
-	bulletParticle->LoadFile("Particle_BossBullet1.xml");
+	bulletParticle->LoadFile("Particle_Boss1Bullet.xml");
 	bulletParticle->desc.gravity = 21;
 	bulletParticle->velocityScalar = 27;
 	bulletParticle->particleCount = 5;

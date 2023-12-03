@@ -72,7 +72,7 @@ Pop* BossBullet2::InitParticle()
 {
 	
 	bulletParticle = Pop::Create();
-	bulletParticle->LoadFile("Particle_BossBullet1.xml");
+	bulletParticle->LoadFile("Particle_Boss1Bullet.xml");
 	bulletParticle->particleCount = 0;
 
 	return bulletParticle;

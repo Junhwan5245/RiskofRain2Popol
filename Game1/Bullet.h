@@ -29,6 +29,7 @@ public:
     virtual void    SetPos(Vector3 pos);
     virtual void    Fire(Vector3 dir, float power, Vector3 rotation);
 
+    virtual void PlayerToBossAttack(class Boss* boss);
     //bool    GetIsFire() { return isFire; }
 };
 

@@ -49,10 +49,10 @@ Scene1::Scene1()
 
    /* itemBox = ItemBox::Create();*/
     
-   for (int i = 0; i < MONCREATESIZE; ++i)
+   for (int i = 0; i < 3; ++i)
    {
-       /*int num = i;*/
-       int num = 1;
+       int num = i;
+       //int num = 1;
        
        auto newMonster = Monster::Create("Monster", MonsterType(num));
        GM->monsterPool.push_back(newMonster);
@@ -146,6 +146,7 @@ void Scene1::Update()
     ImGui::Text("TIMER : %.2f", monsterCreationTimer);
     ImGui::Text("FPS: %d", TIMER->GetFramePerSecond());
     ImGui::Text("Stagelevel : %d", level);
+    ImGui::Text("boss Hp : %d", boss->hp);
 
 
     if (ImGui::Button("Perlin"))
@@ -155,19 +156,19 @@ void Scene1::Update()
 
 
     // 몬스터 랜덤 위치 생성
-    //if (GM->monsterPool.size()<MAXMONSIZE)
-    //{
-    //    if (monsterCreationTimer >= monsterCreationInterval)
-    //    {
-    //        monsterCreationTimer = 0.0f;
-    //        for (int i = 0; i < MONCREATESIZE; ++i)
-    //        {
-    //            int num = RANDOM->Int(0, 2);
-    //            auto newMonster = Monster::Create("Monster", MonsterType(num));
-    //            GM->monsterPool.push_back(newMonster);
-    //        }
-    //    }
-    //}
+    if (GM->monsterPool.size()<MAXMONSIZE)
+    {
+        if (monsterCreationTimer >= monsterCreationInterval)
+        {
+            monsterCreationTimer = 0.0f;
+            for (int i = 0; i < MONCREATESIZE; ++i)
+            {
+                int num = RANDOM->Int(0, 2);
+                auto newMonster = Monster::Create("Monster", MonsterType(num));
+                GM->monsterPool.push_back(newMonster);
+            }
+        }
+    }
     
     //downcasting으로 자식에만 있는 함수에 접근하는 방법
 
@@ -176,36 +177,31 @@ void Scene1::Update()
 
     
     ImGui::Begin("Hierarchy");
-    GM->player->PlayerRenderHierarchy();
-    for (auto& monster : GM->monsterPool)
-    {
-        monster->RenderHierarchy();
-    }
-    for (auto& temp : GM->items)
-    {
-        temp->item->RenderHierarchy();
-    }
-    for (auto& feature : GM->featurePool)
-    {
-        feature->feature->RenderHierarchy();
-    }
-
+    boss->RenderHierarchy();
+    //GM->player->PlayerRenderHierarchy();
+    //for (auto& monster : GM->monsterPool)
+    //{
+    //    monster->RenderHierarchy();
+    //}
+    //for (auto& temp : GM->items)
+    //{
+    //    temp->item->RenderHierarchy();
+    //}
+    //for (auto& feature : GM->featurePool)
+    //{
+    //    feature->feature->RenderHierarchy();
+    //}
     GM->ui->RenderH();
-
-    GM->map->RenderHierarchy();
-    water->RenderHierarchy();
-   
-    
-   
-
-    escape->RenderHierarchy();
+    //GM->map->RenderHierarchy();
+    //water->RenderHierarchy();
+    //escape->RenderHierarchy();
     ImGui::End();
     
     /* Golem* temp1 = dynamic_cast<Golem*>(monster);
       if (temp1)
           temp1->Rendertemp();*/
     
-
+    
 
     Camera::main->Update();
     teleport->Update();
@@ -252,10 +248,14 @@ void Scene1::Update()
             particle->Update();
         }
     }
-
+    boss->Update();
     water->Update();
-   
     GM->Update();//총알
+    //for (auto& bullet : GM->bulletPool)
+    //{
+    //    bullet->PlayerToBossAttack(boss);
+    //    bullet->Update();
+    //}
     GM->player->Update();
 
     escape->Update();
@@ -316,7 +316,19 @@ void Scene1::LateUpdate()
     //    }
     //}
 
-
+    //for (auto& playerBullet : GM->bulletPool)
+    //{
+    //    if (playerBullet->bulletType == BulletType::PLAYER)
+    //    {
+    //        if(playerBullet->Intersect(boss->Find("RootNode")))//보스와 충돌했다면
+    //        {
+    //            playerBullet->isCollsion = true;
+    //
+    //            int damage = GM->player->attack;
+    //            boss->hp -= damage;
+    //        }
+    //    }
+    //}
 
     for (auto& monster : GM->monsterPool)
     {
@@ -377,8 +389,14 @@ void Scene1::LateUpdate()
         }
     }
     
-
-
+    // teleport와 맵 레이 충돌
+    Ray teleportTop;
+    teleportTop.position = teleport->teleport->GetWorldPos() + Vector3(0, 1000, 0);
+    teleportTop.direction = Vector3(0, -1, 0);
+    if (Utility::RayIntersectMap(teleportTop, GM->map, hit))//맵과 몬스터 레이 이용해 몬스터 y값 잡기
+    {
+        teleport->teleport->SetWorldPosY(hit.y);
+    }
     /* dynamic_cast 방법
     Lemurian* temp1 = dynamic_cast<Lemurian*>(monster);
      if (temp1) 
@@ -388,7 +406,7 @@ void Scene1::LateUpdate()
     if (teleport->teleport->Find("RootNode")->Intersect(GM->player->Find("RootNode")))
     {
         if (INPUT->KeyDown('E'))
-        { 
+        {
             GM->monsterPool.push_back(boss);
             //게이지 채우는 것 시작
         }
@@ -409,7 +427,7 @@ void Scene1::Render()
     
     GM->map->Render();
     water->Render();
-   
+    boss->Render();
   /*  itemBox->Render();*/
     
     for (int i = 0; i < 10; i++)
