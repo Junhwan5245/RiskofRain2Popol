@@ -4,7 +4,7 @@ class GolemBullet : public Bullet
 public:
     static GolemBullet* Create(string name = "GolemBullet");
 private:
-
+    Pop* golemBulletHit;
     GolemBullet();
 
 public:

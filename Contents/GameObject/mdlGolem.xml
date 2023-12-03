@@ -7,7 +7,7 @@
         <Scale X="1" Y="1" Z="1"/>
         <Rotation X="0" Y="0" Z="0"/>
     </Transform>
-    <Children Size="2"/>
+    <Children Size="4"/>
     <Child0 Name="RootNode" Visible="true" ObType="0" BoneIndex="1">
         <Collider ColliderType="2" Visible="true">
             <Position X="0" Y="1.85" Z="0"/>
@@ -437,12 +437,34 @@
             <Children Size="0"/>
         </Child2>
     </Child0>
-    <Child1 Name="lazerstart" Visible="true" ObType="0" BoneIndex="-1">
+    <Child1 Name="backHp" Visible="true" ObType="7" BoneIndex="-1">
+        <Mesh File="7.Billboard.mesh"/>
+        <Shader File="7.Billboard.hlsl"/>
+        <Material File="backHp.mtl"/>
+        <Transform>
+            <Position X="0.85000002" Y="4.4499998" Z="0"/>
+            <Scale X="1.7" Y="0.15000001" Z="1"/>
+            <Rotation X="0" Y="0" Z="0"/>
+        </Transform>
+        <Children Size="0"/>
+    </Child1>
+    <Child2 Name="frontHp" Visible="true" ObType="7" BoneIndex="-1">
+        <Mesh File="7.Billboard.mesh"/>
+        <Shader File="7.Billboard.hlsl"/>
+        <Material File="frontHp.mtl"/>
+        <Transform>
+            <Position X="0.85000002" Y="4.4499998" Z="0"/>
+            <Scale X="1.7" Y="0.15000001" Z="1"/>
+            <Rotation X="0" Y="0" Z="0"/>
+        </Transform>
+        <Children Size="0"/>
+    </Child2>
+    <Child3 Name="lazerstart" Visible="true" ObType="0" BoneIndex="-1">
         <Transform>
             <Position X="0" Y="3.5999999" Z="0"/>
             <Scale X="1" Y="1" Z="1"/>
             <Rotation X="0" Y="0" Z="0"/>
         </Transform>
         <Children Size="0"/>
-    </Child1>
+    </Child3>
 </Root>

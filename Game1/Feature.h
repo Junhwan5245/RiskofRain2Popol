@@ -6,8 +6,7 @@ public:
     virtual ~Feature();
     virtual void	Update();
     virtual void	Render();
-    virtual void    Set();
- 
+    virtual void    SetPosition();
     Actor* feature; 
     
 };

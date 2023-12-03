@@ -5,8 +5,10 @@ BossBullet1* BossBullet1::Create(string name)
 {
 	BossBullet1* bossBullet1 = new BossBullet1();
 	bossBullet1->LoadFile("BossBullet1.xml");
+	bossBullet1->bulletParticle->poptype = PopType::BOSSBULLET1;
+
 	bossBullet1->root->rotation.y = 180.0f * ToRadian;
-	bossBullet1->power = 10.0f;
+	bossBullet1->power = 20.0f;
 	
 	return bossBullet1;
 }

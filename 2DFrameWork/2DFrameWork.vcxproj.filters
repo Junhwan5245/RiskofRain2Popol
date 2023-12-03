@@ -117,6 +117,12 @@
     <ClInclude Include="Water.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="Pop.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -252,6 +258,12 @@
     </ClCompile>
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Water.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Pop.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
   </ItemGroup>

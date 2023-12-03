@@ -3,6 +3,8 @@
 Rock1::Rock1()
 {
 	feature->LoadFile("Rock.xml");
+	
+	SetPosition();
 }
 
 Rock1::~Rock1()

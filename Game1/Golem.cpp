@@ -32,7 +32,7 @@ void Golem::Update()
 
 	/*last = root->Find("base")->GetWorldPos();*/
 
-	/*root->Find("frontHp")->scale.x = Hp * 1.7 / 100;*/
+	root->Find("frontHp")->scale.x = hp * 1.7 / 100;
 
 	static float laserTimer = 0.0f;
 
@@ -165,7 +165,7 @@ void Golem::MoveAnimations()
 
 void Golem::DeadAnimations()
 {
-	anim->ChangeAnimation(AnimationState::LOOP, 6, 0.1f);
+	anim->ChangeAnimation(AnimationState::ONCE_LAST, 5, 0.1f);
 }
 
 Golem::Golem()

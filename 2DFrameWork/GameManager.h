@@ -10,6 +10,7 @@ public:
 	class Player* player;//플레이어
 	vector<class Bullet*> bulletPool;//총알 담는 벡터
 	vector<class Feature*> featurePool;//지형물 담는 벡터
+	vector<class Pop*> particlePool;
 	class Terrain* map; 
 
 	virtual ~GameManager();
