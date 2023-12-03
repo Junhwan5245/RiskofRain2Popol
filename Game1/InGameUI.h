@@ -29,6 +29,8 @@ private:
 	wstring wcoolTime_LShift;
 	wstring wcoolTime_R;
 
+	wstring itemSlot[9];
+
 	// юс╫ц
 	//int playerlv = 1;
 	//int playerhp = 120;
@@ -53,8 +55,11 @@ public:
 	void Init();
 	void Update();
 	void Render();
+	void RenderH();
 	void ResizeScreen();
 
+
+	void PlayerInvenFont();
 	void RenderFont();
 };
 

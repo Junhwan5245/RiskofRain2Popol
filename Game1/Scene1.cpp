@@ -43,14 +43,14 @@ Scene1::Scene1()
 
     itemBox = ItemBox::Create();
     
-   for (int i = 0; i < MONCREATESIZE; ++i)
-   {
-       int num = i;
-       /*int num = 2;*/
-       
-       auto newMonster = Monster::Create("Monster", MonsterType(num));
-       GM->monsterPool.push_back(newMonster);
-   }
+    //for (int i = 0; i < MONCREATESIZE; ++i)
+    //{
+    //    int num = i;
+    //    /*int num = 2;*/
+    //    
+    //    auto newMonster = Monster::Create("Monster", MonsterType(num));
+    //    GM->monsterPool.push_back(newMonster);
+    //}
     loadCount++;
     
     boss = Boss::Create("Boss");
@@ -149,19 +149,19 @@ void Scene1::Update()
 
 
     // 몬스터 랜덤 위치 생성
-    if (GM->monsterPool.size()<MAXMONSIZE)
-    {
-        if (monsterCreationTimer >= monsterCreationInterval)
-        {
-            monsterCreationTimer = 0.0f;
-            for (int i = 0; i < MONCREATESIZE; ++i)
-            {
-                int num = RANDOM->Int(0, 2);
-                auto newMonster = Monster::Create("Monster", MonsterType(num));
-                GM->monsterPool.push_back(newMonster);
-            }
-        }
-    }
+    //if (GM->monsterPool.size()<MAXMONSIZE)
+    //{
+    //    if (monsterCreationTimer >= monsterCreationInterval)
+    //    {
+    //        monsterCreationTimer = 0.0f;
+    //        for (int i = 0; i < MONCREATESIZE; ++i)
+    //        {
+    //            int num = RANDOM->Int(0, 2);
+    //            auto newMonster = Monster::Create("Monster", MonsterType(num));
+    //            GM->monsterPool.push_back(newMonster);
+    //        }
+    //    }
+    //}
     
     //downcasting으로 자식에만 있는 함수에 접근하는 방법
 
@@ -179,7 +179,7 @@ void Scene1::Update()
     {
         temp->item->RenderHierarchy();
     }
-
+    GM->ui->RenderH();
     GM->map->RenderHierarchy();
     water->RenderHierarchy();
     
@@ -197,22 +197,22 @@ void Scene1::Update()
     Camera::main->Update();
     teleport->Update();
     itemBox->Update();
-    for (auto& monster : GM->monsterPool)
-    {
-        if (GM->player->isEscape)
-        {
-            monster->way.clear();
-        }
-        else
-        {
-            if (TIMER->GetTick(renewtime, 1.0f))
-            {
-                astar->PathFinding(monster->GetWorldPos(), GM->player->GetWorldPos(), monster->way);
-            }
-        }
-
-       monster->Update();
-    }
+    //for (auto& monster : GM->monsterPool)
+    //{
+    //    if (GM->player->isEscape)
+    //    {
+    //        monster->way.clear();
+    //    }
+    //    else
+    //    {
+    //        if (TIMER->GetTick(renewtime, 1.0f))
+    //        {
+    //            astar->PathFinding(monster->GetWorldPos(), GM->player->GetWorldPos(), monster->way);
+    //        }
+    //    }
+    //
+    //   monster->Update();
+    //}
     GM->map->Update();
     for (auto& item : GM->items)
     {

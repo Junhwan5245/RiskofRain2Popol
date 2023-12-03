@@ -79,10 +79,44 @@ void InGameUI::Render()
 	rightBottom->Render();
 
 	RenderFont();
+	PlayerInvenFont();
+}
+
+void InGameUI::RenderH()
+{
+	upper->RenderHierarchy();
+	leftBottom->RenderHierarchy();
+	rightBottom->RenderHierarchy();
 }
 
 void InGameUI::ResizeScreen()
 {
+}
+
+void InGameUI::PlayerInvenFont()
+{
+	for (int i = 0; i < 9; i++)
+	{
+		string s_slot = "slot" + to_string(i + 1);
+		Vector3 itemSlotPos = upper->Find(s_slot)->GetWorldPos();
+
+		string fileName = upper->Find(s_slot)->material->diffuseMap->file;
+		size_t index = fileName.find_last_of('.');
+
+		string itemName = fileName.substr(0, index);
+		auto iter = GM->player->GetItemInven()->itemList.find(itemName);
+		if (iter != GM->player->GetItemInven()->itemList.end())
+		{
+			itemSlot[i] = to_wstring(iter->second);
+		}
+		else itemSlot[i] = L" ";
+		rect.left = (itemSlotPos.x + 1) * App.GetHalfWidth() + 10;
+		rect.top = (1 - itemSlotPos.y) * App.GetHalfHeight() + 10;
+		rect.right = App.GetWidth();
+		rect.bottom = App.GetHeight();
+
+		DWRITE->RenderText(itemSlot[i], rect, 15, L"Noto Sans CJK KR Regular", Color(1, 1, 1, 1));
+	}
 }
 
 void InGameUI::RenderFont()
@@ -90,10 +124,7 @@ void InGameUI::RenderFont()
 	// LeftBottom Font (Player Lv, Hp..)
 	{
 		Vector3 playerHpBarPos = leftBottom->Find("LeftBottom_PlayerHpFont")->GetWorldPos(); // 플레이어체력바 Pos
-		Vector3 playerHpBarScale = leftBottom->Find("LeftBottom_PlayerHpFont")->scale; // 플레이어체력바 Scale
-
 		Vector3 playerExpBarPos = leftBottom->Find("LeftBottom_LvFont")->GetWorldPos();
-		Vector3 playerExpBarScale = leftBottom->Find("LeftBottom_LvFont")->scale;
 
 		wlv = L"Lv : ";
 		rect.left = (playerExpBarPos.x + 1) * App.GetHalfWidth() - 20;

@@ -2,11 +2,12 @@
 class Inventory
 {
 private:
-	map<string, int> itemList;
-
+	int itemCount = 0;
 
 
 public:
+	map<string, int> itemList;
+
 	Inventory();
 	~Inventory();
 

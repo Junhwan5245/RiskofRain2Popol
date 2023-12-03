@@ -11,7 +11,7 @@ Player* Player::Create(string name)
 	temp->skillState = SkillState::NONE;
 	temp->anim->ChangeAnimation(AnimationState::LOOP, 3, 0.1f);
 	temp->Find("mdlCommandoDualies")->rotation.y = 180.0f * ToRadian;
-	temp->Find("PlayerCam")->rotation.x = 0.0f;
+	temp->Find("PlayerCam")->rotation.x = 0.0f; 
 	temp->rotation.y = 0;
 
 	/** ½ºÅÝ*/
