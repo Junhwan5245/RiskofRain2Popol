@@ -62,6 +62,10 @@ private:
     float               RSkillFireTime;  //  R스킬 발사시간(공속에 따라 더빠르게 발사가능)
     float               RSkillFire;  //  R스킬 발사시간(공속에 따라 더빠르게 발사가능)
 
+    //슬라이딩 벡터 관련
+    Vector3				moveDir = {};
+    Ray					slidingVector;
+    Vector3				slidingVectorHit = {};
     /** 플레이어만 가지고 있을 스텟*/
 
     Player();
@@ -91,7 +95,7 @@ public:
     void    SetPos(Vector3 pos);
     void    WolrdUpdate();
     void    PlayerRenderHierarchy();
-
+    void	MoveBack(Actor* col);
 
     /** Get함수*/
     //Vector3 GetLast() { return last; };

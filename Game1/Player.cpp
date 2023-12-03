@@ -32,13 +32,15 @@ Player* Player::Create(string name)
 	temp->isLButton = false;
 	temp->isRButton = false;
 	temp->isRSkill = false;
-	
+	temp->slidingVector.direction = temp->GetForward();
+
 	return temp;
 }
 
 Player::Player()
 {
 	itemInven = new Inventory();
+	
 }
 
 Player::~Player()
@@ -553,6 +555,19 @@ void Player::PlayerRenderHierarchy()
 {
 	this->RenderHierarchy();
 	
+}
+
+void Player::MoveBack(Actor* col)
+{
+	Vector3 slidingDir = col->GetWorldPos() - GM->player->GetWorldPos();
+	slidingDir.y = 0;
+	slidingDir.Normalize();
+	Vector3 normal = col->collider->GetNormalVector(slidingDir);
+	
+	moveDir = slidingDir - normal * (slidingDir.Dot(normal));
+	moveDir.Normalize();
+	moveDir = -moveDir;
+	GM->player->MoveWorldPos(moveDir * moveSpeed * DELTA);
 }
 
 void Player::StatGUI()

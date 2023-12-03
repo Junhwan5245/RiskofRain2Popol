@@ -7,29 +7,6 @@ Bullet* Bullet::Create(string name)
 	temp->isFire = false;
 	temp->isCollsion = false;
 	temp->extinctionTime = 0.0f;
-
-	
-	/*switch (temp->bulletParticle->poptype)
-	{
-	case PopType::LEMURIANBULLET :
-		temp->bulletParticle->LoadFile("Particle_Fire.xml");
-		break;
-	case PopType::PLAYERBULLET:
-		temp->bulletParticle->LoadFile("Particle_Fire.xml");
-		break;
-	case PopType::GOLEMLAZER:
-		temp->bulletParticle->LoadFile("Particle_Fire.xml");
-		break;
-	case PopType::BOSSBULLET1:
-		temp->bulletParticle->LoadFile("Particle_Fire.xml");
-		break;
-	case PopType::BOSSBULLET2:
-		temp->bulletParticle->LoadFile("Particle_Fire.xml");
-		break;
-	default:
-		break;
-	
-	}*/
 	
 	return temp;
 }
@@ -72,6 +49,7 @@ Pop* Bullet::InitParticle()
 	return nullptr;
 }
 
+
 void Bullet::Update()
 {
 	if (!isFire) return;
@@ -109,11 +87,14 @@ void Bullet::Update()
 			GM->player->DecreaseHP();
 		}
 
-		//if (this->Intersect(monster->Find("RootNode")))
-		//{
-		//	this->isCollsion = true;
-		//	monster->Hp -= 20;//플레이어 피깎기
-		//}
+		if (this->Intersect(monster->Find("RootNode")))
+		{
+			bulletParticle = InitParticle();
+			bulletParticle->SetWorldPos(monster->GetWorldPos());
+			GM->particlePool.push_back(bulletParticle);
+			this->isCollsion = true;
+			monster->hp -= GM->player->attack;//몬스터 수정시에 키기
+		}
 	}
 
 	for (auto& feature : GM->featurePool)

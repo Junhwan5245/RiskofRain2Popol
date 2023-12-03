@@ -5,7 +5,8 @@ LemurianBullet* LemurianBullet::Create(string name)
 {
 	LemurianBullet* lemurianB = new LemurianBullet();
 	lemurianB->LoadFile("LemurianBulletmesh.xml");
-	
+	//lemurianB->InitParticle();
+	//lemurianB->bulletParticle->poptype = PopType::LEMURIANBULLET;
 	/*lemurianB->trail = new LemurianBulletTrail();
 	lemurianB->trail->Top = lemurianB->Find("start");
 	lemurianB->trail->Bottom = lemurianB->Find("end");
@@ -20,7 +21,7 @@ LemurianBullet* LemurianBullet::Create(string name)
 	lemurianB->trail->material->diffuse.z = 0.0f;
 	lemurianB->trail->isPlaying = true;*/
 	lemurianB->root->rotation.y = 180.0f * ToRadian;
-	lemurianB->power = 10.0f;
+	lemurianB->power = 20.0f;
 	return lemurianB;
 }
 

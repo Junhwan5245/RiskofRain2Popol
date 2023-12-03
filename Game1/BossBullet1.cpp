@@ -5,9 +5,8 @@ BossBullet1* BossBullet1::Create(string name)
 {
 	BossBullet1* bossBullet1 = new BossBullet1();
 	bossBullet1->LoadFile("BossBullet1.xml");
-
 	bossBullet1->root->rotation.y = 180.0f * ToRadian;
-	bossBullet1->power = 20.0f;
+	bossBullet1->power = 25.0f;
 	
 	return bossBullet1;
 }
@@ -64,7 +63,7 @@ Pop* BossBullet1::InitParticle()
 	bulletParticle->LoadFile("Particle_Boss1Bullet.xml");
 	bulletParticle->desc.gravity = 21;
 	bulletParticle->velocityScalar = 27;
-	bulletParticle->particleCount = 5;
+	bulletParticle->particleCount = 6;
 
 	return bulletParticle;
 	

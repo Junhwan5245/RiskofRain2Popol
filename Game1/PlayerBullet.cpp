@@ -4,7 +4,8 @@ PlayerBullet* PlayerBullet::Create(string name)
 {
 	PlayerBullet* temp = new PlayerBullet();
 	temp->LoadFile("PlayerBullet.xml");
-	//temp->bulletType = BulletType::PLAYER;
+	temp->InitParticle();
+	
 
 	return temp;
 }
@@ -70,18 +71,6 @@ void PlayerBullet::Attack()
 			
 			monster->hp -= damage;//플레이어 피깎기
 		}
-	}
-}
-
-void PlayerBullet::PlayerToBossAttack(Boss* boss)
-{
-	if (this->Intersect(boss))
-	{
-		this->isCollsion = true;
-
-		int damage = GM->player->attack;
-
-		boss->hp -= damage;//플레이어 피깎기
 	}
 }
 

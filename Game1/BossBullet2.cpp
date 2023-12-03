@@ -6,8 +6,6 @@ BossBullet2* BossBullet2::Create(string name)
 {
 	BossBullet2* bossBullet2 = new BossBullet2();
 	bossBullet2->LoadFile("BossBullet2.xml");
-
-	bossBullet2->bulletParticle->poptype = PopType::BOSSBULLET2;
 	bossBullet2->root->rotation.y = 180.0f * ToRadian;
 	bossBullet2->power = 10.0f;
 	bossBullet2->exploreTime = 0.0f;
@@ -70,7 +68,6 @@ void BossBullet2::Fire(Vector3 dir, float power, Vector3 rotation)
 
 Pop* BossBullet2::InitParticle()
 {
-	
 	bulletParticle = Pop::Create();
 	bulletParticle->LoadFile("Particle_Boss1Bullet.xml");
 	bulletParticle->particleCount = 0;

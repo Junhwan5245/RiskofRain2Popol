@@ -5,7 +5,7 @@ GolemBullet* GolemBullet::Create(string name)
 {
 	GolemBullet* golemB = new GolemBullet();
 	golemB->LoadFile("GolemLazer.xml");
-	/*golemB->root->rotation.y = 180.0f * ToRadian;*/
+
 
 	golemB->power = 10.0f;
 	return golemB;
@@ -49,7 +49,7 @@ Pop* GolemBullet::InitParticle()
 	bulletParticle->LoadFile("ParticleGolemLazer.xml");
 	bulletParticle->desc.gravity = 9;
 	bulletParticle->velocityScalar = 18;
-	bulletParticle->particleCount = 20;
+	bulletParticle->particleCount = 6;
 
 	return bulletParticle;
 }

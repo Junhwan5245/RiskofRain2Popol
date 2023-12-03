@@ -5,7 +5,6 @@ GolemLazer* GolemLazer::Create(string name)
 {
 	GolemLazer* golemB = new GolemLazer();
 	golemB->LoadFile("GolemLazer.xml");
-
 	/*golemB->root->rotation.y = 180.0f * ToRadian;*/
 
 	golemB->power = 2.0f;

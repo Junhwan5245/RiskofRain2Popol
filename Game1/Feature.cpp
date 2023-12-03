@@ -11,6 +11,11 @@ Feature::~Feature()
 
 void Feature::Update()
 {
+	/*if (feature->Find("RootNode")->Intersect(GM->player->Find("RootNode")))
+	{
+		GM->player->MoveBack(feature);
+	}*/
+	
 	feature->Update();
 }
 

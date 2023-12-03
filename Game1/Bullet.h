@@ -2,8 +2,11 @@
 
 enum class BulletType
 {
-    PLAYER,
-    MONSTER,//나중에 세부적으로 나누면 될듯
+  LEMURIAN,
+  GOLEM,
+  BOSS1,
+  BOSS2,
+  PLAYER
 };
 
 class Bullet : public Actor
