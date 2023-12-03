@@ -95,6 +95,15 @@ void Bullet::Update()
 			this->isCollsion = true;
 			monster->hp -= GM->player->attack;//몬스터 수정시에 키기
 		}
+		
+		if (this->Intersect(monster->Find("RootNode")))
+		{
+			bulletParticle = InitParticle();
+			bulletParticle->SetWorldPos(monster->GetWorldPos());
+			GM->particlePool.push_back(bulletParticle);
+			this->isCollsion = true;
+			monster->hp -= GM->player->attack;//몬스터 수정시에 키기
+		}
 	}
 
 	for (auto& feature : GM->featurePool)
