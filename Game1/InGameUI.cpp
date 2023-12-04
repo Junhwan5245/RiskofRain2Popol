@@ -20,6 +20,7 @@ InGameUI::InGameUI()
 
 	bossHPbar = UI::Create("bossHPbar");
 	bossHPbar->LoadFile("UI_InGame_BossHpBar.xml");
+	bossHPbar->visible = false;
 }
 
 InGameUI::~InGameUI()

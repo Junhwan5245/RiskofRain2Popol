@@ -150,16 +150,16 @@ void Monster::MonFSM()
         state = MonsterState::DEAD;
         static int count = 0;
 
-        // 몬스터가 죽었을때의 위치에서 적용해주기
-        //auto iter = GM->player->GetItemInven()->GetItemList().find("Infusion");
-        //if (iter != GM->player->GetItemInven()->GetItemList().end())
-        //{//있다면 적 처치당 maxHp + 1 (중첩 +1) 최대 100(중첩 +100)
-        //    if (count < 100 * iter->second)
-        //    {
-        //        GM->player->maxHp += 1;
-        //        count++;
-        //    }
-        //}
+        //몬스터가 죽었을때의 위치에서 적용해주기
+        auto iter = GM->player->GetItemInven()->itemList.find("Infusion");
+        if (iter != GM->player->GetItemInven()->itemList.end())
+        {//있다면 적 처치당 maxHp + 1 (중첩 +1) 최대 100(중첩 +100)
+            if (count < 100 * iter->second)
+            {
+                GM->player->maxHp += 1;
+                count++;
+            }
+        }
     }
     
     if (state == MonsterState::DEAD)

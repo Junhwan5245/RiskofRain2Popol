@@ -52,20 +52,20 @@ void PlayerBullet::Attack()
 			int damage = GM->player->attack;
 
 			// TriTipDagger
-			//auto iter = GM->player->GetItemInven()->GetItemList().find("TritipDagger");
-			//if (iter != GM->player->GetItemInven()->GetItemList().end())
-			//{//있다면 출혈데미지 추가
-			//	damage += GM->player->attack * iter->second;
-			//}
+			auto iter = GM->player->GetItemInven()->itemList.find("TritipDagger");
+			if (iter != GM->player->GetItemInven()->itemList.end())
+			{//있다면 출혈데미지 추가
+				damage += GM->player->attack * iter->second;
+			}
 
-			//iter = GM->player->GetItemInven()->GetItemList().find("APRound");
-			//if (iter != GM->player->GetItemInven()->GetItemList().end())
-			//{//있다면 보스에게 20%(중첩 +20%) 추가 피해
-			//	if (monster->monsterType == MonsterType::BOSS)
-			//	{
-			//		damage += GM->player->attack * (0.2f * iter->second);
-			//	}
-			//}
+			iter = GM->player->GetItemInven()->itemList.find("APRound");
+			if (iter != GM->player->GetItemInven()->itemList.end())
+			{//있다면 보스에게 20%(중첩 +20%) 추가 피해
+				if (monster->monsterType == MonsterType::BOSS)
+				{
+					damage += GM->player->attack * (0.2f * iter->second);
+				}
+			}
 
 			
 			

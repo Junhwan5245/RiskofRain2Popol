@@ -360,6 +360,7 @@ void Scene1::LateUpdate()
         {
             if (INPUT->KeyDown('E'))
             {
+                GM->ui->bossHPbar->visible = true;
                 GM->ui->isGoalClear = true;
                 isBossCreate = true;
                 Boss* bos = Boss::Create();
