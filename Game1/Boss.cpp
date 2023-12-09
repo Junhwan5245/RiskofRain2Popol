@@ -176,7 +176,7 @@ void Boss::MonFSM()
 	}
 	else
 	{
-		bState == BossState::DEAD;
+		bState = BossState::DEAD;
 	}
 
 	if (bState == BossState::DEAD)

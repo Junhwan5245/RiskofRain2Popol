@@ -89,20 +89,23 @@ void Bullet::Update()
 
 		if (this->Intersect(monster->Find("RootNode")))
 		{
-			bulletParticle = InitParticle();
-			bulletParticle->SetWorldPos(monster->GetWorldPos());
-			GM->particlePool.push_back(bulletParticle);
-			this->isCollsion = true;
-			monster->hp -= GM->player->attack;//몬스터 수정시에 키기
-		}
-		
-		if (this->Intersect(monster->Find("RootNode")))
-		{
-			bulletParticle = InitParticle();
-			bulletParticle->SetWorldPos(monster->GetWorldPos());
-			GM->particlePool.push_back(bulletParticle);
-			this->isCollsion = true;
-			monster->hp -= GM->player->attack;//몬스터 수정시에 키기
+			if (!(monster->monsterType == MonsterType::BOSS))
+			{
+				bulletParticle = InitParticle();
+				bulletParticle->SetWorldPos(monster->GetWorldPos());
+				GM->particlePool.push_back(bulletParticle);
+				this->isCollsion = true;
+				monster->hp -= GM->player->attack;//몬스터 수정시에 키기
+			}
+			else
+			{
+				Vector3 collisionPos = this->GetWorldPos();
+				bulletParticle = InitParticle();
+				bulletParticle->SetWorldPos(collisionPos);
+				GM->particlePool.push_back(bulletParticle);
+				this->isCollsion = true;
+				monster->hp -= GM->player->attack;
+			}
 		}
 	}
 

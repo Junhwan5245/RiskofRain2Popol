@@ -120,6 +120,11 @@ void Golem::Update()
 		
 	}
 	
+	if (state == MonsterState::DEAD)
+	{
+		lazer->visible = false;
+		lazer->isCollsion = true;
+	}
 
 		/*lazer->RenderHierarchy();
 		lazer->Update();*/

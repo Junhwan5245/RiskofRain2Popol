@@ -51,7 +51,7 @@ Scene1::Scene1()
     
    for (int i = 0; i < 3; ++i)
    {
-       int num = i;
+       int num = 2;
        //int num = 1;
        
        auto newMonster = Monster::Create("Monster", MonsterType(num));
