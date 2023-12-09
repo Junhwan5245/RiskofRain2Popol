@@ -67,7 +67,7 @@ void LoadingScene::Update()
     loadingPersent = min(min(17 * loadCount, 99), loadingPersent += 0.025f);
     ImGui::Text("loadCount : %d", loadCount);
 
-    if (loadCount == 7)
+    if (loadCount == 6)
     {
         loadingPersent = 100;
         //Render();

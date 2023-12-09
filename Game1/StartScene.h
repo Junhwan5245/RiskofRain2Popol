@@ -11,7 +11,14 @@ private:
     UI* option;
     UI* exit;
 
+    UI* idSelect; // 닉네임리스트
+    UI* id; // 가운데 창
+    UI* newID;    // 우측 위
+
     wstring w_explan;
+
+    wstring w_id;
+    wstring w_idName;
 
 public:
     StartScene();

@@ -49,10 +49,10 @@ Scene1::Scene1()
 
    /* itemBox = ItemBox::Create();*/
     
-   for (int i = 0; i < MONCREATESIZE; ++i)
+   for (int i = 0; i < 3; ++i)
    {
        int num = i;
-      /* int num = 1;*/
+       //int num = 1;
        
        auto newMonster = Monster::Create("Monster", MonsterType(num));
        GM->monsterPool.push_back(newMonster);
@@ -176,39 +176,35 @@ void Scene1::Update()
 
     
     ImGui::Begin("Hierarchy");
-    GM->player->PlayerRenderHierarchy();
-    for (auto& monster : GM->monsterPool)
-    {
-        monster->RenderHierarchy();
-    }
-    for (auto& temp : GM->items)
-    {
-        temp->item->RenderHierarchy();
-    }
-    for (auto& feature : GM->featurePool)
-    {
-        feature->feature->RenderHierarchy();
-    }
-
-
-    GM->map->RenderHierarchy();
-    water->RenderHierarchy();
-   
-    
-   
-
-    escape->RenderHierarchy();
+    boss->RenderHierarchy();
+    //GM->player->PlayerRenderHierarchy();
+    //for (auto& monster : GM->monsterPool)
+    //{
+    //    monster->RenderHierarchy();
+    //}
+    //for (auto& temp : GM->items)
+    //{
+    //    temp->item->RenderHierarchy();
+    //}
+    //for (auto& feature : GM->featurePool)
+    //{
+    //    feature->feature->RenderHierarchy();
+    //}
+    GM->ui->RenderH();
+    //GM->map->RenderHierarchy();
+    //water->RenderHierarchy();
+    //escape->RenderHierarchy();
     ImGui::End();
     
     /* Golem* temp1 = dynamic_cast<Golem*>(monster);
       if (temp1)
           temp1->Rendertemp();*/
     
-
+    
 
     Camera::main->Update();
     teleport->Update();
-    /*itemBox->Update();*/
+    //itemBox->Update();
 
     for (int i = 0; i < 10; i++)
     {
@@ -251,10 +247,13 @@ void Scene1::Update()
             particle->Update();
         }
     }
-
     water->Update();
-   
     GM->Update();//총알
+    //for (auto& bullet : GM->bulletPool)
+    //{
+    //    bullet->PlayerToBossAttack(boss);
+    //    bullet->Update();
+    //}
     GM->player->Update();
 
     escape->Update();
@@ -268,14 +267,18 @@ void Scene1::LateUpdate()
     playerTop.position = GM->player->GetWorldPos() + Vector3(0, 100, 0);
     playerTop.direction = Vector3(0, -1, 0);
 
-    Ray playerJumpRay;
-    playerTop.position = GM->player->GetWorldPos() + Vector3(0, 1, 0);
-    playerTop.direction = Vector3(0, -1, 0);
+    
 
     Vector3 hit;
     if (Utility::RayIntersectMap(playerTop, GM->map, hit))//맵과 몬스터 레이 이용해 플레이어 y값 잡기
     {
-        GM->player->SetWorldPosY(hit.y);
+        if (hit.y > GM->player->GetWorldPos().y)
+        {
+            GM->player->SetWorldPosY(hit.y + 0.001);
+            GM->player->gravity = 0.0f;
+            GM->player->isJumpFinish = false;
+            GM->player->isJump = false;
+        }
     }
 
     for (auto& monster : GM->monsterPool)
@@ -337,20 +340,33 @@ void Scene1::LateUpdate()
         }
     }
     
-
-
+    // teleport와 맵 레이 충돌
+    Ray teleportTop;
+    teleportTop.position = teleport->teleport->GetWorldPos() + Vector3(0, 1000, 0);
+    teleportTop.direction = Vector3(0, -1, 0);
+    if (Utility::RayIntersectMap(teleportTop, GM->map, hit))//맵과 몬스터 레이 이용해 몬스터 y값 잡기
+    {
+        teleport->teleport->SetWorldPosY(hit.y);
+    }
     /* dynamic_cast 방법
     Lemurian* temp1 = dynamic_cast<Lemurian*>(monster);
      if (temp1) 
          temp1->CollisionBulletToMap(GM->map);*/
     GM->LateUpdate();
 
-    if (teleport->teleport->Find("RootNode")->Intersect(GM->player->Find("RootNode")))
+    if (not isBossCreate)
     {
-        if (INPUT->KeyDown('E'))
-        { 
-            GM->monsterPool.push_back(boss);
-            //게이지 채우는 것 시작
+        if (teleport->teleport->Find("RootNode")->Intersect(GM->player->Find("RootNode")))
+        {
+            if (INPUT->KeyDown('E'))
+            {
+                GM->ui->bossHPbar->visible = true;
+                GM->ui->isGoalClear = true;
+                isBossCreate = true;
+                Boss* bos = Boss::Create();
+                GM->monsterPool.push_back(bos);
+                //게이지 채우는 것 시작
+            }
         }
     }
 }
@@ -369,7 +385,6 @@ void Scene1::Render()
     
     GM->map->Render();
     water->Render();
-   
   /*  itemBox->Render();*/
     
     for (int i = 0; i < 10; i++)

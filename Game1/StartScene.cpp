@@ -23,6 +23,11 @@ StartScene::StartScene()
     exit = UI::Create();
     exit->LoadFile("UI_StartScene_Exit.xml");
 
+    // idSelect = UI::Create("idSelect");
+    //id = UI::Create("id");
+    //newID = UI::Create("newId");
+
+
     loadCount++;
 }
 
@@ -65,15 +70,10 @@ void StartScene::Release()
 void StartScene::Update()
 {
     ImGui::Begin("Hierarchy");
-    playerSelect->RenderHierarchy();
-    option->RenderHierarchy();
-    exit->RenderHierarchy();
+    //idSelect->RenderHierarchy();
+    //id->RenderHierarchy();
+    //newID->RenderHierarchy();
     ImGui::End();
-
-    //if (INPUT->KeyPress('L'))
-    //{
-    //    playerSelect->material->diffuseMap->LoadFile("texUICleanPanel.png");
-    //}
 
 
 
@@ -83,6 +83,9 @@ void StartScene::Update()
     playerSelect->Update();
     option->Update();
     exit->Update();
+    //idSelect->Update();
+    //id->Update();
+    //newID->Update();
 }
 
 void StartScene::LateUpdate()
@@ -102,6 +105,11 @@ void StartScene::Render()
     playerSelect->Render();
     option->Render();
     exit->Render();
+
+
+    //idSelect->Render();
+    //id->Render();
+    //newID->Render();
 }
 
 void StartScene::ResizeScreen()

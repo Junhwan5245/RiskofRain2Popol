@@ -2,21 +2,30 @@
     <Skeleton File="Commando/Commando.skel" BoneIndexCount="114"/>
     <Animations AnimSize="34" File0="Commando/CommandoAnim0.anim" File1="Commando/CommandoAnim1.anim" File2="Commando/CommandoAnim2.anim" File3="Commando/CommandoAnim3.anim" File4="Commando/CommandoAnim4.anim" File5="Commando/CommandoAnim5.anim" File6="Commando/CommandoAnim6.anim" File7="Commando/CommandoAnim7.anim" File8="Commando/CommandoAnim8.anim" File9="Commando/CommandoAnim9.anim" File10="Commando/CommandoAnim10.anim" File11="Commando/CommandoAnim11.anim" File12="Commando/CommandoAnim12.anim" File13="Commando/CommandoAnim13.anim" File14="Commando/CommandoAnim14.anim" File15="Commando/CommandoAnim15.anim" File16="Commando/CommandoAnim16.anim" File17="Commando/CommandoAnim17.anim" File18="Commando/CommandoAnim18.anim" File19="Commando/CommandoAnim19.anim" File20="Commando/CommandoAnim20.anim" File21="Commando/CommandoAnim21.anim" File22="Commando/CommandoAnim22.anim" File23="Commando/CommandoAnim23.anim" File24="Commando/CommandoAnim24.anim" File25="Commando/CommandoAnim25.anim" File26="Commando/CommandoAnim26.anim" File27="Commando/CommandoAnim27.anim" File28="Commando/CommandoAnim28.anim" File29="Commando/CommandoAnim29.anim" File30="Commando/CommandoAnim30.anim" File31="Commando/CommandoAnim31.anim" File32="Commando/CommandoAnim32.anim" File33="Commando/CommandoAnim33.anim"/>
     <Transform>
-        <Position X="17.034592" Y="-0.05380249" Z="24.025402"/>
+        <Position X="-20.736746" Y="7.299068" Z="8.5357494"/>
         <Scale X="1" Y="1" Z="1"/>
-        <Rotation X="0" Y="11.059838" Z="0"/>
+        <Rotation X="0" Y="-12.777015" Z="0"/>
     </Transform>
-    <Children Size="2"/>
-    <Child0 Name="PlayerCam" Visible="true" ObType="2" BoneIndex="-1">
+    <Children Size="3"/>
+    <Child0 Name="FireCam" Visible="true" ObType="2" BoneIndex="-1">
+        <Transform>
+            <Position X="0" Y="1.45" Z="0.75"/>
+            <Scale X="1" Y="1" Z="1"/>
+            <Rotation X="0" Y="0" Z="0"/>
+        </Transform>
+        <Camera Ortho="false" Fov="1.047192" Width="1920" Height="1009" NearZ="0.1" FarZ="500" viewportX="0" viewportY="0" viewportW="1920" viewportH="1009"/>
+        <Children Size="0"/>
+    </Child0>
+    <Child1 Name="PlayerCam" Visible="true" ObType="2" BoneIndex="-1">
         <Transform>
             <Position X="-0.11767732" Y="2.3278432" Z="-3.5158255"/>
             <Scale X="1" Y="1" Z="1"/>
-            <Rotation X="0.060000122" Y="-0.0070004873" Z="0"/>
+            <Rotation X="-6.2580185" Y="-0.0070004873" Z="0"/>
         </Transform>
-        <Camera Ortho="false" Fov="1.047192" Width="1525" Height="1000" NearZ="0.1" FarZ="500" viewportX="0" viewportY="0" viewportW="1525" viewportH="1000"/>
+        <Camera Ortho="false" Fov="1.047192" Width="1920" Height="1009" NearZ="0.1" FarZ="500" viewportX="0" viewportY="0" viewportW="1920" viewportH="1009"/>
         <Children Size="0"/>
-    </Child0>
-    <Child1 Name="RootNode" Visible="true" ObType="0" BoneIndex="1">
+    </Child1>
+    <Child2 Name="RootNode" Visible="true" ObType="0" BoneIndex="1">
         <Collider ColliderType="2" Visible="true">
             <Position X="0" Y="0.94999999" Z="0"/>
             <Scale X="0.25" Y="0.94999999" Z="0.15000001"/>
@@ -1058,5 +1067,5 @@
                 <Children Size="0"/>
             </Child1>
         </Child0>
-    </Child1>
+    </Child2>
 </Root>

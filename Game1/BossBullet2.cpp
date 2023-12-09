@@ -69,7 +69,7 @@ void BossBullet2::Fire(Vector3 dir, float power, Vector3 rotation)
 Pop* BossBullet2::InitParticle()
 {
 	bulletParticle = Pop::Create();
-	bulletParticle->LoadFile("Particle_BossBullet1.xml");
+	bulletParticle->LoadFile("Particle_Boss1Bullet.xml");
 	bulletParticle->particleCount = 0;
 
 	return bulletParticle;

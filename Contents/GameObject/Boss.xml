@@ -5,13 +5,13 @@
     <Transform>
         <Position X="0" Y="26.200001" Z="0"/>
         <Scale X="6" Y="6" Z="6"/>
-        <Rotation X="0" Y="0" Z="0"/>
+        <Rotation X="0" Y="0.88381153" Z="0"/>
     </Transform>
     <Children Size="2"/>
     <Child0 Name="RootNode" Visible="true" ObType="0" BoneIndex="1">
         <Collider ColliderType="2" Visible="true">
-            <Position X="0" Y="4.7083335" Z="0"/>
-            <Scale X="1" Y="1.45" Z="1"/>
+            <Position X="0" Y="5" Z="0"/>
+            <Scale X="1" Y="1" Z="1"/>
             <Rotation X="0" Y="0" Z="0"/>
         </Collider>
         <Transform>

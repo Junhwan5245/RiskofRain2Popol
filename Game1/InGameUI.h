@@ -8,11 +8,11 @@ public:
 	UI* leftBottom;
 	UI* rightBottom;
 
+	UI* bossHPbar;
+	bool isGoalClear = false;
+
+
 private:
-
-
-
-
 	wstring wplayerHp;
 	wstring whpSlash;
 	wstring wplayerMaxHp;
@@ -28,6 +28,8 @@ private:
 	wstring wcoolTime_M2;
 	wstring wcoolTime_LShift;
 	wstring wcoolTime_R;
+
+	wstring itemSlot[9];
 
 	// юс╫ц
 	//int playerlv = 1;
@@ -53,8 +55,11 @@ public:
 	void Init();
 	void Update();
 	void Render();
+	void RenderH();
 	void ResizeScreen();
 
+
+	void PlayerInvenFont();
 	void RenderFont();
 };
 
